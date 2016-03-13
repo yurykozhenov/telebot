@@ -6,7 +6,7 @@
 
     <groupId>ru.finnetrolle</groupId>
     <artifactId>telebot</artifactId>
-    <version>0.0.5</version>
+    <version>0.0.6</version>
 
     <packaging>jar</packaging>
     <name>telebot</name>
@@ -114,6 +114,9 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <executable>true</executable>
+                </configuration>
             </plugin>
             <plugin>
                 <artifactId>kotlin-maven-plugin</artifactId>
