@@ -74,7 +74,7 @@
     <build>
         <resources>
             <resource>
-                <directory>${project.resource.directory}</directory>
+                <directory>src/main/resources</directory>
                 <excludes>
                     <exclude>logback.xml</exclude>
                     <exclude>application.properties</exclude>
