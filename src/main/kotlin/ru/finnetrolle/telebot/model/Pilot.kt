@@ -10,7 +10,7 @@ import javax.persistence.Id
 
 interface PilotRepository: CrudRepository<Pilot, Int>
 
-@Entity
+@Entity(name = "pilots")
 data class Pilot (
         @Id var id: Int = 0,
         var firstName: String = "",
@@ -18,6 +18,6 @@ data class Pilot (
         var username: String = "",
         var apiKey: Int = 0,
         var vCode: String = "",
-        var character: String = "",
+        var characterName: String = "",
         var characterId: Long = 0
 )

@@ -18,13 +18,13 @@ open class UserService @Autowired constructor (val pilotRepo: PilotRepository) {
     fun register(user: User, key: Int, code: String, character: String, characterId: Long) {
         log.info("registering new pilot: " + character)
         val pilot = Pilot(user.id, user.firstName, user.lastName, user.userName, key, code, character, characterId)
-        val saved = pilotRepo.save(pilot)
+        pilotRepo.save(pilot)
     }
 
     fun getCharacterName(id: Int): String? {
         val pilot = pilotRepo.findOne(id)
         if (pilot != null)
-            return pilot.character
+            return pilot.characterName
         else
             return null
     }
@@ -33,7 +33,7 @@ open class UserService @Autowired constructor (val pilotRepo: PilotRepository) {
         return pilotRepo.findOne(id)
     }
 
-    fun getCharacters(): List<String> = pilotRepo.findAll().map { p -> p.character }.toList()
+    fun getCharacters(): List<String> = pilotRepo.findAll().map { p -> p.characterName }.toList()
 
     companion object {
         val log = LoggerFactory.getLogger(UserService::class.java)
