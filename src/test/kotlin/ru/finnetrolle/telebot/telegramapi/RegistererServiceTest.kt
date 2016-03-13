@@ -22,7 +22,6 @@ class RegistererServiceTest {
         ReflectionTestUtils.setField(user, "lastName", "lastName")
         ReflectionTestUtils.setField(user, "userName", "userName")
         ReflectionTestUtils.setField(user, "id", 10)
-
     }
 
     @Test
