@@ -4,6 +4,8 @@ import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
+import org.telegram.telegrambots.api.methods.SendMessage
+import org.telegram.telegrambots.api.objects.ReplyKeyboardMarkup
 import org.telegram.telegrambots.api.objects.Update
 import org.telegram.telegrambots.api.objects.User
 import org.telegram.telegrambots.bots.TelegramLongPollingBot
@@ -34,14 +36,10 @@ class SimpleTelegramBot @Autowired constructor(
         return token
     }
 
-    val regex = Regex("[\\W]")
-
-    val REGISTER_MESSAGE = "Вы еще не зарегистрированы. Для регистрации необходимо использовать" +
-            "ваш apikey и vCode. Отправьте мне сообщение /register apikey vcode."
-
     override fun onUpdateReceived(update: Update?) {
         if (update!!.hasMessage()) {
             val inc = update!!.message
+            log.info("Received message from ${inc.from.userName} : ${inc.text}")
             start(inc.text, inc.from, inc.chatId.toString())
         }
     }
@@ -54,36 +52,30 @@ class SimpleTelegramBot @Autowired constructor(
 
     fun start(text: String, user: User, chatId: String) {
         val parsed = parse(text)
-        println("parsed command is:${parsed.command}")
 
         if (parsed.command.toUpperCase() == "/REGISTER") {
-            println("do register!")
-            val charlist = register(user, parsed.data)
-            sendMessage(MessageBuilder.build(
-                    chatId,
-                    "Now select your character",
-                    MessageBuilder.createKeyboard(charlist)
-            ))
+            val datas = parsed.data.split(Messages.regex)
+            val charlist = registerer.startRegistration(user, datas[0].toInt(), datas[1])
+            if (charlist == null) {
+                send(chatId, Messages.Registration.BAD_AUTH)
+            } else {
+                send(chatId, Messages.Registration.SELECT_CHAR, charlist)
+            }
             return
         }
 
         if (registerer.isInProcess(user.id)) {
             if (parsed.command.length == 2 && parsed.command[0].equals('/')) {
                 val char = registerer.finishRegistration(user.id, parsed.command.substring(1, 2).toInt())
-                sendMessage(MessageBuilder.build(
-                        chatId,
-                        "Successfully registered as ${char}"))
+                send(chatId, "${Messages.Registration.SUCCESS} ${char}")
             } else {
-                sendMessage(MessageBuilder.build(
-                        chatId,
-                        "You must select character to finish registration",
-                        MessageBuilder.createKeyboard(registerer.getListOfCharacterCandidates(user.id))))
+                send(chatId, Messages.Registration.SELECT_CHAR, registerer.getListOfCharacterCandidates(user.id))
             }
             return
         } else {
             val pilot = userService.getCharacterName(user.id)
             if (pilot == null) {
-                sendMessage(MessageBuilder.build(user.id.toString(), REGISTER_MESSAGE))
+                sendMessage(MessageBuilder.build(user.id.toString(), Messages.REGISTER_MESSAGE))
                 return
             }
         }
@@ -100,15 +92,19 @@ class SimpleTelegramBot @Autowired constructor(
         sendMessage(MessageBuilder.build(chatId, text))
     }
 
-    fun register(user: User, data: String): List<String> {
-        val datas = data.split(regex)
-        return registerer.startRegistration(user, datas[0].toInt(), datas[1])
-    }
-
     fun broadcast(text: String) {
         val messages = broadcastComposer.compose(text)
         messages.forEach { m -> sendMessage(m) }
         log.info("broadcast sent to ${messages.size} users")
+    }
+
+    private fun send(chatId: String, text: String) {
+        sendMessage(MessageBuilder.build(chatId, text))
+    }
+
+    private fun send(chatId: String, text: String, options: List<String>) {
+        val kb = MessageBuilder.createKeyboard(options)
+        sendMessage(MessageBuilder.build(chatId, text, kb))
     }
 
     companion object {

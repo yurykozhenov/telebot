@@ -3,7 +3,6 @@ package ru.finnetrolle.telebot.telegramapi
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import org.telegram.telegrambots.api.methods.SendMessage
-import ru.finnetrolle.telebot.model.Pilot
 import ru.finnetrolle.telebot.model.PilotRepository
 
 /**

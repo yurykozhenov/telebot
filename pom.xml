@@ -6,7 +6,7 @@
 
     <groupId>ru.finnetrolle</groupId>
     <artifactId>telebot</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
 
     <packaging>jar</packaging>
     <name>telebot</name>
@@ -80,7 +80,6 @@
                         <filtering>true</filtering>
                         <directory>src/main/resources</directory>
                         <excludes>
-                            <exclude>logback.xml</exclude>
                             <exclude>application.properties</exclude>
                         </excludes>
                     </resource>

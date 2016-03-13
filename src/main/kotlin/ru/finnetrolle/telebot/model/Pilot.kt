@@ -1,6 +1,5 @@
 package ru.finnetrolle.telebot.model
 
-import org.glassfish.jersey.message.filtering.EntityFiltering
 import org.springframework.data.repository.CrudRepository
 import javax.persistence.Entity
 import javax.persistence.Id
@@ -19,5 +18,6 @@ data class Pilot (
         var username: String = "",
         var apiKey: Int = 0,
         var vCode: String = "",
-        var character: String = ""
+        var character: String = "",
+        var characterId: Long = 0
 )

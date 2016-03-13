@@ -2,6 +2,8 @@ package ru.finnetrolle.telebot.telegramapi
 
 import com.beimin.eveapi.parser.ApiAuthorization
 import com.beimin.eveapi.parser.account.CharactersParser
+import com.beimin.eveapi.parser.eve.CharacterInfoParser
+import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
 
 /**
@@ -11,11 +13,31 @@ import org.springframework.stereotype.Component
 @Component
 open class EveApiConnector {
 
-    fun getCharacters(key: Int, code: String): List<String> {
-        val response = CharactersParser().getResponse(ApiAuthorization(key, code))
-        val chars = response.all
-        chars.forEach { c -> println(c.name) }
-        return chars.map { x -> x.name }
+    data class Character(val name: String, val id: Long, val allyId: Long)
+
+    fun getCharacters(key: Int, code: String): List<Character>? {
+        try {
+            return CharactersParser().getResponse(ApiAuthorization(key, code)).all
+                .map { c -> Character(c.name, c.characterID, getCorpId(c.characterID)) }
+                .toList()
+        } catch (e: Exception) {
+            log.warn("Get characters failed for key=${key}", e)
+        }
+        return null
+    }
+
+    fun getCorpId(charId: Long): Long {
+        try {
+            val response = CharacterInfoParser().getResponse(charId)
+            return response.allianceID
+        } catch (e: Exception) {
+            log.warn("Get ally id failed for charid=${charId}", e)
+        }
+        return 0
+    }
+
+    companion object {
+        private val log = LoggerFactory.getLogger(EveApiConnector::class.java)
     }
 
 }

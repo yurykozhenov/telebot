@@ -15,9 +15,9 @@ import ru.finnetrolle.telebot.model.PilotRepository
 @Component
 open class UserService @Autowired constructor (val pilotRepo: PilotRepository) {
 
-    fun register(user: User, key: Int, code: String, character: String) {
+    fun register(user: User, key: Int, code: String, character: String, characterId: Long) {
         log.info("registering new pilot: " + character)
-        val pilot = Pilot(user.id, user.firstName, user.lastName, user.userName, key, code, character)
+        val pilot = Pilot(user.id, user.firstName, user.lastName, user.userName, key, code, character, characterId)
         val saved = pilotRepo.save(pilot)
     }
 
@@ -27,6 +27,10 @@ open class UserService @Autowired constructor (val pilotRepo: PilotRepository) {
             return pilot.character
         else
             return null
+    }
+
+    fun getCharacter(id: Int): Pilot {
+        return pilotRepo.findOne(id)
     }
 
     fun getCharacters(): List<String> = pilotRepo.findAll().map { p -> p.character }.toList()
