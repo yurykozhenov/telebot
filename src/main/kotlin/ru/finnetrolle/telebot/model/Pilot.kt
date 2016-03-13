@@ -13,8 +13,8 @@ interface PilotRepository: CrudRepository<Pilot, Int>
 @Entity(name = "pilots")
 data class Pilot (
         @Id var id: Int = 0,
-        var firstName: String = "",
-        var lastName: String = "",
+        var firstName: String? = "",
+        var lastName: String? = "",
         var username: String = "",
         var apiKey: Int = 0,
         var vCode: String = "",

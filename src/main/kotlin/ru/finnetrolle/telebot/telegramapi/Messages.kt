@@ -13,7 +13,7 @@ object Messages {
 
     object Registration {
         val SELECT_CHAR: String = "Я нашел на указанном аккаунте следующих пилотов: выберите того, кого хотите привязать"
-        val BAD_AUTH: String = "Введены некорректные apiKey + vCode или у сервера какие-то проблемы с авторизацией"
+        val BAD_AUTH: String = "Введены некорректные keyID + vCode или у сервера какие-то проблемы с авторизацией"
         val SUCCESS: String = "Успешно зарегистрирован под именем "
     }
 

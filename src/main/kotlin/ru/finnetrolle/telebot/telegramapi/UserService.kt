@@ -18,7 +18,8 @@ open class UserService @Autowired constructor (val pilotRepo: PilotRepository) {
     fun register(user: User, key: Int, code: String, character: String, characterId: Long) {
         log.info("registering new pilot: " + character)
         val pilot = Pilot(user.id, user.firstName, user.lastName, user.userName, key, code, character, characterId)
-        pilotRepo.save(pilot)
+        val saved = pilotRepo.save(pilot);
+        log.info("saved pilot is ${saved}");
     }
 
     fun getCharacterName(id: Int): String? {
