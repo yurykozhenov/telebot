@@ -6,6 +6,7 @@ import org.junit.Test
 import org.junit.Assert.*
 import org.springframework.test.util.ReflectionTestUtils
 import org.telegram.telegrambots.api.objects.User
+import ru.finnetrolle.telebot.model.Pilot
 import java.util.concurrent.ConcurrentHashMap
 
 /**
@@ -30,6 +31,5 @@ class RegistererServiceTest {
 
     @Test
     fun testIsInProcess() {
-
     }
 }

@@ -15,7 +15,7 @@ data class Pilot (
         @Id var id: Int = 0,
         var firstName: String? = "",
         var lastName: String? = "",
-        var username: String = "",
+        var username: String? = "",
         var apiKey: Int = 0,
         var vCode: String = "",
         var characterName: String = "",
