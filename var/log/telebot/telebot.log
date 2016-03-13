@@ -1,0 +1,895 @@
+2016-03-13 11:02:32.900 [main] INFO  ApplicationKt - Starting ApplicationKt on MacBook-Air-Maksim.local with PID 47678 (/Users/maxsyachin/dev/telebot/target/classes started by maxsyachin in /Users/maxsyachin/dev/telebot)
+2016-03-13 11:02:32.904 [main] INFO  ApplicationKt - No active profile set, falling back to default profiles: default
+2016-03-13 11:02:33.057 [main] INFO  AnnotationConfigEmbeddedWebApplicationContext - Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@11dc3715: startup date [Sun Mar 13 11:02:33 MSK 2016]; root of context hierarchy
+2016-03-13 11:02:33.505 [background-preinit] INFO  Version - HV000001: Hibernate Validator 5.2.4.Final
+2016-03-13 11:02:34.782 [main] INFO  AutowiredAnnotationBeanPostProcessor - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2016-03-13 11:02:34.956 [main] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [class org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$ee47d011] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-03-13 11:02:35.841 [main] INFO  TomcatEmbeddedServletContainer - Tomcat initialized with port(s): 8080 (http)
+2016-03-13 11:02:35.860 [main] INFO  StandardService - Starting service Tomcat
+2016-03-13 11:02:35.861 [main] INFO  StandardEngine - Starting Servlet Engine: Apache Tomcat/8.0.32
+2016-03-13 11:02:36.208 [localhost-startStop-1] INFO  [/] - Initializing Spring embedded WebApplicationContext
+2016-03-13 11:02:36.208 [localhost-startStop-1] INFO  ContextLoader - Root WebApplicationContext: initialization completed in 3157 ms
+2016-03-13 11:02:36.325 [localhost-startStop-1] INFO  FilterRegistrationBean - Mapping filter: 'characterEncodingFilter' to: [/*]
+2016-03-13 11:02:36.791 [main] INFO  LocalContainerEntityManagerFactoryBean - Building JPA container EntityManagerFactory for persistence unit 'default'
+2016-03-13 11:02:36.823 [main] INFO  LogHelper - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2016-03-13 11:02:36.927 [main] INFO  Version - HHH000412: Hibernate Core {4.3.11.Final}
+2016-03-13 11:02:36.930 [main] INFO  Environment - HHH000206: hibernate.properties not found
+2016-03-13 11:02:36.932 [main] INFO  Environment - HHH000021: Bytecode provider name : javassist
+2016-03-13 11:02:37.380 [main] INFO  Version - HCANN000001: Hibernate Commons Annotations {4.0.5.Final}
+2016-03-13 11:02:37.978 [main] INFO  Dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2016-03-13 11:02:37.997 [main] INFO  LobCreatorBuilder - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2016-03-13 11:02:38.114 [main] INFO  ASTQueryTranslatorFactory - HHH000397: Using ASTQueryTranslatorFactory
+2016-03-13 11:02:38.547 [main] INFO  SchemaUpdate - HHH000228: Running hbm2ddl schema update
+2016-03-13 11:02:38.549 [main] INFO  SchemaUpdate - HHH000102: Fetching database metadata
+2016-03-13 11:02:38.554 [main] INFO  SchemaUpdate - HHH000396: Updating schema
+2016-03-13 11:02:38.627 [main] INFO  TableMetadata - HHH000261: Table found: public.pilot
+2016-03-13 11:02:38.628 [main] INFO  TableMetadata - HHH000037: Columns: [character, v_code, api_key, last_name, id, first_name, username]
+2016-03-13 11:02:38.628 [main] INFO  TableMetadata - HHH000108: Foreign keys: []
+2016-03-13 11:02:38.629 [main] INFO  TableMetadata - HHH000126: Indexes: [pilot_pkey]
+2016-03-13 11:02:38.630 [main] INFO  SchemaUpdate - HHH000232: Schema update complete
+2016-03-13 11:02:39.143 [main] INFO  CglibAopProxy - Unable to proxy method [public final void ru.finnetrolle.telebot.telegramapi.UserService.register(org.telegram.telegrambots.api.objects.User,int,java.lang.String,java.lang.String)] because it is final: All calls to this method via a proxy will NOT be routed to the target instance.
+2016-03-13 11:02:39.143 [main] INFO  CglibAopProxy - Unable to proxy method [public final java.lang.String ru.finnetrolle.telebot.telegramapi.UserService.getCharacterName(int)] because it is final: All calls to this method via a proxy will NOT be routed to the target instance.
+2016-03-13 11:02:39.143 [main] INFO  CglibAopProxy - Unable to proxy method [public final ru.finnetrolle.telebot.model.PilotRepository ru.finnetrolle.telebot.telegramapi.UserService.getPilotRepo()] because it is final: All calls to this method via a proxy will NOT be routed to the target instance.
+2016-03-13 11:02:41.083 [main] INFO  AnnotationMBeanExporter - Registering beans for JMX exposure on startup
+2016-03-13 11:02:41.129 [main] INFO  Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2016-03-13 11:02:41.139 [main] INFO  Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2016-03-13 11:02:41.163 [main] INFO  NioSelectorPool - Using a shared selector for servlet write/read
+2016-03-13 11:02:41.188 [main] INFO  TomcatEmbeddedServletContainer - Tomcat started on port(s): 8080 (http)
+2016-03-13 11:02:41.193 [main] INFO  ApplicationKt - Started ApplicationKt in 8.869 seconds (JVM running for 11.038)
+2016-03-13 11:03:07.277 [Thread-5] INFO  AnnotationConfigEmbeddedWebApplicationContext - Closing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@11dc3715: startup date [Sun Mar 13 11:02:33 MSK 2016]; root of context hierarchy
+2016-03-13 11:03:07.280 [Thread-5] INFO  AnnotationMBeanExporter - Unregistering JMX-exposed beans on shutdown
+2016-03-13 11:03:07.281 [Thread-5] INFO  LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2016-03-13 11:03:37.640 [main] INFO  ApplicationKt - Starting ApplicationKt on MacBook-Air-Maksim.local with PID 47696 (/Users/maxsyachin/dev/telebot/target/classes started by maxsyachin in /Users/maxsyachin/dev/telebot)
+2016-03-13 11:03:37.658 [main] INFO  ApplicationKt - No active profile set, falling back to default profiles: default
+2016-03-13 11:03:37.920 [main] INFO  AnnotationConfigEmbeddedWebApplicationContext - Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@11dc3715: startup date [Sun Mar 13 11:03:37 MSK 2016]; root of context hierarchy
+2016-03-13 11:03:38.403 [background-preinit] INFO  Version - HV000001: Hibernate Validator 5.2.4.Final
+2016-03-13 11:03:39.871 [main] INFO  AutowiredAnnotationBeanPostProcessor - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2016-03-13 11:03:39.963 [main] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [class org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$ee47d011] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-03-13 11:03:40.588 [main] INFO  TomcatEmbeddedServletContainer - Tomcat initialized with port(s): 8080 (http)
+2016-03-13 11:03:40.612 [main] INFO  StandardService - Starting service Tomcat
+2016-03-13 11:03:40.616 [main] INFO  StandardEngine - Starting Servlet Engine: Apache Tomcat/8.0.32
+2016-03-13 11:03:40.798 [localhost-startStop-1] INFO  [/] - Initializing Spring embedded WebApplicationContext
+2016-03-13 11:03:40.798 [localhost-startStop-1] INFO  ContextLoader - Root WebApplicationContext: initialization completed in 2884 ms
+2016-03-13 11:03:40.885 [localhost-startStop-1] INFO  FilterRegistrationBean - Mapping filter: 'characterEncodingFilter' to: [/*]
+2016-03-13 11:03:41.312 [main] INFO  LocalContainerEntityManagerFactoryBean - Building JPA container EntityManagerFactory for persistence unit 'default'
+2016-03-13 11:03:41.330 [main] INFO  LogHelper - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2016-03-13 11:03:41.428 [main] INFO  Version - HHH000412: Hibernate Core {4.3.11.Final}
+2016-03-13 11:03:41.430 [main] INFO  Environment - HHH000206: hibernate.properties not found
+2016-03-13 11:03:41.432 [main] INFO  Environment - HHH000021: Bytecode provider name : javassist
+2016-03-13 11:03:41.715 [main] INFO  Version - HCANN000001: Hibernate Commons Annotations {4.0.5.Final}
+2016-03-13 11:03:42.199 [main] INFO  Dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2016-03-13 11:03:42.215 [main] INFO  LobCreatorBuilder - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2016-03-13 11:03:42.355 [main] INFO  ASTQueryTranslatorFactory - HHH000397: Using ASTQueryTranslatorFactory
+2016-03-13 11:03:42.808 [main] INFO  SchemaUpdate - HHH000228: Running hbm2ddl schema update
+2016-03-13 11:03:42.808 [main] INFO  SchemaUpdate - HHH000102: Fetching database metadata
+2016-03-13 11:03:42.812 [main] INFO  SchemaUpdate - HHH000396: Updating schema
+2016-03-13 11:03:42.893 [main] INFO  TableMetadata - HHH000261: Table found: public.pilot
+2016-03-13 11:03:42.894 [main] INFO  TableMetadata - HHH000037: Columns: [character, v_code, api_key, last_name, id, first_name, username]
+2016-03-13 11:03:42.894 [main] INFO  TableMetadata - HHH000108: Foreign keys: []
+2016-03-13 11:03:42.895 [main] INFO  TableMetadata - HHH000126: Indexes: [pilot_pkey]
+2016-03-13 11:03:42.896 [main] INFO  SchemaUpdate - HHH000232: Schema update complete
+2016-03-13 11:03:43.268 [main] INFO  CglibAopProxy - Unable to proxy method [public final void ru.finnetrolle.telebot.telegramapi.UserService.register(org.telegram.telegrambots.api.objects.User,int,java.lang.String,java.lang.String)] because it is final: All calls to this method via a proxy will NOT be routed to the target instance.
+2016-03-13 11:03:43.268 [main] INFO  CglibAopProxy - Unable to proxy method [public final java.lang.String ru.finnetrolle.telebot.telegramapi.UserService.getCharacterName(int)] because it is final: All calls to this method via a proxy will NOT be routed to the target instance.
+2016-03-13 11:03:43.268 [main] INFO  CglibAopProxy - Unable to proxy method [public final ru.finnetrolle.telebot.model.PilotRepository ru.finnetrolle.telebot.telegramapi.UserService.getPilotRepo()] because it is final: All calls to this method via a proxy will NOT be routed to the target instance.
+2016-03-13 11:03:44.570 [main] INFO  AnnotationMBeanExporter - Registering beans for JMX exposure on startup
+2016-03-13 11:03:44.619 [main] INFO  Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2016-03-13 11:03:44.629 [main] INFO  Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2016-03-13 11:03:44.650 [main] INFO  NioSelectorPool - Using a shared selector for servlet write/read
+2016-03-13 11:03:44.667 [main] INFO  TomcatEmbeddedServletContainer - Tomcat started on port(s): 8080 (http)
+2016-03-13 11:03:44.674 [main] INFO  ApplicationKt - Started ApplicationKt in 7.595 seconds (JVM running for 8.689)
+2016-03-13 11:06:37.664 [Thread-5] INFO  AnnotationConfigEmbeddedWebApplicationContext - Closing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@11dc3715: startup date [Sun Mar 13 11:03:37 MSK 2016]; root of context hierarchy
+2016-03-13 11:06:37.670 [Thread-5] INFO  AnnotationMBeanExporter - Unregistering JMX-exposed beans on shutdown
+2016-03-13 11:06:37.672 [Thread-5] INFO  LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2016-03-13 11:08:30.311 [main] INFO  ApplicationKt - Starting ApplicationKt on MacBook-Air-Maksim.local with PID 47750 (/Users/maxsyachin/dev/telebot/target/classes started by maxsyachin in /Users/maxsyachin/dev/telebot)
+2016-03-13 11:08:30.318 [main] INFO  ApplicationKt - No active profile set, falling back to default profiles: default
+2016-03-13 11:08:30.455 [main] INFO  AnnotationConfigEmbeddedWebApplicationContext - Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@11dc3715: startup date [Sun Mar 13 11:08:30 MSK 2016]; root of context hierarchy
+2016-03-13 11:08:30.665 [background-preinit] INFO  Version - HV000001: Hibernate Validator 5.2.4.Final
+2016-03-13 11:08:32.750 [main] INFO  AutowiredAnnotationBeanPostProcessor - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2016-03-13 11:08:32.898 [main] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [class org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$e42b5793] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-03-13 11:08:33.702 [main] INFO  TomcatEmbeddedServletContainer - Tomcat initialized with port(s): 8080 (http)
+2016-03-13 11:08:33.743 [main] INFO  StandardService - Starting service Tomcat
+2016-03-13 11:08:33.744 [main] INFO  StandardEngine - Starting Servlet Engine: Apache Tomcat/8.0.32
+2016-03-13 11:08:33.998 [localhost-startStop-1] INFO  [/] - Initializing Spring embedded WebApplicationContext
+2016-03-13 11:08:33.998 [localhost-startStop-1] INFO  ContextLoader - Root WebApplicationContext: initialization completed in 3559 ms
+2016-03-13 11:08:34.090 [localhost-startStop-1] INFO  FilterRegistrationBean - Mapping filter: 'characterEncodingFilter' to: [/*]
+2016-03-13 11:08:34.545 [main] INFO  LocalContainerEntityManagerFactoryBean - Building JPA container EntityManagerFactory for persistence unit 'default'
+2016-03-13 11:08:34.566 [main] INFO  LogHelper - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2016-03-13 11:08:34.668 [main] INFO  Version - HHH000412: Hibernate Core {4.3.11.Final}
+2016-03-13 11:08:34.671 [main] INFO  Environment - HHH000206: hibernate.properties not found
+2016-03-13 11:08:34.673 [main] INFO  Environment - HHH000021: Bytecode provider name : javassist
+2016-03-13 11:08:34.972 [main] INFO  Version - HCANN000001: Hibernate Commons Annotations {4.0.5.Final}
+2016-03-13 11:08:35.498 [main] INFO  Dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2016-03-13 11:08:35.519 [main] INFO  LobCreatorBuilder - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2016-03-13 11:08:35.669 [main] INFO  ASTQueryTranslatorFactory - HHH000397: Using ASTQueryTranslatorFactory
+2016-03-13 11:08:36.124 [main] INFO  SchemaUpdate - HHH000228: Running hbm2ddl schema update
+2016-03-13 11:08:36.124 [main] INFO  SchemaUpdate - HHH000102: Fetching database metadata
+2016-03-13 11:08:36.128 [main] INFO  SchemaUpdate - HHH000396: Updating schema
+2016-03-13 11:08:36.201 [main] INFO  TableMetadata - HHH000261: Table found: public.pilot
+2016-03-13 11:08:36.201 [main] INFO  TableMetadata - HHH000037: Columns: [character, v_code, api_key, last_name, id, first_name, username]
+2016-03-13 11:08:36.202 [main] INFO  TableMetadata - HHH000108: Foreign keys: []
+2016-03-13 11:08:36.203 [main] INFO  TableMetadata - HHH000126: Indexes: [pilot_pkey]
+2016-03-13 11:08:36.204 [main] INFO  SchemaUpdate - HHH000232: Schema update complete
+2016-03-13 11:08:38.061 [main] INFO  AnnotationMBeanExporter - Registering beans for JMX exposure on startup
+2016-03-13 11:08:38.100 [main] INFO  Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2016-03-13 11:08:38.109 [main] INFO  Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2016-03-13 11:08:38.135 [main] INFO  NioSelectorPool - Using a shared selector for servlet write/read
+2016-03-13 11:08:38.166 [main] INFO  TomcatEmbeddedServletContainer - Tomcat started on port(s): 8080 (http)
+2016-03-13 11:08:38.173 [main] INFO  ApplicationKt - Started ApplicationKt in 8.563 seconds (JVM running for 9.794)
+2016-03-13 11:08:58.162 [Thread-5] INFO  AnnotationConfigEmbeddedWebApplicationContext - Closing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@11dc3715: startup date [Sun Mar 13 11:08:30 MSK 2016]; root of context hierarchy
+2016-03-13 11:08:58.165 [Thread-5] INFO  AnnotationMBeanExporter - Unregistering JMX-exposed beans on shutdown
+2016-03-13 11:08:58.166 [Thread-5] INFO  LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2016-03-13 11:10:31.310 [main] INFO  ApplicationKt - Starting ApplicationKt on MacBook-Air-Maksim.local with PID 47770 (/Users/maxsyachin/dev/telebot/target/classes started by maxsyachin in /Users/maxsyachin/dev/telebot)
+2016-03-13 11:10:31.316 [main] INFO  ApplicationKt - No active profile set, falling back to default profiles: default
+2016-03-13 11:10:31.540 [main] INFO  AnnotationConfigEmbeddedWebApplicationContext - Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@69930714: startup date [Sun Mar 13 11:10:31 MSK 2016]; root of context hierarchy
+2016-03-13 11:10:31.704 [background-preinit] INFO  Version - HV000001: Hibernate Validator 5.2.4.Final
+2016-03-13 11:10:33.300 [main] INFO  AutowiredAnnotationBeanPostProcessor - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2016-03-13 11:10:33.419 [main] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [class org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$ee47d011] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-03-13 11:10:34.050 [main] INFO  TomcatEmbeddedServletContainer - Tomcat initialized with port(s): 8080 (http)
+2016-03-13 11:10:34.070 [main] INFO  StandardService - Starting service Tomcat
+2016-03-13 11:10:34.072 [main] INFO  StandardEngine - Starting Servlet Engine: Apache Tomcat/8.0.32
+2016-03-13 11:10:34.249 [localhost-startStop-1] INFO  [/] - Initializing Spring embedded WebApplicationContext
+2016-03-13 11:10:34.249 [localhost-startStop-1] INFO  ContextLoader - Root WebApplicationContext: initialization completed in 2721 ms
+2016-03-13 11:10:34.339 [localhost-startStop-1] INFO  FilterRegistrationBean - Mapping filter: 'characterEncodingFilter' to: [/*]
+2016-03-13 11:10:34.776 [main] INFO  LocalContainerEntityManagerFactoryBean - Building JPA container EntityManagerFactory for persistence unit 'default'
+2016-03-13 11:10:34.791 [main] INFO  LogHelper - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2016-03-13 11:10:34.899 [main] INFO  Version - HHH000412: Hibernate Core {4.3.11.Final}
+2016-03-13 11:10:34.902 [main] INFO  Environment - HHH000206: hibernate.properties not found
+2016-03-13 11:10:34.904 [main] INFO  Environment - HHH000021: Bytecode provider name : javassist
+2016-03-13 11:10:35.192 [main] INFO  Version - HCANN000001: Hibernate Commons Annotations {4.0.5.Final}
+2016-03-13 11:10:35.684 [main] INFO  Dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2016-03-13 11:10:35.708 [main] INFO  LobCreatorBuilder - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2016-03-13 11:10:35.847 [main] INFO  ASTQueryTranslatorFactory - HHH000397: Using ASTQueryTranslatorFactory
+2016-03-13 11:10:36.331 [main] INFO  SchemaUpdate - HHH000228: Running hbm2ddl schema update
+2016-03-13 11:10:36.332 [main] INFO  SchemaUpdate - HHH000102: Fetching database metadata
+2016-03-13 11:10:36.336 [main] INFO  SchemaUpdate - HHH000396: Updating schema
+2016-03-13 11:10:36.399 [main] INFO  TableMetadata - HHH000261: Table found: public.pilot
+2016-03-13 11:10:36.399 [main] INFO  TableMetadata - HHH000037: Columns: [character, v_code, api_key, last_name, id, first_name, username]
+2016-03-13 11:10:36.399 [main] INFO  TableMetadata - HHH000108: Foreign keys: []
+2016-03-13 11:10:36.400 [main] INFO  TableMetadata - HHH000126: Indexes: [pilot_pkey]
+2016-03-13 11:10:36.401 [main] INFO  SchemaUpdate - HHH000232: Schema update complete
+2016-03-13 11:10:38.406 [main] INFO  AnnotationMBeanExporter - Registering beans for JMX exposure on startup
+2016-03-13 11:10:38.450 [main] INFO  Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2016-03-13 11:10:38.460 [main] INFO  Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2016-03-13 11:10:38.482 [main] INFO  NioSelectorPool - Using a shared selector for servlet write/read
+2016-03-13 11:10:38.513 [main] INFO  TomcatEmbeddedServletContainer - Tomcat started on port(s): 8080 (http)
+2016-03-13 11:10:38.519 [main] INFO  ApplicationKt - Started ApplicationKt in 8.042 seconds (JVM running for 9.349)
+2016-03-13 11:11:18.369 [Thread-5] INFO  AnnotationConfigEmbeddedWebApplicationContext - Closing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@69930714: startup date [Sun Mar 13 11:10:31 MSK 2016]; root of context hierarchy
+2016-03-13 11:11:18.373 [Thread-5] INFO  AnnotationMBeanExporter - Unregistering JMX-exposed beans on shutdown
+2016-03-13 11:11:18.374 [Thread-5] INFO  LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2016-03-13 11:11:39.669 [main] INFO  ApplicationKt - Starting ApplicationKt on MacBook-Air-Maksim.local with PID 47786 (/Users/maxsyachin/dev/telebot/target/classes started by maxsyachin in /Users/maxsyachin/dev/telebot)
+2016-03-13 11:11:39.675 [main] INFO  ApplicationKt - No active profile set, falling back to default profiles: default
+2016-03-13 11:11:39.913 [main] INFO  AnnotationConfigEmbeddedWebApplicationContext - Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@2cb4893b: startup date [Sun Mar 13 11:11:39 MSK 2016]; root of context hierarchy
+2016-03-13 11:11:40.307 [background-preinit] INFO  Version - HV000001: Hibernate Validator 5.2.4.Final
+2016-03-13 11:11:41.799 [main] INFO  AutowiredAnnotationBeanPostProcessor - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2016-03-13 11:11:41.933 [main] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [class org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$65fa0772] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-03-13 11:11:42.775 [main] INFO  TomcatEmbeddedServletContainer - Tomcat initialized with port(s): 8080 (http)
+2016-03-13 11:11:42.798 [main] INFO  StandardService - Starting service Tomcat
+2016-03-13 11:11:42.799 [main] INFO  StandardEngine - Starting Servlet Engine: Apache Tomcat/8.0.32
+2016-03-13 11:11:43.006 [localhost-startStop-1] INFO  [/] - Initializing Spring embedded WebApplicationContext
+2016-03-13 11:11:43.006 [localhost-startStop-1] INFO  ContextLoader - Root WebApplicationContext: initialization completed in 3100 ms
+2016-03-13 11:11:43.112 [localhost-startStop-1] INFO  FilterRegistrationBean - Mapping filter: 'characterEncodingFilter' to: [/*]
+2016-03-13 11:11:43.621 [main] INFO  LocalContainerEntityManagerFactoryBean - Building JPA container EntityManagerFactory for persistence unit 'default'
+2016-03-13 11:11:43.636 [main] INFO  LogHelper - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2016-03-13 11:11:43.750 [main] INFO  Version - HHH000412: Hibernate Core {4.3.11.Final}
+2016-03-13 11:11:43.755 [main] INFO  Environment - HHH000206: hibernate.properties not found
+2016-03-13 11:11:43.758 [main] INFO  Environment - HHH000021: Bytecode provider name : javassist
+2016-03-13 11:11:44.117 [main] INFO  Version - HCANN000001: Hibernate Commons Annotations {4.0.5.Final}
+2016-03-13 11:11:44.638 [main] INFO  Dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2016-03-13 11:11:44.658 [main] INFO  LobCreatorBuilder - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2016-03-13 11:11:44.811 [main] INFO  ASTQueryTranslatorFactory - HHH000397: Using ASTQueryTranslatorFactory
+2016-03-13 11:11:45.271 [main] INFO  SchemaUpdate - HHH000228: Running hbm2ddl schema update
+2016-03-13 11:11:45.271 [main] INFO  SchemaUpdate - HHH000102: Fetching database metadata
+2016-03-13 11:11:45.275 [main] INFO  SchemaUpdate - HHH000396: Updating schema
+2016-03-13 11:11:45.358 [main] INFO  TableMetadata - HHH000261: Table found: public.pilot
+2016-03-13 11:11:45.359 [main] INFO  TableMetadata - HHH000037: Columns: [character, v_code, api_key, last_name, id, first_name, username]
+2016-03-13 11:11:45.359 [main] INFO  TableMetadata - HHH000108: Foreign keys: []
+2016-03-13 11:11:45.360 [main] INFO  TableMetadata - HHH000126: Indexes: [pilot_pkey]
+2016-03-13 11:11:45.361 [main] INFO  SchemaUpdate - HHH000232: Schema update complete
+2016-03-13 11:11:47.393 [main] INFO  AnnotationMBeanExporter - Registering beans for JMX exposure on startup
+2016-03-13 11:11:47.442 [main] INFO  Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2016-03-13 11:11:47.452 [main] INFO  Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2016-03-13 11:11:47.479 [main] INFO  NioSelectorPool - Using a shared selector for servlet write/read
+2016-03-13 11:11:47.506 [main] INFO  TomcatEmbeddedServletContainer - Tomcat started on port(s): 8080 (http)
+2016-03-13 11:11:47.513 [main] INFO  ApplicationKt - Started ApplicationKt in 8.786 seconds (JVM running for 10.67)
+2016-03-13 11:13:30.001 [Thread-5] INFO  AnnotationConfigEmbeddedWebApplicationContext - Closing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@2cb4893b: startup date [Sun Mar 13 11:11:39 MSK 2016]; root of context hierarchy
+2016-03-13 11:13:30.008 [Thread-5] INFO  AnnotationMBeanExporter - Unregistering JMX-exposed beans on shutdown
+2016-03-13 11:13:30.010 [Thread-5] INFO  LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2016-03-13 11:14:51.075 [main] INFO  ApplicationKt - Starting ApplicationKt on MacBook-Air-Maksim.local with PID 47811 (/Users/maxsyachin/dev/telebot/target/classes started by maxsyachin in /Users/maxsyachin/dev/telebot)
+2016-03-13 11:14:51.087 [main] INFO  ApplicationKt - No active profile set, falling back to default profiles: default
+2016-03-13 11:14:51.313 [main] INFO  AnnotationConfigEmbeddedWebApplicationContext - Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@6a4f1a55: startup date [Sun Mar 13 11:14:51 MSK 2016]; root of context hierarchy
+2016-03-13 11:14:51.773 [background-preinit] INFO  Version - HV000001: Hibernate Validator 5.2.4.Final
+2016-03-13 11:14:53.360 [main] INFO  AutowiredAnnotationBeanPostProcessor - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2016-03-13 11:14:53.485 [main] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [class org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$912b698a] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-03-13 11:14:54.251 [main] INFO  TomcatEmbeddedServletContainer - Tomcat initialized with port(s): 8080 (http)
+2016-03-13 11:14:54.275 [main] INFO  StandardService - Starting service Tomcat
+2016-03-13 11:14:54.277 [main] INFO  StandardEngine - Starting Servlet Engine: Apache Tomcat/8.0.32
+2016-03-13 11:14:54.482 [localhost-startStop-1] INFO  [/] - Initializing Spring embedded WebApplicationContext
+2016-03-13 11:14:54.483 [localhost-startStop-1] INFO  ContextLoader - Root WebApplicationContext: initialization completed in 3183 ms
+2016-03-13 11:14:54.594 [localhost-startStop-1] INFO  FilterRegistrationBean - Mapping filter: 'characterEncodingFilter' to: [/*]
+2016-03-13 11:14:55.077 [main] INFO  LocalContainerEntityManagerFactoryBean - Building JPA container EntityManagerFactory for persistence unit 'default'
+2016-03-13 11:14:55.100 [main] INFO  LogHelper - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2016-03-13 11:14:55.225 [main] INFO  Version - HHH000412: Hibernate Core {4.3.11.Final}
+2016-03-13 11:14:55.228 [main] INFO  Environment - HHH000206: hibernate.properties not found
+2016-03-13 11:14:55.231 [main] INFO  Environment - HHH000021: Bytecode provider name : javassist
+2016-03-13 11:14:55.731 [main] INFO  Version - HCANN000001: Hibernate Commons Annotations {4.0.5.Final}
+2016-03-13 11:14:56.409 [main] INFO  Dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2016-03-13 11:14:56.429 [main] INFO  LobCreatorBuilder - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2016-03-13 11:14:56.569 [main] INFO  ASTQueryTranslatorFactory - HHH000397: Using ASTQueryTranslatorFactory
+2016-03-13 11:14:57.126 [main] INFO  SchemaUpdate - HHH000228: Running hbm2ddl schema update
+2016-03-13 11:14:57.126 [main] INFO  SchemaUpdate - HHH000102: Fetching database metadata
+2016-03-13 11:14:57.130 [main] INFO  SchemaUpdate - HHH000396: Updating schema
+2016-03-13 11:14:57.207 [main] INFO  TableMetadata - HHH000261: Table found: public.pilot
+2016-03-13 11:14:57.209 [main] INFO  TableMetadata - HHH000037: Columns: [character, v_code, api_key, last_name, id, first_name, username]
+2016-03-13 11:14:57.209 [main] INFO  TableMetadata - HHH000108: Foreign keys: []
+2016-03-13 11:14:57.211 [main] INFO  TableMetadata - HHH000126: Indexes: [pilot_pkey]
+2016-03-13 11:14:57.212 [main] INFO  SchemaUpdate - HHH000232: Schema update complete
+2016-03-13 11:14:59.694 [main] INFO  AnnotationMBeanExporter - Registering beans for JMX exposure on startup
+2016-03-13 11:14:59.742 [main] INFO  Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2016-03-13 11:14:59.755 [main] INFO  Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2016-03-13 11:14:59.789 [main] INFO  NioSelectorPool - Using a shared selector for servlet write/read
+2016-03-13 11:14:59.820 [main] INFO  TomcatEmbeddedServletContainer - Tomcat started on port(s): 8080 (http)
+2016-03-13 11:14:59.827 [main] INFO  ApplicationKt - Started ApplicationKt in 9.546 seconds (JVM running for 11.425)
+2016-03-13 11:15:21.983 [Thread-5] INFO  AnnotationConfigEmbeddedWebApplicationContext - Closing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@6a4f1a55: startup date [Sun Mar 13 11:14:51 MSK 2016]; root of context hierarchy
+2016-03-13 11:15:21.989 [Thread-5] INFO  AnnotationMBeanExporter - Unregistering JMX-exposed beans on shutdown
+2016-03-13 11:15:21.991 [Thread-5] INFO  LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2016-03-13 11:18:19.004 [main] INFO  ApplicationKt - Starting ApplicationKt on MacBook-Air-Maksim.local with PID 47836 (/Users/maxsyachin/dev/telebot/target/classes started by maxsyachin in /Users/maxsyachin/dev/telebot)
+2016-03-13 11:18:19.016 [main] INFO  ApplicationKt - No active profile set, falling back to default profiles: default
+2016-03-13 11:18:19.269 [main] INFO  AnnotationConfigEmbeddedWebApplicationContext - Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@5276d6ee: startup date [Sun Mar 13 11:18:19 MSK 2016]; root of context hierarchy
+2016-03-13 11:18:19.720 [background-preinit] INFO  Version - HV000001: Hibernate Validator 5.2.4.Final
+2016-03-13 11:18:21.343 [main] INFO  AutowiredAnnotationBeanPostProcessor - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2016-03-13 11:18:21.477 [main] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [class org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$5ff7bd9a] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-03-13 11:18:22.225 [main] INFO  TomcatEmbeddedServletContainer - Tomcat initialized with port(s): 8080 (http)
+2016-03-13 11:18:22.248 [main] INFO  StandardService - Starting service Tomcat
+2016-03-13 11:18:22.249 [main] INFO  StandardEngine - Starting Servlet Engine: Apache Tomcat/8.0.32
+2016-03-13 11:18:22.465 [localhost-startStop-1] INFO  [/] - Initializing Spring embedded WebApplicationContext
+2016-03-13 11:18:22.465 [localhost-startStop-1] INFO  ContextLoader - Root WebApplicationContext: initialization completed in 3201 ms
+2016-03-13 11:18:22.589 [localhost-startStop-1] INFO  FilterRegistrationBean - Mapping filter: 'characterEncodingFilter' to: [/*]
+2016-03-13 11:18:23.135 [main] INFO  LocalContainerEntityManagerFactoryBean - Building JPA container EntityManagerFactory for persistence unit 'default'
+2016-03-13 11:18:23.160 [main] INFO  LogHelper - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2016-03-13 11:18:23.284 [main] INFO  Version - HHH000412: Hibernate Core {4.3.11.Final}
+2016-03-13 11:18:23.287 [main] INFO  Environment - HHH000206: hibernate.properties not found
+2016-03-13 11:18:23.290 [main] INFO  Environment - HHH000021: Bytecode provider name : javassist
+2016-03-13 11:18:23.722 [main] INFO  Version - HCANN000001: Hibernate Commons Annotations {4.0.5.Final}
+2016-03-13 11:18:24.190 [main] INFO  Dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2016-03-13 11:18:24.212 [main] INFO  LobCreatorBuilder - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2016-03-13 11:18:24.329 [main] INFO  ASTQueryTranslatorFactory - HHH000397: Using ASTQueryTranslatorFactory
+2016-03-13 11:18:24.854 [main] INFO  SchemaUpdate - HHH000228: Running hbm2ddl schema update
+2016-03-13 11:18:24.854 [main] INFO  SchemaUpdate - HHH000102: Fetching database metadata
+2016-03-13 11:18:24.858 [main] INFO  SchemaUpdate - HHH000396: Updating schema
+2016-03-13 11:18:24.932 [main] INFO  TableMetadata - HHH000261: Table found: public.pilot
+2016-03-13 11:18:24.933 [main] INFO  TableMetadata - HHH000037: Columns: [character, v_code, api_key, last_name, id, first_name, username]
+2016-03-13 11:18:24.933 [main] INFO  TableMetadata - HHH000108: Foreign keys: []
+2016-03-13 11:18:24.934 [main] INFO  TableMetadata - HHH000126: Indexes: [pilot_pkey]
+2016-03-13 11:18:24.935 [main] INFO  SchemaUpdate - HHH000232: Schema update complete
+2016-03-13 11:18:26.945 [main] INFO  AnnotationMBeanExporter - Registering beans for JMX exposure on startup
+2016-03-13 11:18:27.000 [main] INFO  Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2016-03-13 11:18:27.016 [main] INFO  Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2016-03-13 11:18:27.046 [main] INFO  NioSelectorPool - Using a shared selector for servlet write/read
+2016-03-13 11:18:27.071 [main] INFO  TomcatEmbeddedServletContainer - Tomcat started on port(s): 8080 (http)
+2016-03-13 11:18:27.078 [main] INFO  ApplicationKt - Started ApplicationKt in 8.902 seconds (JVM running for 10.581)
+2016-03-13 11:21:25.396 [Thread-5] INFO  AnnotationConfigEmbeddedWebApplicationContext - Closing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@5276d6ee: startup date [Sun Mar 13 11:18:19 MSK 2016]; root of context hierarchy
+2016-03-13 11:21:25.403 [Thread-5] INFO  AnnotationMBeanExporter - Unregistering JMX-exposed beans on shutdown
+2016-03-13 11:21:25.404 [Thread-5] INFO  LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2016-03-13 11:21:34.543 [main] INFO  ApplicationKt - Starting ApplicationKt on MacBook-Air-Maksim.local with PID 47875 (/Users/maxsyachin/dev/telebot/target/classes started by maxsyachin in /Users/maxsyachin/dev/telebot)
+2016-03-13 11:21:34.552 [main] INFO  ApplicationKt - No active profile set, falling back to default profiles: default
+2016-03-13 11:21:34.854 [main] INFO  AnnotationConfigEmbeddedWebApplicationContext - Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@cc43f62: startup date [Sun Mar 13 11:21:34 MSK 2016]; root of context hierarchy
+2016-03-13 11:21:35.067 [background-preinit] INFO  Version - HV000001: Hibernate Validator 5.2.4.Final
+2016-03-13 11:21:36.768 [main] INFO  AutowiredAnnotationBeanPostProcessor - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2016-03-13 11:21:36.916 [main] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [class org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$7054762a] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-03-13 11:21:37.746 [main] INFO  TomcatEmbeddedServletContainer - Tomcat initialized with port(s): 8080 (http)
+2016-03-13 11:21:37.769 [main] INFO  StandardService - Starting service Tomcat
+2016-03-13 11:21:37.771 [main] INFO  StandardEngine - Starting Servlet Engine: Apache Tomcat/8.0.32
+2016-03-13 11:21:37.977 [localhost-startStop-1] INFO  [/] - Initializing Spring embedded WebApplicationContext
+2016-03-13 11:21:37.977 [localhost-startStop-1] INFO  ContextLoader - Root WebApplicationContext: initialization completed in 3131 ms
+2016-03-13 11:21:38.096 [localhost-startStop-1] INFO  FilterRegistrationBean - Mapping filter: 'characterEncodingFilter' to: [/*]
+2016-03-13 11:21:38.565 [main] INFO  LocalContainerEntityManagerFactoryBean - Building JPA container EntityManagerFactory for persistence unit 'default'
+2016-03-13 11:21:38.580 [main] INFO  LogHelper - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2016-03-13 11:21:38.690 [main] INFO  Version - HHH000412: Hibernate Core {4.3.11.Final}
+2016-03-13 11:21:38.693 [main] INFO  Environment - HHH000206: hibernate.properties not found
+2016-03-13 11:21:38.695 [main] INFO  Environment - HHH000021: Bytecode provider name : javassist
+2016-03-13 11:21:39.078 [main] INFO  Version - HCANN000001: Hibernate Commons Annotations {4.0.5.Final}
+2016-03-13 11:21:39.555 [main] INFO  Dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2016-03-13 11:21:39.575 [main] INFO  LobCreatorBuilder - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2016-03-13 11:21:39.736 [main] INFO  ASTQueryTranslatorFactory - HHH000397: Using ASTQueryTranslatorFactory
+2016-03-13 11:21:40.221 [main] INFO  SchemaUpdate - HHH000228: Running hbm2ddl schema update
+2016-03-13 11:21:40.222 [main] INFO  SchemaUpdate - HHH000102: Fetching database metadata
+2016-03-13 11:21:40.227 [main] INFO  SchemaUpdate - HHH000396: Updating schema
+2016-03-13 11:21:40.303 [main] INFO  TableMetadata - HHH000261: Table found: public.pilot
+2016-03-13 11:21:40.303 [main] INFO  TableMetadata - HHH000037: Columns: [character, v_code, api_key, last_name, id, first_name, username]
+2016-03-13 11:21:40.303 [main] INFO  TableMetadata - HHH000108: Foreign keys: []
+2016-03-13 11:21:40.304 [main] INFO  TableMetadata - HHH000126: Indexes: [pilot_pkey]
+2016-03-13 11:21:40.305 [main] INFO  SchemaUpdate - HHH000232: Schema update complete
+2016-03-13 11:21:42.382 [main] INFO  AnnotationMBeanExporter - Registering beans for JMX exposure on startup
+2016-03-13 11:21:42.431 [main] INFO  Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2016-03-13 11:21:42.442 [main] INFO  Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2016-03-13 11:21:42.469 [main] INFO  NioSelectorPool - Using a shared selector for servlet write/read
+2016-03-13 11:21:42.496 [main] INFO  TomcatEmbeddedServletContainer - Tomcat started on port(s): 8080 (http)
+2016-03-13 11:21:42.504 [main] INFO  ApplicationKt - Started ApplicationKt in 8.815 seconds (JVM running for 10.505)
+2016-03-13 11:21:50.674 [Thread-3] INFO  UserService - registering new pilot: Finne Trolle
+2016-03-13 11:22:16.739 [Thread-5] INFO  AnnotationConfigEmbeddedWebApplicationContext - Closing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@cc43f62: startup date [Sun Mar 13 11:21:34 MSK 2016]; root of context hierarchy
+2016-03-13 11:22:16.747 [Thread-5] INFO  AnnotationMBeanExporter - Unregistering JMX-exposed beans on shutdown
+2016-03-13 11:22:16.748 [Thread-5] INFO  LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2016-03-13 12:01:09.142 [main] INFO  ApplicationKt - Starting ApplicationKt on MacBook-Air-Maksim.local with PID 48065 (/Users/maxsyachin/dev/telebot/target/classes started by maxsyachin in /Users/maxsyachin/dev/telebot)
+2016-03-13 12:01:09.153 [main] INFO  ApplicationKt - No active profile set, falling back to default profiles: default
+2016-03-13 12:01:09.350 [main] INFO  AnnotationConfigEmbeddedWebApplicationContext - Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@11dc3715: startup date [Sun Mar 13 12:01:09 MSK 2016]; root of context hierarchy
+2016-03-13 12:01:10.404 [background-preinit] INFO  Version - HV000001: Hibernate Validator 5.2.4.Final
+2016-03-13 12:01:11.996 [main] INFO  AutowiredAnnotationBeanPostProcessor - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2016-03-13 12:01:12.305 [main] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [class org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$d636b481] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-03-13 12:01:13.161 [main] INFO  TomcatEmbeddedServletContainer - Tomcat initialized with port(s): 8080 (http)
+2016-03-13 12:01:13.182 [main] INFO  StandardService - Starting service Tomcat
+2016-03-13 12:01:13.184 [main] INFO  StandardEngine - Starting Servlet Engine: Apache Tomcat/8.0.32
+2016-03-13 12:01:13.378 [localhost-startStop-1] INFO  [/] - Initializing Spring embedded WebApplicationContext
+2016-03-13 12:01:13.378 [localhost-startStop-1] INFO  ContextLoader - Root WebApplicationContext: initialization completed in 4036 ms
+2016-03-13 12:01:13.794 [localhost-startStop-1] INFO  FilterRegistrationBean - Mapping filter: 'characterEncodingFilter' to: [/*]
+2016-03-13 12:01:13.795 [localhost-startStop-1] INFO  FilterRegistrationBean - Mapping filter: 'requestContextFilter' to: [/*]
+2016-03-13 12:01:13.795 [localhost-startStop-1] INFO  ServletRegistrationBean - Mapping servlet: 'ru.finnetrolle.telebot.restful.JerseyConfig' to [/*]
+2016-03-13 12:01:14.542 [main] INFO  LocalContainerEntityManagerFactoryBean - Building JPA container EntityManagerFactory for persistence unit 'default'
+2016-03-13 12:01:14.586 [main] INFO  LogHelper - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2016-03-13 12:01:14.964 [main] INFO  Version - HHH000412: Hibernate Core {4.3.11.Final}
+2016-03-13 12:01:14.970 [main] INFO  Environment - HHH000206: hibernate.properties not found
+2016-03-13 12:01:14.978 [main] INFO  Environment - HHH000021: Bytecode provider name : javassist
+2016-03-13 12:01:15.756 [main] INFO  Version - HCANN000001: Hibernate Commons Annotations {4.0.5.Final}
+2016-03-13 12:01:16.513 [main] INFO  Dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2016-03-13 12:01:16.556 [main] INFO  LobCreatorBuilder - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2016-03-13 12:01:16.864 [main] INFO  ASTQueryTranslatorFactory - HHH000397: Using ASTQueryTranslatorFactory
+2016-03-13 12:01:17.887 [main] INFO  SchemaUpdate - HHH000228: Running hbm2ddl schema update
+2016-03-13 12:01:17.888 [main] INFO  SchemaUpdate - HHH000102: Fetching database metadata
+2016-03-13 12:01:17.894 [main] INFO  SchemaUpdate - HHH000396: Updating schema
+2016-03-13 12:01:18.010 [main] INFO  TableMetadata - HHH000261: Table found: public.pilot
+2016-03-13 12:01:18.010 [main] INFO  TableMetadata - HHH000037: Columns: [character, v_code, api_key, last_name, id, first_name, username]
+2016-03-13 12:01:18.012 [main] INFO  TableMetadata - HHH000108: Foreign keys: []
+2016-03-13 12:01:18.013 [main] INFO  TableMetadata - HHH000126: Indexes: [pilot_pkey]
+2016-03-13 12:01:18.017 [main] INFO  SchemaUpdate - HHH000232: Schema update complete
+2016-03-13 12:01:21.654 [main] INFO  AnnotationMBeanExporter - Registering beans for JMX exposure on startup
+2016-03-13 12:01:21.701 [main] INFO  Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2016-03-13 12:01:21.714 [main] INFO  Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2016-03-13 12:01:21.740 [main] INFO  NioSelectorPool - Using a shared selector for servlet write/read
+2016-03-13 12:01:21.760 [main] INFO  TomcatEmbeddedServletContainer - Tomcat started on port(s): 8080 (http)
+2016-03-13 12:01:21.814 [main] INFO  ApplicationKt - Started ApplicationKt in 13.343 seconds (JVM running for 14.872)
+2016-03-13 12:02:47.191 [Thread-5] INFO  AnnotationConfigEmbeddedWebApplicationContext - Closing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@11dc3715: startup date [Sun Mar 13 12:01:09 MSK 2016]; root of context hierarchy
+2016-03-13 12:02:47.195 [Thread-5] INFO  AnnotationMBeanExporter - Unregistering JMX-exposed beans on shutdown
+2016-03-13 12:02:47.196 [Thread-5] INFO  LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2016-03-13 12:05:22.508 [main] INFO  ApplicationKt - Starting ApplicationKt on MacBook-Air-Maksim.local with PID 48110 (/Users/maxsyachin/dev/telebot/target/classes started by maxsyachin in /Users/maxsyachin/dev/telebot)
+2016-03-13 12:05:22.514 [main] INFO  ApplicationKt - No active profile set, falling back to default profiles: default
+2016-03-13 12:05:22.753 [main] INFO  AnnotationConfigEmbeddedWebApplicationContext - Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@1460a8c0: startup date [Sun Mar 13 12:05:22 MSK 2016]; root of context hierarchy
+2016-03-13 12:05:23.380 [background-preinit] INFO  Version - HV000001: Hibernate Validator 5.2.4.Final
+2016-03-13 12:05:24.803 [main] INFO  AutowiredAnnotationBeanPostProcessor - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2016-03-13 12:05:25.071 [main] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [class org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$4ca7c2f6] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-03-13 12:05:25.904 [main] INFO  TomcatEmbeddedServletContainer - Tomcat initialized with port(s): 8080 (http)
+2016-03-13 12:05:25.928 [main] INFO  StandardService - Starting service Tomcat
+2016-03-13 12:05:25.929 [main] INFO  StandardEngine - Starting Servlet Engine: Apache Tomcat/8.0.32
+2016-03-13 12:05:26.165 [localhost-startStop-1] INFO  [/] - Initializing Spring embedded WebApplicationContext
+2016-03-13 12:05:26.165 [localhost-startStop-1] INFO  ContextLoader - Root WebApplicationContext: initialization completed in 3417 ms
+2016-03-13 12:05:26.522 [localhost-startStop-1] INFO  FilterRegistrationBean - Mapping filter: 'characterEncodingFilter' to: [/*]
+2016-03-13 12:05:26.522 [localhost-startStop-1] INFO  FilterRegistrationBean - Mapping filter: 'requestContextFilter' to: [/*]
+2016-03-13 12:05:26.522 [localhost-startStop-1] INFO  ServletRegistrationBean - Mapping servlet: 'ru.finnetrolle.telebot.restful.JerseyConfig' to [/*]
+2016-03-13 12:05:27.012 [main] INFO  LocalContainerEntityManagerFactoryBean - Building JPA container EntityManagerFactory for persistence unit 'default'
+2016-03-13 12:05:27.046 [main] INFO  LogHelper - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2016-03-13 12:05:27.162 [main] INFO  Version - HHH000412: Hibernate Core {4.3.11.Final}
+2016-03-13 12:05:27.165 [main] INFO  Environment - HHH000206: hibernate.properties not found
+2016-03-13 12:05:27.167 [main] INFO  Environment - HHH000021: Bytecode provider name : javassist
+2016-03-13 12:05:27.621 [main] INFO  Version - HCANN000001: Hibernate Commons Annotations {4.0.5.Final}
+2016-03-13 12:05:28.321 [main] INFO  Dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2016-03-13 12:05:28.337 [main] INFO  LobCreatorBuilder - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2016-03-13 12:05:28.452 [main] INFO  ASTQueryTranslatorFactory - HHH000397: Using ASTQueryTranslatorFactory
+2016-03-13 12:05:28.887 [main] INFO  SchemaUpdate - HHH000228: Running hbm2ddl schema update
+2016-03-13 12:05:28.887 [main] INFO  SchemaUpdate - HHH000102: Fetching database metadata
+2016-03-13 12:05:28.890 [main] INFO  SchemaUpdate - HHH000396: Updating schema
+2016-03-13 12:05:28.952 [main] INFO  TableMetadata - HHH000261: Table found: public.pilot
+2016-03-13 12:05:28.952 [main] INFO  TableMetadata - HHH000037: Columns: [character, v_code, api_key, last_name, id, first_name, username]
+2016-03-13 12:05:28.952 [main] INFO  TableMetadata - HHH000108: Foreign keys: []
+2016-03-13 12:05:28.952 [main] INFO  TableMetadata - HHH000126: Indexes: [pilot_pkey]
+2016-03-13 12:05:28.953 [main] INFO  SchemaUpdate - HHH000232: Schema update complete
+2016-03-13 12:05:31.183 [main] INFO  AnnotationMBeanExporter - Registering beans for JMX exposure on startup
+2016-03-13 12:05:31.242 [main] INFO  Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2016-03-13 12:05:31.254 [main] INFO  Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2016-03-13 12:05:31.279 [main] INFO  NioSelectorPool - Using a shared selector for servlet write/read
+2016-03-13 12:05:31.299 [main] INFO  TomcatEmbeddedServletContainer - Tomcat started on port(s): 8080 (http)
+2016-03-13 12:05:31.305 [main] INFO  ApplicationKt - Started ApplicationKt in 9.493 seconds (JVM running for 11.12)
+2016-03-13 12:07:06.879 [Thread-5] INFO  AnnotationConfigEmbeddedWebApplicationContext - Closing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@1460a8c0: startup date [Sun Mar 13 12:05:22 MSK 2016]; root of context hierarchy
+2016-03-13 12:07:06.885 [Thread-5] INFO  AnnotationMBeanExporter - Unregistering JMX-exposed beans on shutdown
+2016-03-13 12:07:06.887 [Thread-5] INFO  LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2016-03-13 12:07:14.908 [main] INFO  ApplicationKt - Starting ApplicationKt on MacBook-Air-Maksim.local with PID 48133 (/Users/maxsyachin/dev/telebot/target/classes started by maxsyachin in /Users/maxsyachin/dev/telebot)
+2016-03-13 12:07:14.922 [main] INFO  ApplicationKt - No active profile set, falling back to default profiles: default
+2016-03-13 12:07:15.084 [main] INFO  AnnotationConfigEmbeddedWebApplicationContext - Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@1460a8c0: startup date [Sun Mar 13 12:07:15 MSK 2016]; root of context hierarchy
+2016-03-13 12:07:15.593 [background-preinit] INFO  Version - HV000001: Hibernate Validator 5.2.4.Final
+2016-03-13 12:07:17.390 [main] INFO  AutowiredAnnotationBeanPostProcessor - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2016-03-13 12:07:17.501 [main] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [class org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$f3e02d0b] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-03-13 12:07:18.143 [main] INFO  TomcatEmbeddedServletContainer - Tomcat initialized with port(s): 8080 (http)
+2016-03-13 12:07:18.164 [main] INFO  StandardService - Starting service Tomcat
+2016-03-13 12:07:18.166 [main] INFO  StandardEngine - Starting Servlet Engine: Apache Tomcat/8.0.32
+2016-03-13 12:07:18.358 [localhost-startStop-1] INFO  [/] - Initializing Spring embedded WebApplicationContext
+2016-03-13 12:07:18.358 [localhost-startStop-1] INFO  ContextLoader - Root WebApplicationContext: initialization completed in 3278 ms
+2016-03-13 12:07:18.628 [localhost-startStop-1] INFO  FilterRegistrationBean - Mapping filter: 'characterEncodingFilter' to: [/*]
+2016-03-13 12:07:18.629 [localhost-startStop-1] INFO  FilterRegistrationBean - Mapping filter: 'requestContextFilter' to: [/*]
+2016-03-13 12:07:18.629 [localhost-startStop-1] INFO  ServletRegistrationBean - Mapping servlet: 'ru.finnetrolle.telebot.restful.JerseyConfig' to [/*]
+2016-03-13 12:07:19.064 [main] INFO  LocalContainerEntityManagerFactoryBean - Building JPA container EntityManagerFactory for persistence unit 'default'
+2016-03-13 12:07:19.076 [main] INFO  LogHelper - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2016-03-13 12:07:19.175 [main] INFO  Version - HHH000412: Hibernate Core {4.3.11.Final}
+2016-03-13 12:07:19.176 [main] INFO  Environment - HHH000206: hibernate.properties not found
+2016-03-13 12:07:19.182 [main] INFO  Environment - HHH000021: Bytecode provider name : javassist
+2016-03-13 12:07:19.490 [main] INFO  Version - HCANN000001: Hibernate Commons Annotations {4.0.5.Final}
+2016-03-13 12:07:19.972 [main] INFO  Dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2016-03-13 12:07:19.990 [main] INFO  LobCreatorBuilder - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2016-03-13 12:07:20.126 [main] INFO  ASTQueryTranslatorFactory - HHH000397: Using ASTQueryTranslatorFactory
+2016-03-13 12:07:20.609 [main] INFO  SchemaUpdate - HHH000228: Running hbm2ddl schema update
+2016-03-13 12:07:20.610 [main] INFO  SchemaUpdate - HHH000102: Fetching database metadata
+2016-03-13 12:07:20.613 [main] INFO  SchemaUpdate - HHH000396: Updating schema
+2016-03-13 12:07:20.686 [main] INFO  TableMetadata - HHH000261: Table found: public.pilot
+2016-03-13 12:07:20.687 [main] INFO  TableMetadata - HHH000037: Columns: [character, v_code, api_key, last_name, id, first_name, username]
+2016-03-13 12:07:20.687 [main] INFO  TableMetadata - HHH000108: Foreign keys: []
+2016-03-13 12:07:20.688 [main] INFO  TableMetadata - HHH000126: Indexes: [pilot_pkey]
+2016-03-13 12:07:20.689 [main] INFO  SchemaUpdate - HHH000232: Schema update complete
+2016-03-13 12:07:22.496 [main] INFO  AnnotationMBeanExporter - Registering beans for JMX exposure on startup
+2016-03-13 12:07:22.553 [main] INFO  Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2016-03-13 12:07:22.567 [main] INFO  Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2016-03-13 12:07:22.589 [main] INFO  NioSelectorPool - Using a shared selector for servlet write/read
+2016-03-13 12:07:22.614 [main] INFO  TomcatEmbeddedServletContainer - Tomcat started on port(s): 8080 (http)
+2016-03-13 12:07:22.622 [main] INFO  ApplicationKt - Started ApplicationKt in 8.39 seconds (JVM running for 9.453)
+2016-03-13 12:08:22.163 [Thread-5] INFO  AnnotationConfigEmbeddedWebApplicationContext - Closing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@1460a8c0: startup date [Sun Mar 13 12:07:15 MSK 2016]; root of context hierarchy
+2016-03-13 12:08:22.169 [Thread-5] INFO  AnnotationMBeanExporter - Unregistering JMX-exposed beans on shutdown
+2016-03-13 12:08:22.172 [Thread-5] INFO  LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2016-03-13 12:08:31.022 [main] INFO  ApplicationKt - Starting ApplicationKt on MacBook-Air-Maksim.local with PID 48150 (/Users/maxsyachin/dev/telebot/target/classes started by maxsyachin in /Users/maxsyachin/dev/telebot)
+2016-03-13 12:08:31.027 [main] INFO  ApplicationKt - No active profile set, falling back to default profiles: default
+2016-03-13 12:08:31.202 [main] INFO  AnnotationConfigEmbeddedWebApplicationContext - Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@4f638935: startup date [Sun Mar 13 12:08:31 MSK 2016]; root of context hierarchy
+2016-03-13 12:08:31.752 [background-preinit] INFO  Version - HV000001: Hibernate Validator 5.2.4.Final
+2016-03-13 12:08:33.457 [main] INFO  AutowiredAnnotationBeanPostProcessor - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2016-03-13 12:08:33.570 [main] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [class org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$4ca7c2f6] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-03-13 12:08:34.332 [main] INFO  TomcatEmbeddedServletContainer - Tomcat initialized with port(s): 8080 (http)
+2016-03-13 12:08:34.349 [main] INFO  StandardService - Starting service Tomcat
+2016-03-13 12:08:34.351 [main] INFO  StandardEngine - Starting Servlet Engine: Apache Tomcat/8.0.32
+2016-03-13 12:08:34.523 [localhost-startStop-1] INFO  [/] - Initializing Spring embedded WebApplicationContext
+2016-03-13 12:08:34.523 [localhost-startStop-1] INFO  ContextLoader - Root WebApplicationContext: initialization completed in 3326 ms
+2016-03-13 12:08:34.761 [localhost-startStop-1] INFO  FilterRegistrationBean - Mapping filter: 'characterEncodingFilter' to: [/*]
+2016-03-13 12:08:34.761 [localhost-startStop-1] INFO  FilterRegistrationBean - Mapping filter: 'requestContextFilter' to: [/*]
+2016-03-13 12:08:34.762 [localhost-startStop-1] INFO  ServletRegistrationBean - Mapping servlet: 'ru.finnetrolle.telebot.restful.JerseyConfig' to [/*]
+2016-03-13 12:08:35.143 [main] INFO  LocalContainerEntityManagerFactoryBean - Building JPA container EntityManagerFactory for persistence unit 'default'
+2016-03-13 12:08:35.155 [main] INFO  LogHelper - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2016-03-13 12:08:35.252 [main] INFO  Version - HHH000412: Hibernate Core {4.3.11.Final}
+2016-03-13 12:08:35.254 [main] INFO  Environment - HHH000206: hibernate.properties not found
+2016-03-13 12:08:35.256 [main] INFO  Environment - HHH000021: Bytecode provider name : javassist
+2016-03-13 12:08:35.543 [main] INFO  Version - HCANN000001: Hibernate Commons Annotations {4.0.5.Final}
+2016-03-13 12:08:35.998 [main] INFO  Dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2016-03-13 12:08:36.020 [main] INFO  LobCreatorBuilder - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2016-03-13 12:08:36.157 [main] INFO  ASTQueryTranslatorFactory - HHH000397: Using ASTQueryTranslatorFactory
+2016-03-13 12:08:36.561 [main] INFO  SchemaUpdate - HHH000228: Running hbm2ddl schema update
+2016-03-13 12:08:36.561 [main] INFO  SchemaUpdate - HHH000102: Fetching database metadata
+2016-03-13 12:08:36.565 [main] INFO  SchemaUpdate - HHH000396: Updating schema
+2016-03-13 12:08:36.643 [main] INFO  TableMetadata - HHH000261: Table found: public.pilot
+2016-03-13 12:08:36.644 [main] INFO  TableMetadata - HHH000037: Columns: [character, v_code, api_key, last_name, id, first_name, username]
+2016-03-13 12:08:36.644 [main] INFO  TableMetadata - HHH000108: Foreign keys: []
+2016-03-13 12:08:36.645 [main] INFO  TableMetadata - HHH000126: Indexes: [pilot_pkey]
+2016-03-13 12:08:36.645 [main] INFO  SchemaUpdate - HHH000232: Schema update complete
+2016-03-13 12:08:38.410 [main] INFO  AnnotationMBeanExporter - Registering beans for JMX exposure on startup
+2016-03-13 12:08:38.460 [main] INFO  Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2016-03-13 12:08:38.470 [main] INFO  Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2016-03-13 12:08:38.492 [main] INFO  NioSelectorPool - Using a shared selector for servlet write/read
+2016-03-13 12:08:38.510 [main] INFO  TomcatEmbeddedServletContainer - Tomcat started on port(s): 8080 (http)
+2016-03-13 12:08:38.516 [main] INFO  ApplicationKt - Started ApplicationKt in 8.187 seconds (JVM running for 9.524)
+2016-03-13 12:09:24.355 [Thread-5] INFO  AnnotationConfigEmbeddedWebApplicationContext - Closing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@4f638935: startup date [Sun Mar 13 12:08:31 MSK 2016]; root of context hierarchy
+2016-03-13 12:09:24.361 [Thread-5] INFO  AnnotationMBeanExporter - Unregistering JMX-exposed beans on shutdown
+2016-03-13 12:09:24.362 [Thread-5] INFO  LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2016-03-13 12:09:33.151 [main] INFO  ApplicationKt - Starting ApplicationKt on MacBook-Air-Maksim.local with PID 48168 (/Users/maxsyachin/dev/telebot/target/classes started by maxsyachin in /Users/maxsyachin/dev/telebot)
+2016-03-13 12:09:33.156 [main] INFO  ApplicationKt - No active profile set, falling back to default profiles: default
+2016-03-13 12:09:33.385 [main] INFO  AnnotationConfigEmbeddedWebApplicationContext - Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@1460a8c0: startup date [Sun Mar 13 12:09:33 MSK 2016]; root of context hierarchy
+2016-03-13 12:09:33.815 [background-preinit] INFO  Version - HV000001: Hibernate Validator 5.2.4.Final
+2016-03-13 12:09:35.735 [main] INFO  AutowiredAnnotationBeanPostProcessor - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2016-03-13 12:09:35.864 [main] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [class org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$aaf3a719] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-03-13 12:09:36.785 [main] INFO  TomcatEmbeddedServletContainer - Tomcat initialized with port(s): 8080 (http)
+2016-03-13 12:09:36.811 [main] INFO  StandardService - Starting service Tomcat
+2016-03-13 12:09:36.813 [main] INFO  StandardEngine - Starting Servlet Engine: Apache Tomcat/8.0.32
+2016-03-13 12:09:37.012 [localhost-startStop-1] INFO  [/] - Initializing Spring embedded WebApplicationContext
+2016-03-13 12:09:37.012 [localhost-startStop-1] INFO  ContextLoader - Root WebApplicationContext: initialization completed in 3646 ms
+2016-03-13 12:09:37.297 [localhost-startStop-1] INFO  FilterRegistrationBean - Mapping filter: 'characterEncodingFilter' to: [/*]
+2016-03-13 12:09:37.298 [localhost-startStop-1] INFO  FilterRegistrationBean - Mapping filter: 'requestContextFilter' to: [/*]
+2016-03-13 12:09:37.298 [localhost-startStop-1] INFO  ServletRegistrationBean - Mapping servlet: 'ru.finnetrolle.telebot.restful.JerseyConfig' to [/*]
+2016-03-13 12:09:37.737 [main] INFO  LocalContainerEntityManagerFactoryBean - Building JPA container EntityManagerFactory for persistence unit 'default'
+2016-03-13 12:09:37.753 [main] INFO  LogHelper - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2016-03-13 12:09:37.844 [main] INFO  Version - HHH000412: Hibernate Core {4.3.11.Final}
+2016-03-13 12:09:37.846 [main] INFO  Environment - HHH000206: hibernate.properties not found
+2016-03-13 12:09:37.848 [main] INFO  Environment - HHH000021: Bytecode provider name : javassist
+2016-03-13 12:09:38.151 [main] INFO  Version - HCANN000001: Hibernate Commons Annotations {4.0.5.Final}
+2016-03-13 12:09:38.603 [main] INFO  Dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2016-03-13 12:09:38.616 [main] INFO  LobCreatorBuilder - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2016-03-13 12:09:38.719 [main] INFO  ASTQueryTranslatorFactory - HHH000397: Using ASTQueryTranslatorFactory
+2016-03-13 12:09:39.154 [main] INFO  SchemaUpdate - HHH000228: Running hbm2ddl schema update
+2016-03-13 12:09:39.154 [main] INFO  SchemaUpdate - HHH000102: Fetching database metadata
+2016-03-13 12:09:39.159 [main] INFO  SchemaUpdate - HHH000396: Updating schema
+2016-03-13 12:09:39.242 [main] INFO  TableMetadata - HHH000261: Table found: public.pilot
+2016-03-13 12:09:39.242 [main] INFO  TableMetadata - HHH000037: Columns: [character, v_code, api_key, last_name, id, first_name, username]
+2016-03-13 12:09:39.242 [main] INFO  TableMetadata - HHH000108: Foreign keys: []
+2016-03-13 12:09:39.243 [main] INFO  TableMetadata - HHH000126: Indexes: [pilot_pkey]
+2016-03-13 12:09:39.244 [main] INFO  SchemaUpdate - HHH000232: Schema update complete
+2016-03-13 12:09:41.042 [main] INFO  AnnotationMBeanExporter - Registering beans for JMX exposure on startup
+2016-03-13 12:09:41.084 [main] INFO  Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2016-03-13 12:09:41.095 [main] INFO  Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2016-03-13 12:09:41.116 [main] INFO  NioSelectorPool - Using a shared selector for servlet write/read
+2016-03-13 12:09:41.136 [main] INFO  TomcatEmbeddedServletContainer - Tomcat started on port(s): 8080 (http)
+2016-03-13 12:09:41.143 [main] INFO  ApplicationKt - Started ApplicationKt in 8.841 seconds (JVM running for 10.522)
+2016-03-13 12:09:48.202 [http-nio-8080-exec-1] ERROR JerseyConfig] - Servlet.service() for servlet [ru.finnetrolle.telebot.restful.JerseyConfig] in context with path [] threw exception [org.glassfish.jersey.server.ContainerException: org.telegram.telegrambots.TelegramApiException: Error at sendmessage] with root cause
+org.telegram.telegrambots.TelegramApiException: Error at sendmessage
+	at org.telegram.telegrambots.bots.AbsSender.sendApiMethod(AbsSender.java:435)
+	at org.telegram.telegrambots.bots.AbsSender.sendMessage(AbsSender.java:51)
+	at ru.finnetrolle.telebot.telegramapi.SimpleTelegramBot.broadcast(SimpleTelegramBot.kt:100)
+	at ru.finnetrolle.telebot.restful.BroadcastResource.cast(BroadcastResource.kt:27)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.glassfish.jersey.server.model.internal.ResourceMethodInvocationHandlerFactory$1.invoke(ResourceMethodInvocationHandlerFactory.java:81)
+	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher$1.run(AbstractJavaResourceMethodDispatcher.java:144)
+	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.invoke(AbstractJavaResourceMethodDispatcher.java:161)
+	at org.glassfish.jersey.server.model.internal.JavaResourceMethodDispatcherProvider$ResponseOutInvoker.doDispatch(JavaResourceMethodDispatcherProvider.java:160)
+	at org.glassfish.jersey.server.model.internal.AbstractJavaResourceMethodDispatcher.dispatch(AbstractJavaResourceMethodDispatcher.java:99)
+	at org.glassfish.jersey.server.model.ResourceMethodInvoker.invoke(ResourceMethodInvoker.java:389)
+	at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:347)
+	at org.glassfish.jersey.server.model.ResourceMethodInvoker.apply(ResourceMethodInvoker.java:102)
+	at org.glassfish.jersey.server.ServerRuntime$2.run(ServerRuntime.java:326)
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:271)
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:267)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:315)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:297)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:267)
+	at org.glassfish.jersey.process.internal.RequestScope.runInScope(RequestScope.java:317)
+	at org.glassfish.jersey.server.ServerRuntime.process(ServerRuntime.java:305)
+	at org.glassfish.jersey.server.ApplicationHandler.handle(ApplicationHandler.java:1154)
+	at org.glassfish.jersey.servlet.WebComponent.serviceImpl(WebComponent.java:473)
+	at org.glassfish.jersey.servlet.WebComponent.service(WebComponent.java:427)
+	at org.glassfish.jersey.servlet.ServletContainer.service(ServletContainer.java:388)
+	at org.glassfish.jersey.servlet.ServletContainer.service(ServletContainer.java:341)
+	at org.glassfish.jersey.servlet.ServletContainer.service(ServletContainer.java:228)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:292)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:207)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:240)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:207)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:240)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:207)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:121)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:240)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:207)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:212)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:106)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:502)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:141)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:79)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:88)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:522)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1095)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:672)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1500)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.run(NioEndpoint.java:1456)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:745)
+2016-03-13 12:11:16.905 [http-nio-8080-exec-2] INFO  SimpleTelegramBot - broadcast sent to 1 users
+2016-03-13 12:11:32.514 [http-nio-8080-exec-3] INFO  SimpleTelegramBot - broadcast sent to 1 users
+2016-03-13 12:11:42.382 [Thread-5] INFO  AnnotationConfigEmbeddedWebApplicationContext - Closing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@1460a8c0: startup date [Sun Mar 13 12:09:33 MSK 2016]; root of context hierarchy
+2016-03-13 12:11:42.386 [Thread-5] INFO  AnnotationMBeanExporter - Unregistering JMX-exposed beans on shutdown
+2016-03-13 12:11:42.387 [Thread-5] INFO  LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2016-03-13 12:17:15.042 [main] INFO  ApplicationKt - Starting ApplicationKt on MacBook-Air-Maksim.local with PID 48210 (/Users/maxsyachin/dev/telebot/target/classes started by maxsyachin in /Users/maxsyachin/dev/telebot)
+2016-03-13 12:17:15.046 [main] INFO  ApplicationKt - No active profile set, falling back to default profiles: default
+2016-03-13 12:17:15.256 [main] INFO  AnnotationConfigEmbeddedWebApplicationContext - Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@1460a8c0: startup date [Sun Mar 13 12:17:15 MSK 2016]; root of context hierarchy
+2016-03-13 12:17:16.012 [background-preinit] INFO  Version - HV000001: Hibernate Validator 5.2.4.Final
+2016-03-13 12:17:17.812 [main] INFO  AutowiredAnnotationBeanPostProcessor - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2016-03-13 12:17:18.014 [main] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [class org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$bba5284c] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-03-13 12:17:18.647 [main] INFO  TomcatEmbeddedServletContainer - Tomcat initialized with port(s): 8080 (http)
+2016-03-13 12:17:18.670 [main] INFO  StandardService - Starting service Tomcat
+2016-03-13 12:17:18.672 [main] INFO  StandardEngine - Starting Servlet Engine: Apache Tomcat/8.0.32
+2016-03-13 12:17:18.904 [localhost-startStop-1] INFO  [/] - Initializing Spring embedded WebApplicationContext
+2016-03-13 12:17:18.904 [localhost-startStop-1] INFO  ContextLoader - Root WebApplicationContext: initialization completed in 3653 ms
+2016-03-13 12:17:19.195 [localhost-startStop-1] INFO  FilterRegistrationBean - Mapping filter: 'characterEncodingFilter' to: [/*]
+2016-03-13 12:17:19.195 [localhost-startStop-1] INFO  FilterRegistrationBean - Mapping filter: 'requestContextFilter' to: [/*]
+2016-03-13 12:17:19.196 [localhost-startStop-1] INFO  ServletRegistrationBean - Mapping servlet: 'ru.finnetrolle.telebot.restful.JerseyConfig' to [/*]
+2016-03-13 12:17:19.715 [main] INFO  LocalContainerEntityManagerFactoryBean - Building JPA container EntityManagerFactory for persistence unit 'default'
+2016-03-13 12:17:19.735 [main] INFO  LogHelper - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2016-03-13 12:17:19.866 [main] INFO  Version - HHH000412: Hibernate Core {4.3.11.Final}
+2016-03-13 12:17:19.868 [main] INFO  Environment - HHH000206: hibernate.properties not found
+2016-03-13 12:17:19.871 [main] INFO  Environment - HHH000021: Bytecode provider name : javassist
+2016-03-13 12:17:20.156 [main] INFO  Version - HCANN000001: Hibernate Commons Annotations {4.0.5.Final}
+2016-03-13 12:17:20.591 [main] INFO  Dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2016-03-13 12:17:20.610 [main] INFO  LobCreatorBuilder - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2016-03-13 12:17:20.743 [main] INFO  ASTQueryTranslatorFactory - HHH000397: Using ASTQueryTranslatorFactory
+2016-03-13 12:17:21.119 [main] INFO  SchemaUpdate - HHH000228: Running hbm2ddl schema update
+2016-03-13 12:17:21.120 [main] INFO  SchemaUpdate - HHH000102: Fetching database metadata
+2016-03-13 12:17:21.124 [main] INFO  SchemaUpdate - HHH000396: Updating schema
+2016-03-13 12:17:21.188 [main] INFO  TableMetadata - HHH000261: Table found: public.pilot
+2016-03-13 12:17:21.188 [main] INFO  TableMetadata - HHH000037: Columns: [character, v_code, api_key, last_name, id, first_name, username]
+2016-03-13 12:17:21.188 [main] INFO  TableMetadata - HHH000108: Foreign keys: []
+2016-03-13 12:17:21.189 [main] INFO  TableMetadata - HHH000126: Indexes: [pilot_pkey]
+2016-03-13 12:17:21.189 [main] INFO  SchemaUpdate - HHH000232: Schema update complete
+2016-03-13 12:17:23.448 [main] INFO  AnnotationMBeanExporter - Registering beans for JMX exposure on startup
+2016-03-13 12:17:23.499 [main] INFO  Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2016-03-13 12:17:23.510 [main] INFO  Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2016-03-13 12:17:23.542 [main] INFO  NioSelectorPool - Using a shared selector for servlet write/read
+2016-03-13 12:17:23.575 [main] INFO  TomcatEmbeddedServletContainer - Tomcat started on port(s): 8080 (http)
+2016-03-13 12:17:23.583 [main] INFO  ApplicationKt - Started ApplicationKt in 9.123 seconds (JVM running for 10.611)
+2016-03-13 12:17:30.642 [http-nio-8080-exec-1] INFO  SimpleTelegramBot - broadcast sent to 1 users
+2016-03-13 12:19:07.898 [Thread-5] INFO  AnnotationConfigEmbeddedWebApplicationContext - Closing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@1460a8c0: startup date [Sun Mar 13 12:17:15 MSK 2016]; root of context hierarchy
+2016-03-13 12:19:07.903 [Thread-5] INFO  AnnotationMBeanExporter - Unregistering JMX-exposed beans on shutdown
+2016-03-13 12:19:07.905 [Thread-5] INFO  LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2016-03-13 12:19:11.312 [main] INFO  ApplicationKt - Starting ApplicationKt on MacBook-Air-Maksim.local with PID 48229 (/Users/maxsyachin/dev/telebot/target/classes started by maxsyachin in /Users/maxsyachin/dev/telebot)
+2016-03-13 12:19:11.334 [main] INFO  ApplicationKt - No active profile set, falling back to default profiles: default
+2016-03-13 12:19:11.540 [main] INFO  AnnotationConfigEmbeddedWebApplicationContext - Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@1460a8c0: startup date [Sun Mar 13 12:19:11 MSK 2016]; root of context hierarchy
+2016-03-13 12:19:11.870 [background-preinit] INFO  Version - HV000001: Hibernate Validator 5.2.4.Final
+2016-03-13 12:19:13.117 [main] INFO  AutowiredAnnotationBeanPostProcessor - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2016-03-13 12:19:13.225 [main] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [class org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$39463caf] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-03-13 12:19:13.881 [main] INFO  TomcatEmbeddedServletContainer - Tomcat initialized with port(s): 8080 (http)
+2016-03-13 12:19:13.903 [main] INFO  StandardService - Starting service Tomcat
+2016-03-13 12:19:13.904 [main] INFO  StandardEngine - Starting Servlet Engine: Apache Tomcat/8.0.32
+2016-03-13 12:19:14.079 [localhost-startStop-1] INFO  [/] - Initializing Spring embedded WebApplicationContext
+2016-03-13 12:19:14.080 [localhost-startStop-1] INFO  ContextLoader - Root WebApplicationContext: initialization completed in 2544 ms
+2016-03-13 12:19:14.324 [localhost-startStop-1] INFO  FilterRegistrationBean - Mapping filter: 'characterEncodingFilter' to: [/*]
+2016-03-13 12:19:14.324 [localhost-startStop-1] INFO  FilterRegistrationBean - Mapping filter: 'requestContextFilter' to: [/*]
+2016-03-13 12:19:14.325 [localhost-startStop-1] INFO  ServletRegistrationBean - Mapping servlet: 'ru.finnetrolle.telebot.restful.JerseyConfig' to [/*]
+2016-03-13 12:19:14.706 [main] INFO  LocalContainerEntityManagerFactoryBean - Building JPA container EntityManagerFactory for persistence unit 'default'
+2016-03-13 12:19:14.719 [main] INFO  LogHelper - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2016-03-13 12:19:14.832 [main] INFO  Version - HHH000412: Hibernate Core {4.3.11.Final}
+2016-03-13 12:19:14.835 [main] INFO  Environment - HHH000206: hibernate.properties not found
+2016-03-13 12:19:14.837 [main] INFO  Environment - HHH000021: Bytecode provider name : javassist
+2016-03-13 12:19:15.163 [main] INFO  Version - HCANN000001: Hibernate Commons Annotations {4.0.5.Final}
+2016-03-13 12:19:15.623 [main] INFO  Dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2016-03-13 12:19:15.644 [main] INFO  LobCreatorBuilder - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2016-03-13 12:19:15.791 [main] INFO  ASTQueryTranslatorFactory - HHH000397: Using ASTQueryTranslatorFactory
+2016-03-13 12:19:16.208 [main] INFO  SchemaUpdate - HHH000228: Running hbm2ddl schema update
+2016-03-13 12:19:16.209 [main] INFO  SchemaUpdate - HHH000102: Fetching database metadata
+2016-03-13 12:19:16.213 [main] INFO  SchemaUpdate - HHH000396: Updating schema
+2016-03-13 12:19:16.288 [main] INFO  TableMetadata - HHH000261: Table found: public.pilot
+2016-03-13 12:19:16.289 [main] INFO  TableMetadata - HHH000037: Columns: [character, v_code, api_key, last_name, id, first_name, username]
+2016-03-13 12:19:16.290 [main] INFO  TableMetadata - HHH000108: Foreign keys: []
+2016-03-13 12:19:16.290 [main] INFO  TableMetadata - HHH000126: Indexes: [pilot_pkey]
+2016-03-13 12:19:16.291 [main] INFO  SchemaUpdate - HHH000232: Schema update complete
+2016-03-13 12:19:17.950 [main] INFO  AnnotationMBeanExporter - Registering beans for JMX exposure on startup
+2016-03-13 12:19:17.994 [main] INFO  Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2016-03-13 12:19:18.002 [main] INFO  Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2016-03-13 12:19:18.023 [main] INFO  NioSelectorPool - Using a shared selector for servlet write/read
+2016-03-13 12:19:18.044 [main] INFO  TomcatEmbeddedServletContainer - Tomcat started on port(s): 8080 (http)
+2016-03-13 12:19:18.051 [main] INFO  ApplicationKt - Started ApplicationKt in 7.546 seconds (JVM running for 9.265)
+2016-03-13 12:19:44.704 [Thread-5] INFO  AnnotationConfigEmbeddedWebApplicationContext - Closing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@1460a8c0: startup date [Sun Mar 13 12:19:11 MSK 2016]; root of context hierarchy
+2016-03-13 12:19:44.709 [Thread-5] INFO  AnnotationMBeanExporter - Unregistering JMX-exposed beans on shutdown
+2016-03-13 12:19:44.710 [Thread-5] INFO  LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2016-03-13 12:19:52.871 [main] INFO  ApplicationKt - Starting ApplicationKt on MacBook-Air-Maksim.local with PID 48245 (/Users/maxsyachin/dev/telebot/target/classes started by maxsyachin in /Users/maxsyachin/dev/telebot)
+2016-03-13 12:19:52.884 [main] INFO  ApplicationKt - No active profile set, falling back to default profiles: default
+2016-03-13 12:19:53.191 [main] INFO  AnnotationConfigEmbeddedWebApplicationContext - Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@7fb4f2a9: startup date [Sun Mar 13 12:19:53 MSK 2016]; root of context hierarchy
+2016-03-13 12:19:53.263 [background-preinit] INFO  Version - HV000001: Hibernate Validator 5.2.4.Final
+2016-03-13 12:19:54.688 [main] INFO  AutowiredAnnotationBeanPostProcessor - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2016-03-13 12:19:54.910 [main] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [class org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$e429c94a] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-03-13 12:19:55.742 [main] INFO  TomcatEmbeddedServletContainer - Tomcat initialized with port(s): 8080 (http)
+2016-03-13 12:19:55.769 [main] INFO  StandardService - Starting service Tomcat
+2016-03-13 12:19:55.770 [main] INFO  StandardEngine - Starting Servlet Engine: Apache Tomcat/8.0.32
+2016-03-13 12:19:55.999 [localhost-startStop-1] INFO  [/] - Initializing Spring embedded WebApplicationContext
+2016-03-13 12:19:55.999 [localhost-startStop-1] INFO  ContextLoader - Root WebApplicationContext: initialization completed in 2834 ms
+2016-03-13 12:19:56.404 [localhost-startStop-1] INFO  FilterRegistrationBean - Mapping filter: 'characterEncodingFilter' to: [/*]
+2016-03-13 12:19:56.404 [localhost-startStop-1] INFO  FilterRegistrationBean - Mapping filter: 'requestContextFilter' to: [/*]
+2016-03-13 12:19:56.404 [localhost-startStop-1] INFO  ServletRegistrationBean - Mapping servlet: 'ru.finnetrolle.telebot.restful.JerseyConfig' to [/*]
+2016-03-13 12:19:56.999 [main] INFO  LocalContainerEntityManagerFactoryBean - Building JPA container EntityManagerFactory for persistence unit 'default'
+2016-03-13 12:19:57.019 [main] INFO  LogHelper - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2016-03-13 12:19:57.149 [main] INFO  Version - HHH000412: Hibernate Core {4.3.11.Final}
+2016-03-13 12:19:57.152 [main] INFO  Environment - HHH000206: hibernate.properties not found
+2016-03-13 12:19:57.154 [main] INFO  Environment - HHH000021: Bytecode provider name : javassist
+2016-03-13 12:19:57.544 [main] INFO  Version - HCANN000001: Hibernate Commons Annotations {4.0.5.Final}
+2016-03-13 12:19:58.121 [main] INFO  Dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2016-03-13 12:19:58.143 [main] INFO  LobCreatorBuilder - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2016-03-13 12:19:58.344 [main] INFO  ASTQueryTranslatorFactory - HHH000397: Using ASTQueryTranslatorFactory
+2016-03-13 12:19:59.014 [main] INFO  SchemaUpdate - HHH000228: Running hbm2ddl schema update
+2016-03-13 12:19:59.015 [main] INFO  SchemaUpdate - HHH000102: Fetching database metadata
+2016-03-13 12:19:59.024 [main] INFO  SchemaUpdate - HHH000396: Updating schema
+2016-03-13 12:19:59.116 [main] INFO  TableMetadata - HHH000261: Table found: public.pilot
+2016-03-13 12:19:59.116 [main] INFO  TableMetadata - HHH000037: Columns: [character, v_code, api_key, last_name, id, first_name, username]
+2016-03-13 12:19:59.116 [main] INFO  TableMetadata - HHH000108: Foreign keys: []
+2016-03-13 12:19:59.118 [main] INFO  TableMetadata - HHH000126: Indexes: [pilot_pkey]
+2016-03-13 12:19:59.119 [main] INFO  SchemaUpdate - HHH000232: Schema update complete
+2016-03-13 12:20:12.294 [main] INFO  AnnotationMBeanExporter - Registering beans for JMX exposure on startup
+2016-03-13 12:20:12.348 [main] INFO  Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2016-03-13 12:20:12.361 [main] INFO  Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2016-03-13 12:20:12.389 [main] INFO  NioSelectorPool - Using a shared selector for servlet write/read
+2016-03-13 12:20:12.419 [main] INFO  TomcatEmbeddedServletContainer - Tomcat started on port(s): 8080 (http)
+2016-03-13 12:20:12.431 [main] INFO  ApplicationKt - Started ApplicationKt in 20.619 seconds (JVM running for 22.39)
+2016-03-13 12:20:21.342 [Thread-5] INFO  AnnotationConfigEmbeddedWebApplicationContext - Closing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@7fb4f2a9: startup date [Sun Mar 13 12:19:53 MSK 2016]; root of context hierarchy
+2016-03-13 12:20:21.347 [Thread-5] INFO  AnnotationMBeanExporter - Unregistering JMX-exposed beans on shutdown
+2016-03-13 12:20:21.348 [Thread-5] INFO  LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2016-03-13 12:21:12.830 [main] INFO  ApplicationKt - Starting ApplicationKt on MacBook-Air-Maksim.local with PID 48262 (/Users/maxsyachin/dev/telebot/target/classes started by maxsyachin in /Users/maxsyachin/dev/telebot)
+2016-03-13 12:21:12.837 [main] INFO  ApplicationKt - No active profile set, falling back to default profiles: default
+2016-03-13 12:21:13.036 [main] INFO  AnnotationConfigEmbeddedWebApplicationContext - Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@7dc19a70: startup date [Sun Mar 13 12:21:13 MSK 2016]; root of context hierarchy
+2016-03-13 12:21:13.427 [background-preinit] INFO  Version - HV000001: Hibernate Validator 5.2.4.Final
+2016-03-13 12:21:15.704 [main] INFO  AutowiredAnnotationBeanPostProcessor - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2016-03-13 12:21:15.927 [main] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [class org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$e226eef1] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-03-13 12:21:16.613 [main] INFO  TomcatEmbeddedServletContainer - Tomcat initialized with port(s): 8080 (http)
+2016-03-13 12:21:16.636 [main] INFO  StandardService - Starting service Tomcat
+2016-03-13 12:21:16.638 [main] INFO  StandardEngine - Starting Servlet Engine: Apache Tomcat/8.0.32
+2016-03-13 12:21:16.837 [localhost-startStop-1] INFO  [/] - Initializing Spring embedded WebApplicationContext
+2016-03-13 12:21:16.837 [localhost-startStop-1] INFO  ContextLoader - Root WebApplicationContext: initialization completed in 3827 ms
+2016-03-13 12:21:17.192 [localhost-startStop-1] INFO  FilterRegistrationBean - Mapping filter: 'characterEncodingFilter' to: [/*]
+2016-03-13 12:21:17.193 [localhost-startStop-1] INFO  FilterRegistrationBean - Mapping filter: 'requestContextFilter' to: [/*]
+2016-03-13 12:21:17.193 [localhost-startStop-1] INFO  ServletRegistrationBean - Mapping servlet: 'ru.finnetrolle.telebot.restful.JerseyConfig' to [/*]
+2016-03-13 12:21:17.679 [main] INFO  LocalContainerEntityManagerFactoryBean - Building JPA container EntityManagerFactory for persistence unit 'default'
+2016-03-13 12:21:17.707 [main] INFO  LogHelper - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2016-03-13 12:21:17.843 [main] INFO  Version - HHH000412: Hibernate Core {4.3.11.Final}
+2016-03-13 12:21:17.846 [main] INFO  Environment - HHH000206: hibernate.properties not found
+2016-03-13 12:21:17.848 [main] INFO  Environment - HHH000021: Bytecode provider name : javassist
+2016-03-13 12:21:18.260 [main] INFO  Version - HCANN000001: Hibernate Commons Annotations {4.0.5.Final}
+2016-03-13 12:21:18.726 [main] INFO  Dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2016-03-13 12:21:18.750 [main] INFO  LobCreatorBuilder - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2016-03-13 12:21:18.893 [main] INFO  ASTQueryTranslatorFactory - HHH000397: Using ASTQueryTranslatorFactory
+2016-03-13 12:21:19.380 [main] INFO  SchemaUpdate - HHH000228: Running hbm2ddl schema update
+2016-03-13 12:21:19.380 [main] INFO  SchemaUpdate - HHH000102: Fetching database metadata
+2016-03-13 12:21:19.383 [main] INFO  SchemaUpdate - HHH000396: Updating schema
+2016-03-13 12:21:19.442 [main] INFO  TableMetadata - HHH000261: Table found: public.pilot
+2016-03-13 12:21:19.442 [main] INFO  TableMetadata - HHH000037: Columns: [character, v_code, api_key, last_name, id, first_name, username]
+2016-03-13 12:21:19.443 [main] INFO  TableMetadata - HHH000108: Foreign keys: []
+2016-03-13 12:21:19.443 [main] INFO  TableMetadata - HHH000126: Indexes: [pilot_pkey]
+2016-03-13 12:21:19.444 [main] INFO  SchemaUpdate - HHH000232: Schema update complete
+2016-03-13 12:21:21.852 [main] INFO  AnnotationMBeanExporter - Registering beans for JMX exposure on startup
+2016-03-13 12:21:21.900 [main] INFO  Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2016-03-13 12:21:21.911 [main] INFO  Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2016-03-13 12:21:21.935 [main] INFO  NioSelectorPool - Using a shared selector for servlet write/read
+2016-03-13 12:21:21.960 [main] INFO  TomcatEmbeddedServletContainer - Tomcat started on port(s): 8080 (http)
+2016-03-13 12:21:21.968 [main] INFO  ApplicationKt - Started ApplicationKt in 10.108 seconds (JVM running for 12.151)
+2016-03-13 12:24:48.677 [Thread-5] INFO  AnnotationConfigEmbeddedWebApplicationContext - Closing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@7dc19a70: startup date [Sun Mar 13 12:21:13 MSK 2016]; root of context hierarchy
+2016-03-13 12:24:48.684 [Thread-5] INFO  AnnotationMBeanExporter - Unregistering JMX-exposed beans on shutdown
+2016-03-13 12:24:48.685 [Thread-5] INFO  LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2016-03-13 12:26:05.315 [main] INFO  ApplicationKt - Starting ApplicationKt on MacBook-Air-Maksim.local with PID 48297 (/Users/maxsyachin/dev/telebot/target/classes started by maxsyachin in /Users/maxsyachin/dev/telebot)
+2016-03-13 12:26:05.322 [main] INFO  ApplicationKt - No active profile set, falling back to default profiles: default
+2016-03-13 12:26:05.474 [main] INFO  AnnotationConfigEmbeddedWebApplicationContext - Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@1460a8c0: startup date [Sun Mar 13 12:26:05 MSK 2016]; root of context hierarchy
+2016-03-13 12:26:05.871 [background-preinit] INFO  Version - HV000001: Hibernate Validator 5.2.4.Final
+2016-03-13 12:26:07.414 [main] INFO  AutowiredAnnotationBeanPostProcessor - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2016-03-13 12:26:07.516 [main] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [class org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$43eb3c02] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-03-13 12:26:08.146 [main] INFO  TomcatEmbeddedServletContainer - Tomcat initialized with port(s): 8080 (http)
+2016-03-13 12:26:08.166 [main] INFO  StandardService - Starting service Tomcat
+2016-03-13 12:26:08.167 [main] INFO  StandardEngine - Starting Servlet Engine: Apache Tomcat/8.0.32
+2016-03-13 12:26:08.339 [localhost-startStop-1] INFO  [/] - Initializing Spring embedded WebApplicationContext
+2016-03-13 12:26:08.340 [localhost-startStop-1] INFO  ContextLoader - Root WebApplicationContext: initialization completed in 2871 ms
+2016-03-13 12:26:08.622 [localhost-startStop-1] INFO  FilterRegistrationBean - Mapping filter: 'characterEncodingFilter' to: [/*]
+2016-03-13 12:26:08.623 [localhost-startStop-1] INFO  FilterRegistrationBean - Mapping filter: 'requestContextFilter' to: [/*]
+2016-03-13 12:26:08.624 [localhost-startStop-1] INFO  ServletRegistrationBean - Mapping servlet: 'ru.finnetrolle.telebot.restful.JerseyConfig' to [/*]
+2016-03-13 12:26:09.030 [main] INFO  LocalContainerEntityManagerFactoryBean - Building JPA container EntityManagerFactory for persistence unit 'default'
+2016-03-13 12:26:09.045 [main] INFO  LogHelper - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2016-03-13 12:26:09.147 [main] INFO  Version - HHH000412: Hibernate Core {4.3.11.Final}
+2016-03-13 12:26:09.149 [main] INFO  Environment - HHH000206: hibernate.properties not found
+2016-03-13 12:26:09.151 [main] INFO  Environment - HHH000021: Bytecode provider name : javassist
+2016-03-13 12:26:09.440 [main] INFO  Version - HCANN000001: Hibernate Commons Annotations {4.0.5.Final}
+2016-03-13 12:26:09.847 [main] INFO  Dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2016-03-13 12:26:09.862 [main] INFO  LobCreatorBuilder - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2016-03-13 12:26:10.001 [main] INFO  ASTQueryTranslatorFactory - HHH000397: Using ASTQueryTranslatorFactory
+2016-03-13 12:26:10.465 [main] INFO  SchemaUpdate - HHH000228: Running hbm2ddl schema update
+2016-03-13 12:26:10.466 [main] INFO  SchemaUpdate - HHH000102: Fetching database metadata
+2016-03-13 12:26:10.471 [main] INFO  SchemaUpdate - HHH000396: Updating schema
+2016-03-13 12:26:10.547 [main] INFO  TableMetadata - HHH000261: Table found: public.pilot
+2016-03-13 12:26:10.549 [main] INFO  TableMetadata - HHH000037: Columns: [character, v_code, api_key, last_name, id, first_name, username]
+2016-03-13 12:26:10.549 [main] INFO  TableMetadata - HHH000108: Foreign keys: []
+2016-03-13 12:26:10.550 [main] INFO  TableMetadata - HHH000126: Indexes: [pilot_pkey]
+2016-03-13 12:26:10.551 [main] INFO  SchemaUpdate - HHH000232: Schema update complete
+2016-03-13 12:26:12.294 [main] INFO  AnnotationMBeanExporter - Registering beans for JMX exposure on startup
+2016-03-13 12:26:12.366 [main] INFO  Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2016-03-13 12:26:12.381 [main] INFO  Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2016-03-13 12:26:12.402 [main] INFO  NioSelectorPool - Using a shared selector for servlet write/read
+2016-03-13 12:26:12.419 [main] INFO  TomcatEmbeddedServletContainer - Tomcat started on port(s): 8080 (http)
+2016-03-13 12:26:12.429 [main] INFO  ApplicationKt - Started ApplicationKt in 7.918 seconds (JVM running for 9.415)
+2016-03-13 12:26:43.467 [Thread-5] INFO  AnnotationConfigEmbeddedWebApplicationContext - Closing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@1460a8c0: startup date [Sun Mar 13 12:26:05 MSK 2016]; root of context hierarchy
+2016-03-13 12:26:43.473 [Thread-5] INFO  AnnotationMBeanExporter - Unregistering JMX-exposed beans on shutdown
+2016-03-13 12:26:43.475 [Thread-5] INFO  LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2016-03-13 12:29:29.861 [main] INFO  ApplicationKt - Starting ApplicationKt on MacBook-Air-Maksim.local with PID 48334 (/Users/maxsyachin/dev/telebot/target/classes started by maxsyachin in /Users/maxsyachin/dev/telebot)
+2016-03-13 12:29:29.866 [main] INFO  ApplicationKt - No active profile set, falling back to default profiles: default
+2016-03-13 12:29:30.037 [main] INFO  AnnotationConfigEmbeddedWebApplicationContext - Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@1460a8c0: startup date [Sun Mar 13 12:29:30 MSK 2016]; root of context hierarchy
+2016-03-13 12:29:30.577 [background-preinit] INFO  Version - HV000001: Hibernate Validator 5.2.4.Final
+2016-03-13 12:29:32.346 [main] INFO  AutowiredAnnotationBeanPostProcessor - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2016-03-13 12:29:32.477 [main] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [class org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$43eb3c02] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-03-13 12:29:33.242 [main] INFO  TomcatEmbeddedServletContainer - Tomcat initialized with port(s): 8080 (http)
+2016-03-13 12:29:33.263 [main] INFO  StandardService - Starting service Tomcat
+2016-03-13 12:29:33.266 [main] INFO  StandardEngine - Starting Servlet Engine: Apache Tomcat/8.0.32
+2016-03-13 12:29:33.464 [localhost-startStop-1] INFO  [/] - Initializing Spring embedded WebApplicationContext
+2016-03-13 12:29:33.464 [localhost-startStop-1] INFO  ContextLoader - Root WebApplicationContext: initialization completed in 3434 ms
+2016-03-13 12:29:33.757 [localhost-startStop-1] INFO  FilterRegistrationBean - Mapping filter: 'characterEncodingFilter' to: [/*]
+2016-03-13 12:29:33.758 [localhost-startStop-1] INFO  FilterRegistrationBean - Mapping filter: 'requestContextFilter' to: [/*]
+2016-03-13 12:29:33.758 [localhost-startStop-1] INFO  ServletRegistrationBean - Mapping servlet: 'ru.finnetrolle.telebot.restful.JerseyConfig' to [/*]
+2016-03-13 12:29:34.204 [main] INFO  LocalContainerEntityManagerFactoryBean - Building JPA container EntityManagerFactory for persistence unit 'default'
+2016-03-13 12:29:34.226 [main] INFO  LogHelper - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2016-03-13 12:29:34.349 [main] INFO  Version - HHH000412: Hibernate Core {4.3.11.Final}
+2016-03-13 12:29:34.353 [main] INFO  Environment - HHH000206: hibernate.properties not found
+2016-03-13 12:29:34.355 [main] INFO  Environment - HHH000021: Bytecode provider name : javassist
+2016-03-13 12:29:34.687 [main] INFO  Version - HCANN000001: Hibernate Commons Annotations {4.0.5.Final}
+2016-03-13 12:29:35.156 [main] INFO  Dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2016-03-13 12:29:35.171 [main] INFO  LobCreatorBuilder - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2016-03-13 12:29:35.311 [main] INFO  ASTQueryTranslatorFactory - HHH000397: Using ASTQueryTranslatorFactory
+2016-03-13 12:29:35.782 [main] INFO  SchemaUpdate - HHH000228: Running hbm2ddl schema update
+2016-03-13 12:29:35.783 [main] INFO  SchemaUpdate - HHH000102: Fetching database metadata
+2016-03-13 12:29:35.787 [main] INFO  SchemaUpdate - HHH000396: Updating schema
+2016-03-13 12:29:35.869 [main] INFO  TableMetadata - HHH000261: Table found: public.pilot
+2016-03-13 12:29:35.869 [main] INFO  TableMetadata - HHH000037: Columns: [character, v_code, api_key, last_name, id, first_name, username]
+2016-03-13 12:29:35.869 [main] INFO  TableMetadata - HHH000108: Foreign keys: []
+2016-03-13 12:29:35.870 [main] INFO  TableMetadata - HHH000126: Indexes: [pilot_pkey]
+2016-03-13 12:29:35.871 [main] INFO  SchemaUpdate - HHH000232: Schema update complete
+2016-03-13 12:29:37.973 [main] INFO  AnnotationMBeanExporter - Registering beans for JMX exposure on startup
+2016-03-13 12:29:38.020 [main] INFO  Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2016-03-13 12:29:38.029 [main] INFO  Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2016-03-13 12:29:38.048 [main] INFO  NioSelectorPool - Using a shared selector for servlet write/read
+2016-03-13 12:29:38.067 [main] INFO  TomcatEmbeddedServletContainer - Tomcat started on port(s): 8080 (http)
+2016-03-13 12:29:38.073 [main] INFO  ApplicationKt - Started ApplicationKt in 8.972 seconds (JVM running for 10.355)
+2016-03-13 12:29:59.250 [Thread-3] INFO  UserService - registering new pilot: Finne Trolle
+2016-03-13 12:30:23.632 [Thread-5] INFO  AnnotationConfigEmbeddedWebApplicationContext - Closing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@1460a8c0: startup date [Sun Mar 13 12:29:30 MSK 2016]; root of context hierarchy
+2016-03-13 12:30:23.636 [Thread-5] INFO  AnnotationMBeanExporter - Unregistering JMX-exposed beans on shutdown
+2016-03-13 12:30:23.638 [Thread-5] INFO  LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2016-03-13 12:32:53.062 [main] INFO  ApplicationKt - Starting ApplicationKt on MacBook-Air-Maksim.local with PID 48360 (/Users/maxsyachin/dev/telebot/target/classes started by maxsyachin in /Users/maxsyachin/dev/telebot)
+2016-03-13 12:32:53.072 [main] INFO  ApplicationKt - No active profile set, falling back to default profiles: default
+2016-03-13 12:32:53.255 [main] INFO  AnnotationConfigEmbeddedWebApplicationContext - Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@1460a8c0: startup date [Sun Mar 13 12:32:53 MSK 2016]; root of context hierarchy
+2016-03-13 12:32:53.640 [background-preinit] INFO  Version - HV000001: Hibernate Validator 5.2.4.Final
+2016-03-13 12:32:55.279 [main] INFO  AutowiredAnnotationBeanPostProcessor - JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2016-03-13 12:32:55.402 [main] INFO  PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [class org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$235b362e] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2016-03-13 12:32:56.042 [main] INFO  TomcatEmbeddedServletContainer - Tomcat initialized with port(s): 8080 (http)
+2016-03-13 12:32:56.094 [main] INFO  StandardService - Starting service Tomcat
+2016-03-13 12:32:56.101 [main] INFO  StandardEngine - Starting Servlet Engine: Apache Tomcat/8.0.32
+2016-03-13 12:32:56.312 [localhost-startStop-1] INFO  [/] - Initializing Spring embedded WebApplicationContext
+2016-03-13 12:32:56.313 [localhost-startStop-1] INFO  ContextLoader - Root WebApplicationContext: initialization completed in 3068 ms
+2016-03-13 12:32:56.554 [localhost-startStop-1] INFO  FilterRegistrationBean - Mapping filter: 'characterEncodingFilter' to: [/*]
+2016-03-13 12:32:56.555 [localhost-startStop-1] INFO  FilterRegistrationBean - Mapping filter: 'requestContextFilter' to: [/*]
+2016-03-13 12:32:56.555 [localhost-startStop-1] INFO  ServletRegistrationBean - Mapping servlet: 'ru.finnetrolle.telebot.restful.JerseyConfig' to [/*]
+2016-03-13 12:32:56.989 [main] INFO  LocalContainerEntityManagerFactoryBean - Building JPA container EntityManagerFactory for persistence unit 'default'
+2016-03-13 12:32:57.004 [main] INFO  LogHelper - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2016-03-13 12:32:57.109 [main] INFO  Version - HHH000412: Hibernate Core {4.3.11.Final}
+2016-03-13 12:32:57.111 [main] INFO  Environment - HHH000206: hibernate.properties not found
+2016-03-13 12:32:57.113 [main] INFO  Environment - HHH000021: Bytecode provider name : javassist
+2016-03-13 12:32:57.381 [main] INFO  Version - HCANN000001: Hibernate Commons Annotations {4.0.5.Final}
+2016-03-13 12:32:57.828 [main] INFO  Dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2016-03-13 12:32:57.846 [main] INFO  LobCreatorBuilder - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2016-03-13 12:32:57.981 [main] INFO  ASTQueryTranslatorFactory - HHH000397: Using ASTQueryTranslatorFactory
+2016-03-13 12:32:58.441 [main] INFO  SchemaUpdate - HHH000228: Running hbm2ddl schema update
+2016-03-13 12:32:58.441 [main] INFO  SchemaUpdate - HHH000102: Fetching database metadata
+2016-03-13 12:32:58.445 [main] INFO  SchemaUpdate - HHH000396: Updating schema
+2016-03-13 12:32:58.511 [main] INFO  TableMetadata - HHH000261: Table found: public.pilot
+2016-03-13 12:32:58.511 [main] INFO  TableMetadata - HHH000037: Columns: [character, v_code, api_key, last_name, id, first_name, username]
+2016-03-13 12:32:58.512 [main] INFO  TableMetadata - HHH000108: Foreign keys: []
+2016-03-13 12:32:58.512 [main] INFO  TableMetadata - HHH000126: Indexes: [pilot_pkey]
+2016-03-13 12:32:58.513 [main] INFO  SchemaUpdate - HHH000232: Schema update complete
+2016-03-13 12:33:00.759 [main] INFO  AnnotationMBeanExporter - Registering beans for JMX exposure on startup
+2016-03-13 12:33:00.810 [main] INFO  Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2016-03-13 12:33:00.823 [main] INFO  Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2016-03-13 12:33:00.848 [main] INFO  NioSelectorPool - Using a shared selector for servlet write/read
+2016-03-13 12:33:00.880 [main] INFO  TomcatEmbeddedServletContainer - Tomcat started on port(s): 8080 (http)
+2016-03-13 12:33:00.887 [main] INFO  ApplicationKt - Started ApplicationKt in 8.506 seconds (JVM running for 9.93)
+2016-03-13 12:34:38.972 [Thread-5] INFO  AnnotationConfigEmbeddedWebApplicationContext - Closing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@1460a8c0: startup date [Sun Mar 13 12:32:53 MSK 2016]; root of context hierarchy
+2016-03-13 12:34:38.981 [Thread-5] INFO  AnnotationMBeanExporter - Unregistering JMX-exposed beans on shutdown
+2016-03-13 12:34:38.982 [Thread-5] INFO  LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
