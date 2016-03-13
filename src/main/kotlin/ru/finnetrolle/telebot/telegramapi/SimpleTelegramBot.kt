@@ -87,6 +87,7 @@ class SimpleTelegramBot @Autowired constructor(
         val text = when(parsed.command.toUpperCase()) {
             "/JOKE" -> "oh fuck you, bro!"
             "/USERS" -> userService.getCharacters().joinToString("\n")
+            "/VERSION" -> Messages.VERSION
             else -> "Ok, so?"
         }
         sendMessage(MessageBuilder.build(chatId, text))
