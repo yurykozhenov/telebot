@@ -7,7 +7,7 @@ package ru.finnetrolle.telebot.telegramapi
 */
 object Messages {
 
-    val VERSION = "xXDEATHXx Bot v 0.0.9"
+    val VERSION = "xXDEATHXx Bot v 0.0.10"
 
     val REGISTER_MESSAGE = "Вы еще не зарегистрированы. Для регистрации необходимо использовать" +
             "ваш keyID и vCode. Отправьте мне сообщение /register [keyID] [verification code]"
