@@ -3,15 +3,14 @@ package ru.finnetrolle.telebot.telegramapi
 import org.junit.Before
 import org.junit.Test
 
-import org.junit.Assert.*
 import org.springframework.test.util.ReflectionTestUtils
 import org.telegram.telegrambots.api.objects.User
-import ru.finnetrolle.telebot.model.Pilot
-import java.util.concurrent.ConcurrentHashMap
 
 /**
- * Created by maxsyachin on 13.03.16.
- */
+* Licence: MIT
+* Legion of xXDEATHXx notification bot for telegram
+* Created by finnetrolle on 13.03.16.
+*/
 class RegistererServiceTest {
 
     val user = User()

@@ -1,14 +1,16 @@
 package ru.finnetrolle.telebot.telegramapi
 
 /**
- * Created by maxsyachin on 13.03.16.
- */
+* Licence: MIT
+* Legion of xXDEATHXx notification bot for telegram
+* Created by finnetrolle on 13.03.16.
+*/
 object Messages {
 
     val VERSION = "xXDEATHXx Bot v 0.0.9"
 
     val REGISTER_MESSAGE = "Вы еще не зарегистрированы. Для регистрации необходимо использовать" +
-            "ваш apikey и vCode. Отправьте мне сообщение /register apikey vcode."
+            "ваш keyID и vCode. Отправьте мне сообщение /register [keyID] [verification code]"
     val regex = Regex("[\\W]")
 
     object Registration {

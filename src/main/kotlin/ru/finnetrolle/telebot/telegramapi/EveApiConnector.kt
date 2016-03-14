@@ -7,8 +7,10 @@ import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
 
 /**
- * Created by maxsyachin on 12.03.16.
- */
+* Licence: MIT
+* Legion of xXDEATHXx notification bot for telegram
+* Created by finnetrolle on 12.03.16.
+*/
 
 @Component
 open class EveApiConnector {
@@ -21,7 +23,7 @@ open class EveApiConnector {
                 .map { c -> Character(c.name, c.characterID, getCorpId(c.characterID)) }
                 .toList()
         } catch (e: Exception) {
-            log.warn("Get characters failed for key=${key}", e)
+            log.warn("Get characters failed for key=$key", e)
         }
         return null
     }
@@ -31,7 +33,7 @@ open class EveApiConnector {
             val response = CharacterInfoParser().getResponse(charId)
             return response.allianceID
         } catch (e: Exception) {
-            log.warn("Get ally id failed for charid=${charId}", e)
+            log.warn("Get ally id failed for character id=$charId", e)
         }
         return 0
     }

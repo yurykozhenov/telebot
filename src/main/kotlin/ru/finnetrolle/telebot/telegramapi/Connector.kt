@@ -6,8 +6,10 @@ import org.telegram.telegrambots.TelegramBotsApi
 import javax.annotation.PostConstruct
 
 /**
- * Created by maxsyachin on 12.03.16.
- */
+* Licence: MIT
+* Legion of xXDEATHXx notification bot for telegram
+* Created by finnetrolle on 12.03.16.
+*/
 
 @Component
 class Connector @Autowired constructor(

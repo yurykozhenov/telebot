@@ -4,16 +4,16 @@ import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
-import org.telegram.telegrambots.api.methods.SendMessage
-import org.telegram.telegrambots.api.objects.ReplyKeyboardMarkup
 import org.telegram.telegrambots.api.objects.Update
 import org.telegram.telegrambots.api.objects.User
 import org.telegram.telegrambots.bots.TelegramLongPollingBot
 import kotlin.collections.List
 
 /**
- * Created by maxsyachin on 12.03.16.
- */
+* Licence: MIT
+* Legion of xXDEATHXx notification bot for telegram
+* Created by finnetrolle on 12.03.16.
+*/
 
 @Component
 class SimpleTelegramBot @Autowired constructor(
@@ -38,7 +38,7 @@ class SimpleTelegramBot @Autowired constructor(
 
     override fun onUpdateReceived(update: Update?) {
         if (update!!.hasMessage()) {
-            val inc = update!!.message
+            val inc = update.message
             log.info("Received message from ${inc.from.userName} : ${inc.text}")
             start(inc.text, inc.from, inc.chatId.toString())
         }
@@ -54,12 +54,12 @@ class SimpleTelegramBot @Autowired constructor(
         val parsed = parse(text)
 
         if (parsed.command.toUpperCase() == "/REGISTER") {
-            val datas = parsed.data.split(Messages.regex)
-            val charlist = registerer.startRegistration(user, datas[0].toInt(), datas[1])
-            if (charlist == null) {
+            val dataElements = parsed.data.split(Messages.regex)
+            val charList = registerer.startRegistration(user, dataElements[0].toInt(), dataElements[1])
+            if (charList == null) {
                 send(chatId, Messages.Registration.BAD_AUTH)
             } else {
-                send(chatId, Messages.Registration.SELECT_CHAR, charlist)
+                send(chatId, Messages.Registration.SELECT_CHAR, charList)
             }
             return
         }
@@ -67,7 +67,7 @@ class SimpleTelegramBot @Autowired constructor(
         if (registerer.isInProcess(user.id)) {
             if (parsed.command.length == 2 && parsed.command[0].equals('/')) {
                 val char = registerer.finishRegistration(user.id, parsed.command.substring(1, 2).toInt())
-                send(chatId, "${Messages.Registration.SUCCESS} ${char}")
+                send(chatId, "${Messages.Registration.SUCCESS} $char")
             } else {
                 send(chatId, Messages.Registration.SELECT_CHAR, registerer.getListOfCharacterCandidates(user.id))
             }

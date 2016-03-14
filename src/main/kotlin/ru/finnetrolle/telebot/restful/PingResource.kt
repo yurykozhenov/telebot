@@ -6,8 +6,10 @@ import javax.ws.rs.Path
 import javax.ws.rs.core.Response
 
 /**
- * Created by maxsyachin on 14.03.16.
- */
+* Licence: MIT
+* Legion of xXDEATHXx notification bot for telegram
+* Created by finnetrolle on 14.03.16.
+*/
 
 @Component
 @Path("ping")

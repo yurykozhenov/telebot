@@ -5,8 +5,10 @@ import org.telegram.telegrambots.api.objects.ReplyKeyboardMarkup
 import java.util.*
 
 /**
- * Created by maxsyachin on 13.03.16.
- */
+* Licence: MIT
+* Legion of xXDEATHXx notification bot for telegram
+* Created by finnetrolle on 13.03.16.
+*/
 object MessageBuilder {
 
     fun build(chatId: String, text: String, kb: ReplyKeyboardMarkup): SendMessage {
@@ -27,7 +29,7 @@ object MessageBuilder {
         val kb = ReplyKeyboardMarkup()
         val list = ArrayList<String>()
         for(i in keys.indices) {
-            list.add("/${i} ${keys.get(i)}")
+            list.add("/$i ${keys[i]}")
         }
         kb.keyboard = listOf(list)
         return kb

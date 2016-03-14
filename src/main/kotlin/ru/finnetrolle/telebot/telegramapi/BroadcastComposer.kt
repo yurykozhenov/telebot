@@ -6,8 +6,10 @@ import org.telegram.telegrambots.api.methods.SendMessage
 import ru.finnetrolle.telebot.model.PilotRepository
 
 /**
- * Created by maxsyachin on 13.03.16.
- */
+* Licence: MIT
+* Legion of xXDEATHXx notification bot for telegram
+* Created by finnetrolle on 13.03.16.
+*/
 
 @Component
 class BroadcastComposer @Autowired constructor (

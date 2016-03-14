@@ -5,8 +5,10 @@ import javax.persistence.Entity
 import javax.persistence.Id
 
 /**
- * Created by maxsyachin on 13.03.16.
- */
+* Licence: MIT
+* Legion of xXDEATHXx notification bot for telegram
+* Created by finnetrolle on 13.03.16.
+*/
 
 interface PilotRepository: CrudRepository<Pilot, Int>
 

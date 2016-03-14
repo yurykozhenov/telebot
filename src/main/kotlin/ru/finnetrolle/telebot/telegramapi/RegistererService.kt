@@ -7,8 +7,10 @@ import org.telegram.telegrambots.api.objects.User
 import java.util.concurrent.ConcurrentHashMap
 
 /**
- * Created by maxsyachin on 13.03.16.
- */
+* Licence: MIT
+* Legion of xXDEATHXx notification bot for telegram
+* Created by finnetrolle on 13.03.16.
+*/
 
 @Component
 class RegistererService @Autowired constructor (
@@ -26,7 +28,7 @@ class RegistererService @Autowired constructor (
 
     fun startRegistration(user: User, key: Int, code: String): List<String>? {
         if (registerCandidates.containsKey(user.id)) {
-            log.info("Reregistering telegram person ${user.userName} id=${user.id}")
+            log.info("Start register process again for telegram person ${user.userName} id=${user.id}")
             registerCandidates.remove(user.id)
         }
         val chars = eve.getCharacters(key, code)
@@ -46,19 +48,19 @@ class RegistererService @Autowired constructor (
     }
 
     fun getListOfCharacterCandidates(userId: Int): List<String> {
-        return registerCandidates.get(userId)!!.characters.map{ c -> c.name}
+        return registerCandidates[userId]!!.characters.map{ c -> c.name}
     }
 
     fun finishRegistration(userId: Int, characterNo: Int): String? {
         log.info("Trying to finish registration")
-        val contender = registerCandidates.get(userId)
+        val contender = registerCandidates[userId]
         if (contender == null) {
-            log.warn("Can't find contender in candidates for userid=${userId}")
+            log.warn("Can't find contender in candidates for user id=$userId")
             return null
         }
         val char = contender.characters.getOrNull(characterNo)
         if (char != null) {
-            log.info("Registration successfull for ${contender}")
+            log.info("Registration successful for $contender")
             userService.register(contender.user, contender.key, contender.code, char.name, char.id)
             registerCandidates.remove(userId)
             return char.name

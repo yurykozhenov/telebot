@@ -23,7 +23,7 @@
 
     <logger name="org.hibernate.type" level="INFO"/>
     <logger name="org.hibernate" level="INFO"/>
-    <logger name="ru.russianpost.subscription" level="DEBUG"/>
+    <logger name="ru.finnetrolle.telebot" level="DEBUG"/>
 
     <root level="INFO">
         <appender-ref ref="file"/>
