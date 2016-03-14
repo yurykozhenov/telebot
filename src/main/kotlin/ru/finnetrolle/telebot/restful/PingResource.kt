@@ -1,6 +1,7 @@
 package ru.finnetrolle.telebot.restful
 
 import org.springframework.stereotype.Component
+import ru.finnetrolle.telebot.telegramapi.Messages
 import javax.ws.rs.GET
 import javax.ws.rs.Path
 import javax.ws.rs.core.Response
@@ -17,7 +18,7 @@ class PingResource {
 
     @GET
     fun ping(): Response {
-        return Response.ok("OK").build()
+        return Response.ok("OK ${Messages.VERSION}").build()
     }
 
 }

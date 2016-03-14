@@ -6,7 +6,7 @@
 
     <groupId>ru.finnetrolle</groupId>
     <artifactId>telebot</artifactId>
-    <version>0.0.10</version>
+    <version>0.0.11</version>
 
     <packaging>jar</packaging>
     <name>telebot</name>
