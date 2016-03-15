@@ -14,7 +14,14 @@ import org.springframework.stereotype.Component
 open class JerseyConfig: ResourceConfig {
 
     constructor() {
-        packages(ru.finnetrolle.telebot.restful.JerseyConfig::class.java.`package`.name)
+        register(BroadcastResource::class.java)
+
+        /**
+         * I'm using register instead of packages method because of issue with executable JAR
+         * https://github.com/spring-projects/spring-boot/issues/3413
+         * Anyway, register every endpoint looks cleaner
+         */
+        //        packages(ru.finnetrolle.telebot.restful.JerseyConfig::class.java.`package`.name)
     }
 
 }
