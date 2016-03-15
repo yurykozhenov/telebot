@@ -7,3 +7,4 @@
 
  -= Legion of xXDEATHXx =-
  telegram notification bot
+         ${application.formatted-version}
