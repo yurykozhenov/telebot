@@ -1,6 +1,6 @@
 # xXDEATHXx telegram bot
 
-Telegram bot for notifications broadcasting
+Telegram bot for notifications broadcasting. Version 0.0.x
 
 ## Installation
 
@@ -18,3 +18,4 @@ Telegram bot for notifications broadcasting
 
 Tomcat have a problem with slow startup. To fix it just install haveged
 sudo apt-get install haveged -y
+
