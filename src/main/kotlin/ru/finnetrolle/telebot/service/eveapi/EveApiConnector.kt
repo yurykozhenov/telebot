@@ -1,4 +1,4 @@
-package ru.finnetrolle.telebot.telegramapi
+package ru.finnetrolle.telebot.service.eveapi
 
 import com.beimin.eveapi.parser.ApiAuthorization
 import com.beimin.eveapi.parser.account.CharactersParser

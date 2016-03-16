@@ -1,4 +1,4 @@
-package ru.finnetrolle.telebot.telegramapi
+package ru.finnetrolle.telebot.service.telegram
 
 /**
 * Licence: MIT
@@ -6,8 +6,6 @@ package ru.finnetrolle.telebot.telegramapi
 * Created by finnetrolle on 13.03.16.
 */
 object Messages {
-
-    val VERSION = "xXDEATHXx Bot v 0.0.11"
 
     val REGISTER_MESSAGE = "Вы еще не зарегистрированы. Для регистрации необходимо использовать" +
             "ваш keyID и vCode. Отправьте мне сообщение /register [keyID] [verification code]"

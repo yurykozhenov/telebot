@@ -4,6 +4,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import org.telegram.telegrambots.api.objects.User
+import ru.finnetrolle.telebot.service.eveapi.EveApiConnector
 import java.util.concurrent.ConcurrentHashMap
 
 /**

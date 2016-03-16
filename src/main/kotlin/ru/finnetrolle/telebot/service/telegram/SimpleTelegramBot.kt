@@ -1,4 +1,4 @@
-package ru.finnetrolle.telebot.telegramapi
+package ru.finnetrolle.telebot.service.telegram
 
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component
 import org.telegram.telegrambots.api.objects.Update
 import org.telegram.telegrambots.api.objects.User
 import org.telegram.telegrambots.bots.TelegramLongPollingBot
+import ru.finnetrolle.telebot.telegramapi.*
 import kotlin.collections.List
 
 /**
@@ -87,7 +88,6 @@ class SimpleTelegramBot @Autowired constructor(
         val text = when(parsed.command.toUpperCase()) {
             "/JOKE" -> "oh fuck you, bro!"
             "/USERS" -> userService.getCharacters().joinToString("\n")
-            "/VERSION" -> Messages.VERSION
             else -> "Ok, so?"
         }
         sendMessage(MessageBuilder.build(chatId, text))

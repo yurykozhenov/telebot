@@ -1,4 +1,4 @@
-package ru.finnetrolle.telebot.telegramapi
+package ru.finnetrolle.telebot.service.telegram
 
 import org.telegram.telegrambots.api.methods.SendMessage
 import org.telegram.telegrambots.api.objects.ReplyKeyboardMarkup

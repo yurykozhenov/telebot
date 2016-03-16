@@ -4,7 +4,7 @@
     <property name="APP_NAME" value="telebot"/>
     <property name="MAX_FILE_SIZE" value="5MB"/>
     <property name="MAX_FILES" value="10"/>
-    <property name="PATH" value="logs/"/>
+    <property name="PATH" value="log/"/>
     <property name="PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5p %c{0} - %m%n"/>
 
     <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
@@ -24,6 +24,7 @@
     <logger name="org.hibernate.type" level="INFO"/>
     <logger name="org.hibernate" level="INFO"/>
     <logger name="ru.finnetrolle.telebot" level="DEBUG"/>
+    <logger name="org.jivesoftware" level="ERROR"/>
 
     <root level="INFO">
         <appender-ref ref="file"/>

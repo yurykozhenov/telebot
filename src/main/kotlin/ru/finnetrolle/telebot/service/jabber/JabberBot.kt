@@ -1,4 +1,4 @@
-package ru.finnetrolle.telebot.telegramapi.jabber
+package ru.finnetrolle.telebot.service.jabber
 
 import org.jivesoftware.smack.ConnectionConfiguration
 import org.jivesoftware.smack.chat.Chat
@@ -10,11 +10,8 @@ import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
-import ru.finnetrolle.telebot.telegramapi.SimpleTelegramBot
+import ru.finnetrolle.telebot.service.telegram.SimpleTelegramBot
 import javax.annotation.PostConstruct
-import javax.net.ssl.HostnameVerifier
-import javax.net.ssl.SSLContext
-import javax.net.ssl.SSLSession
 
 /**
  * Licence: MIT
@@ -55,23 +52,16 @@ open class JabberBot @Autowired constructor (
                 .setHost(server)
                 .setPort(port)
                 .setSecurityMode(ConnectionConfiguration.SecurityMode.disabled)
-//                .setDebuggerEnabled(true)
                 .setCompressionEnabled(false)
-                .setHostnameVerifier(object : HostnameVerifier {
-                    override fun verify(p0: String?, p1: SSLSession?): Boolean {
-                        return true
-                    }
-                })
+                .setHostnameVerifier({ p0, p1 -> true })
                 .build()
 
         val connection = XMPPTCPConnection(conf)
-//        val connection = XMPPTCPConnection(nick, password, server)
         connection.connect()
         connection.login()
 
         val chatMan = ChatManager.getInstanceFor(connection)
         chat = chatMan.createChat(broadcaster, { chat, message -> process(chat, message) })
-//        chat = chatMan.createChat(broadcaster, { chat, message -> println("MESAGE: ${message.body}") })
         chat.sendMessage("Hello from bot!")
     }
 

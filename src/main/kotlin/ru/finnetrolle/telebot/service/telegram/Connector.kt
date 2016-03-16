@@ -1,4 +1,4 @@
-package ru.finnetrolle.telebot.telegramapi
+package ru.finnetrolle.telebot.service.telegram
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
