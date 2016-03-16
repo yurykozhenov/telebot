@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-dark.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <title>Telebot by finnetrolle</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <h1>Telebot</h1>
+        <h2></h2>
+
+        <section id="downloads">
+          <a href="https://github.com/finnetrolle/telebot/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/finnetrolle/telebot/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/finnetrolle/telebot" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <h1>
+<a id="xxdeathxx-telegram-bot" class="anchor" href="#xxdeathxx-telegram-bot" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>xXDEATHXx telegram bot</h1>
+
+<p>Telegram bot for notifications broadcasting.</p>
+
+<p>Version 0.0.x - pre alpha. Using this version is very risky!</p>
+
+<h2>
+<a id="what-is-it" class="anchor" href="#what-is-it" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>What is it?</h2>
+
+<p>This bot is a simple notifier via telegram. I hope once you can start bot and send anything to all your pals in ally</p>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h2>
+
+<ul>
+<li>install and configure database (prefer postgres)</li>
+<li>create database and user for your telebot instance</li>
+<li>'git clone' application</li>
+<li>'mvn -U clean install -P production'</li>
+<li>add application.properties file</li>
+<li>'sudo ln -s /path-to-app/telebot.jar /etc/init.d/telebot'</li>
+<li>'sudo service telebot start'</li>
+</ul>
+
+<p>Tomcat have a problem with slow startup. To fix it just install haveged
+'sudo apt-get install haveged -y'</p>
+
+<h2>
+<a id="in-010-version" class="anchor" href="#in-010-version" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>In 0.1.0 version</h2>
+
+<ul>
+<li>superuser in properties file</li>
+<li>allowed ally list</li>
+<li>allowed corp list</li>
+<li>check-before-broadcast</li>
+<li>add/remove ally from list</li>
+<li>add/remove corp from list</li>
+<li>unsecured API to make broadcast</li>
+<li>add/remove moderators</li>
+<li>RPM and easy install guide</li>
+<li>liquibase</li>
+</ul>
+      </section>
+    </div>
+
+    
+  </body>
+</html>

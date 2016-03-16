@@ -1,0 +1,6 @@
+{
+  "name": "Telebot",
+  "tagline": "",
+  "body": "# xXDEATHXx telegram bot\r\n\r\nTelegram bot for notifications broadcasting.\r\n \r\nVersion 0.0.x - pre alpha. Using this version is very risky!\r\n\r\n## What is it?\r\n\r\nThis bot is a simple notifier via telegram. I hope once you can start bot and send anything to all your pals in ally\r\n\r\n## Installation\r\n\r\n- install and configure database (prefer postgres)\r\n- create database and user for your telebot instance\r\n- 'git clone' application\r\n- 'mvn -U clean install -P production'\r\n- add application.properties file\r\n- 'sudo ln -s /path-to-app/telebot.jar /etc/init.d/telebot'\r\n- 'sudo service telebot start'\r\n\r\nTomcat have a problem with slow startup. To fix it just install haveged\r\n'sudo apt-get install haveged -y'\r\n\r\n## In 0.1.0 version\r\n- superuser in properties file\r\n- allowed ally list\r\n- allowed corp list\r\n- check-before-broadcast\r\n- add/remove ally from list\r\n- add/remove corp from list\r\n- unsecured API to make broadcast\r\n- add/remove moderators\r\n- RPM and easy install guide\r\n- liquibase\r\n\r\n\r\n",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
