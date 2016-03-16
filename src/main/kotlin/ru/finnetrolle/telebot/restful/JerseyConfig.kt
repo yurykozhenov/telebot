@@ -21,7 +21,7 @@ open class JerseyConfig: ResourceConfig {
          * https://github.com/spring-projects/spring-boot/issues/3413
          * Anyway, register every endpoint looks cleaner
          */
-        //        packages(ru.finnetrolle.telebot.restful.JerseyConfig::class.java.`package`.name)
+//                packages(ru.finnetrolle.telebot.restful.JerseyConfig::class.java.`package`.name)
     }
 
 }
