@@ -9,12 +9,12 @@ import org.springframework.stereotype.Component
 * Legion of xXDEATHXx notification bot for telegram
 * Created by finnetrolle on 13.03.16.
 */
-@Component
-@Configuration
+//@Component
+//@Configuration
 open class JerseyConfig: ResourceConfig {
 
     constructor() {
-        register(BroadcastResource::class.java)
+//        register(BroadcastResource::class.java)
 
         /**
          * I'm using register instead of packages method because of issue with executable JAR

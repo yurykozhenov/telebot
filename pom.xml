@@ -6,7 +6,7 @@
 
     <groupId>ru.finnetrolle</groupId>
     <artifactId>telebot</artifactId>
-    <version>0.0.16</version>
+    <version>0.0.18</version>
 
     <packaging>jar</packaging>
     <name>telebot</name>
@@ -33,20 +33,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <!--<exclusions>-->
-                <!--<exclusion>-->
-                    <!--<groupId>org.springframework.boot</groupId>-->
-                    <!--<artifactId>spring-boot-starter-tomcat</artifactId>-->
-                <!--</exclusion>-->
-            <!--</exclusions>-->
-        </dependency>
-        <!--<dependency>-->
-            <!--<groupId>org.springframework.boot</groupId>-->
-            <!--<artifactId>spring-boot-starter-jetty</artifactId>-->
-        <!--</dependency>-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-jersey</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -114,13 +100,6 @@
             <artifactId>smack-java7</artifactId>
             <version>4.1.6</version>
         </dependency>
-
-
-
-
-
-
-
     </dependencies>
 
     <profiles>
@@ -147,9 +126,9 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <!--<configuration>-->
-                    <!--<executable>true</executable>-->
-                <!--</configuration>-->
+                <configuration>
+                    <executable>true</executable>
+                </configuration>
             </plugin>
             <plugin>
                 <artifactId>kotlin-maven-plugin</artifactId>
