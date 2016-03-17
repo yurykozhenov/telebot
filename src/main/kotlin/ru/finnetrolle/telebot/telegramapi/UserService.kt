@@ -2,10 +2,12 @@ package ru.finnetrolle.telebot.telegramapi
 
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 import org.telegram.telegrambots.api.objects.User
 import ru.finnetrolle.telebot.model.Pilot
 import ru.finnetrolle.telebot.model.PilotRepository
+import javax.annotation.PostConstruct
 
 /**
 * Licence: MIT
@@ -14,7 +16,27 @@ import ru.finnetrolle.telebot.model.PilotRepository
 */
 
 @Component
-open class UserService @Autowired constructor (val pilotRepo: PilotRepository) {
+open class UserService @Autowired constructor (
+        val pilotRepo: PilotRepository
+) {
+
+    @Value("\${superuser}")
+    private lateinit var superUser: String
+
+    private val DUMMY_PILOT = Pilot()
+
+    @PostConstruct
+    fun init() {
+        log.info("System bot super user is $superUser")
+    }
+
+    fun isModerator(teleId: Int):Boolean {
+        val pilot = pilotRepo.findOne(teleId)?:DUMMY_PILOT
+        if (pilot.characterName.equals(superUser))
+            return true
+        else
+            return pilot.moderator && !pilot.renegade
+    }
 
     fun register(user: User, key: Int, code: String, character: String, characterId: Long) {
         log.info("registering new pilot: " + character)

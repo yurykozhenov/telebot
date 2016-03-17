@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component
 import org.telegram.telegrambots.api.objects.User
 import ru.finnetrolle.telebot.service.eveapi.EveApiConnector
 import java.util.concurrent.ConcurrentHashMap
+import javax.annotation.PostConstruct
 
 /**
 * Licence: MIT

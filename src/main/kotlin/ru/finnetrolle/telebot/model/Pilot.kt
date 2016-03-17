@@ -14,12 +14,14 @@ interface PilotRepository: CrudRepository<Pilot, Int>
 
 @Entity(name = "pilots")
 data class Pilot (
-        @Id var id: Int = 0,
+        @Id var id: Int = 0, // telegram id is PK
         var firstName: String? = "",
         var lastName: String? = "",
         var username: String? = "",
         var apiKey: Int = 0,
         var vCode: String = "",
         var characterName: String = "",
-        var characterId: Long = 0
+        var characterId: Long = 0,
+        var moderator: Boolean = false,
+        var renegade: Boolean = true
 )
