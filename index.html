@@ -1,44 +1,35 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-us">
   <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/github-dark.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
-
+    <meta charset="UTF-8">
     <title>Telebot by finnetrolle</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
   </head>
-
   <body>
+    <section class="page-header">
+      <h1 class="project-name">Telebot</h1>
+      <h2 class="project-tagline"></h2>
+      <a href="https://github.com/finnetrolle/telebot" class="btn">View on GitHub</a>
+      <a href="https://github.com/finnetrolle/telebot/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/finnetrolle/telebot/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
 
-    <header>
-      <div class="container">
-        <h1>Telebot</h1>
-        <h2></h2>
-
-        <section id="downloads">
-          <a href="https://github.com/finnetrolle/telebot/zipball/master" class="btn">Download as .zip</a>
-          <a href="https://github.com/finnetrolle/telebot/tarball/master" class="btn">Download as .tar.gz</a>
-          <a href="https://github.com/finnetrolle/telebot" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
-        </section>
-      </div>
-    </header>
-
-    <div class="container">
-      <section id="main_content">
-        <h1>
+    <section class="main-content">
+      <h1>
 <a id="xxdeathxx-telegram-bot" class="anchor" href="#xxdeathxx-telegram-bot" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>xXDEATHXx telegram bot</h1>
 
 <p>Telegram bot for notifications broadcasting.</p>
 
-<p>Version 0.0.x - pre alpha. Using this version is very risky!</p>
+<p>Version 0.0 - pre alpha or even a proof oc concept. Using this version is very risky!</p>
 
 <h2>
 <a id="what-is-it" class="anchor" href="#what-is-it" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>What is it?</h2>
 
-<p>This bot is a simple notifier via telegram. I hope once you can start bot and send anything to all your pals in ally</p>
+<p>This bot is a simple telegram notifier. I hope once you can start bot and send anything to all your pals in ally</p>
 
 <h2>
 <a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h2>
@@ -46,34 +37,121 @@
 <ul>
 <li>install and configure database (prefer postgres)</li>
 <li>create database and user for your telebot instance</li>
-<li>'git clone' application</li>
-<li>'mvn -U clean install -P production'</li>
+<li>
+<code>git clone</code> application</li>
+<li><code>mvn -U clean install -P production</code></li>
 <li>add application.properties file</li>
-<li>'sudo ln -s /path-to-app/telebot.jar /etc/init.d/telebot'</li>
-<li>'sudo service telebot start'</li>
+<li>
+<code>sudo rm /etc/init.d/telebot</code> if you already have previous version of telebot</li>
+<li><code>sudo ln -s /path-to-app/telebot.jar /etc/init.d/telebot</code></li>
+<li><code>sudo service telebot start</code></li>
 </ul>
 
 <p>Tomcat have a problem with slow startup. To fix it just install haveged
-'sudo apt-get install haveged -y'</p>
+<code>sudo apt-get install haveged -y</code></p>
 
 <h2>
-<a id="in-010-version" class="anchor" href="#in-010-version" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>In 0.1.0 version</h2>
+<a id="next-version-named-users-to-manage-is-01" class="anchor" href="#next-version-named-users-to-manage-is-01" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Next version named 'Users to manage' is 0.1</h2>
+
+<h3>
+<a id="superuser-in-properties-file" class="anchor" href="#superuser-in-properties-file" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Superuser in properties file</h3>
+
+<p>One user to rule them all. Moderator by deafult, can not be moved avay. Can execute any command.</p>
+
+<h3>
+<a id="allowed-ally-and-corp-list" class="anchor" href="#allowed-ally-and-corp-list" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Allowed ally and corp list</h3>
+
+<p>Periodically, system will check every user for corporation and alliance. If registered user's alliance or corporation
+is in one of the lists - he'll get his broadcasts. Otherway this user will be marked 'left' to ignore broadcasts. 
+Marked users will be also removed from moderators list. User can unmark themselve after welcoming in listed corp or ally.
+But only other moderator can return moderator access back to him.</p>
+
+<h3>
+<a id="check-before-broadcast" class="anchor" href="#check-before-broadcast" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Check-before-broadcast</h3>
+
+<p>In fact broadcast will be sent only to users without 'left' mark to make broadcast faster. But there will be a component
+scanning every unmarked person with eve api to find renegades. Administrator will be able to set time between scans.</p>
+
+<h3>
+<a id="addremove-ally-or-corp-from-list" class="anchor" href="#addremove-ally-or-corp-from-list" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Add/remove ally or corp from list</h3>
+
+<p>This feature will be available in bot's chat (only for moderators).</p>
 
 <ul>
-<li>superuser in properties file</li>
-<li>allowed ally list</li>
-<li>allowed corp list</li>
-<li>check-before-broadcast</li>
-<li>add/remove ally from list</li>
-<li>add/remove corp from list</li>
-<li>unsecured API to make broadcast</li>
-<li>add/remove moderators</li>
-<li>RPM and easy install guide</li>
-<li>liquibase</li>
+<li>
+<strong>/addally</strong> [id or name] <em>to add ally into list</em>
+</li>
+<li>
+<strong>/rmally</strong> [id or name] <em>to remove ally from list</em>
+</li>
+<li>
+<strong>/la</strong> <em>to show allys list</em>
+</li>
+<li>
+<strong>/addcorp</strong> [id or name] <em>to add corp into list</em>
+</li>
+<li>
+<strong>/rmcorp</strong> [id or name] <em>to remove corp from list</em>
+</li>
+<li>
+<strong>/lc</strong> <em>to show corp list</em>
+</li>
 </ul>
-      </section>
-    </div>
 
-    
+<h3>
+<a id="unsecured-api-to-make-broadcast" class="anchor" href="#unsecured-api-to-make-broadcast" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Unsecured API to make broadcast</h3>
+
+<p>You'll be able to make broadcast from unsecured endpoint like http://mybothost:8080/cast with POST method. 
+No login and password is needed to access this endpoint so you should be careful.</p>
+
+<h3>
+<a id="addremove-moderators" class="anchor" href="#addremove-moderators" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Add/remove moderators</h3>
+
+<p>This feature will give you a way to have more than one moderator.</p>
+
+<ul>
+<li>
+<strong>/promote</strong> [name] <em>to promote pilot to moderator</em>
+</li>
+<li>
+<strong>/demote</strong> [name] <em>to demote pilot from moderator</em>
+</li>
+<li>
+<strong>/moders</strong> <em>to show all moderators</em>
+</li>
+</ul>
+
+<h3>
+<a id="rpm-and-easy-install-guide" class="anchor" href="#rpm-and-easy-install-guide" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>RPM and easy install guide</h3>
+
+<p>Application is already is executable (it means you shouldn't exec java -jar), but you still need git and maven to build it.
+In this patch you'll get RPM package with settings file and you'll can install it with help of easy install guide.</p>
+
+<p>You will also have an opportunity to build application from sources with maven.</p>
+
+<h3>
+<a id="liquibase" class="anchor" href="#liquibase" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Liquibase</h3>
+
+<p>Hibernate is ok with table creation, but if we want to keep your production database up-to-date with new versions of 
+application, we must use liquibase.</p>
+
+<h3>
+<a id="optional-enhancements" class="anchor" href="#optional-enhancements" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Optional enhancements</h3>
+
+<ul>
+<li>It is a nice idea to make just one page to make registration an easy process because nobody want to copy keyID and vCode to phone</li>
+<li>Embedded database is perfect to make installation easy. H2 is nice and have a chance to replace postgres</li>
+<li>Jabber listener will listen to one jabber person (You'll can find a friend to your old jabber bot!)</li>
+</ul>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/finnetrolle/telebot">Telebot</a> is maintained by <a href="https://github.com/finnetrolle">finnetrolle</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
   </body>
 </html>
