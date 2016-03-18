@@ -25,12 +25,12 @@ Tomcat have a problem with slow startup. To fix it just install haveged
 ## Next version named 'Users to manage' is 0.1
 
 ### Superuser in properties file
-One user to rule them all. Moderator by deafult, can not be moved avay. Can execute any command.
+One user to rule them all. Moderator by default, can not be moved away. Can execute any command.
 
 ### Allowed ally and corp list
 Periodically, system will check every user for corporation and alliance. If registered user's alliance or corporation
-is in one of the lists - he'll get his broadcasts. Otherway this user will be marked 'left' to ignore broadcasts. 
-Marked users will be also removed from moderators list. User can unmark themselve after welcoming in listed corp or ally.
+is in one of the lists - he'll get his broadcasts. In other way this user will be marked 'left' to ignore broadcasts. 
+Marked users will be also removed from moderators list. User can remove his mark after welcoming in listed corp or ally.
 But only other moderator can return moderator access back to him.
 
 ### Check-before-broadcast
