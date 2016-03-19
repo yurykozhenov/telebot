@@ -2,7 +2,7 @@
 <html lang="en-us">
   <head>
     <meta charset="UTF-8">
-    <title>xXDEATHXx telegram bot by finnetrolle</title>
+    <title>Telebot by finnetrolle</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
@@ -11,8 +11,8 @@
   </head>
   <body>
     <section class="page-header">
-      <h1 class="project-name">xXDEATHXx telegram bot</h1>
-      <h2 class="project-tagline"></h2>
+      <h1 class="project-name">Telebot</h1>
+      <h2 class="project-tagline">xXDEATHXx telegram bot</h2>
       <a href="https://github.com/finnetrolle/telebot" class="btn">View on GitHub</a>
       <a href="https://github.com/finnetrolle/telebot/zipball/master" class="btn">Download .zip</a>
       <a href="https://github.com/finnetrolle/telebot/tarball/master" class="btn">Download .tar.gz</a>
@@ -51,19 +51,54 @@
 <code>sudo apt-get install haveged -y</code></p>
 
 <h2>
+<a id="service-configuration" class="anchor" href="#service-configuration" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Service configuration</h2>
+
+<h2>
+<a id="setting-up-your-system" class="anchor" href="#setting-up-your-system" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Setting up your system</h2>
+
+<h3>
+<a id="super-user" class="anchor" href="#super-user" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Super user</h3>
+
+<p>Your service need special user that nobody can demote. This user is moderator by default and even if one of your 
+moderators dicide to kick all other moderators you still have a chance to take control. 
+Set eve character name into superuser property to enable superuser. </p>
+
+<p>Next step is to attach your telegram account to this character. Open telegram and register using <strong>/register</strong> 
+command with your keyId and vCode. Without saying you should select character with superuser's name. If you want to
+show your character's name in moderator list - <strong>/promote</strong> yourself (This is not necessary to superuser to be a moderator)</p>
+
+<h3>
+<a id="add-your-first-alliance-or-corporation" class="anchor" href="#add-your-first-alliance-or-corporation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Add your first alliance or corporation</h3>
+
+<p>At first your service have empty lists for allowed alliances and corporations. This is a time when every person having
+Eve Online character can register into your system. To prevent registering for all except your friends you should add
+some alliances or corporations into service. </p>
+
+<p>Use <strong>/addally</strong> and <strong>/addcorp</strong> commands to fulfill your allowed lists. If you have at least one alliance or 
+one corporation, nobody can register except the pilots of added alliance / corporation.</p>
+
+<h3>
+<a id="promote-moderators" class="anchor" href="#promote-moderators" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Promote moderators</h3>
+
+<p>You probably need help of your friends to make broadcasts, remove alliances and corporations from allowed lists and 
+make a coffee. Add some helpers using <strong>/promote</strong> command. Your moderators can promote and demote any person except 
+super user, so your person is safe. But don't make your servants a slaves because they can make some problems 
+for your system.</p>
+
+<h2>
 <a id="next-version-named-users-to-manage-is-01" class="anchor" href="#next-version-named-users-to-manage-is-01" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Next version named 'Users to manage' is 0.1</h2>
 
 <h3>
 <a id="superuser-in-properties-file" class="anchor" href="#superuser-in-properties-file" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Superuser in properties file</h3>
 
-<p>One user to rule them all. Moderator by deafult, can not be moved avay. Can execute any command.</p>
+<p>One user to rule them all. Moderator by default, can not be moved away. Can execute any command.</p>
 
 <h3>
 <a id="allowed-ally-and-corp-list" class="anchor" href="#allowed-ally-and-corp-list" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Allowed ally and corp list</h3>
 
 <p>Periodically, system will check every user for corporation and alliance. If registered user's alliance or corporation
-is in one of the lists - he'll get his broadcasts. Otherway this user will be marked 'left' to ignore broadcasts. 
-Marked users will be also removed from moderators list. User can unmark themselve after welcoming in listed corp or ally.
+is in one of the lists - he'll get his broadcasts. In other way this user will be marked 'left' to ignore broadcasts. 
+Marked users will be also removed from moderators list. User can remove his mark after welcoming in listed corp or ally.
 But only other moderator can return moderator access back to him.</p>
 
 <h3>
@@ -79,19 +114,19 @@ scanning every unmarked person with eve api to find renegades. Administrator wil
 
 <ul>
 <li>
-<strong>/addally</strong> [id or name] <em>to add ally into list</em>
+<strong>/addally</strong> [ticker] <em>to add ally into list</em>
 </li>
 <li>
-<strong>/rmally</strong> [id or name] <em>to remove ally from list</em>
+<strong>/rmally</strong> [ticker] <em>to remove ally from list</em>
 </li>
 <li>
 <strong>/la</strong> <em>to show allys list</em>
 </li>
 <li>
-<strong>/addcorp</strong> [id or name] <em>to add corp into list</em>
+<strong>/addcorp</strong> [id] <em>to add corp into list</em>
 </li>
 <li>
-<strong>/rmcorp</strong> [id or name] <em>to remove corp from list</em>
+<strong>/rmcorp</strong> [ticker] <em>to remove corp from list</em>
 </li>
 <li>
 <strong>/lc</strong> <em>to show corp list</em>
@@ -117,7 +152,7 @@ No login and password is needed to access this endpoint so you should be careful
 <strong>/demote</strong> [name] <em>to demote pilot from moderator</em>
 </li>
 <li>
-<strong>/moders</strong> <em>to show all moderators</em>
+<strong>/lm</strong> <em>to show all moderators</em>
 </li>
 </ul>
 
@@ -145,7 +180,7 @@ application, we must use liquibase.</p>
 </ul>
 
       <footer class="site-footer">
-        <span class="site-footer-owner"><a href="https://github.com/finnetrolle/telebot">xXDEATHXx telegram bot</a> is maintained by <a href="https://github.com/finnetrolle">finnetrolle</a>.</span>
+        <span class="site-footer-owner"><a href="https://github.com/finnetrolle/telebot">Telebot</a> is maintained by <a href="https://github.com/finnetrolle">finnetrolle</a>.</span>
 
         <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
       </footer>
