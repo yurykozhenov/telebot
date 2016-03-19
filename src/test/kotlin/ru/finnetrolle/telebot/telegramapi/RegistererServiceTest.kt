@@ -5,6 +5,7 @@ import org.junit.Test
 
 import org.springframework.test.util.ReflectionTestUtils
 import org.telegram.telegrambots.api.objects.User
+import ru.finnetrolle.telebot.model.Alliance
 
 /**
 * Licence: MIT

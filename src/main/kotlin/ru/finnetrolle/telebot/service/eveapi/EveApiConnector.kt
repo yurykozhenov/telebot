@@ -1,10 +1,17 @@
 package ru.finnetrolle.telebot.service.eveapi
 
+import com.beimin.eveapi.model.eve.Alliance
+import com.beimin.eveapi.model.eve.CorporationStat
 import com.beimin.eveapi.parser.ApiAuthorization
 import com.beimin.eveapi.parser.account.CharactersParser
+import com.beimin.eveapi.parser.corporation.CorpSheetParser
+import com.beimin.eveapi.parser.eve.AllianceListParser
 import com.beimin.eveapi.parser.eve.CharacterInfoParser
+import com.beimin.eveapi.parser.eve.CharacterLookupParser
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
+import ru.finnetrolle.cachingcontainer.CachingContainer
+import ru.finnetrolle.cachingcontainer.CachingContainer.HOURS
 
 /**
 * Licence: MIT
@@ -16,6 +23,8 @@ import org.springframework.stereotype.Component
 open class EveApiConnector {
 
     data class Character(val name: String, val id: Long, val allyId: Long)
+
+    val allyList = CachingContainer.build<Set<Alliance>>(1 * HOURS)
 
     fun getCharacters(key: Int, code: String): List<Character>? {
         try {
@@ -37,6 +46,14 @@ open class EveApiConnector {
         }
         return 0
     }
+
+    fun getAlliances() = allyList.get { -> AllianceListParser().response.all }//AllianceListParser().response.all
+
+    fun isAllianceExist(ticker: String) = getAlliance(ticker) != null
+
+    fun getAlliance(ticker: String): Alliance? = getAlliances().find { x -> x.shortName.equals(ticker) }
+
+    fun getCorporation(id: Long) = CorpSheetParser().getResponse(id)
 
     companion object {
         private val log = LoggerFactory.getLogger(EveApiConnector::class.java)

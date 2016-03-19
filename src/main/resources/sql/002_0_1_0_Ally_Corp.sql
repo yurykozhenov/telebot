@@ -1,0 +1,20 @@
+BEGIN TRANSACTION;
+
+DROP TABLE IF EXISTS "alliances" CASCADE;
+
+DROP TABLE IF EXISTS "corporations" CASCADE;
+
+CREATE TABLE "alliances" (
+    "id" BIGINT PRIMARY KEY,
+    "title" VARCHAR(150) NOT NULL,
+    "ticker" VARCHAR(5) NOT NULL
+
+);
+
+CREATE TABLE "corporations" (
+    "id" BIGINT PRIMARY KEY,
+    "title" VARCHAR(150) NOT NULL,
+    "ticker" VARCHAR(5) NOT NULL
+);
+
+END TRANSACTION;

@@ -8,7 +8,7 @@ CREATE TABLE "pilots" (
     "last_name" VARCHAR(150),
     "username" VARCHAR(150),
     "api_key" INTEGER NOT NULL,
-    "v_code" VARCHAR(50) NOT NULL,
+    "v_code" VARCHAR(64) NOT NULL,
     "character_name" VARCHAR(100) NOT NULL,
     "character_id" BIGINT NOT NULL,
     "moderator" BOOLEAN DEFAULT FALSE,

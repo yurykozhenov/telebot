@@ -7,6 +7,9 @@
     <changeSet id="1" author="finnetrolle">
         <sqlFile path="sql/001_0_1_0_Schema.sql" relativeToChangelogFile="true" stripComments="true"/>
     </changeSet>
+    <changeSet id="2" author="finnetrolle">
+        <sqlFile path="sql/002_0_1_0_Ally_Corp.sql" relativeToChangelogFile="true" stripComments="true"/>
+    </changeSet>
 
 
 </databaseChangeLog>

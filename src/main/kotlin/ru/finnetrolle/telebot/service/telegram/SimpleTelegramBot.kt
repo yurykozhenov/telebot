@@ -7,6 +7,12 @@ import org.springframework.stereotype.Component
 import org.telegram.telegrambots.api.objects.Update
 import org.telegram.telegrambots.api.objects.User
 import org.telegram.telegrambots.bots.TelegramLongPollingBot
+import ru.finnetrolle.telebot.service.eveapi.EveApiConnector
+import ru.finnetrolle.telebot.telegramapi.AllyService.AddResponse.AllianceAdded
+import ru.finnetrolle.telebot.telegramapi.AllyService.AddResponse.AllianceIsAlreadyInList
+import ru.finnetrolle.telebot.telegramapi.AllyService.AddResponse.AllianceIsNotExist
+import ru.finnetrolle.telebot.telegramapi.AllyService.RemoveResponse.AllianceNotFound
+import ru.finnetrolle.telebot.telegramapi.AllyService.RemoveResponse.AllianceRemoved
 import ru.finnetrolle.telebot.telegramapi.*
 import kotlin.collections.List
 
@@ -20,7 +26,10 @@ import kotlin.collections.List
 class SimpleTelegramBot @Autowired constructor(
         val registerer: RegistererService,
         val broadcastComposer: BroadcastComposer,
-        val userService: UserService
+        val eve: EveApiConnector,
+        val userService: UserService,
+        val allyService: AllyService,
+        val corpService: CorpService
 ): TelegramLongPollingBot() {
 
     @Value("\${telegram.bot.token}")
@@ -87,8 +96,39 @@ class SimpleTelegramBot @Autowired constructor(
     fun chatty(parsed: Command, chatId: String) {
         val text = when(parsed.command.toUpperCase()) {
             "/JOKE" -> "oh fuck you, bro!"
-            "/USERS" -> userService.getCharacters().joinToString("\n")
-            else -> "Ok, so?"
+            "/USERS" -> userService.getCharacters()
+                    .joinToString("\n")
+            "/ADDALLY" -> when (allyService.addAlly(parsed.data)) {
+                is AllianceAdded -> Messages.Ally.ADDED
+                is AllianceIsAlreadyInList -> Messages.Ally.IN_LIST
+                is AllianceIsNotExist -> Messages.Ally.NOT_EXIST
+                else -> Messages.IMPOSSIBLE
+            }
+            "/RMALLY" -> when (allyService.removeAlly(parsed.data)) {
+                is AllianceRemoved -> Messages.Ally.REMOVED
+                is AllianceNotFound -> Messages.Ally.NOT_FOUND
+                else -> Messages.IMPOSSIBLE
+            }
+            "/LA" -> allyService.getAll()
+                    .map { a -> "[${a.ticker}] - ${a.title}" }
+                    .sorted()
+                    .joinToString("\n")
+            "/ADDCORP" -> when (corpService.addCorporation(parsed.data.toLong())) {
+                is CorpService.Add.Success -> Messages.Corp.ADDED
+                is CorpService.Add.AlreadyInList -> Messages.Corp.IN_LIST
+                is CorpService.Add.NotExist -> Messages.Corp.NOT_EXIST
+                else -> Messages.IMPOSSIBLE
+            }
+            "/RMCORP" -> when (corpService.removeCorporation(parsed.data)) {
+                is CorpService.Remove.Success -> Messages.Corp.REMOVED
+                is CorpService.Remove.NotFound -> Messages.Corp.NOT_FOUND
+                else -> Messages.IMPOSSIBLE
+            }
+            "/LC" -> corpService.getAll()
+                    .map { c -> "[${c.ticker}] - ${c.title}" }
+                    .sorted()
+                    .joinToString("\n")
+            else -> Messages.UNKNOWN
         }
         sendMessage(MessageBuilder.build(chatId, text))
     }
