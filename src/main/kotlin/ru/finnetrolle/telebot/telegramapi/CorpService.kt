@@ -61,6 +61,12 @@ import ru.finnetrolle.telebot.service.eveapi.EveApiConnector
         }
     }
 
+    fun contains(corpId: Long) = repo.exists(corpId)
+
+    fun get(corpId: Long) = repo.findOne(corpId)
+
     fun getAll() = repo.findAll()
+
+    fun isEmpty() = repo.count() == 0L
 
 }

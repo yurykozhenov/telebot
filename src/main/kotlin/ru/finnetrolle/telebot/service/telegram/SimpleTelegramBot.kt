@@ -38,6 +38,9 @@ class SimpleTelegramBot @Autowired constructor(
     @Value("\${telegram.bot.username}")
     private lateinit var username: String
 
+    @Value("\${telebot.broadcast.check-before-send}")
+    private var checkBeforeSend: Boolean = false
+
     override fun getBotUsername(): String? {
         return username
     }
@@ -67,19 +70,33 @@ class SimpleTelegramBot @Autowired constructor(
             val dataElements = parsed.data.split(Messages.regex)
             val charList = registerer.startRegistration(user, dataElements[0].toInt(), dataElements[1])
             if (charList == null) {
-                send(chatId, Messages.Registration.BAD_AUTH)
+                send(chatId, Messages.Reg.BAD_AUTH)
             } else {
-                send(chatId, Messages.Registration.SELECT_CHAR, charList)
+                send(chatId, Messages.Reg.SELECT_CHAR, charList)
             }
             return
         }
 
         if (registerer.isInProcess(user.id)) {
             if (parsed.command.length == 2 && parsed.command[0].equals('/')) {
-                val char = registerer.finishRegistration(user.id, parsed.command.substring(1, 2).toInt())
-                send(chatId, "${Messages.Registration.SUCCESS} $char")
+                val finish = registerer.finishRegistration(user.id, parsed.command.substring(1, 2).toInt())
+                when (finish) {
+                    is RegistererService.Finish.FailByNotAllowed ->
+                            send(chatId, finish.name + Messages.Reg.FAIL_DENIED)
+                    is RegistererService.Finish.FailByRegistrationExpired ->
+                            send(chatId, Messages.Reg.FAIL_EXPIRED)
+                    is RegistererService.Finish.FailByWrongSelect ->
+                            send(chatId, Messages.Reg.FAIL_ID)
+                    is RegistererService.Finish.SuccessByAlliance ->
+                            send(chatId, finish.name + Messages.Reg.SUCCESS_ALLY + finish.alliance)
+                    is RegistererService.Finish.SuccessByCorporation ->
+                            send(chatId, finish.name + Messages.Reg.SUCCESS_CORP + finish.corp)
+                    is RegistererService.Finish.SuccessByNoLists ->
+                            send(chatId, finish.name + Messages.Reg.SUCCESS_FIRST)
+                    else -> send(chatId, Messages.IMPOSSIBLE)
+                }
             } else {
-                send(chatId, Messages.Registration.SELECT_CHAR, registerer.getListOfCharacterCandidates(user.id))
+                send(chatId, Messages.Reg.SELECT_CHAR, registerer.getListOfCharacterCandidates(user.id))
             }
             return
         } else {
@@ -90,12 +107,14 @@ class SimpleTelegramBot @Autowired constructor(
             }
         }
 
-        chatty(parsed, chatId)
+        if (userService.isModerator(user.id) && processAuth(parsed, chatId)) {
+            return
+        }
+        processUnauth(parsed, chatId)
     }
 
-    fun chatty(parsed: Command, chatId: String) {
+    fun processAuth(parsed: Command, chatId: String): Boolean {
         val text = when(parsed.command.toUpperCase()) {
-            "/JOKE" -> "oh fuck you, bro!"
             "/USERS" -> userService.getCharacters()
                     .joinToString("\n")
             "/ADDALLY" -> when (allyService.addAlly(parsed.data)) {
@@ -109,10 +128,6 @@ class SimpleTelegramBot @Autowired constructor(
                 is AllianceNotFound -> Messages.Ally.NOT_FOUND
                 else -> Messages.IMPOSSIBLE
             }
-            "/LA" -> allyService.getAll()
-                    .map { a -> "[${a.ticker}] - ${a.title}" }
-                    .sorted()
-                    .joinToString("\n")
             "/ADDCORP" -> when (corpService.addCorporation(parsed.data.toLong())) {
                 is CorpService.Add.Success -> Messages.Corp.ADDED
                 is CorpService.Add.AlreadyInList -> Messages.Corp.IN_LIST
@@ -124,19 +139,49 @@ class SimpleTelegramBot @Autowired constructor(
                 is CorpService.Remove.NotFound -> Messages.Corp.NOT_FOUND
                 else -> Messages.IMPOSSIBLE
             }
+            "/CHECK" -> userService.check().joinToString("\n")
+            "/PRO" -> if (userService.setModerator(parsed.data, true) == null)
+                Messages.User.NOT_FOUND else Messages.User.PROMOTED
+            "/DEM" -> if (userService.setModerator(parsed.data, false) == null)
+                Messages.User.NOT_FOUND else Messages.User.DEMOTED
+            "/RENEGADE" -> if (userService.setRenegade(parsed.data, true) == null)
+                Messages.User.NOT_FOUND else Messages.User.RENEGADED
+            "/LEGALIZE" -> if (userService.setRenegade(parsed.data, false) == null)
+                Messages.User.NOT_FOUND else Messages.User.LEGALIZED
+            "/CAST" -> broadcast(parsed.data)
+            else -> return false
+        }
+        sendMessage(MessageBuilder.build(chatId, text))
+        return true
+    }
+
+    fun processUnauth(parsed: Command, chatId: String): Boolean {
+        val text = when(parsed.command.toUpperCase()) {
+            "/JOKE" -> "oh fuck you, bro!"
+            "/LA" -> allyService.getAll()
+                    .map { a -> "[${a.ticker}] - ${a.title}" }
+                    .sorted()
+                    .joinToString("\n")
             "/LC" -> corpService.getAll()
                     .map { c -> "[${c.ticker}] - ${c.title}" }
                     .sorted()
                     .joinToString("\n")
-            else -> Messages.UNKNOWN
+            "/LM" -> userService.getModerators().joinToString("\n")
+            else -> return false
         }
         sendMessage(MessageBuilder.build(chatId, text))
+        return true
     }
 
-    fun broadcast(text: String) {
+    fun broadcast(text: String): String {
+        if (checkBeforeSend) {
+            userService.check()
+        }
         val messages = broadcastComposer.compose(text)
         messages.forEach { m -> sendMessage(m) }
-        log.info("broadcast sent to ${messages.size} users")
+        val s = "broadcast sent to ${messages.size} users"
+        log.info(s)
+        return s
     }
 
     private fun send(chatId: String, text: String) {

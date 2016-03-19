@@ -22,6 +22,33 @@ This bot is a simple telegram notifier. I hope once you can start bot and send a
 Tomcat have a problem with slow startup. To fix it just install haveged
 `sudo apt-get install haveged -y`
 
+## Service configuration
+
+## Setting up your system
+
+### Super user
+Your service need special user that nobody can demote. This user is moderator by default and even if one of your 
+moderators dicide to kick all other moderators you still have a chance to take control. 
+Set eve character name into superuser property to enable superuser. 
+
+Next step is to attach your telegram account to this character. Open telegram and register using **/register** 
+command with your keyId and vCode. Without saying you should select character with superuser's name. If you want to
+show your character's name in moderator list - **/promote** yourself (This is not necessary to superuser to be a moderator)
+
+### Add your first alliance or corporation
+At first your service have empty lists for allowed alliances and corporations. This is a time when every person having
+Eve Online character can register into your system. To prevent registering for all except your friends you should add
+some alliances or corporations into service. 
+
+Use **/addally** and **/addcorp** commands to fulfill your allowed lists. If you have at least one alliance or 
+one corporation, nobody can register except the pilots of added alliance / corporation.
+
+### Promote moderators
+You probably need help of your friends to make broadcasts, remove alliances and corporations from allowed lists and 
+make a coffee. Add some helpers using **/promote** command. Your moderators can promote and demote any person except 
+super user, so your person is safe. But don't make your servants a slaves because they can make some problems 
+for your system.
+
 ## Next version named 'Users to manage' is 0.1
 
 ### Superuser in properties file
@@ -40,11 +67,11 @@ scanning every unmarked person with eve api to find renegades. Administrator wil
 ### Add/remove ally or corp from list
 This feature will be available in bot's chat (only for moderators).
 
-- **/addally** [id or name] *to add ally into list*
-- **/rmally** [id or name] *to remove ally from list*
+- **/addally** [ticker] *to add ally into list*
+- **/rmally** [ticker] *to remove ally from list*
 - **/la** *to show allys list*
-- **/addcorp** [id or name] *to add corp into list*
-- **/rmcorp** [id or name] *to remove corp from list*
+- **/addcorp** [id] *to add corp into list*
+- **/rmcorp** [ticker] *to remove corp from list*
 - **/lc** *to show corp list*
 
 ### Unsecured API to make broadcast
@@ -56,7 +83,7 @@ This feature will give you a way to have more than one moderator.
 
 - **/promote** [name] *to promote pilot to moderator*
 - **/demote** [name] *to demote pilot from moderator*
-- **/moders** *to show all moderators*
+- **/lm** *to show all moderators*
 
 ### RPM and easy install guide
 Application is already is executable (it means you shouldn't exec java -jar), but you still need git and maven to build it.

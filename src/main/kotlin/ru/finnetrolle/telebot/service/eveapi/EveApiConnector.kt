@@ -8,10 +8,12 @@ import com.beimin.eveapi.parser.corporation.CorpSheetParser
 import com.beimin.eveapi.parser.eve.AllianceListParser
 import com.beimin.eveapi.parser.eve.CharacterInfoParser
 import com.beimin.eveapi.parser.eve.CharacterLookupParser
+import com.beimin.eveapi.response.corporation.CorpSheetResponse
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
 import ru.finnetrolle.cachingcontainer.CachingContainer
 import ru.finnetrolle.cachingcontainer.CachingContainer.HOURS
+import ru.finnetrolle.telebot.model.Pilot
 
 /**
 * Licence: MIT
@@ -28,14 +30,16 @@ open class EveApiConnector {
 
     fun getCharacters(key: Int, code: String): List<Character>? {
         try {
-            return CharactersParser().getResponse(ApiAuthorization(key, code)).all
+            val chars = CharactersParser().getResponse(ApiAuthorization(key, code)).all
                 .map { c -> Character(c.name, c.characterID, getCorpId(c.characterID)) }
-                .toList()
+            return if (chars.isEmpty()) null else chars
         } catch (e: Exception) {
             log.warn("Get characters failed for key=$key", e)
+            return null;
         }
-        return null
     }
+
+    fun getCharacter(id: Long) = CharacterInfoParser().getResponse(id)
 
     fun getCorpId(charId: Long): Long {
         try {
@@ -53,7 +57,10 @@ open class EveApiConnector {
 
     fun getAlliance(ticker: String): Alliance? = getAlliances().find { x -> x.shortName.equals(ticker) }
 
-    fun getCorporation(id: Long) = CorpSheetParser().getResponse(id)
+    fun getCorporation(id: Long): CorpSheetResponse? {
+        val corp = CorpSheetParser().getResponse(id)
+        return if (corp.corporationID == 0L) null else corp
+    }
 
     companion object {
         private val log = LoggerFactory.getLogger(EveApiConnector::class.java)

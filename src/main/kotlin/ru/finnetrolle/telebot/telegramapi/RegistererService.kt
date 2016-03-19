@@ -16,7 +16,9 @@ import java.util.concurrent.ConcurrentHashMap
 @Component
 class RegistererService @Autowired constructor (
         val userService: UserService,
-        val eve: EveApiConnector
+        val eve: EveApiConnector,
+        val allyService: AllyService,
+        val corpService: CorpService
 ) {
 
     private data class Contender(
@@ -52,22 +54,48 @@ class RegistererService @Autowired constructor (
         return registerCandidates[userId]!!.characters.map{ c -> c.name}
     }
 
-    fun finishRegistration(userId: Int, characterNo: Int): String? {
+    interface Finish {
+        data class SuccessByNoLists(val name: String) : Finish
+        data class SuccessByAlliance(val name: String, val alliance: String) : Finish
+        data class SuccessByCorporation(val name: String, val corp: String) : Finish
+        data class FailByNotAllowed(val name: String) : Finish
+        data class FailByWrongSelect(val characterNo: Int) : Finish
+        data class FailByRegistrationExpired(val userId: Int) : Finish
+    }
+
+    fun finishRegistration(userId: Int, characterNo: Int) : Finish {
         log.info("Trying to finish registration")
         val contender = registerCandidates[userId]
         if (contender == null) {
             log.warn("Can't find contender in candidates for user id=$userId")
-            return null
+            return Finish.FailByRegistrationExpired(userId)
         }
         val char = contender.characters.getOrNull(characterNo)
         if (char != null) {
-            log.info("Registration successful for $contender")
-            userService.register(contender.user, contender.key, contender.code, char.name, char.id)
-            registerCandidates.remove(userId)
-            return char.name
+            val eveChar = eve.getCharacter(char.id)
+            if (allyService.contains(eveChar.allianceID)) {
+                log.info("Registration successful for $contender by alliance")
+                register(contender, char)
+                return Finish.SuccessByAlliance(char.name, allyService.get(eveChar.allianceID).ticker)
+            } else if (corpService.contains(eveChar.corporationID)) {
+                log.info("Registration successful for $contender by corporation")
+                register(contender, char)
+                return Finish.SuccessByCorporation(char.name, corpService.get(eveChar.corporationID).ticker)
+            } else if (allyService.isEmpty() && corpService.isEmpty()){
+                log.info("Registration successful for $contender because no allowed lists allowed")
+                register(contender, char)
+                return Finish.SuccessByNoLists(char.name)
+            } else {
+                return Finish.FailByNotAllowed(char.name)
+            }
         } else {
-            return null
+            return Finish.FailByWrongSelect(characterNo)
         }
+    }
+
+    private fun register(contender: Contender, char: EveApiConnector.Character) {
+        userService.register(contender.user, contender.key, contender.code, char.name, char.id)
+        registerCandidates.remove(contender.user.id)
     }
 
     companion object {

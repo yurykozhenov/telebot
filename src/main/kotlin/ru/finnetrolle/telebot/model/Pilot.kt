@@ -1,8 +1,13 @@
 package ru.finnetrolle.telebot.model
 
+import org.springframework.data.jpa.repository.JpaRepository
+import org.springframework.data.jpa.repository.Modifying
+import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.CrudRepository
+import org.springframework.data.repository.query.Param
 import javax.persistence.Entity
 import javax.persistence.Id
+import javax.persistence.Table
 
 /**
 * Licence: MIT
@@ -10,9 +15,21 @@ import javax.persistence.Id
 * Created by finnetrolle on 13.03.16.
 */
 
-interface PilotRepository: CrudRepository<Pilot, Int>
+interface PilotRepository: JpaRepository<Pilot, Int> {
 
-@Entity(name = "pilots")
+    @Modifying
+    @Query("update Pilot u set u.renegade = true where u.id in ?1")
+    fun makeRenegades(@Param("ids") ids: Collection<Int>)
+
+    fun findByCharacterName(name: String): Pilot?
+
+    fun findByRenegadeFalse(): List<Pilot>
+
+    fun findByModeratorTrue(): List<Pilot>
+}
+
+@Entity
+@Table(name = "pilots")
 data class Pilot (
         @Id var id: Int = 0, // telegram id is PK
         var firstName: String? = "",
