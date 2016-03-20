@@ -6,7 +6,7 @@
 
     <groupId>ru.finnetrolle</groupId>
     <artifactId>telebot</artifactId>
-    <version>0.0.22-SNAPSHOT</version>
+    <version>0.0.23-SNAPSHOT</version>
 
     <packaging>jar</packaging>
     <name>telebot</name>
@@ -129,6 +129,11 @@
             <version>4.1.6</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+        </dependency>
+
         <!-- Liquibase -->
         <dependency>
             <groupId>org.liquibase</groupId>
@@ -147,27 +152,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
         <kotlin.version>1.0.0</kotlin.version>
-
-        <project.exclude.directory>src/main/resources_ex</project.exclude.directory>
-
-        <!-- Свойства сборки -->
-        <!--<releases.id>sbs-releases-repository</releases.id>-->
-        <!--<releases.url>http://artifactory.russianpost.ru/artifactory/libs-release-local</releases.url>-->
-
-        <!--<snapshots.id>sbs-snapshots-repository</snapshots.id>-->
-        <!--<snapshots.url>http://artifactory.russianpost.ru/artifactory/libs-snapshot-local</snapshots.url>-->
-
-        <!-- RPM deploy artifact properties -->
-        <rpm.base.name>telebot</rpm.base.name>
-        <service.name>telebot</service.name>
-        <rpm.app.dir>/var/lib/telebot</rpm.app.dir>
-        <rpm.config.dir>/etc/telebot</rpm.config.dir>
-        <rpm.config.log.dir>/var/log/telebot/</rpm.config.log.dir>
-        <rpm.config.log.conf.dir>/etc/telebot/log-cfg</rpm.config.log.conf.dir>
-        <rpm.config.run.pid.dir>/var/run/telebot</rpm.config.run.pid.dir>
-        <rpm.config.init.d.dir>/etc/init.d</rpm.config.init.d.dir>
-        <rpm.config.sysconfig.dir>/etc/sysconfig</rpm.config.sysconfig.dir>
-        <rpm.run.user>telebot</rpm.run.user>
     </properties>
 
     <build>
@@ -191,6 +175,24 @@
                 <configuration>
                     <encoding>UTF-8</encoding>
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${basedir}/target</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>src/main/resources/ext</directory>
+                                    <filtering>true</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
 
             <!-- Kotlin plugin -->
@@ -215,11 +217,7 @@
                     </execution>
                 </executions>
             </plugin>
-
         </plugins>
     </build>
-
-
-
 
 </project>
