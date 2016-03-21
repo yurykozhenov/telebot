@@ -29,7 +29,8 @@ class SimpleTelegramBot @Autowired constructor(
         val eve: EveApiConnector,
         val userService: UserService,
         val allyService: AllyService,
-        val corpService: CorpService
+        val corpService: CorpService,
+        val manager: TelebotServantManager
 ): TelegramLongPollingBot() {
 
     @Value("\${telegram.bot.token}")
@@ -107,71 +108,53 @@ class SimpleTelegramBot @Autowired constructor(
             }
         }
 
-        if (userService.isModerator(user.id) && processAuth(parsed, chatId)) {
-            return
-        }
-        processUnauth(parsed, chatId)
+        val response = manager.serve(ServantManager.Command(parsed.command, parsed.data, user.id))
+        send(chatId, response)
+
+//        if (userService.isModerator(user.id) && processAuth(parsed, chatId)) {
+//            return
+//        }
+//        processUnauth(parsed, chatId)
     }
 
-    fun processAuth(parsed: Command, chatId: String): Boolean {
-        val text = when(parsed.command.toUpperCase()) {
-            "/USERS" -> userService.getCharacters()
-                    .joinToString("\n")
-            "/ADDALLY" -> when (allyService.addAlly(parsed.data)) {
-                is AllianceAdded -> Messages.Ally.ADDED
-                is AllianceIsAlreadyInList -> Messages.Ally.IN_LIST
-                is AllianceIsNotExist -> Messages.Ally.NOT_EXIST
-                else -> Messages.IMPOSSIBLE
-            }
-            "/RMALLY" -> when (allyService.removeAlly(parsed.data)) {
-                is AllianceRemoved -> Messages.Ally.REMOVED
-                is AllianceNotFound -> Messages.Ally.NOT_FOUND
-                else -> Messages.IMPOSSIBLE
-            }
-            "/ADDCORP" -> when (corpService.addCorporation(parsed.data.toLong())) {
-                is CorpService.Add.Success -> Messages.Corp.ADDED
-                is CorpService.Add.AlreadyInList -> Messages.Corp.IN_LIST
-                is CorpService.Add.NotExist -> Messages.Corp.NOT_EXIST
-                else -> Messages.IMPOSSIBLE
-            }
-            "/RMCORP" -> when (corpService.removeCorporation(parsed.data)) {
-                is CorpService.Remove.Success -> Messages.Corp.REMOVED
-                is CorpService.Remove.NotFound -> Messages.Corp.NOT_FOUND
-                else -> Messages.IMPOSSIBLE
-            }
-            "/CHECK" -> userService.check().joinToString("\n")
-            "/PRO" -> if (userService.setModerator(parsed.data, true) == null)
-                Messages.User.NOT_FOUND else Messages.User.PROMOTED
-            "/DEM" -> if (userService.setModerator(parsed.data, false) == null)
-                Messages.User.NOT_FOUND else Messages.User.DEMOTED
-            "/RENEGADE" -> if (userService.setRenegade(parsed.data, true) == null)
-                Messages.User.NOT_FOUND else Messages.User.RENEGADED
-            "/LEGALIZE" -> if (userService.setRenegade(parsed.data, false) == null)
-                Messages.User.NOT_FOUND else Messages.User.LEGALIZED
-            "/CAST" -> broadcast(parsed.data)
-            else -> return false
-        }
-        sendMessage(MessageBuilder.build(chatId, text))
-        return true
-    }
 
-    fun processUnauth(parsed: Command, chatId: String): Boolean {
-        val text = when(parsed.command.toUpperCase()) {
-            "/JOKE" -> "oh fuck you, bro!"
-            "/LA" -> allyService.getAll()
-                    .map { a -> "[${a.ticker}] - ${a.title}" }
-                    .sorted()
-                    .joinToString("\n")
-            "/LC" -> corpService.getAll()
-                    .map { c -> "[${c.ticker}] - ${c.title}" }
-                    .sorted()
-                    .joinToString("\n")
-            "/LM" -> userService.getModerators().joinToString("\n")
-            else -> return false
-        }
-        sendMessage(MessageBuilder.build(chatId, text))
-        return true
-    }
+
+
+
+
+
+//    fun processAuth(parsed: Command, chatId: String): Boolean {
+//        val text = when(parsed.command.toUpperCase()) {
+//            "/LU" -> listOfUsers()
+//            "/ADDALLY" -> addAlly(parsed.data)
+//            "/RMALLY" -> rmAlly(parsed.data)
+//            "/ADDCORP" -> addCorp(parsed.data)
+//            "/RMCORP" -> rmCorp(parsed.data)
+//            "/CHECK" -> checkAll()
+//            "/PRO" -> promote(parsed.data)
+//            "/DEM" -> demote(parsed.data)
+//            "/RENEGADE" -> renegade(parsed.data)
+//            "/LEGALIZE" -> legalize(parsed.data)
+//            "/CAST" -> broadcast(parsed.data)
+//            else -> return false
+//        }
+//        sendMessage(MessageBuilder.build(chatId, text))
+//        return true
+//    }
+//
+//    fun processUnauth(parsed: Command, chatId: String): Boolean {
+//        val text = when(parsed.command.toUpperCase()) {
+//            "/JOKE" -> joke()
+//            "/LA" -> listOfAlliances()
+//            "/LC" -> listOfCorporations()
+//            "/LM" -> listOfModerators()
+//            else -> Messages.UNKNOWN
+//        }
+//        sendMessage(MessageBuilder.build(chatId, text))
+//        return true
+//    }
+
+
 
     fun broadcast(text: String): String {
         if (checkBeforeSend) {

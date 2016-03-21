@@ -13,6 +13,8 @@ object Messages {
 
     val UNKNOWN = "Команда не распознана"
 
+    val ACCESS_DENIED = "Не хватает прав доступа"
+
     val IMPOSSIBLE = "Произошла невозможная ошибка в логике"
 
     object Ally {
