@@ -12,7 +12,7 @@ import ru.finnetrolle.telebot.service.eveapi.EveApiConnector
  * Created by maxsyachin on 19.03.16.
  */
 
-@Component class AllyService
+@Component open class AllyService
 @Autowired constructor(
     private val repo: AllianceRepository,
     private val eve: EveApiConnector
@@ -57,7 +57,7 @@ import ru.finnetrolle.telebot.service.eveapi.EveApiConnector
 
     fun get(allyId: Long) = repo.findOne(allyId)
 
-    fun getAll() = repo.findAll()
+    open fun getAll() = repo.findAll()
 
     fun isEmpty() = repo.count() == 0L
 

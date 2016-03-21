@@ -51,6 +51,8 @@ open class UserService @Autowired constructor (
         log.info("saved pilot is $saved");
     }
 
+    open fun getLegalUsers(): List<Pilot> = pilotRepo.findByRenegadeFalse()
+
     open fun getCharacterName(id: Int): String? {
         val pilot = pilotRepo.findOne(id)
         if (pilot != null)

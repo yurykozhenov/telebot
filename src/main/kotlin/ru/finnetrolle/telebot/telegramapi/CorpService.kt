@@ -12,7 +12,7 @@ import ru.finnetrolle.telebot.service.eveapi.EveApiConnector
  * Created by maxsyachin on 19.03.16.
  */
 
-@Component class CorpService
+@Component open class CorpService
 @Autowired constructor(
         private val repo: CorporationRepository,
         private val eve: EveApiConnector
@@ -65,7 +65,7 @@ import ru.finnetrolle.telebot.service.eveapi.EveApiConnector
 
     fun get(corpId: Long) = repo.findOne(corpId)
 
-    fun getAll() = repo.findAll()
+    open fun getAll() = repo.findAll()
 
     fun isEmpty() = repo.count() == 0L
 

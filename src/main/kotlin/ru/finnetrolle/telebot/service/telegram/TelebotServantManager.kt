@@ -2,8 +2,8 @@ package ru.finnetrolle.telebot.service.telegram
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
-import ru.finnetrolle.telebot.telegramapi.AllyService
-import ru.finnetrolle.telebot.telegramapi.CorpService
+import org.telegram.telegrambots.api.methods.SendMessage
+import ru.finnetrolle.telebot.model.Pilot
 import ru.finnetrolle.telebot.telegramapi.UserService
 import javax.annotation.PostConstruct
 
@@ -15,96 +15,46 @@ import javax.annotation.PostConstruct
 
 @Component
 class TelebotServantManager @Autowired constructor(
-        val userService: UserService,
-        val allyService: AllyService,
-        val corpService: CorpService
+        val processor: MessageProcessor,
+        val userService: UserService
 ) : ServantManager() {
 
     @PostConstruct
     override fun configure() {
         registerServant(
-                Servantee("/ADDALLY", true, true, { c -> addAlly(c.data!!) }),
-                Servantee("/RMALLY", true, true, { c -> rmAlly(c.data!!) }),
-                Servantee("/ADDCORP", true, true, { c -> addCorp(c.data!!) }),
-                Servantee("/RMCORP", true, true, { c -> rmCorp(c.data!!) }),
-                Servantee("/CHECK", false, true, checkAll),
-                Servantee("/DEM", true, true, demote),
-                Servantee("/PRO", true, true, promote),
-                Servantee("/RENEGADE", true, true, { c -> renegade(c.data!!)}),
-                Servantee("/LEGALIZE", true, true, { c -> legalize(c.data!!)}),
-                Servantee("/LU", false, true, { c -> listOfUsers() }),
+                Servantee("/ADDALLY", { c -> makeBackMessage(c, processor.addAlly(c.data)) }, true),
+                Servantee("/RMALLY", { c -> makeBackMessage(c, processor.rmAlly(c.data)) }, true),
+                Servantee("/ADDCORP", { c -> makeBackMessage(c, processor.addCorp(c.data)) }, true),
+                Servantee("/RMCORP", { c -> makeBackMessage(c, processor.rmCorp(c.data)) }, true),
+                Servantee("/CHECK", { c -> makeBackMessage(c, processor.checkAll()) }, true),
+                Servantee("/DEM", { c -> makeBackMessage(c, processor.demote(c.data)) }, true),
+                Servantee("/PRO", { c -> makeBackMessage(c, processor.promote(c.data)) }, true),
+                Servantee("/RENEGADE", { c -> makeBackMessage(c, processor.renegade(c.data))}, true),
+                Servantee("/LEGALIZE", { c -> makeBackMessage(c, processor.legalize(c.data))}, true),
+                Servantee("/LU", { c -> makeBackMessage(c, processor.listOfUsers()) }, true),
+                Servantee("/CAST", { c -> makeBroadcast(userService.getLegalUsers(), c.data)}, true),
 
-                Servantee("/JOKE", false, false, { c -> joke()}),
-                Servantee("/LM", false, false, { c -> listOfModerators()}),
-                Servantee("/LA", false, false, { c -> listOfAlliances()}),
-                Servantee("/LC", false, false, { c -> listOfCorporations()})
+                Servantee("/JOKE", { c -> makeBackMessage(c, processor.joke())}),
+                Servantee("/LM", { c -> makeBackMessage(c, processor.listOfModerators())}),
+                Servantee("/LA", { c -> makeBackMessage(c, processor.listOfAlliances())}),
+                Servantee("/LC", { c -> makeBackMessage(c, processor.listOfCorporations())})
                 )
     }
 
-    private fun joke() = "oh fuck you, bro!"
+    private fun makeBackMessage(command: Command, text: String): List<SendMessage> =
+        listOf(MessageBuilder.build(command.fromChatId, text))
 
-    private fun listOfModerators() = userService.getModerators().joinToString("\n")
+    private fun makeBroadcast(pilots: List<Pilot>, text: String): List<SendMessage> =
+        pilots.map { p -> MessageBuilder.build(p.id.toString(), text) }
 
-    private fun listOfAlliances() = allyService.getAll()
-            .map { a -> "[${a.ticker}] - ${a.title}" }
-            .sorted()
-            .joinToString("\n")
+    override fun getDefaultServant(): (Command) -> List<SendMessage> =
+            { c -> makeBackMessage(c, Messages.UNKNOWN) }
 
-    private fun listOfCorporations() = corpService.getAll()
-            .map { c -> "[${c.ticker}] - ${c.title}" }
-            .sorted()
-            .joinToString("\n")
+    override fun getAccessDeniedServant(): (Command) -> List<SendMessage> =
+            { c -> makeBackMessage(c, Messages.ACCESS_DENIED) }
 
-    private val checkAll: (Command) -> String = { c -> userService.check().joinToString("\n") }
-
-    private val promote: (Command) -> String = { c -> if (userService.setModerator(c.data!!, true) == null)
-        Messages.User.NOT_FOUND else Messages.User.PROMOTED }
-
-    private val demote: (Command) -> String = {c -> if (userService.setModerator(c.data!!, false) == null)
-        Messages.User.NOT_FOUND else Messages.User.DEMOTED }
-
-    private fun renegade(name: String) = if (userService.setRenegade(name, true) == null)
-        Messages.User.NOT_FOUND else Messages.User.RENEGADED
-
-    private fun legalize(name: String) = if (userService.setRenegade(name, false) == null)
-        Messages.User.NOT_FOUND else Messages.User.LEGALIZED
-
-    private fun listOfUsers(): String {
-        return userService.getCharacters()
-                .joinToString("\n")
-    }
-
-    private fun addAlly(ticker: String) = when (allyService.addAlly(ticker)) {
-        is AllyService.AddResponse.AllianceAdded -> Messages.Ally.ADDED
-        is AllyService.AddResponse.AllianceIsAlreadyInList -> Messages.Ally.IN_LIST
-        is AllyService.AddResponse.AllianceIsNotExist -> Messages.Ally.NOT_EXIST
-        else -> Messages.IMPOSSIBLE
-    }
-
-    private fun rmAlly(ticker: String) = when (allyService.removeAlly(ticker)) {
-        is AllyService.RemoveResponse.AllianceRemoved -> Messages.Ally.REMOVED
-        is AllyService.RemoveResponse.AllianceNotFound -> Messages.Ally.NOT_FOUND
-        else -> Messages.IMPOSSIBLE
-    }
-
-    private fun addCorp(corpId: String) = when (corpService.addCorporation(corpId.toLong())) {
-        is CorpService.Add.Success -> Messages.Corp.ADDED
-        is CorpService.Add.AlreadyInList -> Messages.Corp.IN_LIST
-        is CorpService.Add.NotExist -> Messages.Corp.NOT_EXIST
-        else -> Messages.IMPOSSIBLE
-    }
-
-    private fun rmCorp(ticker: String) = when (corpService.removeCorporation(ticker)) {
-        is CorpService.Remove.Success -> Messages.Corp.REMOVED
-        is CorpService.Remove.NotFound -> Messages.Corp.NOT_FOUND
-        else -> Messages.IMPOSSIBLE
-    }
-
-    override fun getDefaultServant(): (Command) -> String = { c -> Messages.UNKNOWN }
-
-    override fun getAccessDeniedServant(): (Command) -> String = { c -> Messages.ACCESS_DENIED}
-
-    override fun getAccessChecker(): (Command) -> Boolean = { c -> userService.isModerator(c.telegramUserId!!)}
+    override fun getAccessChecker(): (Command) -> Boolean =
+            { c -> userService.isModerator(c.telegramUserId!!)}
 
 
 }

@@ -1,5 +1,7 @@
 package ru.finnetrolle.telebot.service.telegram
 
+import org.telegram.telegrambots.api.methods.SendMessage
+
 /**
  * Licence: MIT
  * Legion of xXDEATHXx notification bot for telegram
@@ -10,10 +12,7 @@ abstract class Servant() {
 
     abstract fun getWord(): String
 
-    abstract fun getServant(): (ServantManager.Command) -> String
+    abstract fun getServant(): (ServantManager.Command) -> List<SendMessage>
 
     abstract fun getWithData(): Boolean
-
-    abstract fun getSecured(): Boolean
-
 }

@@ -1,5 +1,6 @@
 package ru.finnetrolle.telebot.service.telegram
 
+import org.telegram.telegrambots.api.methods.SendMessage
 import java.util.*
 
 
@@ -11,56 +12,43 @@ import java.util.*
 
 abstract class ServantManager {
 
-    data class Command(val cmd: String, val data: String?, val telegramUserId: Int?)
-    data class CommandIdentifier(val word: String, val data: Boolean, val secure: Boolean)
-    data class Servantee(val word: String, val data: Boolean, val secure: Boolean, val servant: (Command) -> String)
+    data class Command(val cmd: String, val data: String, val telegramUserId: Int, val fromChatId: String)
+    data class Servantee(val word: String, val servant: (Command) -> List<SendMessage>, val secure: Boolean = false)
 
-    private val servants = HashMap<CommandIdentifier, (Command) -> String>()
+    private val servants = HashMap<String, Servantee>()
 
-    abstract fun getDefaultServant(): (Command) -> String
+    abstract protected fun getDefaultServant(): (Command) -> List<SendMessage>
 
-    abstract fun getAccessDeniedServant(): (Command) -> String
+    abstract protected fun getAccessDeniedServant(): (Command) -> List<SendMessage>
 
-    abstract fun getAccessChecker(): (Command) -> Boolean
+    abstract protected fun getAccessChecker(): (Command) -> Boolean
 
     abstract fun configure()
 
-    fun registerServant(commandIdentifier: CommandIdentifier, servant: (Command) -> String) {
-        servants.put(commandIdentifier, servant)
-    }
-
-    fun registerServant(word: String, data: Boolean, secure: Boolean, servant: (Command) -> String) {
-        registerServant(CommandIdentifier(word, data, secure), servant)
-    }
-
     fun registerServant(vararg servants: Servant) {
         servants.forEach { servant ->
-            registerServant(servant.getWord(), servant.getWithData(), servant.getSecured(), servant.getServant()) }
+            registerServant(Servantee(servant.getWord(), servant.getServant(), servant.getWithData())) }
     }
 
     fun registerServant(vararg servants: Servantee) {
         servants.forEach { servant ->
-            registerServant(servant.word, servant.data, servant.secure, servant.servant)
+            this.servants.put(servant.word, servant)
         }
     }
 
-    fun serve(command: Command): String {
-        val ci = CommandIdentifier(
-                command.cmd,
-                command.data != null,
-                command.telegramUserId != null)
-        val servant = servants[ci]
+    fun serve(command: Command): List<SendMessage> {
+        val servant = servants[command.cmd.toUpperCase()]
         return if (servant == null) {
             getDefaultServant().invoke(command)
         } else {
-            if (ci.secure) {
+            if (servant.secure) {
                 if (getAccessChecker().invoke(command)) {
-                    servant.invoke(command)
+                    servant.servant.invoke(command)
                 } else {
                     getAccessDeniedServant().invoke(command)
                 }
             } else {
-                servant.invoke(command)
+                servant.servant.invoke(command)
             }
         }
     }

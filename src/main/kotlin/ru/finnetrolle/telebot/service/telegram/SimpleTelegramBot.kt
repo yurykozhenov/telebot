@@ -108,53 +108,15 @@ class SimpleTelegramBot @Autowired constructor(
             }
         }
 
-        val response = manager.serve(ServantManager.Command(parsed.command, parsed.data, user.id))
-        send(chatId, response)
+        val response = manager.serve(ServantManager.Command(parsed.command, parsed.data, user.id, chatId))
+//        send(chatId, response)
 
-//        if (userService.isModerator(user.id) && processAuth(parsed, chatId)) {
-//            return
-//        }
-//        processUnauth(parsed, chatId)
+        response.forEach { r -> sendMessage(r) }
+        val s = "Broadcast sent to ${response.size} users"
+        log.info(s)
+        println(s)
+
     }
-
-
-
-
-
-
-
-//    fun processAuth(parsed: Command, chatId: String): Boolean {
-//        val text = when(parsed.command.toUpperCase()) {
-//            "/LU" -> listOfUsers()
-//            "/ADDALLY" -> addAlly(parsed.data)
-//            "/RMALLY" -> rmAlly(parsed.data)
-//            "/ADDCORP" -> addCorp(parsed.data)
-//            "/RMCORP" -> rmCorp(parsed.data)
-//            "/CHECK" -> checkAll()
-//            "/PRO" -> promote(parsed.data)
-//            "/DEM" -> demote(parsed.data)
-//            "/RENEGADE" -> renegade(parsed.data)
-//            "/LEGALIZE" -> legalize(parsed.data)
-//            "/CAST" -> broadcast(parsed.data)
-//            else -> return false
-//        }
-//        sendMessage(MessageBuilder.build(chatId, text))
-//        return true
-//    }
-//
-//    fun processUnauth(parsed: Command, chatId: String): Boolean {
-//        val text = when(parsed.command.toUpperCase()) {
-//            "/JOKE" -> joke()
-//            "/LA" -> listOfAlliances()
-//            "/LC" -> listOfCorporations()
-//            "/LM" -> listOfModerators()
-//            else -> Messages.UNKNOWN
-//        }
-//        sendMessage(MessageBuilder.build(chatId, text))
-//        return true
-//    }
-
-
 
     fun broadcast(text: String): String {
         if (checkBeforeSend) {
