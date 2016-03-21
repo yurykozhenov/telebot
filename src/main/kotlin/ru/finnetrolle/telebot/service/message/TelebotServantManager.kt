@@ -1,4 +1,4 @@
-package ru.finnetrolle.telebot.service.telegram
+package ru.finnetrolle.telebot.service.message
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
@@ -29,15 +29,16 @@ class TelebotServantManager @Autowired constructor(
                 Servantee("/CHECK", { c -> makeBackMessage(c, processor.checkAll()) }, true),
                 Servantee("/DEM", { c -> makeBackMessage(c, processor.demote(c.data)) }, true),
                 Servantee("/PRO", { c -> makeBackMessage(c, processor.promote(c.data)) }, true),
-                Servantee("/RENEGADE", { c -> makeBackMessage(c, processor.renegade(c.data))}, true),
-                Servantee("/LEGALIZE", { c -> makeBackMessage(c, processor.legalize(c.data))}, true),
+                Servantee("/RENEGADE", { c -> makeBackMessage(c, processor.renegade(c.data)) }, true),
+                Servantee("/LEGALIZE", { c -> makeBackMessage(c, processor.legalize(c.data)) }, true),
                 Servantee("/LU", { c -> makeBackMessage(c, processor.listOfUsers()) }, true),
-                Servantee("/CAST", { c -> makeBroadcast(userService.getLegalUsers(), c.data)}, true),
+                Servantee("/CAST", { c -> makeBroadcast(userService.getLegalUsers(), c.data) }, true),
 
-                Servantee("/JOKE", { c -> makeBackMessage(c, processor.joke())}),
-                Servantee("/LM", { c -> makeBackMessage(c, processor.listOfModerators())}),
-                Servantee("/LA", { c -> makeBackMessage(c, processor.listOfAlliances())}),
-                Servantee("/LC", { c -> makeBackMessage(c, processor.listOfCorporations())})
+                Servantee("/JOKE", { c -> makeBackMessage(c, processor.joke()) }),
+                Servantee("/LM", { c -> makeBackMessage(c, processor.listOfModerators()) }),
+                Servantee("/LA", { c -> makeBackMessage(c, processor.listOfAlliances()) }),
+                Servantee("/LC", { c -> makeBackMessage(c, processor.listOfCorporations()) }),
+                Servantee("/HELP", { c -> makeBackMessage(c, this.help(userService.isModerator(c.telegramUserId))) })
                 )
     }
 
@@ -54,7 +55,7 @@ class TelebotServantManager @Autowired constructor(
             { c -> makeBackMessage(c, Messages.ACCESS_DENIED) }
 
     override fun getAccessChecker(): (Command) -> Boolean =
-            { c -> userService.isModerator(c.telegramUserId!!)}
+            { c -> userService.isModerator(c.telegramUserId)}
 
 
 }

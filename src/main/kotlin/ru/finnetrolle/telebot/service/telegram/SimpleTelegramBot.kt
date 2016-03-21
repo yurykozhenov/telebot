@@ -7,12 +7,7 @@ import org.springframework.stereotype.Component
 import org.telegram.telegrambots.api.objects.Update
 import org.telegram.telegrambots.api.objects.User
 import org.telegram.telegrambots.bots.TelegramLongPollingBot
-import ru.finnetrolle.telebot.service.eveapi.EveApiConnector
-import ru.finnetrolle.telebot.telegramapi.AllyService.AddResponse.AllianceAdded
-import ru.finnetrolle.telebot.telegramapi.AllyService.AddResponse.AllianceIsAlreadyInList
-import ru.finnetrolle.telebot.telegramapi.AllyService.AddResponse.AllianceIsNotExist
-import ru.finnetrolle.telebot.telegramapi.AllyService.RemoveResponse.AllianceNotFound
-import ru.finnetrolle.telebot.telegramapi.AllyService.RemoveResponse.AllianceRemoved
+import ru.finnetrolle.telebot.service.message.*
 import ru.finnetrolle.telebot.telegramapi.*
 import kotlin.collections.List
 
@@ -26,10 +21,7 @@ import kotlin.collections.List
 class SimpleTelegramBot @Autowired constructor(
         val registerer: RegistererService,
         val broadcastComposer: BroadcastComposer,
-        val eve: EveApiConnector,
         val userService: UserService,
-        val allyService: AllyService,
-        val corpService: CorpService,
         val manager: TelebotServantManager
 ): TelegramLongPollingBot() {
 
@@ -109,10 +101,9 @@ class SimpleTelegramBot @Autowired constructor(
         }
 
         val response = manager.serve(ServantManager.Command(parsed.command, parsed.data, user.id, chatId))
-//        send(chatId, response)
 
         response.forEach { r -> sendMessage(r) }
-        val s = "Broadcast sent to ${response.size} users"
+        val s = "Broadcast sent to ${response.size} users: ${response.map { r -> r.chatId }.joinToString(", ")}"
         log.info(s)
         println(s)
 

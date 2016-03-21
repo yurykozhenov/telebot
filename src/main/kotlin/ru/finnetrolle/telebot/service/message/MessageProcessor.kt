@@ -1,4 +1,4 @@
-package ru.finnetrolle.telebot.service.telegram
+package ru.finnetrolle.telebot.service.message
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component

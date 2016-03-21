@@ -9,7 +9,10 @@ import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
 import ru.finnetrolle.telebot.model.Pilot
-import ru.finnetrolle.telebot.service.telegram.ServantManager.Command
+import ru.finnetrolle.telebot.service.message.MessageProcessor
+import ru.finnetrolle.telebot.service.message.Messages
+import ru.finnetrolle.telebot.service.message.ServantManager.Command
+import ru.finnetrolle.telebot.service.message.TelebotServantManager
 import ru.finnetrolle.telebot.telegramapi.AllyService
 import ru.finnetrolle.telebot.telegramapi.CorpService
 import ru.finnetrolle.telebot.telegramapi.UserService
@@ -73,11 +76,13 @@ class TelebotServantManagerTest {
         Mockito.`when`(messageProcessor.listOfAlliances()).thenReturn(DATA)
         Mockito.`when`(messageProcessor.listOfCorporations()).thenReturn(DATA)
         Mockito.`when`(messageProcessor.listOfModerators()).thenReturn(DATA)
+        Mockito.`when`(messageProcessor.joke()).thenReturn(DATA)
         listOf(
             Command("/joke", TEXT, USER_USUAL, CHAT_BACK),
             Command("/lm", TEXT, USER_USUAL, CHAT_BACK),
             Command("/la", TEXT, USER_USUAL, CHAT_BACK),
-            Command("/lc", TEXT, USER_USUAL, CHAT_BACK)
+            Command("/lc", TEXT, USER_USUAL, CHAT_BACK),
+            Command("/help", TEXT, USER_USUAL, CHAT_BACK)
         ).forEach { c -> assert(!manager.serve(c)[0].text.equals(Messages.ACCESS_DENIED))}
     }
 

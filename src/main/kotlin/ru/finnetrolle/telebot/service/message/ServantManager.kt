@@ -1,4 +1,4 @@
-package ru.finnetrolle.telebot.service.telegram
+package ru.finnetrolle.telebot.service.message
 
 import org.telegram.telegrambots.api.methods.SendMessage
 import java.util.*
@@ -52,5 +52,10 @@ abstract class ServantManager {
             }
         }
     }
+
+    fun help(forModerator: Boolean) = servants
+                .filter { v -> forModerator || !v.value.secure }
+                .map { v -> v.key }
+                .joinToString("\n")
 
 }
