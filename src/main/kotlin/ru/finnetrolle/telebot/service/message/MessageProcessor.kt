@@ -21,19 +21,21 @@ import ru.finnetrolle.telebot.telegramapi.UserService
 
     open fun joke() = "oh fuck you, bro!"
 
-    open fun listOfModerators() = userService.getModerators().joinToString("\n")
+    private fun <T> listOrEmpty(list: List<T>, divider: String, emptyMsg: String): String {
+        return if (list.isEmpty()) emptyMsg else list.joinToString(divider)
+    }
 
-    open fun listOfAlliances() = allyService.getAll()
+    open fun listOfModerators() = listOrEmpty(userService.getModerators(), "\n", Messages.EMPTY_LIST)
+
+    open fun listOfAlliances() = listOrEmpty(allyService.getAll()
             .map { a -> "[${a.ticker}] - ${a.title}" }
-            .sorted()
-            .joinToString("\n")
+            .sorted(), "\n", Messages.EMPTY_LIST)
 
-    open fun listOfCorporations() = corpService.getAll()
+    open fun listOfCorporations() = listOrEmpty(corpService.getAll()
             .map { c -> "[${c.ticker}] - ${c.title}" }
-            .sorted()
-            .joinToString("\n")
+            .sorted(), "\n", Messages.EMPTY_LIST)
 
-    open fun checkAll() = userService.check().joinToString("\n")
+    open fun checkAll() = listOrEmpty(userService.check(), "\n", Messages.EMPTY_LIST)
 
     open fun promote(data: String) = if (userService.setModerator(data, true) == null)
         Messages.User.NOT_FOUND else Messages.User.PROMOTED
@@ -47,10 +49,7 @@ import ru.finnetrolle.telebot.telegramapi.UserService
     open fun legalize(name: String) = if (userService.setRenegade(name, false) == null)
         Messages.User.NOT_FOUND else Messages.User.LEGALIZED
 
-    open fun listOfUsers(): String {
-        return userService.getCharacters()
-                .joinToString("\n")
-    }
+    open fun listOfUsers() = listOrEmpty(userService.getCharacters(), "\n", Messages.EMPTY_LIST)
 
     open fun addAlly(ticker: String) = when (allyService.addAlly(ticker)) {
         is AllyService.AddResponse.AllianceAdded -> Messages.Ally.ADDED

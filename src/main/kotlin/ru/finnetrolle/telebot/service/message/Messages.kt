@@ -15,6 +15,8 @@ object Messages {
 
     val ACCESS_DENIED = "Не хватает прав доступа"
 
+    val EMPTY_LIST = "Список пуст"
+
     val IMPOSSIBLE = "Произошла невозможная ошибка в логике"
 
     object Ally {
