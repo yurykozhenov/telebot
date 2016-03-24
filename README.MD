@@ -57,11 +57,11 @@ for your system.
 
 ### TBD
 
-#### RPM and easy install guide
-Application is already is executable (it means you shouldn't exec java -jar), but you still need git and maven to build it.
-In this patch you'll get RPM package with settings file and you'll can install it with help of easy install guide.
+#### Docker instead of RPM
+Because it is easier to distribute
 
-You will also have an opportunity to build application from sources with maven.
+#### TESTS!!!
+We need more unit tests at least
 
 #### Easy registration 
 It is a nice idea to make just one page to make registration an easy process because nobody want to copy 
