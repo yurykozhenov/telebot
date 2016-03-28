@@ -9,4 +9,4 @@ ADD application.properties /app/
 
 CMD ["java", "-jar", "/app/telebot.jar"]
 
-EXPOSE 8000
+EXPOSE 8080
