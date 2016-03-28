@@ -9,4 +9,4 @@ RUN tail /app/application.properties
 
 CMD ["java", "-jar", "/app/telebot.jar"]
 
-EXPOSE 8080
+EXPOSE 8000
