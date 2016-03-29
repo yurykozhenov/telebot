@@ -1,8 +1,6 @@
 # Pull base image.
 FROM java:8-jre
 
-VOLUME /usr/share/telebot:/app
-
 ADD telebot.jar /app/
 
 ADD application.properties /app/
