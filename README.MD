@@ -1,4 +1,4 @@
-# xXDEATHXx telegram bot
+# Telebot
 
 Telegram bot for eve players to do your own alliance or corporate broadcasting 
 
