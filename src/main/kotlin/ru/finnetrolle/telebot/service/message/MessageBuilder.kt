@@ -1,6 +1,7 @@
 package ru.finnetrolle.telebot.service.message
 
 import org.telegram.telegrambots.api.methods.SendMessage
+import org.telegram.telegrambots.api.objects.ReplyKeyboardHide
 import org.telegram.telegrambots.api.objects.ReplyKeyboardMarkup
 import java.util.*
 
@@ -19,9 +20,13 @@ object MessageBuilder {
 
     fun build(chatId: String, text: String): SendMessage {
         val msg = SendMessage()
+
         msg.enableMarkdown(true)
         msg.chatId = chatId
         msg.text = text
+        val rkh = ReplyKeyboardHide()
+        rkh.hideKeyboard = true
+        msg.replayMarkup = rkh
         return msg
     }
 
