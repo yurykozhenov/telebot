@@ -129,6 +129,10 @@ for your system.
 - **/mail** *to show last 3 CTA ingame mails*
 
 ## Patch notes
+
+### 0.1.1
+- issue #20 should be fixed
+
 ### 0.1.0
 - added /mail command
 - /help command contains version now
