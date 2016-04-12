@@ -21,7 +21,7 @@ import ru.finnetrolle.telebot.telegramapi.UserService
         val mailbotService: MailbotService
 ) {
 
-    open fun joke() = "oh fuck you, bro!"
+    open fun joke() = "Rent macht frei"
 
     private fun <T> listOrEmpty(list: List<T>, divider: String, emptyMsg: String): String {
         return if (list.isEmpty()) emptyMsg else list.joinToString(divider)
@@ -80,7 +80,7 @@ import ru.finnetrolle.telebot.telegramapi.UserService
     }
 
     open fun lastMail() = mailbotService.getLast()
-            .map { m -> "${m.sender} writes ${m.title} at ${m.sent}: ${m.body}" }
+            .map { m -> "*${m.title}*\n*from: ${m.sender}*\n${m.body}\n----------" }
             .joinToString("\n\n")
     
 }

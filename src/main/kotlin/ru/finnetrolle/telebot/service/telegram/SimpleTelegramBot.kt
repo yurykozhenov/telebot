@@ -25,6 +25,8 @@ class SimpleTelegramBot @Autowired constructor(
         val manager: TelebotServantManager
 ): TelegramLongPollingBot() {
 
+    @Autowired private lateinit var broadcaster: BroadcastService
+
     @Value("\${telegram.bot.token}")
     private lateinit var token: String
 
@@ -114,19 +116,19 @@ class SimpleTelegramBot @Autowired constructor(
             userService.check()
         }
         val messages = broadcastComposer.compose(text)
-        messages.forEach { m -> sendMessage(m) }
+        messages.forEach { m -> broadcaster.enqueue(m) }
         val s = "broadcast sent to ${messages.size} users"
         log.info(s)
         return s
     }
 
     private fun send(chatId: String, text: String) {
-        sendMessage(MessageBuilder.build(chatId, text))
+        broadcaster.enqueue(MessageBuilder.build(chatId, text))
     }
 
     private fun send(chatId: String, text: String, options: List<String>) {
         val kb = MessageBuilder.createKeyboard(options)
-        sendMessage(MessageBuilder.build(chatId, text, kb))
+        broadcaster.enqueue(MessageBuilder.build(chatId, text, kb))
     }
 
     companion object {

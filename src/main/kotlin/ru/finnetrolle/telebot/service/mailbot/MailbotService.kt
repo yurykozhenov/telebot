@@ -70,14 +70,21 @@ open class MailbotService {
             if (end == -1) {
                 return text
             }
-            if (text.substring(pos, end + 1).equals("<br>")) {
-                text = text.substring(0, pos) + "\n" + text.substring(end + 1, text.length)
-            } else {
-                text = text.substring(0, pos) + text.substring(end + 1, text.length)
-            }
+            text = clear(pos, end, text)
             pos = text.indexOf("<")
         }
         return text
+    }
+
+    private fun clear(from: Int, to: Int, text: String): String {
+        val candidate = text.substring(from, to + 1)
+        val replace = when (candidate) {
+            "<br>" -> "\n"
+            "<b>", "</b>" -> "*"
+            "<i>", "</i>" -> "_"
+            else -> ""
+        }
+        return text.substring(0, from) + replace + text.substring(to + 1, text.length)
     }
 
     companion object {

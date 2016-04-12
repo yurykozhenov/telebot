@@ -42,7 +42,7 @@ open class JabberBot @Autowired constructor (
     private lateinit var chat: Chat
 
     @PostConstruct
-    fun init() {
+    fun init()  {
         if (!alive) {
             return
         }
@@ -61,12 +61,11 @@ open class JabberBot @Autowired constructor (
         connection.login()
 
         val chatMan = ChatManager.getInstanceFor(connection)
-        chat = chatMan.createChat(broadcaster, { chat, message -> process(chat, message) })
+        chat = chatMan.createChat(broadcaster, { chat, message -> process(message) })
         chat.sendMessage("Hello from bot!")
     }
 
-    fun process(chat: Chat, message: Message) {
-        println(message.body)
+    fun process(message: Message) {
         log.info("Received from ${message.from} message: ${message.body}")
         telebot.broadcast(message.body)
     }
