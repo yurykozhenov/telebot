@@ -38,7 +38,8 @@ class TelebotServantManager @Autowired constructor(
                 Servantee("/LM", { c -> makeBackMessage(c, processor.listOfModerators()) }),
                 Servantee("/LA", { c -> makeBackMessage(c, processor.listOfAlliances()) }),
                 Servantee("/LC", { c -> makeBackMessage(c, processor.listOfCorporations()) }),
-                Servantee("/HELP", { c -> makeBackMessage(c, this.help(userService.isModerator(c.telegramUserId))) })
+                Servantee("/HELP", { c -> makeBackMessage(c, Messages.HELP + this.help(userService.isModerator(c.telegramUserId))) }),
+                Servantee("/MAIL", { c -> makeBackMessage(c, processor.lastMail())})
                 )
     }
 

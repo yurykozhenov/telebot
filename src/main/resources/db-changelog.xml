@@ -10,6 +10,9 @@
     <changeSet id="2" author="finnetrolle">
         <sqlFile path="sql/002_0_1_0_Ally_Corp.sql" relativeToChangelogFile="true" stripComments="true"/>
     </changeSet>
+    <changeSet id="3" author="finnetrolle">
+        <sqlFile path="sql/003_0_1_0_MAIL.sql" relativeToChangelogFile="true" stripComments="true"/>
+    </changeSet>
 
 
 </databaseChangeLog>

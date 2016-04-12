@@ -8,6 +8,9 @@ import com.beimin.eveapi.parser.corporation.CorpSheetParser
 import com.beimin.eveapi.parser.eve.AllianceListParser
 import com.beimin.eveapi.parser.eve.CharacterInfoParser
 import com.beimin.eveapi.parser.eve.CharacterLookupParser
+import com.beimin.eveapi.parser.pilot.MailBodiesParser
+import com.beimin.eveapi.parser.pilot.MailMessagesParser
+import com.beimin.eveapi.parser.pilot.MailingListsParser
 import com.beimin.eveapi.response.corporation.CorpSheetResponse
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
@@ -61,6 +64,14 @@ open class EveApiConnector {
         val corp = CorpSheetParser().getResponse(id)
         return if (corp.corporationID == 0L) null else corp
     }
+
+    fun getMailList(apiKey: Int, vCode: String, mailingLists: String) =
+            MailMessagesParser().getResponse(ApiAuthorization(apiKey, vCode)).all
+                .filter { x -> x.toListIDs.equals(mailingLists) }
+
+    fun getMailBody(apiKey: Int, vCode: String, mailId: Long) = MailBodiesParser()
+            .getResponse(ApiAuthorization(apiKey, vCode), mailId).all.find { x -> x != null }!!.body
+
 
     companion object {
         private val log = LoggerFactory.getLogger(EveApiConnector::class.java)

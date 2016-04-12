@@ -33,4 +33,6 @@ class BroadcastResource @Autowired constructor (
         return ResponseEntity.ok("Message sent")
     }
 
+
+
 }

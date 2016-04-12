@@ -13,6 +13,8 @@ object Messages {
 
     val UNKNOWN = "Команда не распознана"
 
+    val HELP = "Telebot v 0.1.0\nCommands:\n"
+
     val ACCESS_DENIED = "Не хватает прав доступа"
 
     val EMPTY_LIST = "Список пуст"

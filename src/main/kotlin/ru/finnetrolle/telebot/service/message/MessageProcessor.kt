@@ -2,6 +2,7 @@ package ru.finnetrolle.telebot.service.message
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
+import ru.finnetrolle.telebot.service.mailbot.MailbotService
 import ru.finnetrolle.telebot.telegramapi.AllyService
 import ru.finnetrolle.telebot.telegramapi.CorpService
 import ru.finnetrolle.telebot.telegramapi.UserService
@@ -16,7 +17,8 @@ import ru.finnetrolle.telebot.telegramapi.UserService
 @Autowired constructor(
         val userService: UserService,
         val allyService: AllyService,
-        val corpService: CorpService
+        val corpService: CorpService,
+        val mailbotService: MailbotService
 ) {
 
     open fun joke() = "oh fuck you, bro!"
@@ -76,5 +78,9 @@ import ru.finnetrolle.telebot.telegramapi.UserService
         is CorpService.Remove.NotFound -> Messages.Corp.NOT_FOUND
         else -> Messages.IMPOSSIBLE
     }
+
+    open fun lastMail() = mailbotService.getLast()
+            .map { m -> "${m.sender} writes ${m.title} at ${m.sent}: ${m.body}" }
+            .joinToString("\n\n")
     
 }
