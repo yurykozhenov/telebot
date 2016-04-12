@@ -24,6 +24,7 @@ class TestResource {
     @RequestMapping(method = arrayOf(RequestMethod.GET))
     @ResponseBody
     fun mail():ResponseEntity<List<Mail>> {
+
         mailbot.receiveMail()
         return ResponseEntity.ok(mailbot.getLast())
     }

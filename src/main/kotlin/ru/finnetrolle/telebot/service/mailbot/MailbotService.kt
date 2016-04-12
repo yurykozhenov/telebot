@@ -1,5 +1,6 @@
 package ru.finnetrolle.telebot.service.mailbot
 
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
@@ -37,13 +38,8 @@ open class MailbotService {
     @PostConstruct
     open fun init() {
         lastId.set(mailRepo.getMaxId() ?: 0)
-        println("max mail id is ${lastId.get()}")
+        log.info("Last mail id is ${lastId.get()}")
     }
-
-//    @Transactional
-//    open fun save() {
-//        mailRepo.save(Mail(1, "Jopla", "zupla", "hello Boy"))
-//    }
 
     open fun getLast(): List<Mail> {
         return mailRepo.findFirst3ByOrderByIdDesc()
@@ -51,6 +47,7 @@ open class MailbotService {
 
     @Transactional
     open fun receiveMail() {
+        log.info("Receiving mail procedure")
         val mails = eve.getMailList(keyId.toInt(), vCode, listId)
                 .filter { x -> x.messageID > lastId.get() }
                 .filter { x -> x.title.contains("CTA") || x.title.contains("СТА") }
@@ -81,6 +78,10 @@ open class MailbotService {
             pos = text.indexOf("<")
         }
         return text
+    }
+
+    companion object {
+        private val log = LoggerFactory.getLogger(MailbotService::class.java)
     }
 
 
