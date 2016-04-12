@@ -53,7 +53,7 @@ open class MailbotService {
     open fun receiveMail() {
         val mails = eve.getMailList(keyId.toInt(), vCode, listId)
                 .filter { x -> x.messageID > lastId.get() }
-                .filter { x -> x.title.contains("CTA") }
+                .filter { x -> x.title.contains("CTA") || x.title.contains("СТА") }
                 .map { x -> Mail(x.messageID,
                         x.sentDate,
                         eve.getCharacter(x.senderID).characterName,
