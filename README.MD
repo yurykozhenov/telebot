@@ -4,7 +4,7 @@ Telegram bot for eve players to do your own alliance or corporate broadcasting
 
 You can find this guide in russian here - [версия этого гайда на русском](https://github.com/finnetrolle/telebot/wiki)
  
-Current version: 0.1.0 beta
+Current version: 0.1.4 beta
 
 ***I don't feel my english very good, so, if you have fixes for this page - feel free to send me using email or issues.***
 
