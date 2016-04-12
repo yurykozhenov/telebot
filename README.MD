@@ -28,6 +28,7 @@ You can send me an issue using [issues page](https://github.com/finnetrolle/tele
 * Give your teammates link to bot and they can register without your help using eve keyId and vCode
 * Use REST API to broadcast
 * Connect to Jabber channel to listen and broadcast messages from
+* Check eve ingame mail
 
 ## How to set it up?
 I'm working on making this process easier, but now we have what we have
@@ -125,4 +126,10 @@ for your system.
 - **/lc** *to show corp list*
 - **/lm** *to show all moderators*
 - **/help** *to show available commands*
+- **/mail** *to show last 3 CTA ingame mails*
+
+## Patch notes
+### 0.1.0
+- added /mail command
+- /help command contains version now
 
