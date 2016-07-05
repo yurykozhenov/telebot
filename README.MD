@@ -128,9 +128,15 @@ for your system.
 - **/help** *to show available commands*
 - **/mail** *to show last 3 CTA ingame mails*
 
+### For guests
+- **/REGISTER** *to start registration process*
+
 ## Patch notes
 
 ### 0.1.X
+
+#### 0.2.0
+- You can register users remotely via /register endpoint. Just send ingame id, name and secret to get key to enter in bot chat window 
 
 #### 0.1.4
 - 30 messages to second issue solved via message queue

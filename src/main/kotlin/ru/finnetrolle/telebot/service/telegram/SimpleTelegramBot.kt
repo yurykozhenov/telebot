@@ -22,7 +22,8 @@ class SimpleTelegramBot @Autowired constructor(
         val registerer: RegistererService,
         val broadcastComposer: BroadcastComposer,
         val userService: UserService,
-        val manager: TelebotServantManager
+        val manager: TelebotServantManager,
+        val externalRegistrationService: ExternalRegistrationService
 ): TelegramLongPollingBot() {
 
     @Autowired private lateinit var broadcaster: BroadcastService
@@ -59,6 +60,12 @@ class SimpleTelegramBot @Autowired constructor(
     }
 
     fun start(text: String, user: User, chatId: String) {
+        if (text.length == 6 && externalRegistrationService.tryToApproveContender(text.toUpperCase(), user)) {
+            val registered = userService.getCharacterName(user.id)
+            send(chatId, "Welcome, $registered!")
+            return
+        }
+
         val parsed = parse(text)
 
         if (parsed.command.toUpperCase() == "/REGISTER") {
