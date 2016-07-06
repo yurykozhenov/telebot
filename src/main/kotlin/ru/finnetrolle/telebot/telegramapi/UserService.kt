@@ -76,6 +76,21 @@ open class UserService @Autowired constructor (
         return renes.map { r -> r.pilot.characterName }
     }
 
+    interface SingleCheckResult {
+        data class OK(val name: String, val corp: String, val ally: String): SingleCheckResult
+        data class Renegade(val name: String, val corp: String, val ally: String): SingleCheckResult
+    }
+
+    open fun singleCheck(characterId: Long): SingleCheckResult {
+        val evechar = eve.getCharacter(characterId);
+        if (allyService.getAll().filter { a -> a.id == evechar.allianceID }.isNotEmpty() ||
+                corpService.getAll().filter { a -> a.id == evechar.corporationID }.isNotEmpty()) {
+            return SingleCheckResult.OK (evechar.characterName, evechar.corporation, evechar.alliance)
+        } else {
+            return SingleCheckResult.Renegade(evechar.characterName, evechar.corporation, evechar.alliance)
+        }
+    }
+
     @Transactional
     open fun setModerator(name: String, value: Boolean): Pilot? {
         val user = pilotRepo.findByCharacterName(name)

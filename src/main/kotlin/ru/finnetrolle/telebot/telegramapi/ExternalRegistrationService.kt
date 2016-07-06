@@ -17,6 +17,7 @@ class ExternalRegistrationService {
     @Autowired
     lateinit private var userService: UserService
 
+
     data class PreData(val charName: String, val charId: Long, val dueTo: Long)
 
     private val contenders: MutableMap<String, PreData> = mutableMapOf()
@@ -29,19 +30,39 @@ class ExternalRegistrationService {
         return key
     }
 
-    fun tryToApproveContender(key: String, user: User): Boolean {
+
+    interface ApproveResult {
+        data class Success(val name: String, val corp: String, val ally: String): ApproveResult
+        data class Forbidden(val name: String): ApproveResult
+        data class TimedOut(val late: Long): ApproveResult
+        data class NotAKey(val text: String): ApproveResult
+    }
+
+    fun tryToApproveContender(key: String, user: User): ApproveResult {
         val cont = contenders[key]
         if (cont != null) {
             contenders.remove(key)
             if (cont.dueTo >= System.currentTimeMillis()) {
-                log.info("Registered ${user.id} as ${cont.charName}")
-                userService.register(user, 0, "", cont.charName, cont.charId)
-                return true
+                val checkResult = userService.singleCheck(cont.charId);
+                when (checkResult) {
+                    is UserService.SingleCheckResult.OK -> {
+                        log.info("Registered ${user.id} as ${cont.charName}")
+                        userService.register(user, 0, "", cont.charName, cont.charId)
+                        return ApproveResult.Success(checkResult.name, checkResult.corp, checkResult.ally)
+                    }
+                    is UserService.SingleCheckResult.Renegade -> {
+                        log.info("Renegade ${cont.charName} from ${checkResult.corp} of ${checkResult.ally} trying to register")
+                        return ApproveResult.Forbidden(checkResult.name)
+                    }
+                    else -> {
+                        return ApproveResult.Forbidden(cont.charName)
+                    }
+                }
             } else {
-                return false
+                return ApproveResult.TimedOut(System.currentTimeMillis() - cont.dueTo)
             }
         } else {
-            return false
+            return ApproveResult.NotAKey(key)
         }
     }
 

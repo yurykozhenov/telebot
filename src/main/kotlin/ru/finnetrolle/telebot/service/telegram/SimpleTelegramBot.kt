@@ -10,6 +10,7 @@ import org.telegram.telegrambots.bots.TelegramLongPollingBot
 import ru.finnetrolle.telebot.service.message.*
 import ru.finnetrolle.telebot.telegramapi.*
 import kotlin.collections.List
+import ru.finnetrolle.telebot.telegramapi.ExternalRegistrationService.*
 
 /**
 * Licence: MIT
@@ -59,10 +60,29 @@ class SimpleTelegramBot @Autowired constructor(
         return Command(text.substringBefore(" "), text.substringAfter(" "))
     }
 
+    fun tryAcceptExternalRegistration(text: String, user: User, chatId: String): Boolean {
+        if (text.length == 6) {
+            val tryApp = externalRegistrationService.tryToApproveContender(text.toUpperCase(), user)
+            when (tryApp) {
+                is ApproveResult.Success -> {
+                    send(chatId, "Welcome, ${tryApp.name}!")
+                    return true
+                }
+                is ApproveResult.Forbidden -> {
+                    send(chatId, "Sir ${tryApp.name}, you can't join us because of security settings.")
+                    return true
+                }
+                is ApproveResult.TimedOut -> {
+                    send(chatId, "Dear user, you must enter code into telegram within 20 mins after registration. Try again.")
+                    return true
+                }
+            }
+        }
+        return false
+    }
+
     fun start(text: String, user: User, chatId: String) {
-        if (text.length == 6 && externalRegistrationService.tryToApproveContender(text.toUpperCase(), user)) {
-            val registered = userService.getCharacterName(user.id)
-            send(chatId, "Welcome, $registered!")
+        if (tryAcceptExternalRegistration(text, user, chatId)) {
             return
         }
 
