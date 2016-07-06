@@ -72,13 +72,10 @@ open class UserService @Autowired constructor (
                 .map { p -> CheckPair(p, eve.getCharacter(p.characterId)) }
                 .filter { s -> !allowedAllies.contains(s.character.allianceID) }
                 .filter { s -> !allowedCorps.contains(s.character.corporationID) }
-        pilotRepo.makeRenegades(renes.map { r -> r.pilot.id })
-        val renegadesList = renes.map { r -> r.pilot.characterName }
-        if (renegadesList.isNotEmpty()) {
-            return renegadesList
-        } else {
-            return listOf("No renegades detected")
+        if (renes.isNotEmpty()) {
+            pilotRepo.makeRenegades(renes.map { r -> r.pilot.id })
         }
+        return renes.map { r -> r.pilot.characterName }
     }
 
     interface SingleCheckResult {
