@@ -62,7 +62,6 @@ open class JabberBot @Autowired constructor (
 
         val chatMan = ChatManager.getInstanceFor(connection)
         chat = chatMan.createChat(broadcaster, { chat, message -> process(message) })
-        chat.sendMessage("Hello from bot!")
     }
 
     fun process(message: Message) {
