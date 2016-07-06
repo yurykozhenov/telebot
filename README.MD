@@ -133,10 +133,18 @@ for your system.
 
 ## Patch notes
 
-### 0.1.X
+### 0.2.X
+
+#### 0.2.1
+- check method in bot chat returns "no renegades detected" if no renegades detected
+- external registration is security tested
+- external registration sends sorries if timed out
+- bot not sending 'hello' to jabber
 
 #### 0.2.0
 - You can register users remotely via /register endpoint. Just send ingame id, name and secret to get key to enter in bot chat window 
+
+### 0.1.X
 
 #### 0.1.4
 - 30 messages to second issue solved via message queue
