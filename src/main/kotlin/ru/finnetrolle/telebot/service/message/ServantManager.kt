@@ -59,7 +59,7 @@ abstract class ServantManager {
 
     fun help(forModerator: Boolean) = servants
                 .filter { v -> forModerator || !v.value.secure }
-                .map { v -> "${v.key} - ${v.value.description}" }
+                .map { v -> "${v.key} ${v.value.description}" }
                 .joinToString("\n")
 
 }
