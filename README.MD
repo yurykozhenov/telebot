@@ -135,6 +135,11 @@ for your system.
 
 ### 0.2.X
 
+#### 0.2.2
+- group broadcast added in dummy version (alpha)
+- message localization added (check messages.properties file)
+- help description added
+
 #### 0.2.1
 - check method in bot chat returns "no renegades detected" if no renegades detected
 - external registration is security tested

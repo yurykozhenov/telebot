@@ -13,7 +13,11 @@ import java.util.*
 abstract class ServantManager {
 
     data class Command(val cmd: String, val data: String, val telegramUserId: Int, val fromChatId: String)
-    data class Servantee(val word: String, val servant: (Command) -> List<SendMessage>, val secure: Boolean = false)
+    data class Servantee(
+            val word: String,
+            val servant: (Command) -> List<SendMessage>,
+            val secure: Boolean = false,
+            val description: String = "")
 
     private val servants = HashMap<String, Servantee>()
 
@@ -55,7 +59,7 @@ abstract class ServantManager {
 
     fun help(forModerator: Boolean) = servants
                 .filter { v -> forModerator || !v.value.secure }
-                .map { v -> v.key }
+                .map { v -> "${v.key} - ${v.value.description}" }
                 .joinToString("\n")
 
 }

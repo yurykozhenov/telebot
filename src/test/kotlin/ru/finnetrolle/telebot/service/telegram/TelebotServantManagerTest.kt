@@ -10,12 +10,12 @@ import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
 import ru.finnetrolle.telebot.model.Pilot
 import ru.finnetrolle.telebot.service.message.MessageProcessor
-import ru.finnetrolle.telebot.service.message.Messages
 import ru.finnetrolle.telebot.service.message.ServantManager.Command
 import ru.finnetrolle.telebot.service.message.TelebotServantManager
 import ru.finnetrolle.telebot.telegramapi.AllyService
 import ru.finnetrolle.telebot.telegramapi.CorpService
 import ru.finnetrolle.telebot.telegramapi.UserService
+import ru.finnetrolle.telebot.util.MessageLocalization
 
 /**
  * Licence: MIT
@@ -28,6 +28,7 @@ class TelebotServantManagerTest {
     @Mock lateinit var allyService: AllyService
     @Mock lateinit var corpService: CorpService
     @Mock lateinit var messageProcessor: MessageProcessor
+    @Mock lateinit var loc: MessageLocalization
 
     @InjectMocks
     lateinit var manager: TelebotServantManager
@@ -35,10 +36,11 @@ class TelebotServantManagerTest {
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        manager = TelebotServantManager(messageProcessor, userService)
+        manager = TelebotServantManager(messageProcessor, userService, loc)
         Mockito.`when`(userService.getLegalUsers()).thenReturn(listOf(Pilot(username = "tester", id = 100500)))
         Mockito.`when`(userService.isModerator(1)).thenReturn(true)
         Mockito.`when`(userService.isModerator(2)).thenReturn(false)
+        Mockito.`when`(loc.getMessage(Mockito.anyString())).thenAnswer { i -> i.arguments[0] }
         manager.configure()
     }
 
@@ -69,7 +71,7 @@ class TelebotServantManagerTest {
                 Command("/legalize", TEXT, USER_USUAL, CHAT_BACK),
                 Command("/lu", TEXT, USER_USUAL, CHAT_BACK),
                 Command("/cast", TEXT, USER_USUAL, CHAT_BACK)
-        ).forEach { c -> assert(manager.serve(c)[0].text.equals(Messages.ACCESS_DENIED)) }
+        ).forEach { c -> assert(manager.serve(c)[0].text.equals("messages.access.denied")) }
 
     @Test
     fun testNoSecurity() {
@@ -83,7 +85,7 @@ class TelebotServantManagerTest {
             Command("/la", TEXT, USER_USUAL, CHAT_BACK),
             Command("/lc", TEXT, USER_USUAL, CHAT_BACK),
             Command("/help", TEXT, USER_USUAL, CHAT_BACK)
-        ).forEach { c -> assert(!manager.serve(c)[0].text.equals(Messages.ACCESS_DENIED))}
+        ).forEach { c -> assert(!manager.serve(c)[0].text.equals("messages.access.denied"))}
     }
 
     companion object {

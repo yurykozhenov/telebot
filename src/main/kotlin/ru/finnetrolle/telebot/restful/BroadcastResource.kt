@@ -16,14 +16,13 @@ import ru.finnetrolle.telebot.service.telegram.SimpleTelegramBot
 * Created by finnetrolle on 13.03.16.
 */
 @Controller
-@RequestMapping("/cast")
 class BroadcastResource @Autowired constructor (
         val bot: SimpleTelegramBot
 ) {
 
     data class Message(var text: String = "")
 
-    @RequestMapping(method = arrayOf(RequestMethod.POST))
+    @RequestMapping(value = "/cast", method = arrayOf(RequestMethod.POST))
     @ResponseBody
     fun cast(@RequestBody message: Message): ResponseEntity<String> {
         if (message.text.isEmpty()) {
@@ -31,6 +30,18 @@ class BroadcastResource @Autowired constructor (
         }
         bot.broadcast(message.text)
         return ResponseEntity.ok("Message sent")
+    }
+
+    data class GroupMessage(var text: String = "", var group: String = "")
+
+    @RequestMapping(value = "/groupcast", method = arrayOf(RequestMethod.POST))
+    @ResponseBody
+    fun groupcast(@RequestBody message: GroupMessage): ResponseEntity<String> {
+        if (message.text.isEmpty() || message.group.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+        val receiversCount = bot.groupBroadcast(message.group, message.text)
+        return ResponseEntity.ok("Message sent to $receiversCount of ${message.group}")
     }
 
 

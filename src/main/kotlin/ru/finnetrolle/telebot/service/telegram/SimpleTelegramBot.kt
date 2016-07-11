@@ -7,10 +7,12 @@ import org.springframework.stereotype.Component
 import org.telegram.telegrambots.api.objects.Update
 import org.telegram.telegrambots.api.objects.User
 import org.telegram.telegrambots.bots.TelegramLongPollingBot
+import ru.finnetrolle.telebot.service.external.ExternalGroupProvider
 import ru.finnetrolle.telebot.service.message.*
 import ru.finnetrolle.telebot.telegramapi.*
 import kotlin.collections.List
 import ru.finnetrolle.telebot.telegramapi.ExternalRegistrationService.*
+import ru.finnetrolle.telebot.util.MessageLocalization
 
 /**
 * Licence: MIT
@@ -24,8 +26,11 @@ class SimpleTelegramBot @Autowired constructor(
         val broadcastComposer: BroadcastComposer,
         val userService: UserService,
         val manager: TelebotServantManager,
-        val externalRegistrationService: ExternalRegistrationService
+        val externalRegistrationService: ExternalRegistrationService,
+        val kupuyc: ExternalGroupProvider
 ): TelegramLongPollingBot() {
+
+    @Autowired private lateinit var loc: MessageLocalization
 
     @Autowired private lateinit var broadcaster: BroadcastService
 
@@ -89,12 +94,12 @@ class SimpleTelegramBot @Autowired constructor(
         val parsed = parse(text)
 
         if (parsed.command.toUpperCase() == "/REGISTER") {
-            val dataElements = parsed.data.split(Messages.regex)
+            val dataElements = parsed.data.split(Regex("[\\W]"))
             val charList = registerer.startRegistration(user, dataElements[0].toInt(), dataElements[1])
             if (charList == null) {
-                send(chatId, Messages.Reg.BAD_AUTH)
+                send(chatId, loc.getMessage("messages.reg.bad.auth"))
             } else {
-                send(chatId, Messages.Reg.SELECT_CHAR, charList)
+                send(chatId, loc.getMessage("messages.reg.select.char"), charList)
             }
             return
         }
@@ -104,27 +109,27 @@ class SimpleTelegramBot @Autowired constructor(
                 val finish = registerer.finishRegistration(user.id, parsed.command.substring(1, 2).toInt())
                 when (finish) {
                     is RegistererService.Finish.FailByNotAllowed ->
-                            send(chatId, finish.name + Messages.Reg.FAIL_DENIED)
+                            send(chatId, loc.getMessage("messages.reg.fail.denied", finish.name))
                     is RegistererService.Finish.FailByRegistrationExpired ->
-                            send(chatId, Messages.Reg.FAIL_EXPIRED)
+                            send(chatId, loc.getMessage("messages.reg.fail.expired"))
                     is RegistererService.Finish.FailByWrongSelect ->
-                            send(chatId, Messages.Reg.FAIL_ID)
+                            send(chatId, loc.getMessage("messages.reg.fail.id"))
                     is RegistererService.Finish.SuccessByAlliance ->
-                            send(chatId, finish.name + Messages.Reg.SUCCESS_ALLY + finish.alliance)
+                            send(chatId, loc.getMessage("messages.reg.success.ally", finish.name, finish.alliance))
                     is RegistererService.Finish.SuccessByCorporation ->
-                            send(chatId, finish.name + Messages.Reg.SUCCESS_CORP + finish.corp)
+                            send(chatId, loc.getMessage("messages.reg.success.corp", finish.name, finish.corp))
                     is RegistererService.Finish.SuccessByNoLists ->
-                            send(chatId, finish.name + Messages.Reg.SUCCESS_FIRST)
-                    else -> send(chatId, Messages.IMPOSSIBLE)
+                            send(chatId, loc.getMessage("messages.reg.success.first", finish.name))
+                    else -> send(chatId, loc.getMessage("messages.impossible"))
                 }
             } else {
-                send(chatId, Messages.Reg.SELECT_CHAR, registerer.getListOfCharacterCandidates(user.id))
+                send(chatId, loc.getMessage("messages.reg.select.char"), registerer.getListOfCharacterCandidates(user.id))
             }
             return
         } else {
             val pilot = userService.getCharacterName(user.id)
             if (pilot == null) {
-                sendMessage(MessageBuilder.build(user.id.toString(), Messages.REGISTER_MESSAGE))
+                sendMessage(MessageBuilder.build(user.id.toString(), loc.getMessage("messages.register")))
                 return
             }
         }
@@ -161,4 +166,17 @@ class SimpleTelegramBot @Autowired constructor(
     companion object {
         val log = LoggerFactory.getLogger(SimpleTelegramBot::class.java)
     }
+
+    fun groupBroadcast(group: String, text: String): Int {
+        if (checkBeforeSend) {
+            userService.check()
+        }
+        val members: Set<String> = kupuyc.getMembers(group)
+        val messages = broadcastComposer.compose(text, members)
+        messages.forEach { m -> broadcaster.enqueue(m) }
+        val s = "broadcast sent to ${messages.size} users"
+        log.info(s)
+        return messages.size
+    }
 }
+

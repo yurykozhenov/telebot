@@ -25,4 +25,15 @@ class BroadcastComposer @Autowired constructor (
         }.toList()
     }
 
+    fun compose(text: String, members: Set<String>): List<SendMessage> {
+        return repo.findByRenegadeFalse()
+                .filter { e -> members.contains(e.characterName) }
+                .map { p ->
+            val msg = SendMessage()
+            msg.chatId = p.id.toString()
+            msg.text = text
+            msg
+        }.toList()
+    }
+
 }

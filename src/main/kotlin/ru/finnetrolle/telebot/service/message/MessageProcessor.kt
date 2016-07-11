@@ -6,6 +6,7 @@ import ru.finnetrolle.telebot.service.mailbot.MailbotService
 import ru.finnetrolle.telebot.telegramapi.AllyService
 import ru.finnetrolle.telebot.telegramapi.CorpService
 import ru.finnetrolle.telebot.telegramapi.UserService
+import ru.finnetrolle.telebot.util.MessageLocalization
 
 /**
  * Licence: MIT
@@ -21,62 +22,64 @@ import ru.finnetrolle.telebot.telegramapi.UserService
         val mailbotService: MailbotService
 ) {
 
+    @Autowired private lateinit var loc: MessageLocalization
+
     open fun joke() = "Rent macht frei"
 
     private fun <T> listOrEmpty(list: List<T>, divider: String, emptyMsg: String): String {
         return if (list.isEmpty()) emptyMsg else list.joinToString(divider)
     }
 
-    open fun listOfModerators() = listOrEmpty(userService.getModerators(), "\n", Messages.EMPTY_LIST)
+    open fun listOfModerators() = listOrEmpty(userService.getModerators(), "\n", loc.getMessage("messages.empty.list"))
 
     open fun listOfAlliances() = listOrEmpty(allyService.getAll()
             .map { a -> "[${a.ticker}] - ${a.title}" }
-            .sorted(), "\n", Messages.EMPTY_LIST)
+            .sorted(), "\n", loc.getMessage("messages.empty.list"))
 
     open fun listOfCorporations() = listOrEmpty(corpService.getAll()
             .map { c -> "[${c.ticker}] - ${c.title}" }
-            .sorted(), "\n", Messages.EMPTY_LIST)
+            .sorted(), "\n", loc.getMessage("messages.empty.list"))
 
-    open fun checkAll() = listOrEmpty(userService.check(), "\n", Messages.EMPTY_LIST)
+    open fun checkAll() = listOrEmpty(userService.check(), "\n", loc.getMessage("messages.empty.list"))
 
     open fun promote(data: String) = if (userService.setModerator(data, true) == null)
-        Messages.User.NOT_FOUND else Messages.User.PROMOTED
+        loc.getMessage("messages.user.not.found") else loc.getMessage("messages.user.promoted")
 
     open fun demote(data: String) = if (userService.setModerator(data, false) == null)
-        Messages.User.NOT_FOUND else Messages.User.DEMOTED
+        loc.getMessage("messages.user.not.found") else loc.getMessage("messages.user.demoted")
 
     open fun renegade(name: String) = if (userService.setRenegade(name, true) == null)
-        Messages.User.NOT_FOUND else Messages.User.RENEGADED
+        loc.getMessage("messages.user.not.found") else loc.getMessage("messages.user.renegaded")
 
     open fun legalize(name: String) = if (userService.setRenegade(name, false) == null)
-        Messages.User.NOT_FOUND else Messages.User.LEGALIZED
+        loc.getMessage("messages.user.not.found") else loc.getMessage("messages.user.legalized")
 
-    open fun listOfUsers() = listOrEmpty(userService.getCharacters(), "\n", Messages.EMPTY_LIST)
+    open fun listOfUsers() = listOrEmpty(userService.getCharacters(), "\n", loc.getMessage("messages.empty.list"))
 
     open fun addAlly(ticker: String) = when (allyService.addAlly(ticker)) {
-        is AllyService.AddResponse.AllianceAdded -> Messages.Ally.ADDED
-        is AllyService.AddResponse.AllianceIsAlreadyInList -> Messages.Ally.IN_LIST
-        is AllyService.AddResponse.AllianceIsNotExist -> Messages.Ally.NOT_EXIST
-        else -> Messages.IMPOSSIBLE
+        is AllyService.AddResponse.AllianceAdded -> loc.getMessage("messages.ally.added")
+        is AllyService.AddResponse.AllianceIsAlreadyInList -> loc.getMessage("messages.ally.in.list")
+        is AllyService.AddResponse.AllianceIsNotExist -> loc.getMessage("messages.ally.not.exist")
+        else -> loc.getMessage("messages.impossible")
     }
 
     open fun rmAlly(ticker: String) = when (allyService.removeAlly(ticker)) {
-        is AllyService.RemoveResponse.AllianceRemoved -> Messages.Ally.REMOVED
-        is AllyService.RemoveResponse.AllianceNotFound -> Messages.Ally.NOT_FOUND
-        else -> Messages.IMPOSSIBLE
+        is AllyService.RemoveResponse.AllianceRemoved -> loc.getMessage("messages.ally.removed")
+        is AllyService.RemoveResponse.AllianceNotFound -> loc.getMessage("messages.ally.not.found")
+        else -> loc.getMessage("messages.impossible")
     }
 
     open fun addCorp(corpId: String) = when (corpService.addCorporation(corpId.toLong())) {
-        is CorpService.Add.Success -> Messages.Corp.ADDED
-        is CorpService.Add.AlreadyInList -> Messages.Corp.IN_LIST
-        is CorpService.Add.NotExist -> Messages.Corp.NOT_EXIST
-        else -> Messages.IMPOSSIBLE
+        is CorpService.Add.Success -> loc.getMessage("messages.corp.added")
+        is CorpService.Add.AlreadyInList -> loc.getMessage("messages.corp.in.list")
+        is CorpService.Add.NotExist -> loc.getMessage("messages.corp.not.exist")
+        else -> loc.getMessage("messages.impossible")
     }
 
     open fun rmCorp(ticker: String) = when (corpService.removeCorporation(ticker)) {
-        is CorpService.Remove.Success -> Messages.Corp.REMOVED
-        is CorpService.Remove.NotFound -> Messages.Corp.NOT_FOUND
-        else -> Messages.IMPOSSIBLE
+        is CorpService.Remove.Success -> loc.getMessage("messages.corp.removed")
+        is CorpService.Remove.NotFound -> loc.getMessage("messages.corp.not.found")
+        else -> loc.getMessage("messages.impossible")
     }
 
     open fun lastMail() = mailbotService.getLast()
