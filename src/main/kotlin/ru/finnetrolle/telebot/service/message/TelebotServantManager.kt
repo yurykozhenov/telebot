@@ -38,7 +38,7 @@ class TelebotServantManager @Autowired constructor(
                 Servantee("/GC", { c ->
                     val groupName = c.data.substringBefore(" ")
                     val text = c.data.substringAfter(" ")
-                    makeBroadcast(userService.getLegalUsers(groupName), text)
+                    makeBroadcast(userService.getLegalUsers(groupName), text, groupName)
                 }, true, loc.getMessage("telebot.command.description.gc")),
                 Servantee("/SHOWGROUP", { c-> log.debug("helloFromCmd"); makeBackMessage(c, processor.showGroup(c.data))}, true, loc.getMessage("telebot.command.description.showgroup")),
 
