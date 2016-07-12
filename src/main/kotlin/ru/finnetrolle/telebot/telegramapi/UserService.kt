@@ -22,14 +22,14 @@ import javax.annotation.PostConstruct
 
 @Component
 
-open class UserService @Autowired constructor (
-        val pilotRepo: PilotRepository,
-        val allyService: AllyService,
-        val corpService: CorpService,
-        val eve: EveApiConnector,
-        val groups: ExternalGroupProvider,
-        val loc: MessageLocalization
-) {
+open class UserService {
+
+    @Autowired lateinit private var pilotRepo: PilotRepository
+    @Autowired lateinit private var allyService: AllyService
+    @Autowired lateinit private var corpService: CorpService
+    @Autowired lateinit private var eve: EveApiConnector
+    @Autowired lateinit private var groups: ExternalGroupProvider
+    @Autowired lateinit private var loc: MessageLocalization
 
     @Value("\${telebot.superuser}")
     private lateinit var superUser: String
@@ -129,7 +129,7 @@ open class UserService @Autowired constructor (
         val log = LoggerFactory.getLogger(UserService::class.java)
     }
 
-    fun showGroup(groupName: String): List<String> {
+    open fun showGroup(groupName: String): List<String> {
         log.debug("starting users mixing method for $groupName")
         val names = groups.getMembers(groupName)
         log.debug("${names.size} users in external system")
