@@ -21,6 +21,7 @@ class ExternalGroupProvider {
         log.info("Trying to get users for $group from external resource")
         val template = RestTemplate()
         val uri = UriBuilder.fromUri(url).queryParam("groupName", group).queryParam("secret", secret).build()
+        log.debug(uri.toString())
         try {
             val names = template.getForObject(uri, Rows::class.java).rows.distinct().toSet()
             log.info("Found ${names.size} users for $group")
