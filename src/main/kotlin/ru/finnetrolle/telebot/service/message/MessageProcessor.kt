@@ -85,5 +85,11 @@ import ru.finnetrolle.telebot.util.MessageLocalization
     open fun lastMail() = mailbotService.getLast()
             .map { m -> "*${m.title}*\n*from: ${m.sender}*\n${m.body}\n----------" }
             .joinToString("\n\n")
-    
+
+    fun showGroup(groupName: String): String {
+        val prefix = loc.getMessage("messages.group.header", groupName)
+        return userService.showGroup(groupName)
+                .joinToString(separator = "\n", prefix = prefix)
+    }
+
 }

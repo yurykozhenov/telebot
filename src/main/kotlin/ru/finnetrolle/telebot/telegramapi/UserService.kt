@@ -129,12 +129,15 @@ open class UserService @Autowired constructor (
         val log = LoggerFactory.getLogger(UserService::class.java)
     }
 
-    fun showGroup(groupName: String): String {
+    fun showGroup(groupName: String): List<String> {
         val names = groups.getMembers(groupName)
-        return pilotRepo.findByRenegadeFalse()
-                .filter { n -> names.contains(n.characterName) }
+        log.debug("${names.size} users in external system")
+        val mix = pilotRepo.findByRenegadeFalse()
                 .map { n -> n.characterName }
-                .joinToString(separator = "\n", prefix = loc.getMessage("messages.group.header", groupName))
+                .filter { n -> names.contains(n) }
+                .toList()
+        log.debug("${mix.size} users of group in our DB")
+        return mix
     }
 
 }
