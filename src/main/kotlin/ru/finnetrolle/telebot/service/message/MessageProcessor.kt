@@ -1,5 +1,6 @@
 package ru.finnetrolle.telebot.service.message
 
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import ru.finnetrolle.telebot.service.mailbot.MailbotService
@@ -87,9 +88,14 @@ import ru.finnetrolle.telebot.util.MessageLocalization
             .joinToString("\n\n")
 
     fun showGroup(groupName: String): String {
+        log.debug("Trying to find some users for group $groupName")
         val prefix = loc.getMessage("messages.group.header", groupName)
         return userService.showGroup(groupName)
                 .joinToString(separator = "\n", prefix = prefix)
+    }
+
+    companion object {
+        val log = LoggerFactory.getLogger(MessageProcessor::class.java)
     }
 
 }

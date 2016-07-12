@@ -18,6 +18,7 @@ class ExternalGroupProvider {
     data class Rows(var rows:List<String> = listOf(), val success: Boolean = true, val total: Int = 0)
 
     fun getMembers(group: String): Set<String> {
+        log.info("Trying to get users for $group from external resource")
         val template = RestTemplate()
         val uri = UriBuilder.fromUri(url).queryParam("groupName", group).queryParam("secret", secret).build()
         try {

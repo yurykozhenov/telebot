@@ -45,7 +45,7 @@ class TelebotServantManager @Autowired constructor(
                 Servantee("/MAIL", { c -> makeBackMessage(c, processor.lastMail())}, false, loc.getMessage("telebot.command.description.mail"))
                 )
 
-        log.info("Registered commands is: \n ${this.help(true)}")
+        log.info("Registered commands is: \n${this.help(true)}")
     }
 
     private fun makeBackMessage(command: Command, text: String): List<SendMessage> =
