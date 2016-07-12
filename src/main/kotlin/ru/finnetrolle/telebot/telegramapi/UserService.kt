@@ -57,6 +57,13 @@ open class UserService {
 
     open fun getLegalUsers(): List<Pilot> = pilotRepo.findByRenegadeFalse()
 
+    open fun getLegalUsers(groupName: String): List<Pilot> {
+        val names = groups.getMembers(groupName)
+        return pilotRepo.findByRenegadeFalse()
+                .filter { n -> names.contains(n.characterName) }
+                .toList()
+    }
+
     open fun getCharacterName(id: Int): String? {
         val pilot = pilotRepo.findOne(id)
         if (pilot != null)

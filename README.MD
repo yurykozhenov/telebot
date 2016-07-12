@@ -4,7 +4,7 @@ Telegram bot for eve players to do your own alliance or corporate broadcasting
 
 You can find this guide in russian here - [версия этого гайда на русском](https://github.com/finnetrolle/telebot/wiki)
  
-Current version: 0.1.4 beta
+Current version: 0.2.4 beta
 
 ***I don't feel my english very good, so, if you have fixes for this page - feel free to send me using email or issues.***
 
@@ -134,6 +134,9 @@ for your system.
 ## Patch notes
 
 ### 0.2.X
+
+#### 0.2.4
+- Added command /GC
 
 #### 0.2.3
 - External group harvester works

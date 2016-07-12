@@ -35,7 +35,13 @@ class TelebotServantManager @Autowired constructor(
                 Servantee("/LEGALIZE", { c -> makeBackMessage(c, processor.legalize(c.data)) }, true, loc.getMessage("telebot.command.description.legalize")),
                 Servantee("/LU", { c -> makeBackMessage(c, processor.listOfUsers()) }, true, loc.getMessage("telebot.command.description.lu")),
                 Servantee("/CAST", { c -> makeBroadcast(userService.getLegalUsers(), c.data) }, true, loc.getMessage("telebot.command.description.cast")),
-                Servantee("/SHOWGROUP", { c-> log.debug("helloFromCmd"); makeBackMessage(c, processor.showGroup(c.data))}, true, loc.getMessage("telebot.command.description.showgroup")),
+                Servantee("/GC", { c ->
+                    val groupName = c.data.substringBefore(" ")
+                    val text = c.data.substringAfter(" ")
+                    makeBroadcast(userService.getLegalUsers(groupName), text)
+                }, true, loc.getMessage("telebot.command.description.cast")),
+                Servantee("/SHOWGROUP", { c-> log.debug("helloFromCmd"); makeBackMessage(c, processor.showGroup(c.data))}, true, loc.getMessage("telebot.command.description.gc")),
+
 
                 Servantee("/JOKE", { c -> makeBackMessage(c, processor.joke()) }, false, loc.getMessage("telebot.command.description.joke")),
                 Servantee("/LM", { c -> makeBackMessage(c, processor.listOfModerators()) }, false, loc.getMessage("telebot.command.description.lm")),
@@ -53,6 +59,9 @@ class TelebotServantManager @Autowired constructor(
 
     private fun makeBroadcast(pilots: List<Pilot>, text: String): List<SendMessage> =
         pilots.map { p -> MessageBuilder.build(p.id.toString(), text) }
+
+    private fun makeBroadcast(pilots: List<Pilot>, text: String, groupName: String): List<SendMessage> =
+            pilots.map { p -> MessageBuilder.build(p.id.toString(), loc.getMessage("messages.group.title", groupName, text)) }
 
     override fun getDefaultServant(): (Command) -> List<SendMessage> =
             { c -> makeBackMessage(c, loc.getMessage("messages.unknown")) }
