@@ -10,16 +10,18 @@ import javax.ws.rs.core.UriBuilder
 class ExternalGroupProvider {
 
     @Value("\${telebot.external.groups.secret}")
-    lateinit var secret: String
+    lateinit private var secret: String
 
     @Value("\${telebot.external.groups.url}")
-    lateinit var url: String
+    lateinit private var url: String
+
+    data class Rows(var rows:List<String> = listOf(), val success: Boolean = true, val total: Int = 0)
 
     fun getMembers(group: String): Set<String> {
         val template = RestTemplate()
         val uri = UriBuilder.fromUri(url).queryParam("groupName", group).queryParam("secret", secret).build()
         try {
-            val names = template.getForObject(uri, Array<String>::class.java).distinct().toSet()
+            val names = template.getForObject(uri, Rows::class.java).rows.distinct().toSet()
             log.info("Found ${names.size} users for $group")
             return names
         } catch (e: Exception) {
