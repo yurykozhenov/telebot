@@ -1,5 +1,6 @@
 package ru.finnetrolle.telebot.service.message
 
+import org.slf4j.LoggerFactory
 import org.telegram.telegrambots.api.methods.SendMessage
 import java.util.*
 
@@ -43,15 +44,20 @@ abstract class ServantManager {
     fun serve(command: Command): List<SendMessage> {
         val servant = servants[command.cmd.toUpperCase()]
         return if (servant == null) {
+            log.debug("can't find command ${command.cmd.toUpperCase()}")
             getDefaultServant().invoke(command)
         } else {
+            log.debug("Found command: ${command.cmd}")
             if (servant.secure) {
                 if (getAccessChecker().invoke(command)) {
+                    log.debug("Invoking command")
                     servant.servant.invoke(command)
                 } else {
+                    log.debug("Command is forbidden for current user")
                     getAccessDeniedServant().invoke(command)
                 }
             } else {
+                log.debug("Invoking command")
                 servant.servant.invoke(command)
             }
         }
@@ -61,5 +67,9 @@ abstract class ServantManager {
                 .filter { v -> forModerator || !v.value.secure }
                 .map { v -> "${v.key} ${v.value.description}" }
                 .joinToString("\n")
+
+    companion object {
+        val log = LoggerFactory.getLogger(ServantManager::class.java)
+    }
 
 }
