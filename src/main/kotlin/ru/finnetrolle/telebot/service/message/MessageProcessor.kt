@@ -88,10 +88,16 @@ import ru.finnetrolle.telebot.util.MessageLocalization
 
     fun showGroup(groupName: String): String {
         log.debug("Trying to find some users for group $groupName")
-        val prefix = loc.getMessage("messages.group.header", groupName)
-        log.debug("header will be $prefix")
-        return userService.showGroup(groupName)
-                .joinToString(separator = "\n", prefix = prefix)
+        try {
+            val prefix = loc.getMessage("messages.group.header", groupName)
+            log.debug("header will be $prefix")
+            return userService.showGroup(groupName)
+                    .joinToString(separator = "\n", prefix = prefix)
+        } catch (e: Exception) {
+            log.error(e.message)
+            e.printStackTrace()
+        }
+        return "=("
     }
 
     companion object {
