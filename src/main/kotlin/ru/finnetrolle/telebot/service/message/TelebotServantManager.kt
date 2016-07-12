@@ -35,7 +35,7 @@ class TelebotServantManager @Autowired constructor(
                 Servantee("/LEGALIZE", { c -> makeBackMessage(c, processor.legalize(c.data)) }, true, loc.getMessage("telebot.command.description.legalize")),
                 Servantee("/LU", { c -> makeBackMessage(c, processor.listOfUsers()) }, true, loc.getMessage("telebot.command.description.lu")),
                 Servantee("/CAST", { c -> makeBroadcast(userService.getLegalUsers(), c.data) }, true, loc.getMessage("telebot.command.description.cast")),
-                Servantee("/SHOWGROUP", { c-> makeBackMessage(c, processor.showGroup(c.data))}, true, loc.getMessage("telebot.command.description.showgroup")),
+                Servantee("/SHOWGROUP", { c-> log.debug("helloFromCmd"); makeBackMessage(c, processor.showGroup(c.data))}, true, loc.getMessage("telebot.command.description.showgroup")),
 
                 Servantee("/JOKE", { c -> makeBackMessage(c, processor.joke()) }, false, loc.getMessage("telebot.command.description.joke")),
                 Servantee("/LM", { c -> makeBackMessage(c, processor.listOfModerators()) }, false, loc.getMessage("telebot.command.description.lm")),

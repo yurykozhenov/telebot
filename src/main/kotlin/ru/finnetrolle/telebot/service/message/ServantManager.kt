@@ -50,14 +50,14 @@ abstract class ServantManager {
             log.debug("Found command: ${command.cmd}")
             if (servant.secure) {
                 if (getAccessChecker().invoke(command)) {
-                    log.debug("Invoking command")
+                    log.debug("Invoking command $command")
                     servant.servant.invoke(command)
                 } else {
                     log.debug("Command is forbidden for current user")
                     getAccessDeniedServant().invoke(command)
                 }
             } else {
-                log.debug("Invoking command")
+                log.debug("Invoking command $command")
                 servant.servant.invoke(command)
             }
         }
