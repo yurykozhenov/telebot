@@ -34,13 +34,13 @@ class TelebotServantManager @Autowired constructor(
                 Servantee("/RENEGADE", { c -> makeBackMessage(c, processor.renegade(c.data)) }, true, loc.getMessage("telebot.command.description.renegade")),
                 Servantee("/LEGALIZE", { c -> makeBackMessage(c, processor.legalize(c.data)) }, true, loc.getMessage("telebot.command.description.legalize")),
                 Servantee("/LU", { c -> makeBackMessage(c, processor.listOfUsers()) }, true, loc.getMessage("telebot.command.description.lu")),
-                Servantee("/CAST", { c -> makeBroadcast(userService.getLegalUsers(), c.data) }, true, loc.getMessage("telebot.command.description.cast")),
+                Servantee("/CAST", { c -> makeBroadcast(userService.getLegalUsers(), c.data) }, true, loc.getMessage("telebot.command.description.gc")),
                 Servantee("/GC", { c ->
                     val groupName = c.data.substringBefore(" ")
                     val text = c.data.substringAfter(" ")
                     makeBroadcast(userService.getLegalUsers(groupName), text)
                 }, true, loc.getMessage("telebot.command.description.cast")),
-                Servantee("/SHOWGROUP", { c-> log.debug("helloFromCmd"); makeBackMessage(c, processor.showGroup(c.data))}, true, loc.getMessage("telebot.command.description.gc")),
+                Servantee("/SHOWGROUP", { c-> log.debug("helloFromCmd"); makeBackMessage(c, processor.showGroup(c.data))}, true, loc.getMessage("telebot.command.description.cast")),
 
 
                 Servantee("/JOKE", { c -> makeBackMessage(c, processor.joke()) }, false, loc.getMessage("telebot.command.description.joke")),
