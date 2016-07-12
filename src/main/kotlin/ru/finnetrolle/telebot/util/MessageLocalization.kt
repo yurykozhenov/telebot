@@ -43,6 +43,8 @@ open class MessageLocalization {
     }
 
     open fun getMessage(message: String, vararg params: Any): String {
+        log.debug("Localizing message:\n$message\n")
+        params.forEach { p -> log.debug("param: $p") }
         return messageSource!!.getMessage(message, params, Locale.getDefault())
     }
 
