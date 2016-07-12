@@ -10,6 +10,8 @@ import org.telegram.telegrambots.api.objects.User
 import ru.finnetrolle.telebot.model.Pilot
 import ru.finnetrolle.telebot.model.PilotRepository
 import ru.finnetrolle.telebot.service.eveapi.EveApiConnector
+import ru.finnetrolle.telebot.service.external.ExternalGroupProvider
+import ru.finnetrolle.telebot.util.MessageLocalization
 import javax.annotation.PostConstruct
 
 /**
@@ -24,7 +26,9 @@ open class UserService @Autowired constructor (
         val pilotRepo: PilotRepository,
         val allyService: AllyService,
         val corpService: CorpService,
-        val eve: EveApiConnector
+        val eve: EveApiConnector,
+        val groups: ExternalGroupProvider,
+        val loc: MessageLocalization
 ) {
 
     @Value("\${telebot.superuser}")
@@ -123,6 +127,14 @@ open class UserService @Autowired constructor (
 
     companion object {
         val log = LoggerFactory.getLogger(UserService::class.java)
+    }
+
+    fun showGroup(groupName: String): String {
+        val names = groups.getMembers(groupName)
+        return pilotRepo.findByRenegadeFalse()
+                .filter { n -> names.contains(n.characterName) }
+                .map { n -> n.characterName }
+                .joinToString(separator = "\n", prefix = loc.getMessage("messages.group.header", groupName))
     }
 
 }

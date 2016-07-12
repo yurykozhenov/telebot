@@ -135,6 +135,10 @@ for your system.
 
 ### 0.2.X
 
+#### 0.2.3
+- External group harvester works
+- New command for moderators - showgroup
+
 #### 0.2.2
 - group broadcast added in dummy version (alpha)
 - message localization added (check messages.properties file)
