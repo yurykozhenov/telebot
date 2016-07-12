@@ -20,10 +20,9 @@ import ru.finnetrolle.telebot.util.MessageLocalization
         val userService: UserService,
         val allyService: AllyService,
         val corpService: CorpService,
-        val mailbotService: MailbotService
+        val mailbotService: MailbotService,
+        val loc: MessageLocalization
 ) {
-
-    @Autowired private lateinit var loc: MessageLocalization
 
     open fun joke() = "Rent macht frei"
 
