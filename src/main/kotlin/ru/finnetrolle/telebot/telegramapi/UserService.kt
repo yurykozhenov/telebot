@@ -130,6 +130,7 @@ open class UserService @Autowired constructor (
     }
 
     fun showGroup(groupName: String): List<String> {
+        log.debug("starting users mixing method")
         val names = groups.getMembers(groupName)
         log.debug("${names.size} users in external system")
         val mix = pilotRepo.findByRenegadeFalse()
