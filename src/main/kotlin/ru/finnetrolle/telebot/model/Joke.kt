@@ -2,9 +2,7 @@ package ru.finnetrolle.telebot.model
 
 import org.springframework.data.repository.CrudRepository
 import java.util.*
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.Id
+import javax.persistence.*
 
 /**
  * Licence: MIT
@@ -18,6 +16,8 @@ interface JokeRepository: CrudRepository<Joke, Long> {
 @Entity(name = "jokes")
 data class Joke (
         @Id
+        @GeneratedValue(strategy = javax.persistence.GenerationType.SEQUENCE, generator = "jokes_sequence")
+        @SequenceGenerator(name = "jokes_sequence", sequenceName = "jokes_seq")
         @Column(name = "joke_id") var id: Long = 0,
         @Column(name = "from_name") var fromName: String = "",
         @Column(name = "timestamp") var sent: Date = Date(),

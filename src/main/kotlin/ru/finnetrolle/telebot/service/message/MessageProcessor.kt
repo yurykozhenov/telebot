@@ -110,7 +110,7 @@ import ru.finnetrolle.telebot.util.MessageLocalization
 
     fun addJoke(telegramUserId: Int, data: String): String {
         val pilot = pilotRepo.findOne(telegramUserId)
-        if (pilot != null) {
+        if (pilot == null) {
             return loc.getMessage("telegram.joke.add.someerror")
         } else {
             if (data.length > 1000) {
