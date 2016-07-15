@@ -135,6 +135,9 @@ for your system.
 
 ### 0.2.X
 
+#### 0.2.5
+- Jokes added
+
 #### 0.2.4
 - Added command /GC
 
