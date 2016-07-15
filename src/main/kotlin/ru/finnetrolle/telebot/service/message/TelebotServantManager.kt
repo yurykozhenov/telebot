@@ -42,7 +42,7 @@ class TelebotServantManager @Autowired constructor(
                 }, true, loc.getMessage("telebot.command.description.gc")),
                 Servantee("/SHOWGROUP", { c-> log.debug("helloFromCmd"); makeBackMessage(c, processor.showGroup(c.data))}, true, loc.getMessage("telebot.command.description.showgroup")),
 
-
+                Servantee("/ADDJOKE", {c -> makeBackMessage(c, processor.addJoke(c.telegramUserId, c.data))}, false, loc.getMessage("telebot.command.description.addjoke")),
                 Servantee("/JOKE", { c -> makeBackMessage(c, processor.joke()) }, false, loc.getMessage("telebot.command.description.joke")),
                 Servantee("/LM", { c -> makeBackMessage(c, processor.listOfModerators()) }, false, loc.getMessage("telebot.command.description.lm")),
                 Servantee("/LA", { c -> makeBackMessage(c, processor.listOfAlliances()) }, false, loc.getMessage("telebot.command.description.la")),

@@ -13,6 +13,8 @@
     <changeSet id="3" author="finnetrolle">
         <sqlFile path="sql/003_0_1_0_MAIL.sql" relativeToChangelogFile="true" stripComments="true"/>
     </changeSet>
-
+    <changeSet id="4" author="finnetrolle">
+        <sqlFile path="sql/004_0_2_5_Add_jokes.sql" relativeToChangelogFile="true" stripComments="true"/>
+    </changeSet>
 
 </databaseChangeLog>

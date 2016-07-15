@@ -3,6 +3,8 @@ package ru.finnetrolle.telebot.service.message
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
+import ru.finnetrolle.telebot.model.PilotRepository
+import ru.finnetrolle.telebot.service.jokeservice.JokeService
 import ru.finnetrolle.telebot.service.mailbot.MailbotService
 import ru.finnetrolle.telebot.telegramapi.AllyService
 import ru.finnetrolle.telebot.telegramapi.CorpService
@@ -21,10 +23,12 @@ import ru.finnetrolle.telebot.util.MessageLocalization
         val allyService: AllyService,
         val corpService: CorpService,
         val mailbotService: MailbotService,
-        val loc: MessageLocalization
+        val loc: MessageLocalization,
+        val joker: JokeService,
+        val pilotRepo: PilotRepository
 ) {
 
-    open fun joke() = "Rent macht frei"
+    open fun joke() = joker.joke()
 
     private fun <T> listOrEmpty(list: List<T>, divider: String, emptyMsg: String): String {
         return if (list.isEmpty()) emptyMsg else list.joinToString(divider)
@@ -102,6 +106,20 @@ import ru.finnetrolle.telebot.util.MessageLocalization
 
     companion object {
         val log = LoggerFactory.getLogger(MessageProcessor::class.java)
+    }
+
+    fun addJoke(telegramUserId: Int, data: String): String {
+        val pilot = pilotRepo.findOne(telegramUserId)
+        if (pilot != null) {
+            return loc.getMessage("telegram.joke.add.someerror")
+        } else {
+            if (data.length > 1000) {
+                return loc.getMessage("telegram.joke.add.too.long")
+            } else {
+                joker.addJoke(pilot, data)
+                return loc.getMessage("telegram.joke.add.success")
+            }
+        }
     }
 
 }
