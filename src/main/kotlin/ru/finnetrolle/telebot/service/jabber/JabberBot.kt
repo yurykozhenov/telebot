@@ -65,19 +65,21 @@ open class JabberBot @Autowired constructor (
     }
 
     fun grabGroupName(message: String): String {
-        return message.split(" ").get(4)
+        val g = message.split(" ").get(4)
+        return g.split("\n").get(0)
     }
 
     fun process(message: Message) {
         val groupName = grabGroupName(message.body)
         log.info("Received from ${message.from} for $groupName message: ${message.body}")
-        if (groupName.toUpperCase().equals("ALL")) {
-            log.info("Sent to everybody")
-            telebot.broadcast(message.body)
-        } else {
-            log.info("Sent to group $groupName")
-            telebot.groupBroadcast(groupName, message.body)
-        }
+        telebot.broadcast(message.body)
+//        if (groupName.toUpperCase().equals("ALL")) {
+//            log.info("Sent to everybody")
+//            telebot.broadcast(message.body)
+//        } else {
+//            log.info("Sent to group $groupName")
+//            telebot.groupBroadcast(groupName, message.body)
+//        }
     }
 
     companion object {
