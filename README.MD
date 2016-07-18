@@ -135,6 +135,9 @@ for your system.
 
 ### 0.2.X
 
+#### 0.2.7
+- Group broadcasts from jabber
+
 #### 0.2.6
 - Empty jokes can not be added
 - Broadcast emits mail receiving

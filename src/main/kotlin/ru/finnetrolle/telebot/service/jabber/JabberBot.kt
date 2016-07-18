@@ -64,9 +64,20 @@ open class JabberBot @Autowired constructor (
         chat = chatMan.createChat(broadcaster, { chat, message -> process(message) })
     }
 
+    fun grabGroupName(message: String): String {
+        return message.split(" ").get(4)
+    }
+
     fun process(message: Message) {
-        log.info("Received from ${message.from} message: ${message.body}")
-        telebot.broadcast(message.body)
+        val groupName = grabGroupName(message.body)
+        log.info("Received from ${message.from} for $groupName message: ${message.body}")
+        if (groupName.toUpperCase().equals("ALL")) {
+            log.info("Sent to everybody")
+            telebot.broadcast(message.body)
+        } else {
+            log.info("Sent to group $groupName")
+            telebot.groupBroadcast(groupName, message.body)
+        }
     }
 
     companion object {
