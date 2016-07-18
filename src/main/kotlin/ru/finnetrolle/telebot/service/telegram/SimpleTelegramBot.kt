@@ -54,7 +54,7 @@ class SimpleTelegramBot @Autowired constructor(
     override fun onUpdateReceived(update: Update?) {
         if (update!!.hasMessage()) {
             val inc = update.message
-            log.info("Received message from ${inc.from.userName} : ${inc.text}")
+            log.info("Received message from ${inc.from.id} : ${inc.text}")
             start(inc.text, inc.from, inc.chatId.toString())
         }
     }
