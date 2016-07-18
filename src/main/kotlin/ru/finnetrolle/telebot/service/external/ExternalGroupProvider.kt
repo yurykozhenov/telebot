@@ -27,7 +27,7 @@ class ExternalGroupProvider {
             log.info("Found ${names.size} users for $group")
             return names
         } catch (e: Exception) {
-            log.error("Some error in query for group ${group} ${e.message}")
+            log.error("Some error in query for group $group ${e.message}")
             return setOf()
         }
     }

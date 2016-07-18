@@ -2,9 +2,6 @@ package ru.finnetrolle.telebot.service.eveapi
 
 import org.junit.Test
 
-import org.junit.Assert.*
-import org.junit.Before
-
 /**
  * Licence: MIT
  * Legion of xXDEATHXx notification bot for telegram

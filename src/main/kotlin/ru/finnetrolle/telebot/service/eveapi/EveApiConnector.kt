@@ -1,22 +1,18 @@
 package ru.finnetrolle.telebot.service.eveapi
 
 import com.beimin.eveapi.model.eve.Alliance
-import com.beimin.eveapi.model.eve.CorporationStat
 import com.beimin.eveapi.parser.ApiAuthorization
 import com.beimin.eveapi.parser.account.CharactersParser
 import com.beimin.eveapi.parser.corporation.CorpSheetParser
 import com.beimin.eveapi.parser.eve.AllianceListParser
 import com.beimin.eveapi.parser.eve.CharacterInfoParser
-import com.beimin.eveapi.parser.eve.CharacterLookupParser
 import com.beimin.eveapi.parser.pilot.MailBodiesParser
 import com.beimin.eveapi.parser.pilot.MailMessagesParser
-import com.beimin.eveapi.parser.pilot.MailingListsParser
 import com.beimin.eveapi.response.corporation.CorpSheetResponse
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
 import ru.finnetrolle.cachingcontainer.CachingContainer
 import ru.finnetrolle.cachingcontainer.CachingContainer.HOURS
-import ru.finnetrolle.telebot.model.Pilot
 
 /**
 * Licence: MIT
@@ -54,7 +50,7 @@ open class EveApiConnector {
         return 0
     }
 
-    fun getAlliances() = allyList.get { -> AllianceListParser().response.all }//AllianceListParser().response.all
+    fun getAlliances() = allyList[{ -> AllianceListParser().response.all }]//AllianceListParser().response.all
 
     fun isAllianceExist(ticker: String) = getAlliance(ticker) != null
 

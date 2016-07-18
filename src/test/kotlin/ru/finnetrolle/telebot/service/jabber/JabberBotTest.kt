@@ -1,6 +1,5 @@
 package ru.finnetrolle.telebot.service.jabber
 
-import org.junit.Assert.*
 import org.junit.Test
 
 /**

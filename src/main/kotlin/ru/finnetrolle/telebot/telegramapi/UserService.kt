@@ -29,7 +29,6 @@ open class UserService {
     @Autowired lateinit private var corpService: CorpService
     @Autowired lateinit private var eve: EveApiConnector
     @Autowired lateinit private var groups: ExternalGroupProvider
-    @Autowired lateinit private var loc: MessageLocalization
 
     @Value("\${telebot.superuser}")
     private lateinit var superUser: String

@@ -47,10 +47,6 @@ import ru.finnetrolle.telebot.service.eveapi.EveApiConnector
         return rmCorporation(ticker = ticker)
     }
 
-    fun removeCorporation(id: Long): Remove {
-        return rmCorporation(id = id)
-    }
-
     private fun rmCorporation(ticker: String? = null, id: Long? = null): Remove {
         val corp = if (ticker != null) repo.findByTicker(ticker) else repo.findOne(id)
         return if (corp != null) {

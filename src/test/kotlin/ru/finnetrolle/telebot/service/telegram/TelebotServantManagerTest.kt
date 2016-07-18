@@ -2,7 +2,6 @@ package ru.finnetrolle.telebot.service.telegram
 
 import org.junit.Before
 
-import org.junit.Assert.*
 import org.junit.Test
 import org.mockito.InjectMocks
 import org.mockito.Mock
@@ -89,7 +88,6 @@ class TelebotServantManagerTest {
     }
 
     companion object {
-        val USER_MODERATOR: Int = 1
         val USER_USUAL: Int = 2
 
         val CHAT_BACK: String = "BACK"

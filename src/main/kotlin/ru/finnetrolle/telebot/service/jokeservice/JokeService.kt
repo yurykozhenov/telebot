@@ -30,7 +30,7 @@ class JokeService {
     private val rand = Random()
 
     fun joke(): String {
-        val joke = jokes.get(rand.nextInt(jokes.size))
+        val joke = jokes[rand.nextInt(jokes.size)]
         return loc.getMessage("telebot.joke", joke.fromName, joke.text)
     }
 

@@ -65,8 +65,7 @@ open class JabberBot @Autowired constructor (
     }
 
     fun grabGroupName(message: String): String {
-        val g = message.split(" ").get(4)
-        return g.split("\n").get(0)
+        return message.split(" ")[4].split("\n")[0]
     }
 
     fun process(message: Message) {
