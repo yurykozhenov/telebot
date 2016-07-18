@@ -4,6 +4,8 @@ import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import org.telegram.telegrambots.api.methods.SendMessage
+import org.telegram.telegrambots.api.objects.Message
+import ru.finnetrolle.telebot.restful.BroadcastResource
 import ru.finnetrolle.telebot.service.mailbot.MailbotService
 import ru.finnetrolle.telebot.service.telegram.SimpleTelegramBot
 import java.util.concurrent.ConcurrentLinkedQueue
@@ -23,9 +25,9 @@ class BroadcastService: Runnable {
     override fun run() {
         var checkMail = false
         while(true) {
+            var piped = listOf<SendMessage>()
             var timeSpend = 0L
             try {
-                val start = System.currentTimeMillis()
                 if (q.isNotEmpty()) {
                     timeSpend = castSome()
                     checkMail = true
@@ -58,8 +60,15 @@ class BroadcastService: Runnable {
             messages.add(q.poll())
         }
         val result = messages
-                .map { x -> telegram.sendMessage(x) }
-                .map { x -> x.chatId }
+                .map { x ->
+                    try {
+                        telegram.sendMessage(x)
+                    } catch (e: Exception) {
+                        log.error("Can't send message to ${x.chatId} $x", e)
+                        null
+                    }
+                }
+                .map { x -> if (x!=null) x.chatId else 0 }
                 .joinToString(", ")
         val timeSpend = System.currentTimeMillis() - start
         log.info("Messages sent to: \n$result in $timeSpend msec")
