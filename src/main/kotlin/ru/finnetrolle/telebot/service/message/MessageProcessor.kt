@@ -111,7 +111,7 @@ import ru.finnetrolle.telebot.util.MessageLocalization
     fun addJoke(telegramUserId: Int, data: String): String {
         val pilot = pilotRepo.findOne(telegramUserId)
                 ?: return loc.getMessage("telegram.joke.add.someerror")
-        if (data.isEmpty() || data.equals("/ADDJOKE")) {
+        if (data.isEmpty() || data.toUpperCase().equals("/ADDJOKE")) {
             return loc.getMessage("telegram.joke.add.nothing")
         }
         if (data.length > 1000) {
