@@ -110,16 +110,15 @@ import ru.finnetrolle.telebot.util.MessageLocalization
 
     fun addJoke(telegramUserId: Int, data: String): String {
         val pilot = pilotRepo.findOne(telegramUserId)
-        if (pilot == null) {
-            return loc.getMessage("telegram.joke.add.someerror")
-        } else {
-            if (data.length > 1000) {
-                return loc.getMessage("telegram.joke.add.too.long")
-            } else {
-                joker.addJoke(pilot, data)
-                return loc.getMessage("telegram.joke.add.success")
-            }
+                ?: return loc.getMessage("telegram.joke.add.someerror")
+        if (data.isEmpty() || data.equals("/ADDJOKE")) {
+            return loc.getMessage("telegram.joke.add.nothing")
         }
+        if (data.length > 1000) {
+            return loc.getMessage("telegram.joke.add.too.long")
+        }
+        joker.addJoke(pilot, data)
+        return loc.getMessage("telegram.joke.add.success")
     }
 
 }

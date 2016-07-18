@@ -135,6 +135,10 @@ for your system.
 
 ### 0.2.X
 
+#### 0.2.6
+- Empty jokes can not be added
+- Broadcast emits mail receiving
+
 #### 0.2.5
 - Jokes added
 
