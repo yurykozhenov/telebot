@@ -3,6 +3,14 @@ package ru.finnetrolle.telebot.service.external
 import org.junit.Test
 
 import org.junit.Assert.*
+import org.junit.Before
+import org.mockito.InjectMocks
+import org.mockito.Mock
+import org.mockito.Mockito
+import org.mockito.MockitoAnnotations
+import org.springframework.test.util.ReflectionTestUtils
+import ru.finnetrolle.telebot.service.processing.commands.secured.GlobalBroadcasterCommand
+import ru.finnetrolle.telebot.service.processing.commands.secured.GroupBroadcastCommand
 
 /**
  * Telegram bot
@@ -10,19 +18,24 @@ import org.junit.Assert.*
  * Author: Finne Trolle
  */
 class JabberBotTest {
-    @Test
+
+    @Mock private lateinit var groupExecutor: GroupBroadcastCommand
+    @Mock private lateinit var globalExecutor: GlobalBroadcasterCommand
+
+    @InjectMocks private var jabber = JabberBot()
+
+    @Before
     fun init() {
-        throw UnsupportedOperationException()
+        MockitoAnnotations.initMocks(this)
+        Mockito.`when`(groupExecutor.execute(Mockito.anyObject(), Mockito.anyObject())).thenReturn("ok")
+        Mockito.`when`(globalExecutor.execute(Mockito.anyObject(), Mockito.anyObject())).thenReturn("ok")
     }
 
     @Test
-    fun grabGroupName() {
-        throw UnsupportedOperationException()
-    }
-
-    @Test
-    fun process() {
-        throw UnsupportedOperationException()
+    fun activeSettingTurnsJabberBotOfIfFalse () {
+        ReflectionTestUtils.setField(jabber, "alive", false)
+        jabber.init()
+        assertTrue(ReflectionTestUtils.getField(jabber, "chat") == null)
     }
 
 }

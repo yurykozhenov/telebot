@@ -10,9 +10,15 @@ import org.junit.Assert.*
  * Author: Finne Trolle
  */
 class MessageBuilderTest {
+
+    private val CHAT_ID = "chatid"
+    private val TEXT = "some text"
+
     @Test
-    fun build() {
-        throw UnsupportedOperationException()
+    fun checkMessageBuilding() {
+        val msg = MessageBuilder.build(CHAT_ID, TEXT)
+        assertEquals(CHAT_ID, msg.chatId)
+        assertEquals(TEXT, msg.text)
     }
 
 }

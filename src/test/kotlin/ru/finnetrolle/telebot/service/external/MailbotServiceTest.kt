@@ -10,6 +10,7 @@ import org.junit.Assert.*
  * Author: Finne Trolle
  */
 class MailbotServiceTest {
+
     @Test
     fun init() {
         throw UnsupportedOperationException()

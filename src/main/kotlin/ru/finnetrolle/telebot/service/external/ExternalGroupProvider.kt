@@ -18,14 +18,10 @@ class ExternalGroupProvider {
     data class Rows(var rows: List<String> = listOf(), val success: Boolean = true, val total: Int = 0)
 
     fun getMembers(group: String): Set<String> {
-        log.info("Trying to get users for $group from external resource")
-        val template = RestTemplate()
-        val uri = UriBuilder.fromUri(url).queryParam("groupName", group).queryParam("secret", secret).build()
-        log.debug(uri.toString())
         try {
-            val names = template.getForObject(uri, Rows::class.java).rows.distinct().toSet()
-            log.info("Found ${names.size} users for $group")
-            return names
+            return RestTemplate().getForObject(
+                    UriBuilder.fromUri(url).queryParam("groupName", group).queryParam("secret", secret).build(),
+                    Rows::class.java).rows.toSet()
         } catch (e: Exception) {
             log.error("Some error in query for group $group ${e.message}")
             return setOf()

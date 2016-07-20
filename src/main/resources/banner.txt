@@ -7,5 +7,5 @@
     ░     ░ ░  ░░ ░ ▒  ░ ░ ░  ░▒░▒   ░   ░ ▒ ▒░     ░
   ░         ░     ░ ░      ░    ░    ░ ░ ░ ░ ▒    ░
             ░  ░    ░  ░   ░  ░ ░          ░ ░
-                                     ░
+by Finne Trolle                      ░
                       ${application.formatted-version}

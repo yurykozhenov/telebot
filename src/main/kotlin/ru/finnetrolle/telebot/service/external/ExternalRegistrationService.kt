@@ -25,7 +25,7 @@ open class ExternalRegistrationService {
     fun registerContender(charName: String, charId: Long): String {
         log.info("Add new contender $charName with id=$charId")
         val key = UUID.randomUUID().toString().substring(0, 6)
-        val dueTo = System.currentTimeMillis() + 1000 * 60 * 20
+        val dueTo = System.currentTimeMillis() + TIMEOUT
         contenders.put(key.toUpperCase(), PreData(charName, charId, dueTo))
         return key
     }
@@ -38,9 +38,9 @@ open class ExternalRegistrationService {
     }
 
     open fun tryToApproveContender(key: String, user: User): ApproveResult {
-        val cont = contenders[key]
+        val cont = contenders[key.toUpperCase()]
         if (cont != null) {
-            contenders.remove(key)
+            contenders.remove(key.toUpperCase())
             if (cont.dueTo >= System.currentTimeMillis()) {
                 val checkResult = userService.singleCheck(cont.charId);
                 when (checkResult) {
@@ -67,6 +67,7 @@ open class ExternalRegistrationService {
 
     companion object {
         private val log = LoggerFactory.getLogger(ExternalRegistrationService::class.java)
+        private var TIMEOUT = 1000 * 60 * 20
     }
 
 }

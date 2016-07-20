@@ -14,7 +14,7 @@ import ru.finnetrolle.telebot.util.MessageLocalization
  * Author: Finne Trolle
  */
 @Component
-class GlobalBroadcasterCommand : AbstractSecuredCommand() {
+open class GlobalBroadcasterCommand : AbstractSecuredCommand() {
 
     @Autowired
     private lateinit var userService: UserService

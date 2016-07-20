@@ -20,7 +20,7 @@ open class BotApiExtender(
         val processIncomingMessage: (Message) -> SendMessage
 ) : BotApi {
 
-    private val api = object : TelegramLongPollingBot() {
+    private var api = object : TelegramLongPollingBot() {
         override fun getBotUsername() = name
 
         override fun getBotToken() = token

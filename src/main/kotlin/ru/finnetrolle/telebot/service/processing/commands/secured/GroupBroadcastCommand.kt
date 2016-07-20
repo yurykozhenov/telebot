@@ -15,7 +15,7 @@ import ru.finnetrolle.telebot.util.MessageLocalization
  */
 
 @Component
-class GroupBroadcastCommand : AbstractSecuredCommand() {
+open class GroupBroadcastCommand : AbstractSecuredCommand() {
 
     @Autowired
     private lateinit var userService: UserService

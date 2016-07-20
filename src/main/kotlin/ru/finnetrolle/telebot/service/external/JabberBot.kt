@@ -45,7 +45,7 @@ open class JabberBot {
     @Value("\${jabber.bot.alive}")
     private var alive: Boolean = false
 
-    private lateinit var chat: Chat
+    private var chat: Chat? = null
 
     @PostConstruct
     fun init() {
@@ -70,21 +70,19 @@ open class JabberBot {
         chat = chatMan.createChat(broadcaster, { chat, message -> process(message) })
     }
 
-    fun grabGroupName(message: String): String {
+    private fun grabGroupName(message: String): String {
         return message.split(" ")[4].split("\n")[0]
     }
 
-    fun process(message: Message) {
+    private fun process(message: Message) {
         val groupName = grabGroupName(message.body)
         log.info("Received from ${message.from} for $groupName message: ${message.body}")
         if (groupName.toUpperCase().equals("ALL")) {
             log.info("Sending to everybody")
             globalExecutor.execute(Pilot(id = 0, characterName = "Jabber"), message.body)
-            //            telebot.broadcast(message.body)
         } else {
             log.info("Sending to group $groupName")
             groupExecutor.execute(Pilot(id = 0, characterName = "Jabber"), "${message.body}")
-            //            telebot.groupBroadcast(groupName, message.body)
         }
     }
 

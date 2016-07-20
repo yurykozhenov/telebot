@@ -10,7 +10,7 @@ import org.junit.Test
 class JabberBotTest {
 
     @Test fun testGroupGrabber() {
-
+        throw UnsupportedOperationException()
     }
 
 }
