@@ -31,10 +31,10 @@ open class ExternalRegistrationService {
     }
 
     interface ApproveResult {
-        data class Success(val name: String, val corp: String, val ally: String): ApproveResult
-        data class Forbidden(val name: String): ApproveResult
-        data class TimedOut(val late: Long): ApproveResult
-        data class NotAKey(val text: String): ApproveResult
+        data class Success(val name: String, val corp: String, val ally: String) : ApproveResult
+        data class Forbidden(val name: String) : ApproveResult
+        data class TimedOut(val late: Long) : ApproveResult
+        data class NotAKey(val text: String) : ApproveResult
     }
 
     open fun tryToApproveContender(key: String, user: User): ApproveResult {

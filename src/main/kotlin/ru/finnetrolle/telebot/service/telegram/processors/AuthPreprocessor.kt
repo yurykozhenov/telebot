@@ -6,9 +6,9 @@ import org.springframework.stereotype.Component
 import org.telegram.telegrambots.api.methods.SendMessage
 import org.telegram.telegrambots.api.objects.User
 import ru.finnetrolle.telebot.model.Pilot
-import ru.finnetrolle.telebot.service.processing.MessageBuilder
 import ru.finnetrolle.telebot.service.external.ExternalRegistrationService
 import ru.finnetrolle.telebot.service.internal.UserService
+import ru.finnetrolle.telebot.util.MessageBuilder
 import ru.finnetrolle.telebot.util.MessageLocalization
 
 /**
@@ -26,7 +26,7 @@ open class AuthPreprocessor {
 
     private val KEY_LENGTH: Int = 6
 
-    private fun tryRegister(tryApp: ExternalRegistrationService.ApproveResult) = when(tryApp) {
+    private fun tryRegister(tryApp: ExternalRegistrationService.ApproveResult) = when (tryApp) {
         is ExternalRegistrationService.ApproveResult.Success ->
             loc.getMessage("telebot.fastreg.welcome", tryApp.name)
         is ExternalRegistrationService.ApproveResult.Forbidden ->
@@ -38,8 +38,8 @@ open class AuthPreprocessor {
     }
 
     interface Auth {
-        data class Intercepted(val response: SendMessage): Auth
-        data class Authorized(val pilot: Pilot, val command: String, val data: String): Auth
+        data class Intercepted(val response: SendMessage) : Auth
+        data class Authorized(val pilot: Pilot, val command: String, val data: String) : Auth
     }
 
     open fun selectResponse(text: String, user: User, chatId: String): Auth {

@@ -16,11 +16,11 @@ class BroadcastUnit(
         val bot: BotApi,
         val batchSize: Int = 30,
         val timeout: Long = 1000L
-): Thread() {
+) : Thread() {
 
     interface Task {
-        data class Send(val message: SendMessage): Task
-        data class Quit(val unitName: String): Task
+        data class Send(val message: SendMessage) : Task
+        data class Quit(val unitName: String) : Task
     }
 
     override fun run() {
@@ -28,16 +28,22 @@ class BroadcastUnit(
         while (alive) {
             val start = System.currentTimeMillis()
             if (queue.isNotEmpty()) {
-                for (i in 0..batchSize-1) {
+                for (i in 0..batchSize - 1) {
                     val task = queue.poll()
                     if (task == null) {
                         log.debug("[PART] Sent $i messages in ${System.currentTimeMillis() - start} ms")
                         break
                     } else {
                         when {
-                            task is Task.Send -> { trySend(task.message) }
-                            task is Task.Quit && task.unitName.equals(unitName) -> { alive = false }
-                            else -> { queue.offer(task) }
+                            task is Task.Send -> {
+                                trySend(task.message)
+                            }
+                            task is Task.Quit && task.unitName.equals(unitName) -> {
+                                alive = false
+                            }
+                            else -> {
+                                queue.offer(task)
+                            }
                         }
                     }
                 }
@@ -50,8 +56,12 @@ class BroadcastUnit(
     private fun trySend(msg: SendMessage) {
         val sendResult = bot.send(msg)
         when (sendResult) {
-            is BotApi.Send.Success -> { log.trace("Message successfully sent to ${sendResult.chatId} in ${sendResult.spend} ms") }
-            is BotApi.Send.Failed -> { log.error("Message can not be sent to ${sendResult.chatId}", sendResult.e) }
+            is BotApi.Send.Success -> {
+                log.trace("Message successfully sent to ${sendResult.chatId} in ${sendResult.spend} ms")
+            }
+            is BotApi.Send.Failed -> {
+                log.error("Message can not be sent to ${sendResult.chatId}", sendResult.e)
+            }
         }
     }
 

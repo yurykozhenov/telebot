@@ -16,7 +16,7 @@ import ru.finnetrolle.telebot.service.external.EveApiConnector
 @Autowired constructor(
         private val repo: CorporationRepository,
         private val eve: EveApiConnector
-){
+) {
 
     interface Add {
         data class Success(val corporation: Corporation) : Add

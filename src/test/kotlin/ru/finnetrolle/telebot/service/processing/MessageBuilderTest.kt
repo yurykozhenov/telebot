@@ -2,6 +2,7 @@ package ru.finnetrolle.telebot.service.processing
 
 import org.junit.Assert.*
 import org.junit.Test
+import ru.finnetrolle.telebot.util.MessageBuilder
 
 /**
  * Telegram bot

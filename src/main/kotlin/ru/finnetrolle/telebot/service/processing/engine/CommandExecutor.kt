@@ -1,6 +1,5 @@
 package ru.finnetrolle.telebot.service.processing.engine
 
-import org.telegram.telegrambots.api.methods.SendMessage
 import ru.finnetrolle.telebot.model.Pilot
 
 /**

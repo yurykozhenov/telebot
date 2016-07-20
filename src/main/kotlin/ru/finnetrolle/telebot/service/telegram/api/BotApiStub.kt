@@ -11,7 +11,7 @@ import org.telegram.telegrambots.api.methods.SendMessage
 open class BotApiStub(
         val sendDelay: Long = 0,
         val sendCallback: (SendMessage) -> SendMessage = { msg -> msg }
-): BotApi {
+) : BotApi {
 
     override fun send(message: SendMessage): BotApi.Send {
         if (sendDelay > 0L) {

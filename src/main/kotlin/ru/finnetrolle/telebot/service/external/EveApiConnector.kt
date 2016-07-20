@@ -15,10 +15,10 @@ import ru.finnetrolle.cachingcontainer.CachingContainer
 import ru.finnetrolle.cachingcontainer.CachingContainer.HOURS
 
 /**
-* Licence: MIT
-* Legion of xXDEATHXx notification bot for telegram
-* Created by finnetrolle on 12.03.16.
-*/
+ * Licence: MIT
+ * Legion of xXDEATHXx notification bot for telegram
+ * Created by finnetrolle on 12.03.16.
+ */
 
 @Component
 open class EveApiConnector {
@@ -30,7 +30,7 @@ open class EveApiConnector {
     fun getCharacters(key: Int, code: String): List<Character>? {
         try {
             val chars = CharactersParser().getResponse(ApiAuthorization(key, code)).all
-                .map { c -> Character(c.name, c.characterID, getCorpId(c.characterID)) }
+                    .map { c -> Character(c.name, c.characterID, getCorpId(c.characterID)) }
             return if (chars.isEmpty()) null else chars
         } catch (e: Exception) {
             log.warn("Get characters failed for key=$key", e)
@@ -63,7 +63,7 @@ open class EveApiConnector {
 
     fun getMailList(apiKey: Int, vCode: String, mailingLists: String) =
             MailMessagesParser().getResponse(ApiAuthorization(apiKey, vCode)).all
-                .filter { x -> x.toListIDs.equals(mailingLists) }
+                    .filter { x -> x.toListIDs.equals(mailingLists) }
 
     fun getMailBody(apiKey: Int, vCode: String, mailId: Long) = MailBodiesParser()
             .getResponse(ApiAuthorization(apiKey, vCode), mailId).all.find { x -> x != null }!!.body

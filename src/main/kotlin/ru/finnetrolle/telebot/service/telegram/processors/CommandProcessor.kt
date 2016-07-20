@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component
 import org.telegram.telegrambots.api.methods.SendMessage
 import ru.finnetrolle.telebot.model.Pilot
 import ru.finnetrolle.telebot.service.processing.engine.CommandExecutorService
-import javax.annotation.PostConstruct
 
 /**
  * Telegram bot
@@ -22,12 +21,6 @@ open class CommandProcessor {
 
     open fun process(command: String, data: String, pilot: Pilot): SendMessage {
         return ces.execute(command, data, pilot, pilot.id.toString())
-    }
-
-    @PostConstruct
-    fun init() {
-        log.info("\n\nCES loaded:\n${ces.generateHelp(Pilot(moderator = true))}\n\n")
-        println("CES loaded:\n${ces.generateHelp(Pilot(moderator = true))}")
     }
 
     companion object {

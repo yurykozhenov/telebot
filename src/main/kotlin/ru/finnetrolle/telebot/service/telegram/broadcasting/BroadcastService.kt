@@ -48,7 +48,7 @@ open class BroadcastService {
     open fun send(messages: Collection<SendMessage>) {
         if (bots.isNotEmpty()) {
             q.addAll(messages.map { m -> BroadcastUnit.Task.Send(m) }.toList())
-        }else {
+        } else {
             log.error("Trying to send messages without worker units")
         }
     }

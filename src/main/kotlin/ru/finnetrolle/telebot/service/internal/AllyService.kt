@@ -16,7 +16,7 @@ import ru.finnetrolle.telebot.service.external.EveApiConnector
 @Autowired constructor(
         private val repo: AllianceRepository,
         private val eve: EveApiConnector
-){
+) {
 
     interface AddResponse {
         data class AllianceAdded(val alliance: Alliance) : AddResponse
@@ -39,8 +39,8 @@ import ru.finnetrolle.telebot.service.external.EveApiConnector
     }
 
     interface RemoveResponse {
-        data class AllianceRemoved(val alliance: Alliance): RemoveResponse
-        data class AllianceNotFound(val ticker: String): RemoveResponse
+        data class AllianceRemoved(val alliance: Alliance) : RemoveResponse
+        data class AllianceNotFound(val ticker: String) : RemoveResponse
     }
 
     fun removeAlly(ticker: String): RemoveResponse {

@@ -1,12 +1,11 @@
-package ru.finnetrolle.telebot.service.processing.commands
+package ru.finnetrolle.telebot.service.processing.commands.secured
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import ru.finnetrolle.telebot.model.Pilot
 import ru.finnetrolle.telebot.service.internal.UserService
-import ru.finnetrolle.telebot.service.processing.MessageBuilder
-import ru.finnetrolle.telebot.service.processing.engine.CommandExecutor
 import ru.finnetrolle.telebot.service.telegram.TelegramBotService
+import ru.finnetrolle.telebot.util.MessageBuilder
 import ru.finnetrolle.telebot.util.MessageLocalization
 
 /**
@@ -15,7 +14,7 @@ import ru.finnetrolle.telebot.util.MessageLocalization
  * Author: Finne Trolle
  */
 @Component
-class GlobalBroadcasterCommand: CommandExecutor {
+class GlobalBroadcasterCommand : AbstractSecuredCommand() {
 
     @Autowired
     private lateinit var userService: UserService
@@ -28,9 +27,7 @@ class GlobalBroadcasterCommand: CommandExecutor {
 
     override fun name() = "/CAST"
 
-    override fun secured() = true
-
-    override fun description() = "telebot.command.description.cast"
+    override fun description() = loc.getMessage("telebot.command.description.cast")
 
     override fun execute(pilot: Pilot, data: String): String {
         val users = userService.getLegalUsers()

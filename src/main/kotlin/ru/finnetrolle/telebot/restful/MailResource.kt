@@ -17,13 +17,13 @@ import ru.finnetrolle.telebot.service.external.MailbotService
 
 @Controller
 @RequestMapping("/test")
-class TestResource {
+class MailResource {
 
     @Autowired lateinit private var mailbot: MailbotService
 
     @RequestMapping(method = arrayOf(RequestMethod.GET))
     @ResponseBody
-    fun mail():ResponseEntity<List<Mail>> {
+    fun mail(): ResponseEntity<List<Mail>> {
         mailbot.receiveMail()
         return ResponseEntity.ok(mailbot.getLast())
     }

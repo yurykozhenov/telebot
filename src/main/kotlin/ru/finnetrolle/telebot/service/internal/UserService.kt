@@ -11,14 +11,13 @@ import ru.finnetrolle.telebot.model.Pilot
 import ru.finnetrolle.telebot.model.PilotRepository
 import ru.finnetrolle.telebot.service.external.EveApiConnector
 import ru.finnetrolle.telebot.service.external.ExternalGroupProvider
-import ru.finnetrolle.telebot.util.MessageLocalization
 import javax.annotation.PostConstruct
 
 /**
-* Licence: MIT
-* Legion of xXDEATHXx notification bot for telegram
-* Created by finnetrolle on 13.03.16.
-*/
+ * Licence: MIT
+ * Legion of xXDEATHXx notification bot for telegram
+ * Created by finnetrolle on 13.03.16.
+ */
 
 @Component
 
@@ -88,8 +87,8 @@ open class UserService {
     }
 
     interface SingleCheckResult {
-        data class OK(val name: String, val corp: String, val ally: String): SingleCheckResult
-        data class Renegade(val name: String, val corp: String, val ally: String): SingleCheckResult
+        data class OK(val name: String, val corp: String, val ally: String) : SingleCheckResult
+        data class Renegade(val name: String, val corp: String, val ally: String) : SingleCheckResult
     }
 
     open fun singleCheck(characterId: Long): SingleCheckResult {
@@ -130,22 +129,13 @@ open class UserService {
 
     open fun getCharacters(): List<String> = pilotRepo.findAll().map { p -> p.characterName }.toList()
 
-    open fun showGroup(groupName: String): List<String> {
-        log.debug("starting users mixing method for $groupName")
-        val names = groups.getMembers(groupName)
-        log.debug("${names.size} users in external system")
-        val mix = pilotRepo.findByRenegadeFalse()
-                .map { n -> n.characterName }
-                .filter { n -> names.contains(n) }
-                .toList()
-        log.debug("${mix.size} users of group in our DB")
-        return mix
-    }
 
     private fun isSuperUser(pilot: Pilot) = pilot.characterName.equals(superUser)
 
     companion object {
         val log = LoggerFactory.getLogger(UserService::class.java)
     }
+
+    fun getAllUsers() = pilotRepo.findAll()
 
 }

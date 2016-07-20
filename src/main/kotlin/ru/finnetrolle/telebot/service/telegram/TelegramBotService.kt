@@ -6,14 +6,13 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 import org.telegram.telegrambots.api.methods.SendMessage
 import org.telegram.telegrambots.api.objects.Message
-import ru.finnetrolle.telebot.service.telegram.processors.CommandProcessor
-import ru.finnetrolle.telebot.service.processing.MessageBuilder
 import ru.finnetrolle.telebot.service.telegram.api.BotApi
 import ru.finnetrolle.telebot.service.telegram.api.BotApiExtender
 import ru.finnetrolle.telebot.service.telegram.api.BotApiStub
 import ru.finnetrolle.telebot.service.telegram.broadcasting.BroadcastService
 import ru.finnetrolle.telebot.service.telegram.processors.AuthPreprocessor
-import java.util.*
+import ru.finnetrolle.telebot.service.telegram.processors.CommandProcessor
+import ru.finnetrolle.telebot.util.MessageBuilder
 import javax.annotation.PostConstruct
 
 /**
@@ -47,7 +46,7 @@ open class TelegramBotService {
             try {
                 api = BotApiExtender(botUsername, botToken, processMessage)
                 broadcastService.init(api)
-            } catch (e : Exception) {
+            } catch (e: Exception) {
                 log.error("Bot cannot be started", e)
             }
         } else {
@@ -59,9 +58,15 @@ open class TelegramBotService {
     private val processMessage: (Message) -> SendMessage = { msg ->
         val authResult = authPreprocessor.selectResponse(msg.text, msg.from, msg.chatId.toString())
         when (authResult) {
-            is AuthPreprocessor.Auth.Intercepted -> { authResult.response }
-            is AuthPreprocessor.Auth.Authorized -> { commandProcessor.process(authResult.command, authResult.data, authResult.pilot) }
-            else -> { log.warn("Impossible option"); MessageBuilder.build(msg.chatId.toString(), "This option is impossible")}
+            is AuthPreprocessor.Auth.Intercepted -> {
+                authResult.response
+            }
+            is AuthPreprocessor.Auth.Authorized -> {
+                commandProcessor.process(authResult.command, authResult.data, authResult.pilot)
+            }
+            else -> {
+                log.warn("Impossible option"); MessageBuilder.build(msg.chatId.toString(), "This option is impossible")
+            }
         }
     }
 

@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
 import ru.finnetrolle.telebot.model.Mail
 import ru.finnetrolle.telebot.model.MailRepository
-import ru.finnetrolle.telebot.service.external.EveApiConnector
 import java.util.concurrent.atomic.AtomicLong
 import javax.annotation.PostConstruct
 
@@ -92,7 +91,6 @@ open class MailbotService {
     companion object {
         private val log = LoggerFactory.getLogger(MailbotService::class.java)
     }
-
 
 
 }

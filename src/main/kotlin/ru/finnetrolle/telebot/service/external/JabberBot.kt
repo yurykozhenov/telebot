@@ -11,8 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 import ru.finnetrolle.telebot.model.Pilot
-import ru.finnetrolle.telebot.service.processing.commands.GlobalBroadcasterCommand
-import ru.finnetrolle.telebot.service.processing.commands.GroupBroadcastCommand
+import ru.finnetrolle.telebot.service.processing.commands.secured.GlobalBroadcasterCommand
+import ru.finnetrolle.telebot.service.processing.commands.secured.GroupBroadcastCommand
 import javax.annotation.PostConstruct
 
 /**
@@ -22,7 +22,7 @@ import javax.annotation.PostConstruct
  */
 
 @Component
-open class JabberBot  {
+open class JabberBot {
 
     @Autowired
     private lateinit var groupExecutor: GroupBroadcastCommand
@@ -48,7 +48,7 @@ open class JabberBot  {
     private lateinit var chat: Chat
 
     @PostConstruct
-    fun init()  {
+    fun init() {
         if (!alive) {
             return
         }
@@ -80,11 +80,11 @@ open class JabberBot  {
         if (groupName.toUpperCase().equals("ALL")) {
             log.info("Sending to everybody")
             globalExecutor.execute(Pilot(id = 0, characterName = "Jabber"), message.body)
-//            telebot.broadcast(message.body)
+            //            telebot.broadcast(message.body)
         } else {
             log.info("Sending to group $groupName")
             groupExecutor.execute(Pilot(id = 0, characterName = "Jabber"), "${message.body}")
-//            telebot.groupBroadcast(groupName, message.body)
+            //            telebot.groupBroadcast(groupName, message.body)
         }
     }
 

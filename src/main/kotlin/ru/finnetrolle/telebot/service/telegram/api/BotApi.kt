@@ -11,8 +11,8 @@ import org.telegram.telegrambots.api.methods.SendMessage
 interface BotApi {
 
     interface Send {
-        data class Success(val chatId: Long, val spend: Long): Send
-        data class Failed(val chatId: Long, val e: TelegramApiException): Send
+        data class Success(val chatId: Long, val spend: Long) : Send
+        data class Failed(val chatId: Long, val e: TelegramApiException) : Send
     }
 
     open fun send(message: SendMessage): Send

@@ -12,7 +12,7 @@
 //import ru.finnetrolle.telebot.assertMessage
 //import ru.finnetrolle.telebot.model.Pilot
 //import ru.finnetrolle.telebot.service.telegram.processors.CommandProcessor
-//import ru.finnetrolle.telebot.service.processing.MessageBuilder
+//import ru.finnetrolle.telebot.util.MessageBuilder
 //import ru.finnetrolle.telebot.service.external.ExternalRegistrationService
 //import ru.finnetrolle.telebot.service.telegram.processors.AuthPreprocessor
 //import ru.finnetrolle.telebot.service.internal.UserService

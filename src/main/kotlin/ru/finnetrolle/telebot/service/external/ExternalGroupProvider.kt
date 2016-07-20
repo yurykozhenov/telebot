@@ -15,7 +15,7 @@ class ExternalGroupProvider {
     @Value("\${telebot.external.groups.url}")
     lateinit private var url: String
 
-    data class Rows(var rows:List<String> = listOf(), val success: Boolean = true, val total: Int = 0)
+    data class Rows(var rows: List<String> = listOf(), val success: Boolean = true, val total: Int = 0)
 
     fun getMembers(group: String): Set<String> {
         log.info("Trying to get users for $group from external resource")

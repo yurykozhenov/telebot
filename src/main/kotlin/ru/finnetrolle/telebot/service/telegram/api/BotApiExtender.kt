@@ -20,8 +20,7 @@ open class BotApiExtender(
         val processIncomingMessage: (Message) -> SendMessage
 ) : BotApi {
 
-    private val api = object : TelegramLongPollingBot()
-    {
+    private val api = object : TelegramLongPollingBot() {
         override fun getBotUsername() = name
 
         override fun getBotToken() = token
@@ -39,7 +38,8 @@ open class BotApiExtender(
                     log.warn("Not supported format - InlineQuery from ${request.inlineQuery.from.id}")
                 }
                 else -> {
-                    log.warn("Impossible Exception for unknown request type")}
+                    log.warn("Impossible Exception for unknown request type")
+                }
             }
         }
     }

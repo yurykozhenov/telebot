@@ -2,15 +2,11 @@ package ru.finnetrolle.telebot.service.processing.engine
 
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.beans.factory.config.BeanPostProcessor
-import org.springframework.context.annotation.Configuration
 import org.springframework.stereotype.Component
 import org.telegram.telegrambots.api.methods.SendMessage
 import ru.finnetrolle.telebot.model.Pilot
-import ru.finnetrolle.telebot.service.processing.MessageBuilder
-import ru.finnetrolle.telebot.service.processing.engine.CommandExecutor
+import ru.finnetrolle.telebot.util.MessageBuilder
 import ru.finnetrolle.telebot.util.MessageLocalization
-import javax.annotation.PostConstruct
 
 /**
  * Telegram bot
@@ -36,7 +32,15 @@ open class CommandExecutorService {
         }
         val executor = executors[command.toUpperCase()]
         return if (executor != null) {
-            MessageBuilder.build(chatId, executor.execute(pilot, data))
+            if (executor.secured()) {
+                if (pilot.moderator) {
+                    MessageBuilder.build(chatId, executor.execute(pilot, data))
+                } else {
+                    MessageBuilder.build(chatId, loc.getMessage("messages.access.denied"))
+                }
+            } else {
+                MessageBuilder.build(chatId, executor.execute(pilot, data))
+            }
         } else {
             MessageBuilder.build(chatId, loc.getMessage("messages.unknown"))
         }
