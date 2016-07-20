@@ -20,6 +20,7 @@ open class CommandProcessor {
     private lateinit var ces: CommandExecutorService
 
     open fun process(command: String, data: String, pilot: Pilot): SendMessage {
+        log.debug("Processing command $command from $pilot with data = $data")
         return ces.execute(command, data, pilot, pilot.id.toString())
     }
 

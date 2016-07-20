@@ -60,7 +60,4 @@ open class AuthPreprocessor {
         }
     }
 
-    companion object {
-        private val log = LoggerFactory.getLogger(AuthPreprocessor::class.java)
-    }
 }
