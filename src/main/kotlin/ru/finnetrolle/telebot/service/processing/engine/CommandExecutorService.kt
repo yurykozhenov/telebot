@@ -5,7 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.config.BeanPostProcessor
 import org.springframework.context.annotation.Configuration
 import org.springframework.stereotype.Component
+import org.telegram.telegrambots.api.methods.SendMessage
+import ru.finnetrolle.telebot.model.Pilot
+import ru.finnetrolle.telebot.service.processing.MessageBuilder
 import ru.finnetrolle.telebot.service.processing.engine.CommandExecutor
+import ru.finnetrolle.telebot.util.MessageLocalization
 import javax.annotation.PostConstruct
 
 /**
@@ -14,23 +18,41 @@ import javax.annotation.PostConstruct
  * Author: Finne Trolle
  */
 
-//@Configuration
 @Component
-open class CommandExecutorService : BeanPostProcessor {
+open class CommandExecutorService {
 
-    private val executors = mutableListOf<CommandExecutor>()
+    private val executors = mutableMapOf<String, CommandExecutor>()
 
-    override fun postProcessBeforeInitialization(bean: Any?, name: String?) = bean
+    @Autowired
+    private lateinit var loc: MessageLocalization
 
-    override fun postProcessAfterInitialization(bean: Any?, name: String?): Any? {
-        if (bean is CommandExecutor) {
-            println("Executor found with name ${bean!!.javaClass.name}")
-            executors.add(bean)
-        }
-        return bean
+    open fun addExecutor(executor: CommandExecutor) {
+        executors.put(executor.name().toUpperCase(), executor)
     }
 
-    open fun commands() = executors
+    open fun execute(command: String, data: String, pilot: Pilot, chatId: String): SendMessage {
+        if (command.toUpperCase().equals("/HELP")) {
+            return MessageBuilder.build(chatId, generateHelp(pilot))
+        }
+        val executor = executors[command.toUpperCase()]
+        return if (executor != null) {
+            MessageBuilder.build(chatId, executor.execute(pilot, data))
+        } else {
+            MessageBuilder.build(chatId, loc.getMessage("messages.unknown"))
+        }
+    }
+
+    open fun generateHelp(pilot: Pilot): String {
+        return if (pilot.moderator)
+            executors
+                    .map { e -> "${e.value.name()} - ${loc.getMessage(e.value.description())}" }
+                    .joinToString(separator = "\n", prefix = loc.getMessage("messages.help"))
+        else
+            executors
+                    .filter { e -> !e.value.secured() }
+                    .map { e -> "${e.value.name()} - ${loc.getMessage(e.value.description())}" }
+                    .joinToString(separator = "\n", prefix = loc.getMessage("messages.help"))
+    }
 
     companion object {
         val log = LoggerFactory.getLogger(CommandExecutorService::class.java)
