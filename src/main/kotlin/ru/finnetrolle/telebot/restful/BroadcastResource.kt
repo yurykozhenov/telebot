@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody
 import ru.finnetrolle.telebot.model.Pilot
 import ru.finnetrolle.telebot.service.processing.commands.secured.GlobalBroadcasterCommand
 import ru.finnetrolle.telebot.service.processing.commands.secured.GroupBroadcastCommand
+import ru.finnetrolle.telebot.service.processing.commands.secured.ListUsersCommand
 
 /**
  * Licence: MIT
@@ -20,6 +21,9 @@ import ru.finnetrolle.telebot.service.processing.commands.secured.GroupBroadcast
  */
 @Controller
 class BroadcastResource {
+
+    @Autowired
+    private lateinit var cmd: ListUsersCommand
 
     @Autowired
     private lateinit var globalCaster: GlobalBroadcasterCommand
@@ -59,6 +63,12 @@ class BroadcastResource {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
         }
         return ResponseEntity.ok(groupCaster.execute(Pilot(characterName = message.from), "${message.group} ${message.text}"))
+    }
+
+    @RequestMapping(value = "/lu", method = arrayOf(RequestMethod.GET))
+    @ResponseBody
+    fun lu(): ResponseEntity<String> {
+        return ResponseEntity.ok(cmd.execute(Pilot(moderator = true), ""))
     }
 
 
