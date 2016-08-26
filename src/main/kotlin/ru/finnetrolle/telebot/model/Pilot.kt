@@ -34,8 +34,6 @@ data class Pilot (
         var firstName: String? = "",
         var lastName: String? = "",
         var username: String? = "",
-        var apiKey: Int = 0,
-        var vCode: String = "",
         var characterName: String = "",
         var characterId: Long = 0,
         var moderator: Boolean = false,

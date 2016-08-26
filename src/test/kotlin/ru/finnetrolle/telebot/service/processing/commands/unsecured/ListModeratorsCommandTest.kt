@@ -1,0 +1,36 @@
+package ru.finnetrolle.telebot.service.processing.commands.unsecured
+
+import org.junit.Test
+
+import org.junit.Assert.*
+import org.junit.Before
+import org.mockito.InjectMocks
+import org.mockito.Mock
+import org.mockito.Mockito
+import org.mockito.MockitoAnnotations
+import ru.finnetrolle.telebot.service.external.MailbotService
+import ru.finnetrolle.telebot.util.MessageLocalization
+
+/**
+ * Telegram bot
+ * Licence: MIT
+ * Author: Finne Trolle
+ */
+class ListModeratorsCommandTest {
+
+    @Mock private lateinit var loc: MessageLocalization
+
+    @InjectMocks private var cx = MailCommand()
+
+    @Before
+    fun init() {
+        MockitoAnnotations.initMocks(this)
+        Mockito.`when`(loc.getMessage(Mockito.anyString())).thenAnswer { a -> a.arguments[0] }
+    }
+
+    @Test
+    fun execute() {
+        throw UnsupportedOperationException()
+    }
+
+}
