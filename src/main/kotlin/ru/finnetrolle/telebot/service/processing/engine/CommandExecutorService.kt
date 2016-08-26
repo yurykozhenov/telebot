@@ -47,15 +47,15 @@ open class CommandExecutorService {
     }
 
     open fun generateHelp(pilot: Pilot): String {
-        val msg = "messages.help.message"
+        val msg = loc.getMessage("messages.help.message")
         return if (pilot.moderator)
             executors
-                    .map { e -> "${e.value.name()} - ${loc.getMessage(e.value.description())}" }
+                    .map { e -> "${e.value.name()} - ${e.value.description()}" }
                     .joinToString(separator = "\n", prefix = msg)
         else
             executors
                     .filter { e -> !e.value.secured() }
-                    .map { e -> "${e.value.name()} - ${loc.getMessage(e.value.description())}" }
+                    .map { e -> "${e.value.name()} - ${e.value.description()}" }
                     .joinToString(separator = "\n", prefix = msg)
     }
 
