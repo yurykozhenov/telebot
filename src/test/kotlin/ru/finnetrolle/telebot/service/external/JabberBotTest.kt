@@ -27,8 +27,6 @@ class JabberBotTest {
     @Before
     fun init() {
         MockitoAnnotations.initMocks(this)
-        Mockito.`when`(groupExecutor.execute(Mockito.anyObject(), Mockito.anyObject())).thenReturn("ok")
-        Mockito.`when`(globalExecutor.execute(Mockito.anyObject(), Mockito.anyObject())).thenReturn("ok")
     }
 
     @Test
