@@ -136,6 +136,6 @@ open class UserService {
         val log = LoggerFactory.getLogger(UserService::class.java)
     }
 
-    fun getAllUsers() = pilotRepo.findAll()
+    open fun getAllUsers() = pilotRepo.findAll()
 
 }
