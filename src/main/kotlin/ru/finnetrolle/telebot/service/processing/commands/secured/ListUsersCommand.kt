@@ -28,7 +28,7 @@ class ListUsersCommand : AbstractSecuredCommand() {
     override fun execute(pilot: Pilot, data: String): String {
         val users = userService.getAllUsers()
                 .map { u -> "${renemark(u)}${u.characterName}${modermark(u)}" }
-        return loc.getMessage("messages.response.lu", users.size, users.joinToString(separator = "\n"))
+        return loc.getMessage("messages.response.lu", users.size, users.joinToString(separator = ",\n"))
     }
 
     private fun renemark(pilot: Pilot) = if (pilot.renegade) "[R] " else ""
