@@ -16,5 +16,8 @@
     <changeSet id="4" author="finnetrolle">
         <sqlFile path="sql/004_0_2_5_Add_jokes.sql" relativeToChangelogFile="true" stripComments="true"/>
     </changeSet>
+    <changeSet id="5" author="finnetrolle">
+        <sqlFile path="sql/005_0_3_1_Remove_not_null.sql" relativeToChangelogFile="true" stripComments="true"/>
+    </changeSet>
 
 </databaseChangeLog>
