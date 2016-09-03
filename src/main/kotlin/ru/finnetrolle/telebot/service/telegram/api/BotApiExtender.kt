@@ -56,7 +56,8 @@ open class BotApiExtender(
 
     override fun send(message: SendMessage): BotApi.Send {
         try {
-            log.trace("Trying to send response to ${message.chatId}")
+            log.debug("Trying to send response to ${message.chatId}")
+            log.debug("Message is ${message.text}")
             val start = System.currentTimeMillis()
             return BotApi.Send.Success(
                     api.sendMessage(message).chatId,
@@ -64,6 +65,9 @@ open class BotApiExtender(
         } catch (e: TelegramApiException) {
             log.error("Message sending was not success because of", e)
             return BotApi.Send.Failed(message.chatId.toLong(), e)
+        } catch (e: Exception) {
+            log.error("Message sending failed because of", e)
+            return BotApi.Send.Failed(message.chatId.toLong(), TelegramApiException(e.message))
         }
     }
 
