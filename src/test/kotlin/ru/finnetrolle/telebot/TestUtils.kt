@@ -1,7 +1,7 @@
 package ru.finnetrolle.telebot
 
 import org.junit.Assert
-import org.telegram.telegrambots.api.methods.SendMessage
+import org.telegram.telegrambots.api.methods.send.SendMessage
 
 /**
  * Telegram bot

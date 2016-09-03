@@ -1,7 +1,8 @@
 package ru.finnetrolle.telebot.util
 
-import org.telegram.telegrambots.api.methods.SendMessage
-import org.telegram.telegrambots.api.objects.ReplyKeyboardHide
+import org.telegram.telegrambots.api.methods.send.SendMessage
+import org.telegram.telegrambots.api.objects.replykeyboard.ReplyKeyboardHide
+
 
 /**
  * Telegram bot
@@ -26,9 +27,9 @@ object MessageBuilder {
         msg.chatId = chatId
         msg.text = text
         msg.enableMarkdown(true)
-        val rkh = ReplyKeyboardHide()
-        rkh.hideKeyboard = true
-        msg.replayMarkup = rkh
+//        val rkh = ReplyKeyboardHide()
+//        rkh.hideKeyboard = true
+//        msg.replayMarkup = rkh
         return msg
     }
 

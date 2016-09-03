@@ -1,7 +1,7 @@
 package ru.finnetrolle.telebot.service.telegram.api
 
 import org.slf4j.LoggerFactory
-import org.telegram.telegrambots.api.methods.SendMessage
+import org.telegram.telegrambots.api.methods.send.SendMessage
 
 /**
  * Telegram bot

@@ -3,7 +3,7 @@ package ru.finnetrolle.telebot.service.telegram.api
 import org.slf4j.LoggerFactory
 import org.telegram.telegrambots.TelegramApiException
 import org.telegram.telegrambots.TelegramBotsApi
-import org.telegram.telegrambots.api.methods.SendMessage
+import org.telegram.telegrambots.api.methods.send.SendMessage
 import org.telegram.telegrambots.api.objects.Message
 import org.telegram.telegrambots.api.objects.Update
 import org.telegram.telegrambots.bots.TelegramLongPollingBot

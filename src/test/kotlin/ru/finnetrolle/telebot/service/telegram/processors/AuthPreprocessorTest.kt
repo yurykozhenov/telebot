@@ -7,7 +7,6 @@ import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
-import org.telegram.telegrambots.api.methods.SendMessage
 import org.telegram.telegrambots.api.objects.User
 import ru.finnetrolle.telebot.assertMessage
 import ru.finnetrolle.telebot.model.Pilot

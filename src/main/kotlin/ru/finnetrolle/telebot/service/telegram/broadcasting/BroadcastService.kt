@@ -3,7 +3,7 @@ package ru.finnetrolle.telebot.service.telegram.broadcasting
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
-import org.telegram.telegrambots.api.methods.SendMessage
+import org.telegram.telegrambots.api.methods.send.SendMessage
 import ru.finnetrolle.telebot.service.telegram.api.BotApi
 import java.util.*
 import java.util.concurrent.ConcurrentLinkedQueue

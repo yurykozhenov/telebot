@@ -3,7 +3,7 @@ package ru.finnetrolle.telebot.service.telegram.processors
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
-import org.telegram.telegrambots.api.methods.SendMessage
+import org.telegram.telegrambots.api.methods.send.SendMessage
 import org.telegram.telegrambots.api.objects.User
 import ru.finnetrolle.telebot.model.Pilot
 import ru.finnetrolle.telebot.service.external.ExternalRegistrationService

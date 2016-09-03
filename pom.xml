@@ -6,7 +6,7 @@
 
     <groupId>ru.finnetrolle</groupId>
     <artifactId>telebot</artifactId>
-    <version>0.3.0-SNAPSHOT</version>
+    <version>0.3.3-SNAPSHOT</version>
 
     <packaging>jar</packaging>
     <name>telebot</name>
@@ -99,7 +99,7 @@
         <dependency>
             <groupId>com.github.rubenlagus</groupId>
             <artifactId>TelegramBots</artifactId>
-            <version>v1.0</version>
+            <version>v2.3.3.4</version>
         </dependency>
 
         <dependency>
