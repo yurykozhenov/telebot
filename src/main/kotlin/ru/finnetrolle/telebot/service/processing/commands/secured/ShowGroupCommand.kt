@@ -33,7 +33,7 @@ class ShowGroupCommand : AbstractSecuredCommand() {
             return userService.getLegalUsers(data)
                     .joinToString(separator = "\n", prefix = prefix)
         } catch (e: Exception) {
-            log.error(e.message)
+            log.error(e.message, e)
             return loc.getMessage("messages.impossible")
         }
     }
