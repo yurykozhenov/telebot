@@ -31,6 +31,7 @@ class ShowGroupCommand : AbstractSecuredCommand() {
         try {
             val prefix = loc.getMessage("messages.group.header", data)
             return userService.getLegalUsers(data)
+                    .map { u -> u.characterName }
                     .joinToString(separator = "\n", prefix = prefix)
         } catch (e: Exception) {
             log.error(e.message, e)

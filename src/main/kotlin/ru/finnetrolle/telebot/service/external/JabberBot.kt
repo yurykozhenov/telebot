@@ -76,13 +76,13 @@ open class JabberBot {
 
     private fun process(message: Message) {
         val groupName = grabGroupName(message.body)
-        log.info("Received from ${message.from} for $groupName message: ${message.body}")
+        log.info("Received from [${message.from}] for [$groupName] message: [${message.body}]")
         if (groupName.toUpperCase().equals("ALL")) {
             log.info("Sending to everybody")
             globalExecutor.execute(Pilot(id = 0, characterName = "Jabber"), message.body)
         } else {
             log.info("Sending to group $groupName")
-            groupExecutor.execute(Pilot(id = 0, characterName = "Jabber"), "${message.body}")
+            groupExecutor.execute(Pilot(id = 0, characterName = "Jabber"), "$groupName ${message.body}")
         }
     }
 

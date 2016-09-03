@@ -23,7 +23,7 @@ class ExternalGroupProvider {
                     UriBuilder.fromUri(url).queryParam("groupName", group).queryParam("secret", secret).build(),
                     Rows::class.java).rows.toSet()
         } catch (e: Exception) {
-            log.error("Some error in query for group $group ${e.message}")
+            log.error("Some error in query for group [$group]", e)
             return setOf()
         }
     }
