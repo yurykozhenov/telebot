@@ -56,8 +56,8 @@ open class BotApiExtender(
 
     override fun send(message: SendMessage): BotApi.Send {
         try {
-            log.debug("Trying to send response to ${message.chatId}")
-            log.debug("Message is ${message.text}")
+            log.trace("Trying to send response to ${message.chatId}")
+//            log.debug("Message is ${message.text}")
             val start = System.currentTimeMillis()
             return BotApi.Send.Success(
                     api.sendMessage(message).chatId,
