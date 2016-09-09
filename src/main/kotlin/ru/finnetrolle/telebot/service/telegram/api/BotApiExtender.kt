@@ -64,6 +64,7 @@ open class BotApiExtender(
                     System.currentTimeMillis() - start)
         } catch (e: TelegramApiException) {
             log.error("Message sending was not success because of", e)
+            log.error("Telegram message is ${e.apiResponse}")
             return BotApi.Send.Failed(message.chatId.toLong(), e)
         } catch (e: Exception) {
             log.error("Message sending failed because of", e)
