@@ -1,5 +1,7 @@
 # Telebot
 
+[![Build Status](https://travis-ci.org/finnetrolle/telebot.svg?branch=master)](https://travis-ci.org/finnetrolle/telebot)
+
 Telegram bot for eve players to do your own alliance or corporation broadcasting 
  
 Current version: 0.3.0 **unstable beta**
