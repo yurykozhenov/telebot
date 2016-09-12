@@ -22,3 +22,7 @@ after_success:
   - docker build -t $CONFIG:$COMMIT .
   - docker tag $CONFIG:$COMMIT $CONFIG:$TAG
   - docker push $CONFIG
+
+notifications:
+  email:
+    - maxsyachin@gmail.com
