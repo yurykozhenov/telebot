@@ -1,6 +1,7 @@
 package ru.finnetrolle.telebot.service.processing.commands.secured
 
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Test
 import org.mockito.InjectMocks
 import org.mockito.Mock
@@ -14,6 +15,10 @@ import ru.finnetrolle.telebot.util.MessageLocalization
  * Licence: MIT
  * Author: Finne Trolle
  */
+
+
+
+@Ignore
 class AddAllianceCommandTest {
 
     @Mock private lateinit var loc: MessageLocalization

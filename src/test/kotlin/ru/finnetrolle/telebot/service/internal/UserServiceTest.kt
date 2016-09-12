@@ -3,12 +3,15 @@ package ru.finnetrolle.telebot.service.internal
 import org.junit.Test
 
 import org.junit.Assert.*
+import org.junit.Ignore
 
 /**
  * Telegram bot
  * Licence: MIT
  * Author: Finne Trolle
  */
+
+@Ignore
 class UserServiceTest {
     @Test
     fun init() {

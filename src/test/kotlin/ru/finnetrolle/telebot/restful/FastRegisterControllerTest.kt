@@ -1,6 +1,7 @@
 package ru.finnetrolle.telebot.restful
 
 import org.junit.Assert.*
+import org.junit.Ignore
 import org.junit.Test
 
 /**
@@ -10,6 +11,7 @@ import org.junit.Test
  */
 class FastRegisterControllerTest {
 
+    @Ignore
     @Test
     fun test() {
         throw UnsupportedOperationException()

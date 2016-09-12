@@ -1,6 +1,7 @@
 package ru.finnetrolle.telebot.restful
 
 import org.junit.Assert.*
+import org.junit.Ignore
 import org.junit.Test
 
 /**
@@ -9,6 +10,8 @@ import org.junit.Test
  * Author: Finne Trolle
  */
 class MailResourceTest {
+
+    @Ignore
     @Test
     fun test () {
         throw UnsupportedOperationException()

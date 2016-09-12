@@ -4,6 +4,7 @@ import org.junit.Test
 
 import org.junit.Assert.*
 import org.junit.Before
+import org.junit.Ignore
 import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito
@@ -16,6 +17,8 @@ import ru.finnetrolle.telebot.util.MessageLocalization
  * Licence: MIT
  * Author: Finne Trolle
  */
+
+@Ignore
 class AddJokeCommandTest {
 
     @Mock private lateinit var loc: MessageLocalization
