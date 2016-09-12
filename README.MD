@@ -1,6 +1,7 @@
 # Telebot
 
 [![Build Status](https://travis-ci.org/finnetrolle/telebot.svg?branch=master)](https://travis-ci.org/finnetrolle/telebot)
+[![codecov](https://codecov.io/gh/finnetrolle/telebot/branch/master/graph/badge.svg)](https://codecov.io/gh/finnetrolle/telebot)
 
 Telegram bot for eve players to do your own alliance or corporation broadcasting 
  
