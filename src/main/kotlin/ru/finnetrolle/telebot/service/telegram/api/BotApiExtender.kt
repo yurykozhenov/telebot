@@ -7,6 +7,7 @@ import org.telegram.telegrambots.api.methods.send.SendMessage
 import org.telegram.telegrambots.api.objects.Message
 import org.telegram.telegrambots.api.objects.Update
 import org.telegram.telegrambots.bots.TelegramLongPollingBot
+import ru.finnetrolle.telebot.service.internal.UserService
 
 /**
  * Telegram bot
@@ -19,6 +20,8 @@ open class BotApiExtender(
         val token: String,
         val processIncomingMessage: (Message) -> SendMessage
 ) : BotApi {
+
+    private lateinit var userService: UserService
 
     private var api = object : TelegramLongPollingBot() {
         override fun getBotUsername() = name
@@ -49,22 +52,28 @@ open class BotApiExtender(
             TelegramBotsApi().registerBot(api)
         } catch (e: TelegramApiException) {
             log.error("Can't connect to telegram", e)
+            log.error("Response is ${e.apiResponse}")
             log.error("Exit")
             System.exit(1)
         }
     }
 
+    private val BLOCKED_BOT_MESSAGE: String = "Bot was blocked by the user"
+
     override fun send(message: SendMessage): BotApi.Send {
         try {
             log.trace("Trying to send response to ${message.chatId}")
-//            log.debug("Message is ${message.text}")
             val start = System.currentTimeMillis()
             return BotApi.Send.Success(
                     api.sendMessage(message).chatId,
                     System.currentTimeMillis() - start)
         } catch (e: TelegramApiException) {
-            log.error("Message sending was not success because of", e)
-            log.error("Telegram message is ${e.apiResponse}")
+            if (e.apiResponse.equals(BLOCKED_BOT_MESSAGE)) {
+                log.warn("User ${message.chatId} stopped bot and will be removed from db")
+                userService.removeByTelegramId(message.chatId)
+            } else {
+                log.error("Message sent is failed. API Response = [${e.apiResponse}]", e)
+            }
             return BotApi.Send.Failed(message.chatId.toLong(), e)
         } catch (e: Exception) {
             log.error("Message sending failed because of", e)

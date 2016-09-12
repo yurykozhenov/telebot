@@ -138,4 +138,11 @@ open class UserService {
 
     open fun getAllUsers() = pilotRepo.findAll()
 
+    open fun removeByTelegramId(chatId: String) {
+        val id = chatId.toInt()
+        val pilot = pilotRepo.findOne(id)
+        pilotRepo.delete(chatId.toInt())
+        log.warn("User ${pilot.characterName} is removed")
+    }
+
 }
