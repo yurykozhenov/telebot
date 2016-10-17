@@ -34,16 +34,19 @@ object MessageBuilder {
     }
 
     fun split(message: SendMessage): Collection<SendMessage> {
-        if (message.text.length > 4000) {
-            val msgs = mutableListOf<SendMessage>()
-            val count = message.text.length / 4000
-            (0..count-2).forEach { i ->
-                msgs.add(MessageBuilder.build(message.chatId, message.text.substring(i * 4000, (i + 1) * 4000)))
+        var sb = StringBuilder()
+        val msgs = mutableListOf<SendMessage>()
+        message.text.forEach { c ->
+            sb.append(c)
+            if (sb.length >= 4000) {
+                msgs.add(MessageBuilder.build(message.chatId, sb.toString()))
+                sb = StringBuilder()
             }
-            return msgs
-        } else {
-            return listOf(message)
         }
+        if (sb.length != 0) {
+            msgs.add(MessageBuilder.build(message.chatId, sb.toString()))
+        }
+        return msgs
     }
 
     //    todo: commented for better times
