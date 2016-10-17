@@ -47,16 +47,8 @@ open class BroadcastService {
 //    }
 
     open fun send(messages: Collection<SendMessage>) {
-
         val msgs = mutableListOf<SendMessage>()
-        messages.forEach { m -> if (m.text.length > 4000) {
-            val count = m.text.length / 4000
-            (0..count-2).forEach { i ->
-                msgs.add(MessageBuilder.build(m.chatId, m.text.substring(i * 4000, (i + 1) * 4000)))
-            }
-        } else {
-            msgs.add(m)
-        }}
+        messages.forEach { m -> if (m.text.length > 4000) msgs.addAll(MessageBuilder.split(m)) else msgs.add(m) }
         if (bots.isNotEmpty()) {
             q.addAll(msgs.map { m -> BroadcastUnit.Task.Send(m) }.toList())
         } else {

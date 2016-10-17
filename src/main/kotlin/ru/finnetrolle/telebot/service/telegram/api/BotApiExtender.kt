@@ -8,6 +8,7 @@ import org.telegram.telegrambots.api.objects.Message
 import org.telegram.telegrambots.api.objects.Update
 import org.telegram.telegrambots.bots.TelegramLongPollingBot
 import ru.finnetrolle.telebot.service.internal.UserService
+import ru.finnetrolle.telebot.util.MessageBuilder
 
 /**
  * Telegram bot
@@ -62,11 +63,17 @@ open class BotApiExtender(
 
     override fun send(message: SendMessage): BotApi.Send {
         try {
-            log.trace("Trying to send response to ${message.chatId}")
+            val messages = MessageBuilder.split(message)
             val start = System.currentTimeMillis()
-            return BotApi.Send.Success(
-                    api.sendMessage(message).chatId,
-                    System.currentTimeMillis() - start)
+            if (messages.size > 1) {
+                messages.forEach { m -> send(m) }
+                return BotApi.Send.Success(message.chatId.toLong(), System.currentTimeMillis() - start)
+            } else {
+                log.trace("Trying to send response to ${message.chatId}")
+                return BotApi.Send.Success(
+                        api.sendMessage(message).chatId,
+                        System.currentTimeMillis() - start)
+            }
         } catch (e: TelegramApiException) {
             if (e.apiResponse.equals(BLOCKED_BOT_MESSAGE)) {
                 log.warn("User ${message.chatId} stopped bot and will be removed from db")

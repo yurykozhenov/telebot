@@ -33,6 +33,19 @@ object MessageBuilder {
         return msg
     }
 
+    fun split(message: SendMessage): Collection<SendMessage> {
+        if (message.text.length > 4000) {
+            val msgs = mutableListOf<SendMessage>()
+            val count = message.text.length / 4000
+            (0..count-2).forEach { i ->
+                msgs.add(MessageBuilder.build(message.chatId, message.text.substring(i * 4000, (i + 1) * 4000)))
+            }
+            return msgs
+        } else {
+            return listOf(message)
+        }
+    }
+
     //    todo: commented for better times
     //    fun createKeyboard(keys: List<String>): ReplyKeyboardMarkup {
     //        val kb = ReplyKeyboardMarkup()
