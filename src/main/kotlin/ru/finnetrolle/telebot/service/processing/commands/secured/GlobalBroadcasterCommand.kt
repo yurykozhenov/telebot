@@ -7,6 +7,7 @@ import ru.finnetrolle.telebot.service.internal.UserService
 import ru.finnetrolle.telebot.service.telegram.TelegramBotService
 import ru.finnetrolle.telebot.util.MessageBuilder
 import ru.finnetrolle.telebot.util.MessageLocalization
+import java.util.*
 
 /**
  * Telegram bot
@@ -31,7 +32,8 @@ open class GlobalBroadcasterCommand : AbstractSecuredCommand() {
 
     override fun execute(pilot: Pilot, data: String): String {
         val users = userService.getLegalUsers()
-        telegram.broadcast(users.map { u -> MessageBuilder.build(u.id.toString(), data) }.toList())
+        val message = "Broadcast from ${pilot.characterName} at ${Date()} \n$data"
+        telegram.broadcast(users.map { u -> MessageBuilder.build(u.id.toString(), message) }.toList())
         return loc.getMessage("messages.broadcast.result", users.size)
     }
 }

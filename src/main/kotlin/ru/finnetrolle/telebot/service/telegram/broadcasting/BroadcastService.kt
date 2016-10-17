@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 import org.telegram.telegrambots.api.methods.send.SendMessage
 import ru.finnetrolle.telebot.service.telegram.api.BotApi
+import ru.finnetrolle.telebot.util.MessageBuilder
 import java.util.*
 import java.util.concurrent.ConcurrentLinkedQueue
 
@@ -37,17 +38,27 @@ open class BroadcastService {
         }
     }
 
-    open fun send(message: SendMessage) {
-        if (bots.isNotEmpty()) {
-            q.offer(BroadcastUnit.Task.Send(message))
-        } else {
-            log.error("Trying to send messages without worker units")
-        }
-    }
+//    open fun send(message: SendMessage) {
+//        if (bots.isNotEmpty()) {
+//            q.offer(BroadcastUnit.Task.Send(message))
+//        } else {
+//            log.error("Trying to send messages without worker units")
+//        }
+//    }
 
     open fun send(messages: Collection<SendMessage>) {
+
+        val msgs = mutableListOf<SendMessage>()
+        messages.forEach { m -> if (m.text.length > 4000) {
+            val count = m.text.length / 4000
+            (0..count-2).forEach { i ->
+                msgs.add(MessageBuilder.build(m.chatId, m.text.substring(i * 4000, (i + 1) * 4000)))
+            }
+        } else {
+            msgs.add(m)
+        }}
         if (bots.isNotEmpty()) {
-            q.addAll(messages.map { m -> BroadcastUnit.Task.Send(m) }.toList())
+            q.addAll(msgs.map { m -> BroadcastUnit.Task.Send(m) }.toList())
         } else {
             log.error("Trying to send messages without worker units")
         }
