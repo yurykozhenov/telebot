@@ -92,7 +92,11 @@ open class UserService {
     }
 
     open fun singleCheck(characterId: Long): SingleCheckResult {
-        val evechar = eve.getCharacter(characterId);
+        val evechar = eve.getCharacter(characterId)
+        if (evechar.characterName == null) {
+            log.error("character name is null for $evechar with ${evechar.characterName} and ${evechar.characterID}")
+            throw EveApiUnknownException();
+        }
         if (allyService.getAll().filter { a -> a.id == evechar.allianceID }.isNotEmpty() ||
                 corpService.getAll().filter { a -> a.id == evechar.corporationID }.isNotEmpty()) {
             return SingleCheckResult.OK (evechar.characterName, evechar.corporation, evechar.alliance)
@@ -144,5 +148,9 @@ open class UserService {
         pilotRepo.delete(chatId.toInt())
         log.warn("User ${pilot.characterName} is removed")
     }
+
+}
+
+class EveApiUnknownException : RuntimeException() {
 
 }
