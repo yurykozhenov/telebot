@@ -47,12 +47,16 @@ open class BroadcastService {
     }
 
     open fun send(messages: Collection<SendMessage>) {
+        try {
 //        val msgs = mutableListOf<SendMessage>()
 //        messages.forEach { m -> if (m.text.length > 4000) msgs.addAll(MessageBuilder.split(m)) else msgs.add(m) }
-        if (bots.isNotEmpty()) {
-            q.addAll(messages.map { m -> BroadcastUnit.Task.Send(m) }.toList())
-        } else {
-            log.error("Trying to send messages without worker units")
+            if (bots.isNotEmpty()) {
+                q.addAll(messages.map { m -> BroadcastUnit.Task.Send(m) }.toList())
+            } else {
+                log.error("Trying to send messages without worker units")
+            }
+        } catch (e: Exception) {
+            log.error(" Can't broadcasting because of ", e)
         }
     }
 
