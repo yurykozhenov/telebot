@@ -77,7 +77,7 @@ open class BotApiExtender(
         } catch (e: TelegramApiException) {
             if (e.apiResponse.equals(BLOCKED_BOT_MESSAGE)) {
                 log.warn("User ${message.chatId} stopped bot and will be removed from db")
-                userService.removeByTelegramId(message.chatId)
+//                userService.removeByTelegramId(message.chatId)
             } else {
                 log.error("Message sent is failed. API Response = [${e.apiResponse}]", e)
             }
