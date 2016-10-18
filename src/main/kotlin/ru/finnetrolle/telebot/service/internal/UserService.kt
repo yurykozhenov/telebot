@@ -92,6 +92,7 @@ open class UserService {
     }
 
     open fun singleCheck(characterId: Long): SingleCheckResult {
+        log.info("Checking id = $characterId")
         val evechar = eve.getCharacter(characterId)
         if (evechar.characterName == null) {
             log.error("Character with id = $characterId have null cahracter name. Also his id from system is ${evechar.characterID}")
