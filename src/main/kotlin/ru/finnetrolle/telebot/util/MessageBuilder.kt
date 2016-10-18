@@ -26,7 +26,7 @@ object MessageBuilder {
         val msg = SendMessage()
         msg.chatId = chatId
         msg.text = text
-        msg.enableMarkdown(true)
+//        msg.enableMarkdown(true)
 //        val rkh = ReplyKeyboardHide()
 //        rkh.hideKeyboard = true
 //        msg.replayMarkup = rkh

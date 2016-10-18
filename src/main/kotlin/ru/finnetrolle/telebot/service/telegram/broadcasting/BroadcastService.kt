@@ -38,19 +38,19 @@ open class BroadcastService {
         }
     }
 
-//    open fun send(message: SendMessage) {
-//        if (bots.isNotEmpty()) {
-//            q.offer(BroadcastUnit.Task.Send(message))
-//        } else {
-//            log.error("Trying to send messages without worker units")
-//        }
-//    }
+    open fun send(message: SendMessage) {
+        if (bots.isNotEmpty()) {
+            q.offer(BroadcastUnit.Task.Send(message))
+        } else {
+            log.error("Trying to send messages without worker units")
+        }
+    }
 
     open fun send(messages: Collection<SendMessage>) {
-        val msgs = mutableListOf<SendMessage>()
-        messages.forEach { m -> if (m.text.length > 4000) msgs.addAll(MessageBuilder.split(m)) else msgs.add(m) }
+//        val msgs = mutableListOf<SendMessage>()
+//        messages.forEach { m -> if (m.text.length > 4000) msgs.addAll(MessageBuilder.split(m)) else msgs.add(m) }
         if (bots.isNotEmpty()) {
-            q.addAll(msgs.map { m -> BroadcastUnit.Task.Send(m) }.toList())
+            q.addAll(messages.map { m -> BroadcastUnit.Task.Send(m) }.toList())
         } else {
             log.error("Trying to send messages without worker units")
         }
