@@ -32,6 +32,6 @@ class ListUsersCommand : AbstractSecuredCommand() {
         return loc.getMessage("messages.response.lu", users.size, users.joinToString(separator = "\n"))
     }
 
-    private fun renemark(pilot: Pilot) = if (pilot.renegade) " [R]" else ""
-    private fun modermark(pilot: Pilot) = if (pilot.moderator) " [M]" else ""
+    private fun renemark(pilot: Pilot) = if (pilot.renegade) " >> Renegade" else ""
+    private fun modermark(pilot: Pilot) = if (pilot.moderator) " >> Moderator" else ""
 }

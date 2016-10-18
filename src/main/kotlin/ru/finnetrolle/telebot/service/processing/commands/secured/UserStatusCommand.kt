@@ -35,7 +35,8 @@ class UserStatusCommand : AbstractSecuredCommand() {
         } else {
             val moder = if (user.moderator) " is moderator" else ""
             val renegade = if (user.renegade) " is renegade" else ""
-            return "${user.characterName}$moder$renegade"
+            val additional = if (moder.isEmpty() && renegade.isEmpty()) " просто поц" else "$moder$renegade"
+            return "${user.characterName}$additional"
         }
     }
 }
