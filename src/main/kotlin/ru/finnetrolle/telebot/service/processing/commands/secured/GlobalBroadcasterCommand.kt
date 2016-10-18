@@ -42,5 +42,6 @@ open class GlobalBroadcasterCommand : AbstractSecuredCommand() {
         } catch (e: Exception) {
             log.error("Can't execute command global broadcast because of", e)
         }
+        return "Some very bad happened"
     }
 }
