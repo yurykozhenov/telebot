@@ -94,7 +94,7 @@ open class UserService {
     open fun singleCheck(characterId: Long): SingleCheckResult {
         val evechar = eve.getCharacter(characterId)
         if (evechar.characterName == null) {
-            log.error("character name is null for $evechar with ${evechar.characterName} and ${evechar.characterID}")
+            log.error("Character with id = $characterId have null cahracter name. Also his id from system is ${evechar.characterID}")
             throw EveApiUnknownException();
         }
         if (allyService.getAll().filter { a -> a.id == evechar.allianceID }.isNotEmpty() ||
