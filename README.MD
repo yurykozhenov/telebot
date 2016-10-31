@@ -1,5 +1,10 @@
 # Telebot
 
+## Project is going to be closed and replaced by
+* https://github.com/finnetrolle/botqueen
+* https://github.com/finnetrolle/config-server
+* https://github.com/finnetrolle/botling
+
 [![Build Status](https://travis-ci.org/finnetrolle/telebot.svg?branch=master)](https://travis-ci.org/finnetrolle/telebot)
 [![codecov](https://codecov.io/gh/finnetrolle/telebot/branch/master/graph/badge.svg)](https://codecov.io/gh/finnetrolle/telebot)
 [![](https://images.microbadger.com/badges/image/finnetrolle/telebot.svg)](https://microbadger.com/images/finnetrolle/telebot "Get your own image badge on microbadger.com")
