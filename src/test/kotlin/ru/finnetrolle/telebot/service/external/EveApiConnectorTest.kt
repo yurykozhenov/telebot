@@ -25,7 +25,6 @@ class EveApiConnectorTest {
     val eve = EveApiConnector()
 
     @Test
-    @Ignore
     fun testGetCharacters() {
         assert(eve.getCharacters(0, "") == null)
         assert(eve.getCharacter(90659919) != null)
@@ -33,7 +32,6 @@ class EveApiConnectorTest {
     }
 
     @Test
-    @Ignore
     fun testGetCorpId() {
         assert(eve.getCorpId(0) == 0L)
     }
