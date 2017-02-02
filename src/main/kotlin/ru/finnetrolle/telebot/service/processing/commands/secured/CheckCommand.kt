@@ -25,12 +25,12 @@ class CheckCommand : AbstractSecuredCommand() {
 
     override fun description() = loc.getMessage("telebot.command.description.check")
 
-    override fun execute(pilot: Pilot, data: String): String {
-        val start = System.currentTimeMillis()
-        val result = pilotService.check()
-        return loc.getMessage("messages.response.check",
-                (System.currentTimeMillis() - start) / 1000,
-                result.renegaded.size, result.checked,
-                result.renegaded.joinToString("\n"))
-    }
+    override fun execute(pilot: Pilot, data: String) =  loc.getMessage("messages.unavailable")
+//        val start = System.currentTimeMillis()
+//        val result = pilotService.check()
+//        return loc.getMessage("messages.response.check",
+//                (System.currentTimeMillis() - start) / 1000,
+//                result.renegaded.size, result.checked,
+//                result.renegaded.joinToString("\n"))
+
 }

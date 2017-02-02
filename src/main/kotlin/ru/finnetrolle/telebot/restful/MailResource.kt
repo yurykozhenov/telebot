@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.ResponseBody
 import ru.finnetrolle.telebot.model.Mail
 import ru.finnetrolle.telebot.service.external.MailbotService
+import ru.finnetrolle.telebot.service.internal.PilotService
 
 /**
  * Licence: MIT
@@ -21,11 +22,20 @@ class MailResource {
 
     @Autowired lateinit private var mailbot: MailbotService
 
+    @Autowired
+    private lateinit var pilotService: PilotService
+
     @RequestMapping(method = arrayOf(RequestMethod.GET))
     @ResponseBody
     fun mail(): ResponseEntity<List<Mail>> {
         mailbot.receiveMail()
         return ResponseEntity.ok(mailbot.getLast())
+    }
+
+    @RequestMapping(method = arrayOf(RequestMethod.GET), path = arrayOf("/check"))
+    @ResponseBody
+    fun check(): PilotService.CheckResult {
+        return pilotService.check()
     }
 
 }
