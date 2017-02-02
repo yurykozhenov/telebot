@@ -16,6 +16,8 @@ import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
 import ru.finnetrolle.cachingcontainer.CachingContainer
 import ru.finnetrolle.cachingcontainer.CachingContainer.HOURS
+import ru.finnetrolle.telebot.util.getPage
+import ru.finnetrolle.telebot.util.getPagesCount
 
 /**
  * Licence: MIT
@@ -51,12 +53,14 @@ open class EveApiConnector {
     }
 
     fun getAffilations(ids: List<Long>): Map<Long, CharacterAffiliation>  {
-        return (0..ids.size / 100 + 1)
-                .map { ids.subList(it * 100, it * 100 + 100) }
+        return (0..ids.getPagesCount(100))
+                .map { ids.getPage(it, 100) }
                 .flatMap { CharacterAffiliationParser().getResponse(*it.toLongArray()).all }
                 .map { Pair(it.characterID, it) }
                 .toMap()
     }
+
+
 
     fun getCorpId(charId: Long): Long {
         try {
