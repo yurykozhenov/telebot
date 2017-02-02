@@ -130,6 +130,15 @@ open class UserService {
         }
     }
 
+    @Transactional
+    open fun remove(name:String): String {
+        val user = pilotRepo.findByCharacterName(name)
+        if (user != null) {
+            pilotRepo.delete(user)
+        }
+        return name
+    }
+
     open fun getModerators(): List<String> = pilotRepo.findByModeratorTrue().map { p -> p.characterName }
 
     open fun getCharacters(): List<String> = pilotRepo.findAll().map { p -> p.characterName }.toList()

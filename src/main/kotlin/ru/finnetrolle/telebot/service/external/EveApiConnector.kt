@@ -3,11 +3,11 @@ package ru.finnetrolle.telebot.service.external
 import com.beimin.eveapi.model.eve.Alliance
 import com.beimin.eveapi.parser.ApiAuthorization
 import com.beimin.eveapi.parser.account.CharactersParser
+import com.beimin.eveapi.parser.character.MailBodiesParser
+import com.beimin.eveapi.parser.character.MailMessagesParser
 import com.beimin.eveapi.parser.corporation.CorpSheetParser
 import com.beimin.eveapi.parser.eve.AllianceListParser
 import com.beimin.eveapi.parser.eve.CharacterInfoParser
-import com.beimin.eveapi.parser.pilot.MailBodiesParser
-import com.beimin.eveapi.parser.pilot.MailMessagesParser
 import com.beimin.eveapi.response.corporation.CorpSheetResponse
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
@@ -50,7 +50,7 @@ open class EveApiConnector {
         return 0
     }
 
-    fun getAlliances() = allyList[{ -> AllianceListParser().response.all }]//AllianceListParser().response.all
+    fun getAlliances() = allyList[{ -> AllianceListParser().response.all.toSet() }]//AllianceListParser().response.all
 
     fun isAllianceExist(ticker: String) = getAlliance(ticker) != null
 
@@ -62,12 +62,12 @@ open class EveApiConnector {
     }
 
     fun getMailList(apiKey: Int, vCode: String, mailingLists: String) =
+
             MailMessagesParser().getResponse(ApiAuthorization(apiKey, vCode)).all
                     .filter { x -> x.toListIDs.equals(mailingLists) }
 
     fun getMailBody(apiKey: Int, vCode: String, mailId: Long) = MailBodiesParser()
             .getResponse(ApiAuthorization(apiKey, vCode), mailId).all.find { x -> x != null }!!.body
-
 
     companion object {
         private val log = LoggerFactory.getLogger(EveApiConnector::class.java)
