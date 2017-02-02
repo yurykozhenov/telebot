@@ -28,7 +28,8 @@ class EveApiConnectorTest {
     @Ignore
     fun testGetCharacters() {
         assert(eve.getCharacters(0, "") == null)
-//        assert(eve.getCharacter(1234512) != null)
+        assert(eve.getCharacter(90659919) != null)
+        assert(eve.getCharacter(90659919).characterName == "Finne Trolle")
     }
 
     @Test
