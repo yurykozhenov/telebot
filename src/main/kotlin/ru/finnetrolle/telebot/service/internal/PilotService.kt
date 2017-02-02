@@ -55,10 +55,11 @@ open class PilotService {
     @Transactional
     open fun add(user: User, character: String, characterId: Long): Add {
         log.info("registering new pilot: " + character)
-        pilotRepo.findOne(user.id).get()?.let {
-            return Add.AlreadyExists(it)
-        }
-        return Add.Success(pilotRepo.save(Pilot(user.id, user.firstName, user.lastName, user.userName, character, characterId)))
+        return pilotRepo.findOne(user.id).decide({
+            Add.AlreadyExists(it)
+        },{
+            Add.Success(pilotRepo.save(Pilot(user.id, user.firstName, user.lastName, user.userName, character, characterId)))
+        })
     }
 
     open fun getLegalUsers(): List<Pilot> = pilotRepo.findByRenegadeFalse()
