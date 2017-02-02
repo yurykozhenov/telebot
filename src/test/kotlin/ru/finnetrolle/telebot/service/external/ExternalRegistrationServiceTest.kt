@@ -1,16 +1,16 @@
 package ru.finnetrolle.telebot.service.external
 
-import org.junit.Test
-
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Before
+import org.junit.Test
 import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
 import org.springframework.test.util.ReflectionTestUtils
 import org.telegram.telegrambots.api.objects.User
-import ru.finnetrolle.telebot.service.internal.UserService
+import ru.finnetrolle.telebot.service.internal.PilotService
 
 /**
  * Telegram bot
@@ -19,7 +19,7 @@ import ru.finnetrolle.telebot.service.internal.UserService
  */
 class ExternalRegistrationServiceTest {
 
-    @Mock lateinit private var userService: UserService
+    @Mock lateinit private var pilotService: PilotService
 
     @InjectMocks private var service = ExternalRegistrationService()
 
@@ -32,7 +32,7 @@ class ExternalRegistrationServiceTest {
     fun init() {
         MockitoAnnotations.initMocks(this)
         ReflectionTestUtils.setField(USER, "id", TELE_ID)
-        Mockito.`when`(userService.singleCheck(USER_ID)).thenReturn(UserService.SingleCheckResult.OK(USER_NAME, "", ""))
+        Mockito.`when`(pilotService.singleCheck(USER_ID)).thenReturn(PilotService.SingleCheckResult.OK(USER_NAME, "", ""))
     }
 
     @Test
@@ -69,14 +69,14 @@ class ExternalRegistrationServiceTest {
 
     @Test
     fun pilotFromAllianceNotInListTakesForbidden() {
-        Mockito.`when`(userService.singleCheck(USER_ID)).thenReturn(UserService.SingleCheckResult.Renegade(USER_NAME, "", ""))
+        Mockito.`when`(pilotService.singleCheck(USER_ID)).thenReturn(PilotService.SingleCheckResult.Renegade(USER_NAME, "", ""))
         val key = service.registerContender(USER_NAME, USER_ID)
         assertTrue(service.tryToApproveContender(key, USER) is ExternalRegistrationService.ApproveResult.Forbidden)
     }
 
     @Test
     fun pilotCheckReturnsSomeUnknownShitAndServiceReturnsForbidden() {
-        Mockito.`when`(userService.singleCheck(USER_ID)).thenReturn(object : UserService.SingleCheckResult{})
+        Mockito.`when`(pilotService.singleCheck(USER_ID)).thenReturn(object : PilotService.SingleCheckResult {})
         val key = service.registerContender(USER_NAME, USER_ID)
         assertTrue(service.tryToApproveContender(key, USER) is ExternalRegistrationService.ApproveResult.Forbidden)
     }

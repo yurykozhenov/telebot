@@ -7,6 +7,6 @@ import ru.finnetrolle.telebot.service.processing.engine.CommandExecutor
  * Licence: MIT
  * Author: Finne Trolle
  */
-abstract class AbstractUnsecuredCommand: CommandExecutor {
+abstract class AbstractUnsecuredCommand : CommandExecutor {
     override fun secured() = false
 }

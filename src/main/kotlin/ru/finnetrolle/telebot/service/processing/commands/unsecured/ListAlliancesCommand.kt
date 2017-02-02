@@ -14,7 +14,7 @@ import ru.finnetrolle.telebot.util.MessageLocalization
  */
 
 @Component
-class ListAlliancesCommand: AbstractUnsecuredCommand() {
+class ListAlliancesCommand : AbstractUnsecuredCommand() {
 
     @Autowired
     private lateinit var loc: MessageLocalization

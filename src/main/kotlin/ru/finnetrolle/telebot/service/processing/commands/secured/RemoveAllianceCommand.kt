@@ -13,7 +13,7 @@ import ru.finnetrolle.telebot.util.MessageLocalization
  */
 
 @Component
-class RemoveAllianceCommand: AbstractSecuredCommand() {
+class RemoveAllianceCommand : AbstractSecuredCommand() {
 
     @Autowired
     private lateinit var allyService: AllyService
@@ -26,10 +26,10 @@ class RemoveAllianceCommand: AbstractSecuredCommand() {
     override fun description() = loc.getMessage("telebot.command.description.rmally")
 
     override fun execute(pilot: Pilot, data: String): String {
-        val result = allyService.removeAlly(data)
+        val result = allyService.remove(data)
         return when (result) {
-            is AllyService.RemoveResponse.AllianceRemoved -> loc.getMessage("messages.ally.removed")
-            is AllyService.RemoveResponse.AllianceNotFound -> loc.getMessage("messages.ally.not.found")
+            is AllyService.Remove.Success -> loc.getMessage("messages.ally.removed")
+            is AllyService.Remove.NotFound -> loc.getMessage("messages.ally.not.found")
             else -> loc.getMessage("messages.impossible")
         }
     }

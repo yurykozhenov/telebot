@@ -4,7 +4,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.telegram.telegrambots.api.objects.User
-import ru.finnetrolle.telebot.service.internal.UserService
+import ru.finnetrolle.telebot.service.internal.PilotService
 import java.util.*
 
 /**
@@ -16,7 +16,7 @@ import java.util.*
 open class ExternalRegistrationService {
 
     @Autowired
-    lateinit private var userService: UserService
+    lateinit private var pilotService: PilotService
 
     data class PreData(val charName: String, val charId: Long, val dueTo: Long)
 
@@ -42,14 +42,14 @@ open class ExternalRegistrationService {
         if (cont != null) {
             contenders.remove(key.toUpperCase())
             if (cont.dueTo >= System.currentTimeMillis()) {
-                val checkResult = userService.singleCheck(cont.charId);
+                val checkResult = pilotService.singleCheck(cont.charId);
                 when (checkResult) {
-                    is UserService.SingleCheckResult.OK -> {
+                    is PilotService.SingleCheckResult.OK -> {
                         log.info("Registered ${user.id} as ${cont.charName}")
-                        userService.register(user, cont.charName, cont.charId)
+                        pilotService.add(user, cont.charName, cont.charId)
                         return ApproveResult.Success(checkResult.name, checkResult.corp, checkResult.ally)
                     }
-                    is UserService.SingleCheckResult.Renegade -> {
+                    is PilotService.SingleCheckResult.Renegade -> {
                         log.info("Renegade ${cont.charName} from ${checkResult.corp} of ${checkResult.ally} trying to register")
                         return ApproveResult.Forbidden(checkResult.name)
                     }

@@ -3,8 +3,9 @@ package ru.finnetrolle.telebot.service.processing.commands.secured
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import ru.finnetrolle.telebot.model.Pilot
-import ru.finnetrolle.telebot.service.internal.UserService
+import ru.finnetrolle.telebot.service.internal.PilotService
 import ru.finnetrolle.telebot.util.MessageLocalization
+import ru.finnetrolle.telebot.util.decide
 
 /**
  * Telegram bot
@@ -13,10 +14,10 @@ import ru.finnetrolle.telebot.util.MessageLocalization
  */
 
 @Component
-class RemoveCommand: AbstractSecuredCommand() {
+class RemoveCommand : AbstractSecuredCommand() {
 
     @Autowired
-    private lateinit var userService: UserService
+    private lateinit var pilotService: PilotService
 
     @Autowired
     private lateinit var loc: MessageLocalization
@@ -26,6 +27,10 @@ class RemoveCommand: AbstractSecuredCommand() {
     override fun description() = loc.getMessage("telebot.command.description.remove")
 
     override fun execute(pilot: Pilot, data: String): String {
-        return "removed ${userService.remove(data)}"
+        return pilotService.remove(data).decide({
+            "removed ${it.characterName}"
+        }, {
+            loc.getMessage("messages.user.not.found")
+        })
     }
 }

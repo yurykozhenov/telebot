@@ -4,7 +4,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import ru.finnetrolle.telebot.model.Pilot
-import ru.finnetrolle.telebot.service.internal.UserService
+import ru.finnetrolle.telebot.service.internal.PilotService
 import ru.finnetrolle.telebot.util.MessageLocalization
 
 /**
@@ -20,7 +20,9 @@ class ShowGroupCommand : AbstractSecuredCommand() {
     private lateinit var loc: MessageLocalization
 
     @Autowired
-    private lateinit var userService: UserService
+    private lateinit var pilotService: PilotService
+
+    private val log = LoggerFactory.getLogger(ShowGroupCommand::class.java)
 
     override fun name() = "/SHOWGROUP"
 
@@ -30,16 +32,12 @@ class ShowGroupCommand : AbstractSecuredCommand() {
         log.debug("Trying to find some users for group $data")
         try {
             val prefix = loc.getMessage("messages.group.header", data)
-            return userService.getLegalUsers(data)
+            return pilotService.getLegalUsers(data)
                     .map { u -> u.characterName }
                     .joinToString(separator = "\n", prefix = prefix)
         } catch (e: Exception) {
             log.error(e.message, e)
             return loc.getMessage("messages.impossible")
         }
-    }
-
-    companion object {
-        val log = LoggerFactory.getLogger(ShowGroupCommand::class.java)
     }
 }

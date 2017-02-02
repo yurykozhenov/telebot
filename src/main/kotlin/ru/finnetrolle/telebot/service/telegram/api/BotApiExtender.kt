@@ -1,13 +1,12 @@
 package ru.finnetrolle.telebot.service.telegram.api
 
 import org.slf4j.LoggerFactory
-import org.telegram.telegrambots.TelegramApiException
+import org.telegram.telegrambots.exceptions.TelegramApiException
 import org.telegram.telegrambots.TelegramBotsApi
 import org.telegram.telegrambots.api.methods.send.SendMessage
 import org.telegram.telegrambots.api.objects.Message
 import org.telegram.telegrambots.api.objects.Update
 import org.telegram.telegrambots.bots.TelegramLongPollingBot
-import ru.finnetrolle.telebot.service.internal.UserService
 import ru.finnetrolle.telebot.util.MessageBuilder
 
 /**
@@ -21,8 +20,6 @@ open class BotApiExtender(
         val token: String,
         val processIncomingMessage: (Message) -> SendMessage
 ) : BotApi {
-
-    private lateinit var userService: UserService
 
     private var api = object : TelegramLongPollingBot() {
         override fun getBotUsername() = name
@@ -53,7 +50,7 @@ open class BotApiExtender(
             TelegramBotsApi().registerBot(api)
         } catch (e: TelegramApiException) {
             log.error("Can't connect to telegram", e)
-            log.error("Response is ${e.apiResponse}")
+            log.error("Response is ${e.message}")
             log.error("Exit")
             System.exit(1)
         }
@@ -75,11 +72,11 @@ open class BotApiExtender(
                         System.currentTimeMillis() - start)
             }
         } catch (e: TelegramApiException) {
-            if (e.apiResponse.equals(BLOCKED_BOT_MESSAGE)) {
+            if (e.message.equals(BLOCKED_BOT_MESSAGE)) {
                 log.warn("User ${message.chatId} stopped bot and will be removed from db")
 //                userService.removeByTelegramId(message.chatId)
             } else {
-                log.error("Message sent is failed. API Response = [${e.apiResponse}]", e)
+                log.error("Message sent is failed. API Response = [${e.message}]", e)
             }
             return BotApi.Send.Failed(message.chatId.toLong(), e)
         } catch (e: Exception) {

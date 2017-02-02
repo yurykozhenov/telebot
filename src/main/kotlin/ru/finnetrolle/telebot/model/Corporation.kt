@@ -14,6 +14,10 @@ import javax.persistence.Id
 
 interface CorporationRepository: Repository<Corporation, Long> {
     fun findByTicker(ticker: String): Optional<Corporation>
+    fun save(corporation: Corporation): Corporation
+    fun findOne(id: Long): Optional<Corporation>
+    fun delete(corporation: Corporation)
+    fun findAll(): List<Corporation>
 }
 
 @Entity(name = "corporations")

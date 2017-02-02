@@ -26,6 +26,14 @@ interface PilotRepository: Repository<Pilot, Int> {
     fun findByRenegadeFalse(): List<Pilot>
 
     fun findByModeratorTrue(): List<Pilot>
+
+    fun save(pilot: Pilot): Pilot
+
+    fun findOne(id: Int): Optional<Pilot>
+
+    fun delete(pilot: Pilot)
+
+    fun findAll(): List<Pilot>
 }
 
 @Entity

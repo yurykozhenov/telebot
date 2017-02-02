@@ -4,7 +4,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import ru.finnetrolle.telebot.model.Pilot
-import ru.finnetrolle.telebot.service.internal.UserService
+import ru.finnetrolle.telebot.service.internal.PilotService
 import ru.finnetrolle.telebot.service.telegram.TelegramBotService
 import ru.finnetrolle.telebot.util.MessageBuilder
 import ru.finnetrolle.telebot.util.MessageLocalization
@@ -19,7 +19,7 @@ import java.util.*
 open class GlobalBroadcasterCommand : AbstractSecuredCommand() {
 
     @Autowired
-    private lateinit var userService: UserService
+    private lateinit var pilotService: PilotService
 
     @Autowired
     private lateinit var telegram: TelegramBotService
@@ -35,9 +35,9 @@ open class GlobalBroadcasterCommand : AbstractSecuredCommand() {
 
     override fun execute(pilot: Pilot, data: String): String {
         try {
-            val users = userService.getLegalUsers()
+            val users = pilotService.getLegalUsers()
             val message = "Broadcast from ${pilot.characterName} at ${Date()} \n$data"
-            telegram.broadcast(users.map { u -> MessageBuilder.build(u.id.toString(), message) }.toList())
+            telegram.broadcast(users.map { u -> MessageBuilder.build(u.id.toString(), message) })
             return loc.getMessage("messages.broadcast.result", users.size)
         } catch (e: Exception) {
             log.error("Can't execute command global broadcast because of", e)

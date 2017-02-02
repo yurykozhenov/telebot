@@ -1,15 +1,15 @@
 package ru.finnetrolle.telebot.service.telegram.processors
 
-import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import org.telegram.telegrambots.api.methods.send.SendMessage
 import org.telegram.telegrambots.api.objects.User
 import ru.finnetrolle.telebot.model.Pilot
 import ru.finnetrolle.telebot.service.external.ExternalRegistrationService
-import ru.finnetrolle.telebot.service.internal.UserService
+import ru.finnetrolle.telebot.service.internal.PilotService
 import ru.finnetrolle.telebot.util.MessageBuilder
 import ru.finnetrolle.telebot.util.MessageLocalization
+import ru.finnetrolle.telebot.util.decide
 
 /**
  * Telegram bot
@@ -21,7 +21,7 @@ import ru.finnetrolle.telebot.util.MessageLocalization
 open class AuthPreprocessor {
 
     @Autowired private lateinit var externalRegistrationService: ExternalRegistrationService
-    @Autowired private lateinit var userService: UserService
+    @Autowired private lateinit var pilotService: PilotService
     @Autowired private lateinit var loc: MessageLocalization
 
     private val KEY_LENGTH: Int = 6
@@ -43,21 +43,20 @@ open class AuthPreprocessor {
     }
 
     open fun selectResponse(text: String, user: User, chatId: String): Auth {
-        val pilot = userService.getPilot(user.id)
-        if (pilot == null) {
+        return pilotService.getPilot(user.id).decide({
+            if (it.renegade) {
+                Auth.Intercepted(MessageBuilder.build(chatId, loc.getMessage("messages.renegade")))
+            } else {
+                Auth.Authorized(it, text.substringBefore(" "), text.substringAfter(" "))
+            }
+        }, {
             if (text.length == KEY_LENGTH) {
                 val regResult = tryRegister(externalRegistrationService.tryToApproveContender(text.toUpperCase(), user))
-                return Auth.Intercepted(MessageBuilder.build(chatId, regResult))
+                Auth.Intercepted(MessageBuilder.build(chatId, regResult))
             } else {
-                return Auth.Intercepted(MessageBuilder.build(chatId, loc.getMessage("messages.please.register")))
+                Auth.Intercepted(MessageBuilder.build(chatId, loc.getMessage("messages.please.register")))
             }
-        } else {
-            if (pilot.renegade) {
-                return Auth.Intercepted(MessageBuilder.build(chatId, loc.getMessage("messages.renegade")))
-            } else {
-                return Auth.Authorized(pilot, text.substringBefore(" "), text.substringAfter(" "))
-            }
-        }
+        })
     }
 
 }

@@ -14,6 +14,10 @@ import javax.persistence.Id
 
 interface AllianceRepository: Repository<Alliance, Long> {
     fun findByTicker(ticker: String): Optional<Alliance>
+    fun save(alliance: Alliance): Alliance
+    fun delete(alliance: Alliance)
+    fun findOne(id: Long): Optional<Alliance>
+    fun findAll(): List<Alliance>
 }
 
 @Entity(name = "alliances")

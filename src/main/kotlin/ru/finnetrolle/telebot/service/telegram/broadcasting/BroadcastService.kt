@@ -27,8 +27,10 @@ open class BroadcastService {
     @Value("\${telegram.bot.batch}")
     private lateinit var batch: Integer
 
-    val q: Queue<BroadcastUnit.Task> = ConcurrentLinkedQueue()
-    val bots = mutableListOf<String>()
+    private val log = LoggerFactory.getLogger(BroadcastService::class.java)
+
+    private val q: Queue<BroadcastUnit.Task> = ConcurrentLinkedQueue()
+    private val bots = mutableListOf<String>()
 
     open fun init(api: BotApi) {
         (1..threads.toInt()).forEach { t ->
@@ -51,17 +53,15 @@ open class BroadcastService {
 //        val msgs = mutableListOf<SendMessage>()
 //        messages.forEach { m -> if (m.text.length > 4000) msgs.addAll(MessageBuilder.split(m)) else msgs.add(m) }
             if (bots.isNotEmpty()) {
-                q.addAll(messages.map { m -> BroadcastUnit.Task.Send(m) }.toList())
+                q.addAll(messages
+                        .flatMap { MessageBuilder.split(it) }
+                        .map { BroadcastUnit.Task.Send(it) })
             } else {
                 log.error("Trying to send messages without worker units")
             }
         } catch (e: Exception) {
             log.error(" Can't broadcasting because of ", e)
         }
-    }
-
-    companion object {
-        val log = LoggerFactory.getLogger(BroadcastService::class.java)
     }
 
 }

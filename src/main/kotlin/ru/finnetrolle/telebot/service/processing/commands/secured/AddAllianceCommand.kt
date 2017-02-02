@@ -26,11 +26,11 @@ class AddAllianceCommand : AbstractSecuredCommand() {
     override fun description() = loc.getMessage("telebot.command.description.addally")
 
     override fun execute(pilot: Pilot, data: String): String {
-        val result = allyService.addAlly(data)
+        val result = allyService.add(data)
         return when (result) {
-            is AllyService.AddResponse.AllianceAdded -> loc.getMessage("messages.ally.added", result.alliance.title)
-            is AllyService.AddResponse.AllianceIsAlreadyInList -> loc.getMessage("messages.ally.in.list")
-            is AllyService.AddResponse.AllianceIsNotExist -> loc.getMessage("messages.ally.not.exist")
+            is AllyService.Add.Success -> loc.getMessage("messages.ally.added", result.alliance.title)
+            is AllyService.Add.AlreadyExists -> loc.getMessage("messages.ally.in.list")
+            is AllyService.Add.NotFound -> loc.getMessage("messages.ally.not.exist")
             else -> loc.getMessage("messages.impossible")
         }
     }

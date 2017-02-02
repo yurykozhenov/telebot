@@ -3,9 +3,9 @@ package ru.finnetrolle.telebot.service.processing.commands.secured
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import ru.finnetrolle.telebot.model.Pilot
-import ru.finnetrolle.telebot.model.PilotRepository
-import ru.finnetrolle.telebot.service.internal.UserService
+import ru.finnetrolle.telebot.service.internal.PilotService
 import ru.finnetrolle.telebot.util.MessageLocalization
+import ru.finnetrolle.telebot.util.decide
 
 /**
  * Telegram bot
@@ -19,24 +19,17 @@ class UserStatusCommand : AbstractSecuredCommand() {
     private lateinit var loc: MessageLocalization
 
     @Autowired
-    private lateinit var userService: UserService
-
-    @Autowired
-    private lateinit var repo: PilotRepository
+    private lateinit var pilotService: PilotService
 
     override fun name() = "/US"
 
     override fun description() = loc.getMessage("telebot.command.description.us")
 
     override fun execute(pilot: Pilot, data: String): String {
-        val user = repo.findByCharacterName(data)
-        if (user == null) {
-            return loc.getMessage("messages.user.not.found")
-        } else {
-            val moder = if (user.moderator) " is moderator" else ""
-            val renegade = if (user.renegade) " is renegade" else ""
-            val additional = if (moder.isEmpty() && renegade.isEmpty()) " просто поц" else "$moder$renegade"
-            return "${user.characterName}$additional"
-        }
+        return pilotService.getPilot(data).decide({
+            "${it.characterName} [${it.characterId}] \n moderator: ${it.moderator}\n renegade: ${it.renegade}"
+        }, {
+            loc.getMessage("messages.user.not.found")
+        })
     }
 }

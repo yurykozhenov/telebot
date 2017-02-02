@@ -12,7 +12,7 @@ import ru.finnetrolle.telebot.util.MessageLocalization
  * Author: Finne Trolle
  */
 @Component
-class RemoveCorporationCommand: AbstractSecuredCommand() {
+class RemoveCorporationCommand : AbstractSecuredCommand() {
 
     @Autowired
     private lateinit var corpService: CorpService
@@ -25,7 +25,7 @@ class RemoveCorporationCommand: AbstractSecuredCommand() {
     override fun description() = loc.getMessage("telebot.command.description.rmcorp")
 
     override fun execute(pilot: Pilot, data: String): String {
-        val result = corpService.removeCorporation(data)
+        val result = corpService.remove(data)
         return when (result) {
             is CorpService.Remove.NotFound -> loc.getMessage("messages.corp.not.found")
             is CorpService.Remove.Success -> loc.getMessage("messages.corp.removed")

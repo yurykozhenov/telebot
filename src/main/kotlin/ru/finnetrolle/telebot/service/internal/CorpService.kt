@@ -2,6 +2,7 @@ package ru.finnetrolle.telebot.service.internal
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
+import org.springframework.transaction.annotation.Transactional
 import ru.finnetrolle.telebot.model.Corporation
 import ru.finnetrolle.telebot.model.CorporationRepository
 import ru.finnetrolle.telebot.service.external.EveApiConnector
@@ -12,11 +13,14 @@ import ru.finnetrolle.telebot.service.external.EveApiConnector
  * Created by maxsyachin on 19.03.16.
  */
 
-@Component open class CorpService
-@Autowired constructor(
-        private val repo: CorporationRepository,
-        private val eve: EveApiConnector
-) {
+@Component
+open class CorpService {
+
+    @Autowired
+    private lateinit var repo: CorporationRepository
+
+    @Autowired
+    private lateinit var eve: EveApiConnector
 
     interface Add {
         data class Success(val corporation: Corporation) : Add
@@ -24,45 +28,31 @@ import ru.finnetrolle.telebot.service.external.EveApiConnector
         data class NotExist(val id: Long) : Add
     }
 
-    fun addCorporation(id: Long): Add {
-        val existing = repo.findOne(id)
-        return if (existing == null) {
-            val corp = eve.getCorporation(id)
-            if (corp == null) {
-                Add.NotExist(id)
-            } else {
-                Add.Success(repo.save(Corporation(corp.corporationID, corp.ticker, corp.corporationName)))
-            }
-        } else {
-            Add.AlreadyInList(existing)
+    @Transactional
+    open fun add(id: Long): Add {
+        repo.findOne(id).get()?.let { return Add.AlreadyInList(it) }
+        eve.getCorporation(id)?.let {
+            return Add.Success(repo.save(Corporation(it.corporationID, it.ticker, it.corporationName)))
         }
+        return Add.NotExist(id)
     }
 
     interface Remove {
         data class Success(val corporation: Corporation) : Remove
-        data class NotFound(val ticker: String?, val id: Long?) : Remove
+        data class NotFound(val ticker: String) : Remove
     }
 
-    fun removeCorporation(ticker: String): Remove {
-        return rmCorporation(ticker = ticker)
-    }
-
-    private fun rmCorporation(ticker: String? = null, id: Long? = null): Remove {
-        val corp = if (ticker != null) repo.findByTicker(ticker) else repo.findOne(id)
-        return if (corp != null) {
-            repo.delete(corp)
-            Remove.Success(corp)
-        } else {
-            Remove.NotFound(ticker, id)
+    @Transactional
+    open fun remove(ticker: String): Remove {
+        repo.findByTicker(ticker).get()?.let {
+            repo.delete(it)
+            return Remove.Success(it)
         }
+        return Remove.NotFound(ticker)
     }
 
-    fun contains(corpId: Long) = repo.exists(corpId)
-
-    fun get(corpId: Long) = repo.findOne(corpId)
+    open fun get(corpId: Long) = repo.findOne(corpId)
 
     open fun getAll() = repo.findAll()
-
-    fun isEmpty() = repo.count() == 0L
 
 }

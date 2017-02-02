@@ -1,6 +1,7 @@
 package ru.finnetrolle.telebot.service.telegram.processors
 
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 import org.mockito.InjectMocks
@@ -8,14 +9,12 @@ import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
 import org.telegram.telegrambots.api.objects.User
-import ru.finnetrolle.telebot.assertMessage
 import ru.finnetrolle.telebot.model.Pilot
-import ru.finnetrolle.telebot.service.telegram.processors.CommandProcessor
-import ru.finnetrolle.telebot.util.MessageBuilder
 import ru.finnetrolle.telebot.service.external.ExternalRegistrationService
-import ru.finnetrolle.telebot.service.telegram.processors.AuthPreprocessor
-import ru.finnetrolle.telebot.service.internal.UserService
+import ru.finnetrolle.telebot.service.internal.PilotService
+import ru.finnetrolle.telebot.util.MessageBuilder
 import ru.finnetrolle.telebot.util.MessageLocalization
+import java.util.*
 
 /**
  * Telegram bot
@@ -28,7 +27,7 @@ class AuthPreprocessorTest {
     private var preprocessor = AuthPreprocessor()
 
     @Mock private lateinit var externalRegistrationService: ExternalRegistrationService
-    @Mock private lateinit var userService: UserService
+    @Mock private lateinit var pilotService: PilotService
     @Mock private lateinit var loc: MessageLocalization
     @Mock private var USER = User()
 
@@ -58,15 +57,15 @@ class AuthPreprocessorTest {
     private val USER_ID = 10
 
     fun unregisteredUser() {
-        Mockito.`when`(userService.getPilot(USER_ID)).thenReturn(null)
+        Mockito.`when`(pilotService.getPilot(USER_ID)).thenReturn(Optional.empty())
     }
 
     fun registeredUser() {
-        Mockito.`when`(userService.getPilot(USER_ID)).thenReturn(Pilot(USER_ID, "name", renegade = false))
+        Mockito.`when`(pilotService.getPilot(USER_ID)).thenReturn(Optional.of(Pilot(USER_ID, "name", renegade = false)))
     }
 
     fun renegadeUser() {
-        Mockito.`when`(userService.getPilot(USER_ID)).thenReturn(Pilot(USER_ID, "name", renegade = true))
+        Mockito.`when`(pilotService.getPilot(USER_ID)).thenReturn(Optional.of(Pilot(USER_ID, "name", renegade = true)))
     }
 
     @Test

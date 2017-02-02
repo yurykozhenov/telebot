@@ -12,6 +12,7 @@ import javax.persistence.*
 
 interface JokeRepository: Repository<Joke, Long> {
         fun findAll(): List<Joke>
+        fun save(joke: Joke): Joke
 }
 
 @Entity(name = "jokes")

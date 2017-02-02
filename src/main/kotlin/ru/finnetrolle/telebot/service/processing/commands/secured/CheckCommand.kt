@@ -3,7 +3,7 @@ package ru.finnetrolle.telebot.service.processing.commands.secured
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import ru.finnetrolle.telebot.model.Pilot
-import ru.finnetrolle.telebot.service.internal.UserService
+import ru.finnetrolle.telebot.service.internal.PilotService
 import ru.finnetrolle.telebot.util.MessageLocalization
 
 /**
@@ -19,7 +19,7 @@ class CheckCommand : AbstractSecuredCommand() {
     private lateinit var loc: MessageLocalization
 
     @Autowired
-    private lateinit var userService: UserService
+    private lateinit var pilotService: PilotService
 
     override fun name() = "/CHECK"
 
@@ -27,7 +27,7 @@ class CheckCommand : AbstractSecuredCommand() {
 
     override fun execute(pilot: Pilot, data: String): String {
         val start = System.currentTimeMillis()
-        val result = userService.check()
+        val result = pilotService.check()
         return loc.getMessage("messages.response.check",
                 (System.currentTimeMillis() - start) / 1000,
                 result.renegaded.size, result.checked,

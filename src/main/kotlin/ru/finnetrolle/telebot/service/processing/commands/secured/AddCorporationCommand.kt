@@ -27,7 +27,7 @@ class AddCorporationCommand : AbstractSecuredCommand() {
 
     override fun execute(pilot: Pilot, data: String): String {
         try {
-            val result = corpService.addCorporation(data.toLong())
+            val result = corpService.add(data.toLong())
             return when (result) {
                 is CorpService.Add.AlreadyInList -> loc.getMessage("messages.corp.in.list")
                 is CorpService.Add.NotExist -> loc.getMessage("messages.corp.not.exist")

@@ -1,7 +1,6 @@
 package ru.finnetrolle.telebot.util
 
 import org.telegram.telegrambots.api.methods.send.SendMessage
-import org.telegram.telegrambots.api.objects.replykeyboard.ReplyKeyboardHide
 
 
 /**
@@ -34,6 +33,9 @@ object MessageBuilder {
     }
 
     fun split(message: SendMessage): Collection<SendMessage> {
+        if (message.text.length < 4000) {
+            return listOf(message)
+        }
         var sb = StringBuilder()
         val msgs = mutableListOf<SendMessage>()
         message.text.forEach { c ->
