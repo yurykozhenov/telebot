@@ -3,6 +3,7 @@ package ru.finnetrolle.telebot.service.external
 import org.junit.Test
 
 import org.junit.Assert.*
+import org.junit.Ignore
 
 /**
  * Telegram bot
@@ -24,12 +25,14 @@ class EveApiConnectorTest {
     val eve = EveApiConnector()
 
     @Test
+    @Ignore
     fun testGetCharacters() {
         assert(eve.getCharacters(0, "") == null)
 //        assert(eve.getCharacter(1234512) != null)
     }
 
     @Test
+    @Ignore
     fun testGetCorpId() {
         assert(eve.getCorpId(0) == 0L)
     }

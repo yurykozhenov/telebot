@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional
 import ru.finnetrolle.telebot.model.Corporation
 import ru.finnetrolle.telebot.model.CorporationRepository
 import ru.finnetrolle.telebot.service.external.EveApiConnector
+import ru.finnetrolle.telebot.util.decide
 
 /**
  * Licence: MIT
@@ -30,11 +31,18 @@ open class CorpService {
 
     @Transactional
     open fun add(id: Long): Add {
-        repo.findOne(id).get()?.let { return Add.AlreadyInList(it) }
-        eve.getCorporation(id)?.let {
-            return Add.Success(repo.save(Corporation(it.corporationID, it.ticker, it.corporationName)))
+        val exists = repo.findOne(id)
+        if (exists.isPresent) {
+            return Add.AlreadyInList(exists.get())
         }
-        return Add.NotExist(id)
+
+        val corp = eve.getCorporation(id)
+        if (corp == null) {
+            return Add.NotExist(id)
+        } else {
+            return Add.Success(repo.save(Corporation(corp.corporationID, corp.ticker, corp.corporationName)))
+        }
+
     }
 
     interface Remove {
@@ -44,11 +52,12 @@ open class CorpService {
 
     @Transactional
     open fun remove(ticker: String): Remove {
-        repo.findByTicker(ticker).get()?.let {
+        return repo.findByTicker(ticker).decide({
             repo.delete(it)
-            return Remove.Success(it)
-        }
-        return Remove.NotFound(ticker)
+            Remove.Success(it)
+        },{
+            Remove.NotFound(ticker)
+        })
     }
 
     open fun get(corpId: Long) = repo.findOne(corpId)

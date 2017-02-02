@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional
 import ru.finnetrolle.telebot.model.Alliance
 import ru.finnetrolle.telebot.model.AllianceRepository
 import ru.finnetrolle.telebot.service.external.EveApiConnector
+import ru.finnetrolle.telebot.util.decide
 
 /**
  * Licence: MIT
@@ -30,13 +31,17 @@ open class AllyService {
 
     @Transactional
     open fun add(ticker: String): Add {
-        repo.findByTicker(ticker).get()?.let {
-            return Add.AlreadyExists(it)
+        val exists = repo.findByTicker(ticker)
+        if (exists.isPresent) {
+            return Add.AlreadyExists(exists.get())
         }
-        eve.getAlliance(ticker)?.let {
-            return Add.Success(repo.save(Alliance(it.allianceID, it.shortName, it.name)))
+
+        val ally = eve.getAlliance(ticker)
+        return if (ally == null) {
+            Add.NotFound(ticker)
+        } else {
+            Add.Success(repo.save(Alliance(ally.allianceID, ally.shortName, ally.name)))
         }
-        return Add.NotFound(ticker)
     }
 
     interface Remove {
@@ -46,11 +51,12 @@ open class AllyService {
 
     @Transactional
     open fun remove(ticker: String): Remove {
-        repo.findByTicker(ticker).get()?.let {
+        return repo.findByTicker(ticker).decide({
             repo.delete(it)
-            return Remove.Success(it)
-        }
-        return Remove.NotFound(ticker)
+            Remove.Success(it)
+        },{
+            Remove.NotFound(ticker)
+        })
     }
 
     open fun get(allyId: Long) = repo.findOne(allyId)
