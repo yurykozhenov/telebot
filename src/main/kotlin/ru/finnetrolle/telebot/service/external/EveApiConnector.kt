@@ -1,12 +1,14 @@
 package ru.finnetrolle.telebot.service.external
 
 import com.beimin.eveapi.model.eve.Alliance
+import com.beimin.eveapi.model.eve.CharacterAffiliation
 import com.beimin.eveapi.parser.ApiAuthorization
 import com.beimin.eveapi.parser.account.CharactersParser
 import com.beimin.eveapi.parser.character.MailBodiesParser
 import com.beimin.eveapi.parser.character.MailMessagesParser
 import com.beimin.eveapi.parser.corporation.CorpSheetParser
 import com.beimin.eveapi.parser.eve.AllianceListParser
+import com.beimin.eveapi.parser.eve.CharacterAffiliationParser
 import com.beimin.eveapi.parser.eve.CharacterInfoParser
 import com.beimin.eveapi.response.corporation.CorpSheetResponse
 import com.beimin.eveapi.response.eve.CharacterInfoResponse
@@ -46,7 +48,14 @@ open class EveApiConnector {
             log.error("bad results when asking $id")
             throw e
         }
+    }
 
+    fun getAffilations(ids: List<Long>): Map<Long, CharacterAffiliation>  {
+        return (0..ids.size / 100 + 1)
+                .map { ids.subList(it * 100, it * 100 + 100) }
+                .flatMap { CharacterAffiliationParser().getResponse(*it.toLongArray()).all }
+                .map { Pair(it.characterID, it) }
+                .toMap()
     }
 
     fun getCorpId(charId: Long): Long {

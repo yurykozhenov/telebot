@@ -1,5 +1,6 @@
 package ru.finnetrolle.telebot.service.internal
 
+import com.beimin.eveapi.model.eve.CharacterAffiliation
 import com.beimin.eveapi.response.eve.CharacterInfoResponse
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
@@ -75,17 +76,17 @@ open class PilotService {
     open fun getPilot(telegramId: Int) = pilotRepo.findOne(telegramId)
     open fun getPilot(characterName: String) = pilotRepo.findByCharacterName(characterName)
 
-    data class CheckPair(val pilot: Pilot, val character: CharacterInfoResponse)
+    data class CheckPair(val pilot: Pilot, val character: CharacterAffiliation)
     data class CheckResult(val renegaded: List<String>, val checked: Int)
 
     @Transactional
     open fun check(): CheckResult {
         val allowedAllies = allyService.getAll().map { a -> a.id }.toSet()
         val allowedCorps = corpService.getAll().map { c -> c.id }.toSet()
-        val pilotsToCheck = pilotRepo.findByRenegadeFalse()
+        val pilotsToCheck = pilotRepo.findByRenegadeFalse().filter { !isSuperUser(it) }
+        val afillations = eve.getAffilations(pilotsToCheck.map { it.characterId })
         val renegades = pilotsToCheck
-                .filter { !isSuperUser(it) }
-                .map { CheckPair(it, eve.getCharacter(it.characterId)) }
+                .map { CheckPair(it, afillations.getOrElse(it.characterId, {CharacterAffiliation()})) }
                 .filter { !allowedAllies.contains(it.character.allianceID) }
                 .filter { !allowedCorps.contains(it.character.corporationID) }
         if (renegades.isNotEmpty()) {
