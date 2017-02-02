@@ -1,9 +1,10 @@
 package ru.finnetrolle.telebot.model
 
-import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Modifying
 import org.springframework.data.jpa.repository.Query
+import org.springframework.data.repository.Repository
 import org.springframework.data.repository.query.Param
+import java.util.*
 import javax.persistence.Entity
 import javax.persistence.Id
 import javax.persistence.Table
@@ -14,13 +15,13 @@ import javax.persistence.Table
 * Created by finnetrolle on 13.03.16.
 */
 
-interface PilotRepository: JpaRepository<Pilot, Int> {
+interface PilotRepository: Repository<Pilot, Int> {
 
     @Modifying
     @Query("update Pilot u set u.renegade = true where u.id in ?1")
     fun makeRenegades(@Param("ids") ids: Collection<Int>)
 
-    fun findByCharacterName(name: String): Pilot?
+    fun findByCharacterName(name: String): Optional<Pilot>
 
     fun findByRenegadeFalse(): List<Pilot>
 

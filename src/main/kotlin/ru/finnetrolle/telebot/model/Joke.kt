@@ -1,6 +1,6 @@
 package ru.finnetrolle.telebot.model
 
-import org.springframework.data.repository.CrudRepository
+import org.springframework.data.repository.Repository
 import java.util.*
 import javax.persistence.*
 
@@ -10,7 +10,8 @@ import javax.persistence.*
  * Created by maxsyachin on 15.07.16.
  */
 
-interface JokeRepository: CrudRepository<Joke, Long> {
+interface JokeRepository: Repository<Joke, Long> {
+        fun findAll(): List<Joke>
 }
 
 @Entity(name = "jokes")

@@ -1,6 +1,7 @@
 package ru.finnetrolle.telebot.model
 
-import org.springframework.data.repository.CrudRepository
+import org.springframework.data.repository.Repository
+import java.util.*
 import javax.persistence.Entity
 import javax.persistence.Id
 
@@ -11,8 +12,8 @@ import javax.persistence.Id
  */
 
 
-interface AllianceRepository: CrudRepository<Alliance, Long> {
-    fun findByTicker(ticker: String): Alliance?
+interface AllianceRepository: Repository<Alliance, Long> {
+    fun findByTicker(ticker: String): Optional<Alliance>
 }
 
 @Entity(name = "alliances")

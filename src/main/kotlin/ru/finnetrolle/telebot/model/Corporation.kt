@@ -1,6 +1,7 @@
 package ru.finnetrolle.telebot.model
 
-import org.springframework.data.repository.CrudRepository
+import org.springframework.data.repository.Repository
+import java.util.*
 import javax.persistence.Entity
 import javax.persistence.Id
 
@@ -11,8 +12,8 @@ import javax.persistence.Id
  */
 
 
-interface CorporationRepository: CrudRepository<Corporation, Long> {
-    fun findByTicker(ticker: String): Corporation?
+interface CorporationRepository: Repository<Corporation, Long> {
+    fun findByTicker(ticker: String): Optional<Corporation>
 }
 
 @Entity(name = "corporations")
