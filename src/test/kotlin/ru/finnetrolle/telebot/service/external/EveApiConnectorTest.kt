@@ -26,6 +26,7 @@ class EveApiConnectorTest {
     @Test
     fun testGetCharacters() {
         assert(eve.getCharacters(0, "") == null)
+//        assert(eve.getCharacter(1234512) != null)
     }
 
     @Test

@@ -9,6 +9,7 @@ import com.beimin.eveapi.parser.corporation.CorpSheetParser
 import com.beimin.eveapi.parser.eve.AllianceListParser
 import com.beimin.eveapi.parser.eve.CharacterInfoParser
 import com.beimin.eveapi.response.corporation.CorpSheetResponse
+import com.beimin.eveapi.response.eve.CharacterInfoResponse
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
 import ru.finnetrolle.cachingcontainer.CachingContainer
@@ -38,7 +39,15 @@ open class EveApiConnector {
         }
     }
 
-    fun getCharacter(id: Long) = CharacterInfoParser().getResponse(id)
+    fun getCharacter(id: Long):CharacterInfoResponse {
+        try {
+            return CharacterInfoParser().getResponse(id)
+        } catch (e: Exception) {
+            log.error("bad results when asking $id")
+            throw e
+        }
+
+    }
 
     fun getCorpId(charId: Long): Long {
         try {
