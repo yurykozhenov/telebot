@@ -17,7 +17,7 @@ fun <T, R> Optional<T>.decide(success: (T) -> R, failure: () -> R): R {
 }
 
 fun <T> List<T>.getPagesCount(pageSize: Int): Int {
-    return this.size / pageSize
+    return if (this.size % pageSize == 0) this.size / pageSize else this.size / pageSize + 1
 }
 
 fun <T> List<T>.getPage(pageSize: Int, page: Int): List<T> {

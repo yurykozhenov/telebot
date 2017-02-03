@@ -60,8 +60,6 @@ open class EveApiConnector {
                 .toMap()
     }
 
-
-
     fun getCorpId(charId: Long): Long {
         try {
             val response = CharacterInfoParser().getResponse(charId)
