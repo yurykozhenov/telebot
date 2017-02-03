@@ -34,8 +34,12 @@ class MailResource {
 
     @RequestMapping(method = arrayOf(RequestMethod.GET), path = arrayOf("/check"))
     @ResponseBody
-    fun check(): PilotService.CheckResult {
-        return pilotService.check()
+    fun check(): CheckWrapper {
+        val start = System.currentTimeMillis()
+        val result = pilotService.check()
+        return CheckWrapper(System.currentTimeMillis() - start, result)
     }
+
+    data class CheckWrapper( val time: Long, val result: PilotService.CheckResult)
 
 }
