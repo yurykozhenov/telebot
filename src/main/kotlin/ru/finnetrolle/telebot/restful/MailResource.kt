@@ -1,5 +1,6 @@
 package ru.finnetrolle.telebot.restful
 
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Controller
@@ -25,6 +26,8 @@ class MailResource {
     @Autowired
     private lateinit var pilotService: PilotService
 
+    private val log = LoggerFactory.getLogger(MailResource::class.java)
+
     @RequestMapping(method = arrayOf(RequestMethod.GET))
     @ResponseBody
     fun mail(): ResponseEntity<List<Mail>> {
@@ -37,7 +40,9 @@ class MailResource {
     fun check(): CheckWrapper {
         val start = System.currentTimeMillis()
         val result = pilotService.check()
-        return CheckWrapper(System.currentTimeMillis() - start, result)
+        val wrapper = CheckWrapper(System.currentTimeMillis() - start, result)
+        log.info("Renegade check result: $wrapper")
+        return wrapper
     }
 
     data class CheckWrapper( val time: Long, val result: PilotService.CheckResult)
