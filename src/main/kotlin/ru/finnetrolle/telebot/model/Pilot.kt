@@ -46,5 +46,6 @@ data class Pilot (
         var characterName: String = "",
         var characterId: Long = 0,
         var moderator: Boolean = false,
-        var renegade: Boolean = false
+        var renegade: Boolean = false,
+        var translateTo: String = ""
 )

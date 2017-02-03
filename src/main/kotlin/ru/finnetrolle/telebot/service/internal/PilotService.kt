@@ -147,6 +147,16 @@ open class PilotService {
         })
     }
 
+    @Transactional
+    open fun setTranslator(id: Int, language: String): Optional<Pilot> {
+        return pilotRepo.findOne(id).decide({
+            it.translateTo = language
+            Optional.of(pilotRepo.save(it))
+        },{
+            Optional.empty()
+        })
+    }
+
     open fun getModerators() = pilotRepo.findByModeratorTrue()
 
     private fun isSuperUser(pilot: Pilot) = pilot.characterName == superUser

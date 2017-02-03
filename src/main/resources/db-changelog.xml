@@ -19,5 +19,8 @@
     <changeSet id="5" author="finnetrolle">
         <sqlFile path="sql/005_0_3_1_Remove_not_null.sql" relativeToChangelogFile="true" stripComments="true"/>
     </changeSet>
+    <changeSet id="6" author="finnetrolle">
+        <sqlFile path="sql/006_0_4_1_translate.sql" relativeToChangelogFile="true" stripComments="true"/>
+    </changeSet>
 
 </databaseChangeLog>
