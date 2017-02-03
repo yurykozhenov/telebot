@@ -20,10 +20,10 @@ fun <T> List<T>.getPagesCount(pageSize: Int): Int {
     return if (this.size % pageSize == 0) this.size / pageSize else this.size / pageSize + 1
 }
 
-fun <T> List<T>.getPage(pageSize: Int, page: Int): List<T> {
+fun <T> List<T>.getPage(page: Int, pageSize: Int): List<T> {
     val pages = this.getPagesCount(pageSize)
-    if (page == pages) {
-        return this.subList(page * pageSize, this.size - (page * pageSize))
+    if (page == pages - 1) {
+        return this.subList(page * pageSize, this.size)
     } else {
         return this.subList(page * pageSize, page * pageSize + pageSize)
     }
