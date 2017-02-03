@@ -53,7 +53,7 @@ open class EveApiConnector {
     }
 
     fun getAffilations(ids: List<Long>): Map<Long, CharacterAffiliation>  {
-        return (0..ids.getPagesCount(100))
+        return (0..ids.getPagesCount(100) - 1)
                 .map { ids.getPage(it, 100) }
                 .flatMap { CharacterAffiliationParser().getResponse(*it.toLongArray()).all }
                 .map { Pair(it.characterID, it) }

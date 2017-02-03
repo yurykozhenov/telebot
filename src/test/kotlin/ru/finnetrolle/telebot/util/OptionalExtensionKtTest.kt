@@ -27,6 +27,8 @@ class OptionalExtensionKtTest {
     @Test
     fun testPages() {
         val list = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+
+
         assertArrayEquals(arrayOf(1, 2, 3), list.getPage(0, 3).toTypedArray())
         assertArrayEquals(arrayOf(10), list.getPage(3, 3).toTypedArray())
     }
