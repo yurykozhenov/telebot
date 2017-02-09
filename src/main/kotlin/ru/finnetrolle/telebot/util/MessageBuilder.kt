@@ -41,31 +41,23 @@ object MessageBuilder {
         }
         var sb = StringBuilder()
         val msgs = mutableListOf<SendMessage>()
+        log.debug("String length = ${message.text.length}")
         message.text.split("\n").forEach { line ->
-            line.forEach { c ->
-                sb.append(c)
+            line.forEach { char ->
+                sb.append(char)
                 if (sb.length >= 4100) {
                     msgs.add(MessageBuilder.build(message.chatId, sb.toString()))
                     log.debug("Split by char")
                     sb = StringBuilder()
                 }
             }
-            sb.append("\n")
-            if (sb.length >= 4000) {
+            sb.appendln()
+            if (sb.length >= 3900) {
                 msgs.add(MessageBuilder.build(message.chatId, sb.toString()))
                 sb = StringBuilder()
-                log.debug("Split by newline")
+                log.debug("Split by newline. Current line is [$line]")
             }
         }
-//
-//
-//        message.text.forEach { c ->
-//            sb.append(c)
-//            if (sb.length >= 4000) {
-//                msgs.add(MessageBuilder.build(message.chatId, sb.toString()))
-//                sb = StringBuilder()
-//            }
-//        }
         if (sb.length != 0) {
             msgs.add(MessageBuilder.build(message.chatId, sb.toString()))
         }
