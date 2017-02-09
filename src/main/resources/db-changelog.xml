@@ -25,5 +25,8 @@
     <changeSet id="7" author="finnetrolle">
         <sqlFile path="sql/007_0_4_1_speakers.sql" relativeToChangelogFile="true" stripComments="true"/>
     </changeSet>
+    <changeSet id="8" author="finnetrolle">
+        <sqlFile path="sql/008_043_broadcasts.sql" relativeToChangelogFile="true" stripComments="true"/>
+    </changeSet>
 
 </databaseChangeLog>

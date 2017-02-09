@@ -2,6 +2,9 @@ package ru.finnetrolle.telebot.service.processing.commands.secured
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
+import org.springframework.transaction.annotation.Transactional
+import ru.finnetrolle.telebot.model.Broadcast
+import ru.finnetrolle.telebot.model.BroadcastRepository
 import ru.finnetrolle.telebot.model.Pilot
 import ru.finnetrolle.telebot.service.internal.PilotService
 import ru.finnetrolle.telebot.service.telegram.TelegramBotService
@@ -27,15 +30,24 @@ open class GroupBroadcastCommand : AbstractSecuredCommand() {
     @Autowired
     private lateinit var loc: MessageLocalization
 
+    @Autowired
+    private lateinit var castRepo: BroadcastRepository
+
     override fun name() = "/GC"
 
     override fun description() = loc.getMessage("telebot.command.description.gc")
 
+    @Transactional
     override fun execute(pilot: Pilot, data: String): String {
         val text = data.substringAfter(" ")
         val users = pilotService.getLegalUsers(data.substringBefore(" "))
         val message = "Broadcast from ${pilot.characterName} at ${Date()} \n$text"
         telegram.broadcast(users.map { u -> MessageBuilder.build(u.id.toString(), message) })
+        castRepo.save(Broadcast(
+                fromName = pilot.characterName,
+                toGroupName = data.substringBefore(" "),
+                message = message,
+                receiversCount = users.size))
         return loc.getMessage("messages.broadcast.result", users.size)
     }
 }
