@@ -28,7 +28,7 @@ class ListUsersCommand : AbstractSecuredCommand() {
     override fun execute(pilot: Pilot, data: String): String {
         val users = pilotService.getAllUsers()
                 .map { "${it.characterName}${renemark(it)}${modermark(it)}" }
-                .sorted()
+                .sortedBy(String::toUpperCase)
         return loc.getMessage("messages.response.lu", users.size, users.joinToString(separator = "\n"))
     }
 
