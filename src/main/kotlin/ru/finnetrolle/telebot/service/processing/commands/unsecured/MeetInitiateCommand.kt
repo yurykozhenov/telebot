@@ -2,7 +2,6 @@ package ru.finnetrolle.telebot.service.processing.commands.unsecured
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
-import org.springframework.transaction.annotation.Transactional
 import ru.finnetrolle.telebot.model.Pilot
 import ru.finnetrolle.telebot.service.internal.MeetingService
 import ru.finnetrolle.telebot.util.MessageLocalization
@@ -14,7 +13,7 @@ import ru.finnetrolle.telebot.util.MessageLocalization
  */
 
 @Component
-class MeetInitiateCommand : AbstractUnsecuredCommand() {
+open class MeetInitiateCommand : AbstractUnsecuredCommand() {
 
     @Autowired
     private lateinit var loc: MessageLocalization
@@ -26,7 +25,6 @@ class MeetInitiateCommand : AbstractUnsecuredCommand() {
 
     override fun description() = loc.getMessage("telebot.command.description.meet")
 
-    @Transactional
     override fun execute(pilot: Pilot, data: String): String {
         return meet.createMeeting(pilot, data)
     }
