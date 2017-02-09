@@ -59,7 +59,9 @@ open class BotApiExtender(
         }
     }
 
-    private val BLOCKED_BOT_MESSAGE: String = "Bot was blocked by the user"
+    private val BLOCKED_BOT_MESSAGE: String = "Forbidden: bot was blocked by the user"
+    private val DEACTIVATED_BOT_MESSAGE: String = "Forbidden: user is deactivated"
+
 
     override fun send(message: SendMessage): BotApi.Send {
         try {
@@ -75,7 +77,7 @@ open class BotApiExtender(
                         System.currentTimeMillis() - start)
             }
         } catch (e: TelegramApiException) {
-            if (e.apiResponse.equals(BLOCKED_BOT_MESSAGE)) {
+            if (e.apiResponse.equals(BLOCKED_BOT_MESSAGE) || e.apiResponse.equals(DEACTIVATED_BOT_MESSAGE)) {
                 pilotService.remove(message.chatId).decide({
                     log.debug("REMOVED: ${it.characterName} [${it.characterId} because of stopped bot]")
                 },{
