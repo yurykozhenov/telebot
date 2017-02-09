@@ -175,6 +175,11 @@ open class PilotService {
     }
 
     @Transactional
+    open fun update(pilot: Pilot): Pilot {
+        return pilotRepo.save(pilot)
+    }
+
+    @Transactional
     open fun setSpeaker(name: String, value: Boolean): Optional<Pilot> {
         return pilotRepo.findByCharacterName(name).decide({
             it.speaker = value

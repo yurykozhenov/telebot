@@ -47,7 +47,15 @@ open class AuthPreprocessor {
             if (it.renegade) {
                 Auth.Intercepted(MessageBuilder.build(chatId, loc.getMessage("messages.renegade")))
             } else {
-                Auth.Authorized(it, text.substringBefore(" "), text.substringAfter(" "))
+                //renew pilot's data if have changes
+                if (user.firstName != it.firstName || user.lastName != it.lastName || it.username != it.username) {
+                    it.firstName = user.firstName
+                    it.lastName = user.lastName
+                    it.username = user.userName
+                    Auth.Authorized(pilotService.update(it), text.substringBefore(" "), text.substringAfter(" "))
+                } else {
+                    Auth.Authorized(it, text.substringBefore(" "), text.substringAfter(" "))
+                }
             }
         }, {
             if (text.length == KEY_LENGTH) {
