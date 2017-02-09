@@ -38,13 +38,22 @@ object MessageBuilder {
         }
         var sb = StringBuilder()
         val msgs = mutableListOf<SendMessage>()
-        message.text.forEach { c ->
-            sb.append(c)
+        message.text.split("\n").forEach {
+            sb.append(it)
             if (sb.length >= 4000) {
                 msgs.add(MessageBuilder.build(message.chatId, sb.toString()))
                 sb = StringBuilder()
             }
         }
+//
+//
+//        message.text.forEach { c ->
+//            sb.append(c)
+//            if (sb.length >= 4000) {
+//                msgs.add(MessageBuilder.build(message.chatId, sb.toString()))
+//                sb = StringBuilder()
+//            }
+//        }
         if (sb.length != 0) {
             msgs.add(MessageBuilder.build(message.chatId, sb.toString()))
         }

@@ -24,10 +24,10 @@ class MessageBuilderTest {
     @Test
     fun checkSplitting() {
         val s = StringBuilder()
-        (1..5000).forEach { i -> s.append("&") }
-        assertEquals(5000, s.toString().length)
+        (1..1000).forEach { i -> s.append("& sdfsD F5 sf  ASD a5 dsf sdF sd \n") }
+        assertEquals(34000, s.toString().length)
         val message = MessageBuilder.build("12345", s.toString())
-        assertEquals(2, MessageBuilder.split(message).size)
+        assertEquals(9, MessageBuilder.split(message).size)
     }
 
 }
