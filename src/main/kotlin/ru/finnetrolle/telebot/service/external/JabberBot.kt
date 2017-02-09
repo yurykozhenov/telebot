@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 import ru.finnetrolle.telebot.model.Pilot
-import ru.finnetrolle.telebot.service.processing.commands.secured.GlobalBroadcasterCommand
+import ru.finnetrolle.telebot.service.processing.commands.unsecured.GlobalBroadcasterCommand
 import ru.finnetrolle.telebot.service.processing.commands.secured.GroupBroadcastCommand
 import javax.annotation.PostConstruct
 

@@ -22,5 +22,8 @@
     <changeSet id="6" author="finnetrolle">
         <sqlFile path="sql/006_0_4_1_translate.sql" relativeToChangelogFile="true" stripComments="true"/>
     </changeSet>
+    <changeSet id="7" author="finnetrolle">
+        <sqlFile path="sql/007_0_4_1_speakers.sql" relativeToChangelogFile="true" stripComments="true"/>
+    </changeSet>
 
 </databaseChangeLog>

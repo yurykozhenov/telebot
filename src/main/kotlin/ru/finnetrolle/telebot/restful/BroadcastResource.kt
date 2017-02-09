@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.ResponseBody
 import ru.finnetrolle.telebot.model.Pilot
-import ru.finnetrolle.telebot.service.processing.commands.secured.GlobalBroadcasterCommand
+import ru.finnetrolle.telebot.service.processing.commands.unsecured.GlobalBroadcasterCommand
 import ru.finnetrolle.telebot.service.processing.commands.secured.GroupBroadcastCommand
 import ru.finnetrolle.telebot.service.processing.commands.secured.ListUsersCommand
 

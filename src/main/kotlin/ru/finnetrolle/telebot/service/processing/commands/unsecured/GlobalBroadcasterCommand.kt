@@ -1,11 +1,10 @@
-package ru.finnetrolle.telebot.service.processing.commands.secured
+package ru.finnetrolle.telebot.service.processing.commands.unsecured
 
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import ru.finnetrolle.telebot.model.Pilot
 import ru.finnetrolle.telebot.service.external.TranslateService
-import ru.finnetrolle.telebot.service.external.YandexTranslate
 import ru.finnetrolle.telebot.service.internal.PilotService
 import ru.finnetrolle.telebot.service.telegram.TelegramBotService
 import ru.finnetrolle.telebot.util.MessageBuilder
@@ -18,7 +17,7 @@ import java.util.*
  * Author: Finne Trolle
  */
 @Component
-open class GlobalBroadcasterCommand : AbstractSecuredCommand() {
+open class GlobalBroadcasterCommand : AbstractUnsecuredCommand() {
 
     @Autowired
     private lateinit var pilotService: PilotService
@@ -39,6 +38,9 @@ open class GlobalBroadcasterCommand : AbstractSecuredCommand() {
     override fun description() = loc.getMessage("telebot.command.description.cast")
 
     override fun execute(pilot: Pilot, data: String): String {
+        if (!pilot.moderator && !pilot.speaker) {
+            return loc.getMessage("message.cast.you.not.speaker")
+        }
         try {
             val message = "Broadcast from ${pilot.characterName} at ${Date()} \n$data"
             val users = pilotService.getLegalUsers()

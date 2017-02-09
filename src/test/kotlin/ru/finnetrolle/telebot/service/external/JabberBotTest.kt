@@ -9,7 +9,7 @@ import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
 import org.springframework.test.util.ReflectionTestUtils
-import ru.finnetrolle.telebot.service.processing.commands.secured.GlobalBroadcasterCommand
+import ru.finnetrolle.telebot.service.processing.commands.unsecured.GlobalBroadcasterCommand
 import ru.finnetrolle.telebot.service.processing.commands.secured.GroupBroadcastCommand
 
 /**

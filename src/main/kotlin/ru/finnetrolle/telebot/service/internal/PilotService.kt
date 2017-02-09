@@ -157,6 +157,16 @@ open class PilotService {
         })
     }
 
+    @Transactional
+    open fun setSpeaker(name: String, value: Boolean): Optional<Pilot> {
+        return pilotRepo.findByCharacterName(name).decide({
+            it.speaker = value
+            Optional.of(pilotRepo.save(it))
+        },{
+            Optional.empty()
+        })
+    }
+
     open fun getModerators() = pilotRepo.findByModeratorTrue()
 
     private fun isSuperUser(pilot: Pilot) = pilot.characterName == superUser
