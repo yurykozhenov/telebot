@@ -27,7 +27,7 @@ class SetTranslateLanguage : AbstractUnsecuredCommand() {
     override fun description() = loc.getMessage("telebot.command.description.tolang")
 
     override fun execute(pilot: Pilot, data: String): String {
-        return pilotService.setTranslator(pilot.id, "en").decide({
+        return pilotService.setTranslator(pilot.id, "ru-en").decide({
             loc.getMessage("messages.lang.changed", pilot.characterName, data)
         },{
             loc.getMessage("messages.user.not.found")
