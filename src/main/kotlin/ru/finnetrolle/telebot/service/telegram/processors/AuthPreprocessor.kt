@@ -52,15 +52,16 @@ open class AuthPreprocessor {
                 Auth.Intercepted(MessageBuilder.build(chatId, loc.getMessage("messages.renegade")))
             } else {
                 //renew pilot's data if have changes
-                if (user.firstName != it.firstName || user.lastName != it.lastName || it.username != it.username) {
+                if (user.firstName == it.firstName && user.lastName == it.lastName && user.userName == it.username) {
+                    log.debug("User in DB looks same as from telegram\nfirst ${it.firstName} = ${user.firstName}" +
+                            "\nlast ${it.lastName} - ${user.lastName}\nun ${it.username} - ${it.username}")
+                    Auth.Authorized(it, text.substringBefore(" "), text.substringAfter(" "))
+                } else {
                     log.debug("User $it changed telegram account details [$user]")
                     it.firstName = user.firstName
                     it.lastName = user.lastName
                     it.username = user.userName
                     Auth.Authorized(pilotService.update(it), text.substringBefore(" "), text.substringAfter(" "))
-                } else {
-                    log.debug("User in DB $it looks like [$user]")
-                    Auth.Authorized(it, text.substringBefore(" "), text.substringAfter(" "))
                 }
             }
         }, {
