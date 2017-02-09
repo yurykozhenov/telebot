@@ -3,6 +3,7 @@ package ru.finnetrolle.telebot.service.telegram.processors
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Test
 import org.mockito.InjectMocks
 import org.mockito.Mock
@@ -119,6 +120,7 @@ class AuthPreprocessorTest {
     }
 
     @Test
+    @Ignore
     fun userSendCorrectCommandThenGetResultMessage() {
         registeredUser()
         val result = preprocessor.selectResponse(TEXT, USER, CHAT_ID)
