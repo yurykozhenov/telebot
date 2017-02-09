@@ -33,9 +33,9 @@ open class CommandExecutorService {
     open fun execute(command: String, data: String, pilot: Pilot, chatId: String): SendMessage {
         if (command.toUpperCase() == "/HELP")
             return MessageBuilder.build(chatId, generateHelp(pilot))
-        if (command.toUpperCase().substring(0, 8) == "/MEETYES^")
+        if (command.length > 7 && command.toUpperCase().substring(0, 8) == "/MEETYES^")
             return MessageBuilder.build(chatId, meet.acceptMeeting(command.substringAfter("^")))
-        if (command.toUpperCase().substring(0, 7) == "/MEETNO^")
+        if (command.length > 6 && command.toUpperCase().substring(0, 7) == "/MEETNO^")
             return MessageBuilder.build(chatId, meet.declineMeeting(command.substringAfter("^")))
 
         val executor = executors[command.toUpperCase()]
