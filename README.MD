@@ -10,6 +10,19 @@ Telegram bot for eve players to do your own alliance or corporation broadcasting
  
 Current version: 0.4.4 **very unstable refactored beta**
 
+## New in 0.4.x
+* telebot is back! microservice splitting idea is not necessary yet
+* telegram API client version is raised
+* functional refactoring
+* jabber is removed
+* yandex translation is added
+* speaker role is added
+* broadcasts will be saved in db
+* check method is enhanced
+* renegades now can be dropped in one query
+* moderator can remove pilot by name
+* autoremove from database for users, who stopped bot in their client
+
 ## What is it?
 
 This bot is a simple telegram notifier. The main goal is to deliver a system, that can replace jabber.
@@ -59,5 +72,3 @@ for your system.
 [0.2.X - preparing to release](https://github.com/finnetrolle/telebot/blob/master/docs/patchnotes/0.2.X.MD)
 
 [0.1.X - proof of concept](https://github.com/finnetrolle/telebot/blob/master/docs/patchnotes/0.1.X.MD)
-
-
