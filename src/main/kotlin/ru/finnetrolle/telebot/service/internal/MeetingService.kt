@@ -57,7 +57,7 @@ open class MeetingService {
             }
         },{
             log.debug("Meeting failed because user is not found")
-            loc.getMessage("message.user.not.found")
+            loc.getMessage("messages.user.not.found")
         })
     }
 
