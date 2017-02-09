@@ -39,7 +39,7 @@ object MessageBuilder {
         var sb = StringBuilder()
         val msgs = mutableListOf<SendMessage>()
         message.text.split("\n").forEach {
-            sb.append(it)
+            sb.append(it).append("\n")
             if (sb.length >= 4000) {
                 msgs.add(MessageBuilder.build(message.chatId, sb.toString()))
                 sb = StringBuilder()
