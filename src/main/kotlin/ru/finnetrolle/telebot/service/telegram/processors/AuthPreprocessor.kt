@@ -59,6 +59,7 @@ open class AuthPreprocessor {
                     it.username = user.userName
                     Auth.Authorized(pilotService.update(it), text.substringBefore(" "), text.substringAfter(" "))
                 } else {
+                    log.debug("User in DB $it looks like [$user]")
                     Auth.Authorized(it, text.substringBefore(" "), text.substringAfter(" "))
                 }
             }

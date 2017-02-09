@@ -31,17 +31,14 @@ open class CommandExecutorService {
     }
 
     open fun execute(command: String, data: String, pilot: Pilot, chatId: String): SendMessage {
-        log.debug("COMMAND DEBUG. COMMAND = [$command]")
         if (command.toUpperCase() == "/HELP")
             return MessageBuilder.build(chatId, generateHelp(pilot))
         if (command.length > 8 && command.toUpperCase().substring(0, 10) == "/MEET_YES_") {
             val id = command.substring(10, command.length)
-            log.debug("Want accept meeting with id = $id")
             return MessageBuilder.build(chatId, meet.acceptMeeting(id))
         }
         if (command.length > 7 && command.toUpperCase().substring(0, 9) == "/MEET_NO_") {
             val id = command.substring(9, command.length)
-            log.debug("Want decline meeting with id = $id")
             return MessageBuilder.build(chatId, meet.declineMeeting(id))
         }
 
