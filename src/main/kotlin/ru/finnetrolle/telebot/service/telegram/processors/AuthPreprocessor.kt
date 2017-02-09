@@ -46,6 +46,7 @@ open class AuthPreprocessor {
     private val log = LoggerFactory.getLogger(AuthPreprocessor::class.java)
 
     open fun selectResponse(text: String, user: User, chatId: String): Auth {
+        log.debug("selecting response for pilot ${user} with ${user.firstName}, ${user.lastName}, ${user.userName}")
         return pilotService.getPilot(user.id).decide({
             if (it.renegade) {
                 Auth.Intercepted(MessageBuilder.build(chatId, loc.getMessage("messages.renegade")))

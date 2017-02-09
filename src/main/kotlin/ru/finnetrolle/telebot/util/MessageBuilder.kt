@@ -1,5 +1,6 @@
 package ru.finnetrolle.telebot.util
 
+import org.slf4j.LoggerFactory
 import org.telegram.telegrambots.api.methods.send.SendMessage
 
 
@@ -32,24 +33,28 @@ object MessageBuilder {
         return msg
     }
 
+    private val log = LoggerFactory.getLogger(MessageBuilder::class.java)
+
     fun split(message: SendMessage): Collection<SendMessage> {
         if (message.text.length < 4000) {
             return listOf(message)
         }
         var sb = StringBuilder()
         val msgs = mutableListOf<SendMessage>()
-        message.text.split("\n").forEach {
-            it.forEach { c ->
+        message.text.split("\n").forEach { line ->
+            line.forEach { c ->
                 sb.append(c)
                 if (sb.length >= 4100) {
                     msgs.add(MessageBuilder.build(message.chatId, sb.toString()))
+                    log.debug("Split by char")
                     sb = StringBuilder()
                 }
             }
-            sb.append(it).append("\n")
+            sb.append("\n")
             if (sb.length >= 4000) {
                 msgs.add(MessageBuilder.build(message.chatId, sb.toString()))
                 sb = StringBuilder()
+                log.debug("Split by newline")
             }
         }
 //
