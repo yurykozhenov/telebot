@@ -1,5 +1,6 @@
 package ru.finnetrolle.telebot.service.telegram.processors
 
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import org.telegram.telegrambots.api.methods.send.SendMessage
@@ -42,6 +43,8 @@ open class AuthPreprocessor {
         data class Authorized(val pilot: Pilot, val command: String, val data: String) : Auth
     }
 
+    private val log = LoggerFactory.getLogger(AuthPreprocessor::class.java)
+
     open fun selectResponse(text: String, user: User, chatId: String): Auth {
         return pilotService.getPilot(user.id).decide({
             if (it.renegade) {
@@ -49,6 +52,7 @@ open class AuthPreprocessor {
             } else {
                 //renew pilot's data if have changes
                 if (user.firstName != it.firstName || user.lastName != it.lastName || it.username != it.username) {
+                    log.debug("User $it changed telegram account details [$user]")
                     it.firstName = user.firstName
                     it.lastName = user.lastName
                     it.username = user.userName
