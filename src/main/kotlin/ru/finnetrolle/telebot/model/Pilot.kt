@@ -21,9 +21,15 @@ interface PilotRepository: Repository<Pilot, Int> {
     @Query("update Pilot u set u.renegade = true where u.id in ?1")
     fun makeRenegades(@Param("ids") ids: Collection<Int>)
 
+    @Modifying
+    @Query("delete from pilots where renegade = true", nativeQuery = true)
+    fun dropRenegades()
+
     fun findByCharacterName(name: String): Optional<Pilot>
 
     fun findByRenegadeFalse(): List<Pilot>
+
+    fun findByRenegadeTrue(): List<Pilot>
 
     fun findByModeratorTrue(): List<Pilot>
 

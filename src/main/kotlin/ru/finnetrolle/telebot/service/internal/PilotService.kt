@@ -148,6 +148,23 @@ open class PilotService {
     }
 
     @Transactional
+    open fun remove(id: Int): Optional<Pilot> {
+        return pilotRepo.findOne(id).decide({
+            pilotRepo.delete(it)
+            Optional.of(it)
+        },{
+            Optional.empty()
+        })
+    }
+
+    @Transactional
+    open fun dropRenegades(): List<Pilot> {
+        val pilots = pilotRepo.findByRenegadeTrue()
+        pilotRepo.dropRenegades()
+        return pilots
+    }
+
+    @Transactional
     open fun setTranslator(id: Int, language: String): Optional<Pilot> {
         return pilotRepo.findOne(id).decide({
             it.translateTo = language

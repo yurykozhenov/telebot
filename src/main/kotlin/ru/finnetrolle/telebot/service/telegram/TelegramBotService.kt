@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 import org.telegram.telegrambots.api.methods.send.SendMessage
 import org.telegram.telegrambots.api.objects.Message
+import ru.finnetrolle.telebot.service.internal.PilotService
 import ru.finnetrolle.telebot.service.telegram.api.BotApi
 import ru.finnetrolle.telebot.service.telegram.api.BotApiExtender
 import ru.finnetrolle.telebot.service.telegram.api.BotApiStub
@@ -27,6 +28,7 @@ open class TelegramBotService {
     @Autowired private lateinit var authPreprocessor: AuthPreprocessor
     @Autowired private lateinit var commandProcessor: CommandProcessor
     @Autowired private lateinit var broadcastService: BroadcastService
+    @Autowired private lateinit var pilotService: PilotService
 
     @Value("\${telegram.bot.token}")
     private lateinit var botToken: String
@@ -44,7 +46,7 @@ open class TelegramBotService {
         if (alive) {
             log.info("Telegram bot is enabled")
             try {
-                api = BotApiExtender(botUsername, botToken, processMessage)
+                api = BotApiExtender(botUsername, botToken, processMessage, pilotService)
                 broadcastService.init(api)
             } catch (e: Exception) {
                 log.error("Bot cannot be started", e)
