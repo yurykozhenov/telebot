@@ -7,7 +7,9 @@ import org.telegram.telegrambots.api.methods.send.SendMessage
 import org.telegram.telegrambots.api.objects.Message
 import org.telegram.telegrambots.api.objects.Update
 import org.telegram.telegrambots.bots.TelegramLongPollingBot
+import ru.finnetrolle.telebot.service.internal.PilotService
 import ru.finnetrolle.telebot.util.MessageBuilder
+import ru.finnetrolle.telebot.util.decide
 
 /**
  * Telegram bot
@@ -18,7 +20,8 @@ import ru.finnetrolle.telebot.util.MessageBuilder
 open class BotApiExtender(
         val name: String,
         val token: String,
-        val processIncomingMessage: (Message) -> SendMessage
+        val processIncomingMessage: (Message) -> SendMessage,
+        val pilotService: PilotService
 ) : BotApi {
 
     private var api = object : TelegramLongPollingBot() {
@@ -72,11 +75,14 @@ open class BotApiExtender(
                         System.currentTimeMillis() - start)
             }
         } catch (e: TelegramApiException) {
-            if (e.message.equals(BLOCKED_BOT_MESSAGE)) {
-                log.warn("User ${message.chatId} stopped bot and will be removed from db")
-//                userService.removeByTelegramId(message.chatId)
+            if (e.apiResponse.equals(BLOCKED_BOT_MESSAGE)) {
+                pilotService.remove(message.chatId).decide({
+                    log.debug("REMOVED: ${it.characterName} [${it.characterId} because of stopped bot]")
+                },{
+                    log.warn("Can't remove user with id ${message.chatId} because of db")
+                })
             } else {
-                log.error("Message sent is failed. API Response = [${e.message}]", e)
+                log.error("Message sent is failed. API Response = [${e.apiResponse}], message = [${e.message}]", e)
             }
             return BotApi.Send.Failed(message.chatId.toLong(), e)
         } catch (e: Exception) {
