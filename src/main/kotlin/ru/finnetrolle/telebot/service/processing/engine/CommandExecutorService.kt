@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import org.telegram.telegrambots.api.methods.send.SendMessage
 import ru.finnetrolle.telebot.model.Pilot
+import ru.finnetrolle.telebot.service.internal.MeetingService
 import ru.finnetrolle.telebot.util.MessageBuilder
 import ru.finnetrolle.telebot.util.MessageLocalization
 
@@ -22,14 +23,21 @@ open class CommandExecutorService {
     @Autowired
     private lateinit var loc: MessageLocalization
 
+    @Autowired
+    private lateinit var meet: MeetingService
+
     open fun addExecutor(executor: CommandExecutor) {
         executors.put(executor.name().toUpperCase(), executor)
     }
 
     open fun execute(command: String, data: String, pilot: Pilot, chatId: String): SendMessage {
-        if (command.toUpperCase().equals("/HELP")) {
+        if (command.toUpperCase() == "/HELP")
             return MessageBuilder.build(chatId, generateHelp(pilot))
-        }
+        if (command.toUpperCase().substring(0, 8) == "/MEETYES^")
+            return MessageBuilder.build(chatId, meet.acceptMeeting(command.substringAfter("^")))
+        if (command.toUpperCase().substring(0, 7) == "/MEETNO^")
+            return MessageBuilder.build(chatId, meet.declineMeeting(command.substringAfter("^")))
+
         val executor = executors[command.toUpperCase()]
         return if (executor != null) {
             if (executor.secured()) {

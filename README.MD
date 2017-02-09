@@ -8,9 +8,10 @@
 
 Telegram bot for eve players to do your own alliance or corporation broadcasting 
  
-Current version: 0.4.4 **very unstable refactored beta**
+Current version: 0.4.5 **very unstable refactored beta**
 
 ## New in 0.4.x
+* you can exchange contacts in telegram bot via meet command
 * telebot is back! microservice splitting idea is not necessary yet
 * telegram API client version is raised
 * functional refactoring
