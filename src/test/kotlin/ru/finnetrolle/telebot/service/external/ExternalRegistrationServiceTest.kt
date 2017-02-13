@@ -74,12 +74,6 @@ class ExternalRegistrationServiceTest {
         assertTrue(service.tryToApproveContender(key, USER) is ExternalRegistrationService.ApproveResult.Forbidden)
     }
 
-    @Test
-    fun pilotCheckReturnsSomeUnknownShitAndServiceReturnsForbidden() {
-        Mockito.`when`(pilotService.singleCheck(USER_ID)).thenReturn(object : PilotService.SingleCheckResult {})
-        val key = service.registerContender(USER_NAME, USER_ID)
-        assertTrue(service.tryToApproveContender(key, USER) is ExternalRegistrationService.ApproveResult.Forbidden)
-    }
 
     @Test
     fun wrongKeyReturnsNotAKey() {
