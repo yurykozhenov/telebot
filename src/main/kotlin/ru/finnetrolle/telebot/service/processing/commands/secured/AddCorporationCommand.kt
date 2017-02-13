@@ -32,7 +32,6 @@ class AddCorporationCommand : AbstractSecuredCommand() {
                 is CorpService.Add.AlreadyInList -> loc.getMessage("messages.corp.in.list")
                 is CorpService.Add.NotExist -> loc.getMessage("messages.corp.not.exist")
                 is CorpService.Add.Success -> loc.getMessage("messages.corp.added")
-                else -> loc.getMessage("messages.impossible")
             }
         } catch (e: NumberFormatException) {
             log.error("Can't convert '$data' to corporation id", e)

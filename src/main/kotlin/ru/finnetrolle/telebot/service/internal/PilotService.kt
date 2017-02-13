@@ -95,9 +95,9 @@ open class PilotService {
         return CheckResult(renegades.map { it.pilot.characterName }, pilotsToCheck.size)
     }
 
-    interface SingleCheckResult {
-        data class OK(val name: String, val corp: String, val ally: String) : SingleCheckResult
-        data class Renegade(val name: String, val corp: String, val ally: String) : SingleCheckResult
+    sealed class SingleCheckResult {
+        class OK(val name: String, val corp: String, val ally: String) : SingleCheckResult()
+        class Renegade(val name: String, val corp: String, val ally: String) : SingleCheckResult()
     }
 
     open fun singleCheck(characterId: Long): SingleCheckResult {

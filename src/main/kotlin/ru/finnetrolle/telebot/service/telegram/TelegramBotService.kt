@@ -67,9 +67,6 @@ open class TelegramBotService {
                 is AuthPreprocessor.Auth.Authorized -> {
                     commandProcessor.process(authResult.command, authResult.data, authResult.pilot)
                 }
-                else -> {
-                    log.warn("Impossible option"); MessageBuilder.build(msg.chatId.toString(), "This option is impossible")
-                }
             }
         } catch (e: Exception) {
             log.error("Some failed", e); MessageBuilder.build(msg.chatId.toString(), "Some bad happend =(")

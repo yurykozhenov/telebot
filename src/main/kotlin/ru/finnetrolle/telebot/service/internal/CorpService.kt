@@ -23,10 +23,10 @@ open class CorpService {
     @Autowired
     private lateinit var eve: EveApiConnector
 
-    interface Add {
-        data class Success(val corporation: Corporation) : Add
-        data class AlreadyInList(val corporation: Corporation) : Add
-        data class NotExist(val id: Long) : Add
+    sealed class Add {
+        class Success(val corporation: Corporation) : Add()
+        class AlreadyInList(val corporation: Corporation) : Add()
+        class NotExist(val id: Long) : Add()
     }
 
     @Transactional
@@ -45,9 +45,9 @@ open class CorpService {
 
     }
 
-    interface Remove {
-        data class Success(val corporation: Corporation) : Remove
-        data class NotFound(val ticker: String) : Remove
+    sealed class Remove {
+        class Success(val corporation: Corporation) : Remove()
+        class NotFound(val ticker: String) : Remove()
     }
 
     @Transactional

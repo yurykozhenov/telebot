@@ -30,7 +30,6 @@ class RemoveAllianceCommand : AbstractSecuredCommand() {
         return when (result) {
             is AllyService.Remove.Success -> loc.getMessage("messages.ally.removed")
             is AllyService.Remove.NotFound -> loc.getMessage("messages.ally.not.found")
-            else -> loc.getMessage("messages.impossible")
         }
     }
 }

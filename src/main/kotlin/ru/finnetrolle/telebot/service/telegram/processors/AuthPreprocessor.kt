@@ -38,9 +38,9 @@ open class AuthPreprocessor {
             loc.getMessage("messages.please.register")
     }
 
-    interface Auth {
-        data class Intercepted(val response: SendMessage) : Auth
-        data class Authorized(val pilot: Pilot, val command: String, val data: String) : Auth
+    sealed class Auth {
+        class Intercepted(val response: SendMessage) : Auth()
+        class Authorized(val pilot: Pilot, val command: String, val data: String) : Auth()
     }
 
     private val log = LoggerFactory.getLogger(AuthPreprocessor::class.java)

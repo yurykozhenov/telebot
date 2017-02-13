@@ -53,9 +53,6 @@ open class ExternalRegistrationService {
                         log.info("Renegade ${cont.charName} from ${checkResult.corp} of ${checkResult.ally} trying to register")
                         return ApproveResult.Forbidden(checkResult.name)
                     }
-                    else -> {
-                        return ApproveResult.Forbidden(cont.charName)
-                    }
                 }
             } else {
                 return ApproveResult.TimedOut(System.currentTimeMillis() - cont.dueTo)

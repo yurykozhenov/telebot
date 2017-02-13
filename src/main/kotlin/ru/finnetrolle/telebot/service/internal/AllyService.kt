@@ -23,10 +23,10 @@ open class AllyService {
     @Autowired
     private lateinit var eve: EveApiConnector
 
-    interface Add {
-        data class Success(val alliance: Alliance) : Add
-        data class AlreadyExists(val alliance: Alliance) : Add
-        data class NotFound(val ticker: String) : Add
+    sealed class Add {
+        class Success(val alliance: Alliance) : Add()
+        class AlreadyExists(val alliance: Alliance) : Add()
+        class NotFound(val ticker: String) : Add()
     }
 
     @Transactional
@@ -44,9 +44,9 @@ open class AllyService {
         }
     }
 
-    interface Remove {
-        data class Success(val alliance: Alliance) : Remove
-        data class NotFound(val ticker: String) : Remove
+    sealed class Remove {
+        class Success(val alliance: Alliance) : Remove()
+        class NotFound(val ticker: String) : Remove()
     }
 
     @Transactional

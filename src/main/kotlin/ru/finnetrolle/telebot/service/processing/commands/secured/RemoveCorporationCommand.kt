@@ -29,7 +29,6 @@ class RemoveCorporationCommand : AbstractSecuredCommand() {
         return when (result) {
             is CorpService.Remove.NotFound -> loc.getMessage("messages.corp.not.found")
             is CorpService.Remove.Success -> loc.getMessage("messages.corp.removed")
-            else -> loc.getMessage("messages.impossible")
         }
     }
 }

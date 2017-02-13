@@ -31,7 +31,6 @@ class AddAllianceCommand : AbstractSecuredCommand() {
             is AllyService.Add.Success -> loc.getMessage("messages.ally.added", result.alliance.title)
             is AllyService.Add.AlreadyExists -> loc.getMessage("messages.ally.in.list")
             is AllyService.Add.NotFound -> loc.getMessage("messages.ally.not.exist")
-            else -> loc.getMessage("messages.impossible")
         }
     }
 
