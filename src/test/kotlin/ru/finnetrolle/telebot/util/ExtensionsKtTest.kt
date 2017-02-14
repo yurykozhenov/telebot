@@ -8,7 +8,7 @@ import org.junit.Test
  * Licence: MIT
  * Author: Finne Trolle
  */
-class OptionalExtensionKtTest {
+class ExtensionsKtTest {
 
     @Test
     fun testPagesCount() {

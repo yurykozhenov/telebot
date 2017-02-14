@@ -29,7 +29,5 @@ open class CommandExecutorBeanPostProcessor : BeanPostProcessor {
 
     override fun postProcessAfterInitialization(bean: Any?, name: String?) = bean
 
-    companion object {
-        val log = LoggerFactory.getLogger(CommandExecutorBeanPostProcessor::class.java)
-    }
+    private val log = LoggerFactory.getLogger(CommandExecutorBeanPostProcessor::class.java)
 }

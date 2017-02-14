@@ -10,11 +10,11 @@ import org.telegram.telegrambots.TelegramApiException
  */
 interface BotApi {
 
-    interface Send {
-        data class Success(val chatId: Long, val spend: Long) : Send
-        data class Failed(val chatId: Long, val e: TelegramApiException) : Send
+    sealed class Send () {
+        class Success(val chatId: Long, val spend: Long) : Send()
+        class Failed(val chatId: Long, val e: TelegramApiException) : Send()
     }
 
-    open fun send(message: SendMessage): Send
+    fun send(message: SendMessage): Send
 
 }

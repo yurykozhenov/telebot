@@ -30,17 +30,22 @@ open class CommandExecutorService {
         executors.put(executor.name().toUpperCase(), executor)
     }
 
-    open fun execute(command: String, data: String, pilot: Pilot, chatId: String): SendMessage {
+    private fun preprocess(command: String, pilot: Pilot): SendMessage? {
         if (command.toUpperCase() == "/HELP")
-            return MessageBuilder.build(chatId, generateHelp(pilot))
+            return MessageBuilder.build(pilot.id.toString(), generateHelp(pilot))
         if (command.length > 8 && command.toUpperCase().substring(0, 10) == "/MEET_YES_") {
             val id = command.substring(10, command.length)
-            return MessageBuilder.build(chatId, meet.acceptMeeting(id))
+            return MessageBuilder.build(pilot.id.toString(), meet.acceptMeeting(id))
         }
         if (command.length > 7 && command.toUpperCase().substring(0, 9) == "/MEET_NO_") {
             val id = command.substring(9, command.length)
-            return MessageBuilder.build(chatId, meet.declineMeeting(id))
+            return MessageBuilder.build(pilot.id.toString(), meet.declineMeeting(id))
         }
+        return null
+    }
+
+    open fun execute(command: String, data: String, pilot: Pilot, chatId: String): SendMessage {
+        preprocess(command, pilot)?.let { return it }
 
         val executor = executors[command.toUpperCase()]
         return if (executor != null) {
@@ -71,7 +76,6 @@ open class CommandExecutorService {
                     .joinToString(separator = "\n", prefix = msg)
     }
 
-    companion object {
-        val log = LoggerFactory.getLogger(CommandExecutorService::class.java)
-    }
+    private val log = LoggerFactory.getLogger(CommandExecutorService::class.java)
+
 }

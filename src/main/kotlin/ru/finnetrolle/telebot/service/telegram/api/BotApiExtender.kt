@@ -80,7 +80,7 @@ open class BotApiExtender(
             if (e.apiResponse.equals(BLOCKED_BOT_MESSAGE) || e.apiResponse.equals(DEACTIVATED_BOT_MESSAGE)) {
                 log.debug("Pilot ${message.chatId} must be removed")
                 pilotService.remove(message.chatId.toInt()).decide({
-                    log.debug("REMOVED: ${it.characterName} [${it.characterId} because of stopped bot]")
+                    log.debug("REMOVED: ${it.characterName} [${it.characterId} because of ${e.apiResponse}]")
                 },{
                     log.warn("Can't remove user with id ${message.chatId} because of db")
                 })

@@ -89,8 +89,6 @@ open class EveApiConnector {
     fun getMailBody(apiKey: Int, vCode: String, mailId: Long) = MailBodiesParser()
             .getResponse(ApiAuthorization(apiKey, vCode), mailId).all.find { x -> x != null }!!.body
 
-    companion object {
-        private val log = LoggerFactory.getLogger(EveApiConnector::class.java)
-    }
+    private val log = LoggerFactory.getLogger(EveApiConnector::class.java)
 
 }

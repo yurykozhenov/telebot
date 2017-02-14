@@ -20,21 +20,23 @@ open class ExternalRegistrationService {
 
     data class PreData(val charName: String, val charId: Long, val dueTo: Long)
 
+    public val KEY_LENGTH: Int = 6
+
     private val contenders: MutableMap<String, PreData> = mutableMapOf()
 
     fun registerContender(charName: String, charId: Long): String {
         log.info("Add new contender $charName with id=$charId")
-        val key = UUID.randomUUID().toString().substring(0, 6)
+        val key = UUID.randomUUID().toString().substring(0, KEY_LENGTH)
         val dueTo = System.currentTimeMillis() + TIMEOUT
         contenders.put(key.toUpperCase(), PreData(charName, charId, dueTo))
         return key
     }
 
-    interface ApproveResult {
-        data class Success(val name: String, val corp: String, val ally: String) : ApproveResult
-        data class Forbidden(val name: String) : ApproveResult
-        data class TimedOut(val late: Long) : ApproveResult
-        data class NotAKey(val text: String) : ApproveResult
+    sealed class ApproveResult {
+        class Success(val name: String, val corp: String, val ally: String) : ApproveResult()
+        class Forbidden(val name: String) : ApproveResult()
+        class TimedOut(val late: Long) : ApproveResult()
+        class NotAKey(val text: String) : ApproveResult()
     }
 
     open fun tryToApproveContender(key: String, user: User): ApproveResult {

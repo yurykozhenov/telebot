@@ -46,8 +46,6 @@ open class MessageLocalization {
         return messageSource!!.getMessage(message, params, Locale.getDefault())
     }
 
-    companion object {
-        private val log = LoggerFactory.getLogger(MessageLocalization::class.java)
-    }
+    private val log = LoggerFactory.getLogger(MessageLocalization::class.java)
 
 }

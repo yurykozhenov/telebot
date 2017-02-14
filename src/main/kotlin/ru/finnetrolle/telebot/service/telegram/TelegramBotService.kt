@@ -7,12 +7,12 @@ import org.springframework.stereotype.Component
 import org.telegram.telegrambots.api.methods.send.SendMessage
 import org.telegram.telegrambots.api.objects.Message
 import ru.finnetrolle.telebot.service.internal.PilotService
+import ru.finnetrolle.telebot.service.processing.engine.CommandExecutorService
 import ru.finnetrolle.telebot.service.telegram.api.BotApi
 import ru.finnetrolle.telebot.service.telegram.api.BotApiExtender
 import ru.finnetrolle.telebot.service.telegram.api.BotApiStub
 import ru.finnetrolle.telebot.service.telegram.broadcasting.BroadcastService
 import ru.finnetrolle.telebot.service.telegram.processors.AuthPreprocessor
-import ru.finnetrolle.telebot.service.telegram.processors.CommandProcessor
 import ru.finnetrolle.telebot.util.MessageBuilder
 import javax.annotation.PostConstruct
 
@@ -26,9 +26,11 @@ import javax.annotation.PostConstruct
 open class TelegramBotService {
 
     @Autowired private lateinit var authPreprocessor: AuthPreprocessor
-    @Autowired private lateinit var commandProcessor: CommandProcessor
     @Autowired private lateinit var broadcastService: BroadcastService
     @Autowired private lateinit var pilotService: PilotService
+
+    @Autowired
+    private lateinit var ces: CommandExecutorService
 
     @Value("\${telegram.bot.token}")
     private lateinit var botToken: String
@@ -65,7 +67,7 @@ open class TelegramBotService {
                     authResult.response
                 }
                 is AuthPreprocessor.Auth.Authorized -> {
-                    commandProcessor.process(authResult.command, authResult.data, authResult.pilot)
+                    ces.execute(authResult.command, authResult.data, authResult.pilot, authResult.pilot.id.toString())
                 }
             }
         } catch (e: Exception) {

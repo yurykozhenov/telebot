@@ -8,7 +8,7 @@
 
 Telegram bot for eve players to do your own alliance or corporation broadcasting 
  
-Current version: 0.4.6 **very unstable refactored beta**
+Current version: 0.4.7 **very unstable refactored beta**
 
 ## New in 0.4.x
 * message splitting for large messages

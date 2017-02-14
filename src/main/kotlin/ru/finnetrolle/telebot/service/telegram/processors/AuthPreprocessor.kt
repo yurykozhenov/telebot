@@ -25,7 +25,7 @@ open class AuthPreprocessor {
     @Autowired private lateinit var pilotService: PilotService
     @Autowired private lateinit var loc: MessageLocalization
 
-    private val KEY_LENGTH: Int = 6
+
 
     private fun tryRegister(tryApp: ExternalRegistrationService.ApproveResult) = when (tryApp) {
         is ExternalRegistrationService.ApproveResult.Success ->
@@ -34,7 +34,7 @@ open class AuthPreprocessor {
             loc.getMessage("telebot.fastreg.forbidden", tryApp.name)
         is ExternalRegistrationService.ApproveResult.TimedOut ->
             loc.getMessage("telebot.fastreg.expired")
-        else ->
+        is ExternalRegistrationService.ApproveResult.NotAKey ->
             loc.getMessage("messages.please.register")
     }
 
@@ -51,13 +51,9 @@ open class AuthPreprocessor {
             if (it.renegade) {
                 Auth.Intercepted(MessageBuilder.build(chatId, loc.getMessage("messages.renegade")))
             } else {
-                //renew pilot's data if have changes
-                if (user.firstName == it.firstName && user.lastName == it.lastName && user.userName == it.username) {
-                    log.debug("User in DB looks same as from telegram\nfirst ${it.firstName} = ${user.firstName}" +
-                            "\nlast ${it.lastName} - ${user.lastName}\nun ${it.username} - ${it.username}")
+                if (isTelegramDataEquals(user, it)) {
                     Auth.Authorized(it, text.substringBefore(" "), text.substringAfter(" "))
                 } else {
-                    log.debug("User $it changed telegram account details [$user]")
                     it.firstName = user.firstName
                     it.lastName = user.lastName
                     it.username = user.userName
@@ -65,7 +61,7 @@ open class AuthPreprocessor {
                 }
             }
         }, {
-            if (text.length == KEY_LENGTH) {
+            if (text.length == externalRegistrationService.KEY_LENGTH) {
                 val regResult = tryRegister(externalRegistrationService.tryToApproveContender(text.toUpperCase(), user))
                 Auth.Intercepted(MessageBuilder.build(chatId, regResult))
             } else {
@@ -74,4 +70,6 @@ open class AuthPreprocessor {
         })
     }
 
+    private fun isTelegramDataEquals(user: User, pilot: Pilot): Boolean =
+            user.firstName == pilot.firstName && user.lastName == pilot.lastName && user.userName == pilot.username
 }

@@ -1,5 +1,6 @@
 package ru.finnetrolle.telebot.restful
 
+import org.hibernate.validator.constraints.NotBlank
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.HttpStatus
@@ -10,9 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.ResponseBody
 import ru.finnetrolle.telebot.model.Pilot
-import ru.finnetrolle.telebot.service.processing.commands.unsecured.GlobalBroadcasterCommand
 import ru.finnetrolle.telebot.service.processing.commands.secured.GroupBroadcastCommand
 import ru.finnetrolle.telebot.service.processing.commands.secured.ListUsersCommand
+import ru.finnetrolle.telebot.service.processing.commands.unsecured.GlobalBroadcasterCommand
+import javax.validation.Validation
 
 /**
  * Licence: MIT
@@ -37,31 +39,30 @@ class BroadcastResource {
     @Value("\${api.secret.cast.global}")
     private lateinit var globalCastSecret: String
 
-    data class Message(var text: String = "", var secret: String = "", var from: String = "")
+    sealed class In {
+        class Message(
+                @NotBlank val text: String,
+                @NotBlank val secret: String,
+                @NotBlank val from: String) : In()
+
+        class GroupMessage(
+                @NotBlank val text: String,
+                @NotBlank val group: String,
+                @NotBlank val secret: String,
+                @NotBlank val from: String) : In()
+    }
 
     @RequestMapping(value = "/cast", method = arrayOf(RequestMethod.POST))
     @ResponseBody
-    fun cast(@RequestBody message: Message): ResponseEntity<String> {
-        if (message.text.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-        }
-        if (!message.secret.equals(globalCastSecret)) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
-        }
+    fun cast(@RequestBody message: In.Message): ResponseEntity<String> {
+        validate(message)?.let { return it }
         return ResponseEntity.ok(globalCaster.execute(Pilot(characterName = message.from), message.text))
     }
 
-    data class GroupMessage(var text: String = "", var group: String = "", var secret: String = "", var from: String = "")
-
     @RequestMapping(value = "/gc", method = arrayOf(RequestMethod.POST))
     @ResponseBody
-    fun groupcast(@RequestBody message: GroupMessage): ResponseEntity<String> {
-        if (message.text.isEmpty() || message.group.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-        }
-        if (!message.secret.equals(groupCastSecret)) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
-        }
+    fun groupcast(@RequestBody message: In.GroupMessage): ResponseEntity<String> {
+        validate(message)?.let { return it }
         return ResponseEntity.ok(groupCaster.execute(Pilot(characterName = message.from), "${message.group} ${message.text}"))
     }
 
@@ -71,5 +72,18 @@ class BroadcastResource {
         return ResponseEntity.ok(cmd.execute(Pilot(moderator = true), ""))
     }
 
+    private fun validate(input: In): ResponseEntity<String>? {
+        val constraints = Validation.buildDefaultValidatorFactory().validator!!.validate(input)
+        return if (constraints.isNotEmpty()) {
+            ResponseEntity.status(HttpStatus.BAD_REQUEST).body(constraints.map { it.message }.joinToString("\n"))
+        } else {
+            if ((input is In.GroupMessage && !input.secret.equals(groupCastSecret))
+                    || (input is In.Message && !input.secret.equals(globalCastSecret))) {
+                ResponseEntity.status(HttpStatus.FORBIDDEN).body("")
+            } else {
+                null
+            }
+        }
+    }
 
 }
