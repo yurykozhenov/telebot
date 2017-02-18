@@ -44,6 +44,7 @@ class AuthPreprocessorTest {
         Mockito.doAnswer { i -> i.arguments[0] }.`when`(loc).getMessage(Mockito.anyString())
         Mockito.`when`(USER.id).thenReturn(USER_ID)
         val message = MessageBuilder.build(CHAT_ID, DATA)
+        Mockito.`when`(externalRegistrationService.getKeyLength()).thenReturn(6)
     }
 
     private val RESP_WELCOME = "telebot.fastreg.welcome"
@@ -93,7 +94,7 @@ class AuthPreprocessorTest {
     @Test
     fun guestEnterNotPinThenAskedToRegister() {
         unregisteredUser()
-        val result = preprocessor.selectResponse(PIN, USER, CHAT_ID)
+        val result = preprocessor.selectResponse(NOT_A_PIN, USER, CHAT_ID)
         assertTrue(result is AuthPreprocessor.Auth.Intercepted)
         assertEquals(RESP_REGISTER, (result as AuthPreprocessor.Auth.Intercepted).response.text)
         Mockito.verify(externalRegistrationService, Mockito.times(0)).tryToApproveContender(NOT_A_PIN, USER)
@@ -104,6 +105,7 @@ class AuthPreprocessorTest {
         unregisteredUser()
         Mockito.`when`(externalRegistrationService.tryToApproveContender(PIN, USER))
                 .thenReturn(ExternalRegistrationService.ApproveResult.TimedOut(100))
+
         val result = preprocessor.selectResponse(PIN, USER, CHAT_ID)
         assertTrue(result is AuthPreprocessor.Auth.Intercepted)
         assertEquals(RESP_EXPIRED, (result as AuthPreprocessor.Auth.Intercepted).response.text)

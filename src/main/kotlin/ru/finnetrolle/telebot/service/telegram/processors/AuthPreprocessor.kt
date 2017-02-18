@@ -61,7 +61,7 @@ open class AuthPreprocessor {
                 }
             }
         }, {
-            if (text.length == externalRegistrationService.KEY_LENGTH) {
+            if (text.length == externalRegistrationService.getKeyLength()) {
                 val regResult = tryRegister(externalRegistrationService.tryToApproveContender(text.toUpperCase(), user))
                 Auth.Intercepted(MessageBuilder.build(chatId, regResult))
             } else {

@@ -33,11 +33,11 @@ open class CommandExecutorService {
     private fun preprocess(command: String, pilot: Pilot): SendMessage? {
         if (command.toUpperCase() == "/HELP")
             return MessageBuilder.build(pilot.id.toString(), generateHelp(pilot))
-        if (command.length > 8 && command.toUpperCase().substring(0, 10) == "/MEET_YES_") {
+        if (command.length > 9 && command.toUpperCase().substring(0, 10) == "/MEET_YES_") {
             val id = command.substring(10, command.length)
             return MessageBuilder.build(pilot.id.toString(), meet.acceptMeeting(id))
         }
-        if (command.length > 7 && command.toUpperCase().substring(0, 9) == "/MEET_NO_") {
+        if (command.length > 8 && command.toUpperCase().substring(0, 9) == "/MEET_NO_") {
             val id = command.substring(9, command.length)
             return MessageBuilder.build(pilot.id.toString(), meet.declineMeeting(id))
         }

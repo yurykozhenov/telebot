@@ -20,9 +20,11 @@ open class ExternalRegistrationService {
 
     data class PreData(val charName: String, val charId: Long, val dueTo: Long)
 
-    public val KEY_LENGTH: Int = 6
+    val KEY_LENGTH: Int = 6
 
     private val contenders: MutableMap<String, PreData> = mutableMapOf()
+
+    open fun getKeyLength() = KEY_LENGTH
 
     fun registerContender(charName: String, charId: Long): String {
         log.info("Add new contender $charName with id=$charId")
