@@ -51,7 +51,7 @@ class ListCommand : AbstractSecuredCommand() {
         if (list.isEmpty()) {
             return loc.getMessage("messages.list.nothing")
         }
-        return loc.getMessage("messages.list.${data.toUpperCase()}", list.size, list)
+        return loc.getMessage("messages.list.${data.toUpperCase()}", list.size, list.joinToString("\n"))
     }
 
     fun List<Pilot>.pilotNames() = this.map { it.characterName }.sortedBy { it.toUpperCase() }
