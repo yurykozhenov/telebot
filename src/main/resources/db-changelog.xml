@@ -31,5 +31,8 @@
     <changeSet id="9" author="finnetrolle">
         <sqlFile path="sql/009_045_meetings.sql" relativeToChangelogFile="true" stripComments="true"/>
     </changeSet>
+    <changeSet id="10" author="finnetrolle">
+        <sqlFile path="sql/010_fixy.sql" relativeToChangelogFile="true" splitStatements="true"/>
+    </changeSet>
 
 </databaseChangeLog>

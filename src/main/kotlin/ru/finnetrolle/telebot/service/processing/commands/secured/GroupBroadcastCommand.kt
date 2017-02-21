@@ -47,7 +47,7 @@ open class GroupBroadcastCommand : AbstractSecuredCommand() {
                 fromName = pilot.characterName,
                 toGroupName = data.substringBefore(" "),
                 message = message,
-                receiversCount = users.size as Long))
+                receiversCount = users.size))
         return loc.getMessage("messages.broadcast.result", users.size)
     }
 }

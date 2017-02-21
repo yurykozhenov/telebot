@@ -64,7 +64,7 @@ open class GlobalBroadcasterCommand : AbstractUnsecuredCommand() {
                     fromName = pilot.characterName,
                     toGroupName = "all",
                     message = message,
-                    receiversCount = users.size as Long))
+                    receiversCount = users.size))
             return loc.getMessage("messages.broadcast.result", users.size)
         } catch (e: Exception) {
             log.error("Can't execute command global broadcast because of", e)
