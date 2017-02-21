@@ -25,5 +25,5 @@ data class Broadcast (
         @Column(name = "timestamp") var sent: Date = Date(),
         @Column(name = "to_group") var toGroupName: String = "all",
         @Column(name = "message") var message: String = "",
-        @Column(name = "receivers_count") var receiversCount: Int = 0
+        @Column(name = "receivers_count") var receiversCount: Long = 0
 )
