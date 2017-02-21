@@ -13,7 +13,7 @@ import ru.finnetrolle.telebot.util.MessageLocalization
  * Author: Finne Trolle
  */
 
-@Component
+//@Component
 class ListAlliancesCommand : AbstractUnsecuredCommand() {
 
     @Autowired

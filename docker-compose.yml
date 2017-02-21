@@ -1,0 +1,51 @@
+# this is an example telebot docker-compose file
+version: '3'
+services:
+
+  db:
+    image: postgres:latest
+    container_name: telebot_database
+    environment:
+      - POSTGRES_PASSWORD=somepassword
+    restart: always
+
+  smlr:
+    image: finnetrolle/telebot:$BRANCH
+    container_name: telebot_app
+    restart: always
+    environment:
+      # database connection
+      SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/postgres
+      SPRING_DATASOURCE_USERNAME=postgres
+      SPRING_DATASOURCE_PASSWORD=somepassword
+
+      # telegram bot settings
+      TELEGRAM_BOT_TOKEN=
+      TELEGRAM_BOT_USERNAME=
+      TELEGRAM_BOT_ALIVE=FALSE
+
+      # secrets
+      API_SECRET_CAST_GROUP=
+      API_SECRET_CAST_GLOBAL=
+
+      # superuser
+      TELEBOT_SUPERUSER=
+      TELEBOT_SECRET_EXTERNAL_REGISTER=
+      TELEBOT_EXTERNAL_GROUPS_SECRET=
+      TELEBOT_EXTERNAL_GROUPS_URL=
+
+      #mailbot
+      MAILBOT_KEY_ID=
+      MAILBOT_VCODE=
+      MAILBOT_LIST_ID=
+
+      YANDEX_KEY=
+
+      SERVER_PORT=8080
+
+    links:
+      - db
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db

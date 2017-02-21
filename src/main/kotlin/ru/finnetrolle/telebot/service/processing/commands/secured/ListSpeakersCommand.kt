@@ -11,7 +11,7 @@ import ru.finnetrolle.telebot.util.MessageLocalization
  * Licence: MIT
  * Author: Finne Trolle
  */
-@Component
+//@Component
 class ListSpeakersCommand : AbstractSecuredCommand() {
 
     @Autowired
