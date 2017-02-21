@@ -68,11 +68,13 @@ open class CommandExecutorService {
         return if (pilot.moderator)
             executors
                     .map { e -> "${e.value.name()} - ${e.value.description()}" }
+                    .sortedBy { it }
                     .joinToString(separator = "\n", prefix = msg)
         else
             executors
                     .filter { e -> !e.value.secured() }
                     .map { e -> "${e.value.name()} - ${e.value.description()}" }
+                    .sortedBy { it }
                     .joinToString(separator = "\n", prefix = msg)
     }
 
