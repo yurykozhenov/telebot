@@ -33,6 +33,8 @@ interface PilotRepository: Repository<Pilot, Int> {
 
     fun findByModeratorTrue(): List<Pilot>
 
+    fun findBySpeakerTrue(): List<Pilot>
+
     fun save(pilot: Pilot): Pilot
 
     fun findOne(id: Int): Optional<Pilot>

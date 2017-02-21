@@ -10,6 +10,11 @@ Telegram bot for eve players to do your own alliance or corporation broadcasting
  
 Current version: 0.4.7 **very unstable refactored beta**
 
+## todos
+* registration UI
+* ping
+* docker-compose file
+
 ## New in 0.4.x
 * message splitting for large messages
 * you can exchange contacts in telegram bot via meet command

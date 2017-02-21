@@ -18,10 +18,10 @@ after_success:
   - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
 
   #DOCKER
-  - export CONFIG=finnetrolle/telebot
-  - docker build -t $CONFIG:$COMMIT .
-  - docker tag $CONFIG:$COMMIT $CONFIG:$TAG
-  - docker push $CONFIG
+  - export NAME=finnetrolle/telebot
+  - docker build -t $NAME:$COMMIT .
+  - docker tag $NAME:$COMMIT $NAME:$TAG
+  - docker push $NAME
 
 notifications:
   email:

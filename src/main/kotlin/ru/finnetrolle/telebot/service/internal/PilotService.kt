@@ -195,4 +195,6 @@ open class PilotService {
 
     open fun getAllUsers() = pilotRepo.findAll()
 
+    open fun getSpeakers() = pilotRepo.findBySpeakerTrue()
+
 }
