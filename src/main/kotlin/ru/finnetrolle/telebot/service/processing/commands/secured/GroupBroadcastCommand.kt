@@ -7,6 +7,7 @@ import ru.finnetrolle.telebot.model.Broadcast
 import ru.finnetrolle.telebot.model.BroadcastRepository
 import ru.finnetrolle.telebot.model.Pilot
 import ru.finnetrolle.telebot.service.internal.PilotService
+import ru.finnetrolle.telebot.service.processing.commands.AbstractSecuredCommand
 import ru.finnetrolle.telebot.service.telegram.TelegramBotService
 import ru.finnetrolle.telebot.util.MessageBuilder
 import ru.finnetrolle.telebot.util.MessageLocalization

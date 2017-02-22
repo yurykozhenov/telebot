@@ -9,6 +9,7 @@ import ru.finnetrolle.telebot.model.BroadcastRepository
 import ru.finnetrolle.telebot.model.Pilot
 import ru.finnetrolle.telebot.service.external.TranslateService
 import ru.finnetrolle.telebot.service.internal.PilotService
+import ru.finnetrolle.telebot.service.processing.commands.AbstractUnsecuredCommand
 import ru.finnetrolle.telebot.service.telegram.TelegramBotService
 import ru.finnetrolle.telebot.util.MessageBuilder
 import ru.finnetrolle.telebot.util.MessageLocalization

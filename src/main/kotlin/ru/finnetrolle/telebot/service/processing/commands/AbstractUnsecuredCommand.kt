@@ -1,4 +1,4 @@
-package ru.finnetrolle.telebot.service.processing.commands.unsecured
+package ru.finnetrolle.telebot.service.processing.commands
 
 import ru.finnetrolle.telebot.service.processing.engine.CommandExecutor
 

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import ru.finnetrolle.telebot.model.Pilot
 import ru.finnetrolle.telebot.service.internal.MeetingService
+import ru.finnetrolle.telebot.service.processing.commands.AbstractUnsecuredCommand
 import ru.finnetrolle.telebot.util.MessageLocalization
 
 /**
