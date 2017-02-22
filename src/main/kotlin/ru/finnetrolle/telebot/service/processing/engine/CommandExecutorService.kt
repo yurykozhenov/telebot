@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component
 import org.telegram.telegrambots.api.methods.send.SendMessage
 import ru.finnetrolle.telebot.model.Pilot
 import ru.finnetrolle.telebot.service.internal.MeetingService
+import ru.finnetrolle.telebot.service.internal.QuestService
 import ru.finnetrolle.telebot.util.MessageBuilder
 import ru.finnetrolle.telebot.util.MessageLocalization
 
@@ -26,6 +27,9 @@ open class CommandExecutorService {
     @Autowired
     private lateinit var meet: MeetingService
 
+    @Autowired
+    private lateinit var quest: QuestService
+
     open fun addExecutor(executor: CommandExecutor) {
         executors.put(executor.name().toUpperCase(), executor)
     }
@@ -33,6 +37,18 @@ open class CommandExecutorService {
     private fun preprocess(command: String, pilot: Pilot): SendMessage? {
         if (command.toUpperCase() == "/HELP")
             return MessageBuilder.build(pilot.id.toString(), generateHelp(pilot))
+        if (command.length > 11 && command.toUpperCase().substring(0, 12) == "/VOTE_QUEST_") {
+            val id = command.substring(12, command.length)
+            return MessageBuilder.build(pilot.id.toString(), when (quest.vote(pilot.id, id)) {
+                QuestService.VoteResult.Success -> loc.getMessage("vote.success")
+                QuestService.VoteResult.AlreadyVoted -> loc.getMessage("vote.already")
+                QuestService.VoteResult.OptionNotFound -> loc.getMessage("vote.not.found")
+            })
+        }
+        if (command.length > 11 && command.toUpperCase().substring(0, 12) == "/SHOW_QUEST_") {
+            val id = command.substring(12, command.length)
+            return MessageBuilder.build(pilot.id.toString(), quest.stringified(id))
+        }
         if (command.length > 9 && command.toUpperCase().substring(0, 10) == "/MEET_YES_") {
             val id = command.substring(10, command.length)
             return MessageBuilder.build(pilot.id.toString(), meet.acceptMeeting(id))
