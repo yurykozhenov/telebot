@@ -4,9 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
 import ru.finnetrolle.telebot.model.*
-import ru.finnetrolle.telebot.util.decide
 import java.time.LocalDateTime
-import java.util.*
 
 /**
  * Telegram bot
@@ -29,7 +27,7 @@ open class QuestService {
 
     @Transactional
     open fun create(pilot: Pilot, questText: String, options: List<String>,
-                       activeMinutes: Long = 15L, groupName: String = ""): QuestRepresentation {
+                    activeMinutes: Long = 15L, groupName: String = ""): QuestRepresentation {
         val quest = Quest(
                 author = pilot.id,
                 expires = LocalDateTime.now().plusMinutes(activeMinutes),
@@ -44,11 +42,13 @@ open class QuestService {
             quest.id,
             quest.text,
             quest.expires,
-            quest.options.map { OptionRepresentation(
-                    it.id,
-                    it.text,
-                    it.voters.size,
-                    it.voters.map { i -> i.characterName }.toSet()) })
+            quest.options.map {
+                OptionRepresentation(
+                        it.id,
+                        it.text,
+                        it.voters.size,
+                        it.voters.map { i -> i.characterName }.toSet())
+            })
 
     @Transactional
     open fun represent(questId: String): QuestRepresentation {
@@ -82,22 +82,26 @@ open class QuestService {
         object Success : VoteResult()
         object AlreadyVoted : VoteResult()
         object OptionNotFound : VoteResult()
+        object QuestExpires : VoteResult()
     }
 
     @Transactional
     open fun vote(pilotId: Int, optionId: String): VoteResult {
         val pilot = pilotRepo.findOne(pilotId).get()
-        return optionRepo.findOne(optionId).decide({
-            if (it.voters.contains(pilot)) {
-                VoteResult.AlreadyVoted
-            } else {
-                it.voters.add(pilot)
-                optionRepo.save(it)
-                VoteResult.Success
+        val option = optionRepo.findOne(optionId)
+        if (option.isPresent) {
+            val quest = option.get().quest
+            if (quest.expires.isBefore(LocalDateTime.now())) {
+                return VoteResult.QuestExpires
             }
-        },{
-            VoteResult.OptionNotFound
-        })
+            if (quest.options.filter { o -> o.voters.contains(pilot) }.isNotEmpty()) {
+                return VoteResult.AlreadyVoted
+            }
+            option.get().voters.add(pilot)
+            optionRepo.save(option.get())
+            return VoteResult.Success
+        }
+        return VoteResult.OptionNotFound
     }
 
 }
