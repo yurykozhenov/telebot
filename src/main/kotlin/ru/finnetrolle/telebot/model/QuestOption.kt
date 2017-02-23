@@ -20,7 +20,7 @@ interface QuestOptionRepository : Repository<QuestOption, String> {
 data class QuestOption(
         @Id
         @Column(name = "quest_option_id")
-        var id: String = UUID.randomUUID().toString(),
+        var id: String = UUID.randomUUID().toString().replace("-", ""),
 
         @Column(name = "text")
         var text: String = "",

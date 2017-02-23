@@ -21,7 +21,7 @@ interface QuestRepository : Repository<Quest, String> {
 data class Quest(
         @Id
         @Column(name = "quest_id")
-        var id: String = UUID.randomUUID().toString(),
+        var id: String = UUID.randomUUID().toString().replace("-", ""),
 
         @Column(name = "author")
         var author: Int = 0,
