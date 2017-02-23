@@ -43,6 +43,7 @@ open class CommandExecutorService {
                 QuestService.VoteResult.Success -> loc.getMessage("vote.success")
                 QuestService.VoteResult.AlreadyVoted -> loc.getMessage("vote.already")
                 QuestService.VoteResult.OptionNotFound -> loc.getMessage("vote.not.found")
+                QuestService.VoteResult.QuestExpires -> loc.getMessage("vote.expires")
             })
         }
         if (command.length > 11 && command.toUpperCase().substring(0, 12) == "/SHOW_QUEST_") {

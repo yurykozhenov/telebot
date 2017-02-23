@@ -54,7 +54,7 @@ object CommandParser {
         if (data.substringAfter(" ").contains('[')) {
             return Variable.Group(gain, data.substringAfter(" "))
         } else {
-            return Variable.Text(data)
+            return Variable.Text(data.substring(1, data.length))
         }
     }
 
