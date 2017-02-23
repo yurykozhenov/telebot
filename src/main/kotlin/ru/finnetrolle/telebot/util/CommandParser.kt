@@ -13,7 +13,7 @@ object CommandParser {
         var res: Variable = cut(data)
         var options = listOf<String>()
         var text = ""
-        var mins = 15L
+        var mins = 1440L
         var groupName = "ALL"
         var counter = 0
         do {
