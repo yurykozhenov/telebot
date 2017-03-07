@@ -13,7 +13,6 @@ I hope once you can start bot and send anything to all your pals in ally or corp
 * speakers can make group broadcasts
 * registration UI
 * do-not-disturb time range for users
-* anti-check command (to legalize renegades automatically)
 
 ## New in 0.5.x
 * docker-compose file
