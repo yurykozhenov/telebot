@@ -33,11 +33,6 @@ open class MessageLocalization {
         return messageSource
     }
 
-    @PostConstruct
-    fun init() {
-        log.info(getMessage("message.system.load.approve"))
-    }
-
     open fun getMessage(message: String): String {
         return this.messageSource!!.getMessage(message, null, Locale.getDefault())
     }
