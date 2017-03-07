@@ -95,6 +95,21 @@ open class PilotService {
         return CheckResult(renegades.map { it.pilot.characterName }, pilotsToCheck.size)
     }
 
+    @Transactional
+    open fun amnesty(): CheckResult {
+        val allowedAllies = allyService.getAll().map { a -> a.id }.toSet()
+        val allowedCorps = corpService.getAll().map { c -> c.id }.toSet()
+        val pilotsToCheck = pilotRepo.findByRenegadeTrue().filter { !isSuperUser(it) }
+        val afillations = eve.getAffilations(pilotsToCheck.map { it.characterId })
+        val amnestee = pilotsToCheck
+                .map { CheckPair(it, afillations.getOrElse(it.characterId, {CharacterAffiliation()})) }
+                .filter { allowedAllies.contains(it.character.allianceID ?: -1) || allowedCorps.contains(it.character.corporationID) }
+        if (amnestee.isNotEmpty()) {
+            pilotRepo.makeAmnestee(amnestee.map { it.pilot.id })
+        }
+        return CheckResult(amnestee.map { it.pilot.characterName }, pilotsToCheck.size)
+    }
+
     sealed class SingleCheckResult {
         class OK(val name: String, val corp: String, val ally: String) : SingleCheckResult()
         class Renegade(val name: String, val corp: String, val ally: String) : SingleCheckResult()
@@ -114,7 +129,6 @@ open class PilotService {
                 return SingleCheckResult.Renegade(it.characterName, it.corporation, it.alliance)
             }
         }
-        throw EveApiUnknownException() // external system not answering
     }
 
     @Transactional

@@ -1,6 +1,6 @@
 # Telebot
 
-0.5.1 beta 
+0.5.2 beta 
 [![Build Status](https://travis-ci.org/finnetrolle/telebot.svg?branch=master)](https://travis-ci.org/finnetrolle/telebot)
 [![codecov](https://codecov.io/gh/finnetrolle/telebot/branch/master/graph/badge.svg)](https://codecov.io/gh/finnetrolle/telebot)
 [![](https://images.microbadger.com/badges/image/finnetrolle/telebot.svg)](https://microbadger.com/images/finnetrolle/telebot "Get your own image badge on microbadger.com") 
@@ -18,6 +18,7 @@ I hope once you can start bot and send anything to all your pals in ally or corp
 ## New in 0.5.x
 * docker-compose file
 * quests
+* amnesty for mass renegades
 
 You can send me an issue using [issues page](https://github.com/finnetrolle/telebot/issues)
 

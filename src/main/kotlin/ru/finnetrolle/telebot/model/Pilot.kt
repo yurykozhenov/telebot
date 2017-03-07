@@ -21,6 +21,10 @@ interface PilotRepository: Repository<Pilot, Int> {
     fun makeRenegades(@Param("ids") ids: Collection<Int>)
 
     @Modifying
+    @Query("update Pilot u set u.renegade = false where u.id in ?1")
+    fun makeAmnestee(@Param("ids") ids: Collection<Int>)
+
+    @Modifying
     @Query("delete from pilots where renegade = true", nativeQuery = true)
     fun dropRenegades()
 

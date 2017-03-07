@@ -45,6 +45,17 @@ class MailResource {
         return wrapper
     }
 
+    @RequestMapping(method = arrayOf(RequestMethod.GET), path = arrayOf("/amnesty"))
+    @ResponseBody
+    fun amnesty(): CheckWrapper {
+        val start = System.currentTimeMillis()
+        val result = pilotService.amnesty()
+        val wrapper = CheckWrapper(System.currentTimeMillis() - start, result)
+        log.info("Renegade amnesty result: $wrapper")
+        return wrapper
+    }
+
+    data class AmnestyWrapper( val time: Long, val result: PilotService.CheckResult)
     data class CheckWrapper( val time: Long, val result: PilotService.CheckResult)
 
 }
