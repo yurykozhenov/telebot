@@ -38,8 +38,6 @@ class EmbeddedRegisterController {
         return "telecode"
     }
 
-    @RequestMapping(method = arrayOf(RequestMethod.GET))
-    fun viewRegister(): String {
-        return "signup"
-    }
+    @RequestMapping
+    fun signup() = "signup"
 }

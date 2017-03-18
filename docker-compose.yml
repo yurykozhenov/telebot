@@ -10,7 +10,7 @@ services:
     restart: always
 
   smlr:
-    image: finnetrolle/telebot:$BRANCH
+    image: finnetrolle/telebot:latest
     container_name: telebot_app
     restart: always
     environment:
@@ -20,26 +20,28 @@ services:
       SPRING_DATASOURCE_PASSWORD=somepassword
 
       # telegram bot settings
-      TELEGRAM_BOT_TOKEN=
-      TELEGRAM_BOT_USERNAME=
-      TELEGRAM_BOT_ALIVE=FALSE
+      TELEGRAM_BOT_TOKEN=enter_here_your_telegram_token
+      TELEGRAM_BOT_USERNAME=enter_here_your_bot_name
+      TELEGRAM_BOT_ALIVE=TRUE
 
       # secrets
-      API_SECRET_CAST_GROUP=
-      API_SECRET_CAST_GLOBAL=
+      API_SECRET_CAST_GROUP=secret
+      API_SECRET_CAST_GLOBAL=secret
 
       # superuser
-      TELEBOT_SUPERUSER=
-      TELEBOT_SECRET_EXTERNAL_REGISTER=
-      TELEBOT_EXTERNAL_GROUPS_SECRET=
-      TELEBOT_EXTERNAL_GROUPS_URL=
+      TELEBOT_SUPERUSER=Your character Name
+
+      # Only for xXDEATHXx register system
+      TELEBOT_SECRET_EXTERNAL_REGISTER=secret
+      TELEBOT_EXTERNAL_GROUPS_SECRET=secret
+      TELEBOT_EXTERNAL_GROUPS_URL=secret
 
       #mailbot
-      MAILBOT_KEY_ID=
-      MAILBOT_VCODE=
-      MAILBOT_LIST_ID=
+      MAILBOT_KEY_ID=your key id for mail
+      MAILBOT_VCODE=your vcode for mail
+      MAILBOT_LIST_ID=your mailing list id
 
-      YANDEX_KEY=
+      YANDEX_KEY=secret
 
       SERVER_PORT=8080
 
