@@ -15,7 +15,7 @@ import javax.persistence.Id
 interface MailRepository: Repository<Mail, Long> {
 
     @Query(value = "select max(id) from mail", nativeQuery = true)
-    fun getMaxId(): Long
+    fun getMaxId(): Long?
 
     fun findFirst3ByOrderByIdDesc(): List<Mail>
 
