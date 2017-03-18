@@ -37,4 +37,7 @@ class EmbeddedRegisterController {
         }
         return "telecode"
     }
+
+    @RequestMapping
+    fun signup() = "signup"
 }

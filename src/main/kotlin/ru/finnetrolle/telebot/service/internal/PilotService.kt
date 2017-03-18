@@ -124,9 +124,9 @@ open class PilotService {
                 throw EveApiUnknownException()
             }
             if (allyService.get(it.allianceID ?: -1L).isPresent || corpService.get(it.corporationID).isPresent) {
-                return SingleCheckResult.OK(it.characterName, it.corporation, it.alliance)
+                return SingleCheckResult.OK(it.characterName, it.corporation, it.alliance ?: "")
             } else {
-                return SingleCheckResult.Renegade(it.characterName, it.corporation, it.alliance)
+                return SingleCheckResult.Renegade(it.characterName, it.corporation, it.alliance ?: "")
             }
         }
     }

@@ -1,0 +1,8 @@
+.idea/
+*.iml
+var/
+target/
+log/
+*.log
+datafile.properties
+datafile.script
