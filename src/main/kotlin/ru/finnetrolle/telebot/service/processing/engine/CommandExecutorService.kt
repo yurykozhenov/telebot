@@ -37,15 +37,15 @@ open class CommandExecutorService {
     private fun preprocess(command: String, pilot: Pilot): SendMessage? {
         if (command.toUpperCase() == "/HELP")
             return MessageBuilder.build(pilot.id.toString(), generateHelp(pilot))
-        if (command.length > 11 && command.toUpperCase().substring(0, 12) == "/VOTE_QUEST_") {
-            val id = command.substring(12, command.length)
-            return MessageBuilder.build(pilot.id.toString(), when (quest.vote(pilot.id, id)) {
-                QuestService.VoteResult.Success -> loc.getMessage("vote.success")
-                QuestService.VoteResult.AlreadyVoted -> loc.getMessage("vote.already")
-                QuestService.VoteResult.OptionNotFound -> loc.getMessage("vote.not.found")
-                QuestService.VoteResult.QuestExpires -> loc.getMessage("vote.expires")
-            })
-        }
+//        if (command.length > 11 && command.toUpperCase().substring(0, 12) == "/VOTE_QUEST_") {
+//            val id = command.substring(12, command.length)
+//            return MessageBuilder.build(pilot.id.toString(), when (quest.vote(pilot.id, id)) {
+//                QuestService.VoteResult.Success -> loc.getMessage("vote.success")
+//                QuestService.VoteResult.AlreadyVoted -> loc.getMessage("vote.already")
+//                QuestService.VoteResult.OptionNotFound -> loc.getMessage("vote.not.found")
+//                QuestService.VoteResult.QuestExpires -> loc.getMessage("vote.expires")
+//            })
+//        }
         if (command.length > 11 && command.toUpperCase().substring(0, 12) == "/SHOW_QUEST_") {
             val id = command.substring(12, command.length)
             return MessageBuilder.build(pilot.id.toString(), quest.stringified(id))

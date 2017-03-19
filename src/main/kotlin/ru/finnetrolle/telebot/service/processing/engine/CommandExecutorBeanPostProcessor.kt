@@ -17,8 +17,10 @@ open class CommandExecutorBeanPostProcessor : BeanPostProcessor {
     @Autowired
     private lateinit var ces: CommandExecutorService
 
+    private val excludes: List<String> = listOf("/JOKE", "/ADDJOKE")
+
     override fun postProcessBeforeInitialization(bean: Any?, name: String?): Any? {
-        if (bean is CommandExecutor) {
+        if (bean is CommandExecutor && !excludes.contains(bean.name())) {
             log.info("Registering${securedMark(bean)}command executor ${bean.name()} ${bean.description()}")
             ces.addExecutor(bean)
         }
