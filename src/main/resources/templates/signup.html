@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
     <title>Register</title>
@@ -13,6 +13,8 @@
     <input type="text" class="form-control" placeholder="Character name" name="cname"/><br/>
     <button class="btn btn-default" type="submit">Получить код подтверждения</button>
 </form>
+
+<a th:href="@{/images/api_example.jpg}">Пример</a>
 
 </body>
 </html>
