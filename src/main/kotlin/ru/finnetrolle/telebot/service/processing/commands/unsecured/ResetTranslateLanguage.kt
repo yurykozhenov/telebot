@@ -29,7 +29,7 @@ class ResetTranslateLanguage : AbstractUnsecuredCommand() {
 
     override fun execute(pilot: Pilot, data: String): String {
         return pilotService.setTranslator(pilot.id, "").decide({
-            loc.getMessage("messages.lang.changed", pilot.characterName, data)
+            loc.getMessage("messages.lang.changed", pilot.characterName, "русский")
         },{
             loc.getMessage("messages.user.not.found")
         })
